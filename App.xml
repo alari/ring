@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Application>
+	<Plugin name="Lf"></Plugin>
+	<If mode="development">
+		<Registry key="db/default/engine" value="mysql"></Registry>
+		<Registry key="db/default/host" value="localhost"></Registry>
+		<Registry key="db/default/dbname" value="ring"></Registry>
+		<Host pattern="mirari">
+			<Plugin name="Mr"></Plugin>
+		</Host>
+		<Host pattern="centralis">
+			<Plugin name="Ctr"></Plugin>
+		</Host>
+		<Registry key="hosts/center" value="centralis"></Registry>
+		<Registry key="hosts/project" value="mirari"></Registry>
+		<Registry key="sites/static_urlbase" value="Apps/Ring/static/s/"></Registry>
+		<Registry key="sites/static_folder" value="./Apps/Ring/static/s/"></Registry>
+	</If>
+	<If mode="production">
+		<Registry key="db/default/engine" value="mysql"></Registry>
+		<Registry key="db/default/host" value="localhost"></Registry>
+		<Registry key="db/default/dbname" value="mirari"></Registry>
+		<Registry key="db/default/user" value="mirari"></Registry>
+		<Registry key="db/default/password" value="XKSLzapa"></Registry>
+		<Host pattern="mirari\.name">
+			<Plugin name="Mr"></Plugin>
+		</Host>
+		<Host pattern="centralis\.name">
+			<Plugin name="Ctr"></Plugin>
+		</Host>
+		<Registry key="hosts/center" value="centralis.name"></Registry>
+		<Registry key="hosts/project" value="mirari.name"></Registry>
+		<Registry key="sites/static_urlbase" value="static/s/"></Registry>
+		<Registry key="sites/static_folder" value="./static/s/"></Registry>
+	</If>
+	<Url pattern="openid/login">
+		<Command name="OpenId_Login" plugin="-"></Command>
+	</Url>
+	<Url pattern="openid/logout">
+		<Command name="OpenId_Logout" plugin="-"></Command>
+	</Url>
+	<Url pattern="openid/server">
+		<Command name="OpenId_Provider" plugin="-"></Command>
+	</Url>
+	<Url pattern="openid/redirect">
+		<Command name="OpenId_Redirect" plugin="-"></Command>
+	</Url>
+	<Url pattern="">
+		<Command name="Home"></Command>
+	</Url>
+	<Registry key="html/static_root" value="/Apps/Ring/static/"></Registry>
+	<Registry key="class/R_Mdl_User/plugins" type="add"
+		value="O_OpenId_Provider_UserPlugin"></Registry>
+	<Registry key="class/R_Mdl_Site/acl">
+		<User-In field="owner">
+			<Role name="Site Owner"></Role>
+		</User-In>
+		<User-In field="owner_friends">
+			<Role name="Site Owner's Friend"></Role>
+		</User-In>
+		<User-In field="owner_friends_friends">
+			<Role name="Site Owner's Friends Friend"></Role>
+		</User-In>
+	</Registry>
+	<Registry key="uses" type="add" value="R_Mdl_Session"></Registry>
+	<Registry key="classnames/session" value="R_Mdl_Session"></Registry>
+	<Registry key="classnames/user" value="R_Mdl_User"></Registry>
+	<Registry key="classnames/visitor" value="O_Acl_Visitor"></Registry>
+	<Registry key="paginator/title" value="Страницы"></Registry>
+	<Registry key="paginator/last" value="&gt;&gt;"></Registry>
+	<Registry key="paginator/first" value="&lt;&lt;"></Registry>
+	<Registry key="paginator/prev" value="&lt;"></Registry>
+	<Registry key="paginator/next" value="&gt;"></Registry>
+	<Registry key="paginator/order_title" value="Сортировка"></Registry>
+
+
+
+
+
+
+</Application>
