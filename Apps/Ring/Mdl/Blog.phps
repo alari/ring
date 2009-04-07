@@ -13,7 +13,11 @@ class R_Mdl_Blog extends O_Dao_ActiveRecord {
 	public function getCommand( $page )
 	{
 		$prefix = "R_Lf_Sys_Blog_Cmd_";
-		if (preg_match( "#^form(/([0-9]*))?$#", $page, $matches )) {
+		$matches = Array();
+	if($page == "SystemAdmin"){
+		$class = $prefix."SystemAdmin";
+		$cmd = new $class;
+	} elseif (preg_match( "#^form(/([0-9]*))?$#", $page, $matches )) {
 			$class = $prefix . "Form";
 			$cmd = new $class( );
 			if (isset( $matches[ 2 ] ))

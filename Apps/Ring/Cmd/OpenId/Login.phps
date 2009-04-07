@@ -15,7 +15,7 @@ class R_Cmd_OpenId_Login extends R_Command {
 			// Process auth for our users
 			$user = R_Mdl_User::getByIdentity( $_POST[ "openid_identifier" ] );
 			if ($user && $user->isOurUser()) {
-				if ((isset( $_POST[ "pwd" ] ) && $user->login( $_POST[ "pwd" ] )) || $user->identity == R_Mdl_Session::getIdentity()) {
+				if ((isset( $_POST[ "pwd" ] ) && $user->can("log in") && $user->login( $_POST[ "pwd" ] )) || $user->identity == R_Mdl_Session::getIdentity()) {
 					$redirect = $_SESSION[ "redirect" ];
 					$url = parse_url( $redirect );
 					if (isset( $url[ "host" ] ) && ($url[ "host" ] == O_Registry::get( "app/hosts/project" ) || O_Dao_Query::get(

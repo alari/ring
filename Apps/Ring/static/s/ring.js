@@ -49,5 +49,32 @@ var R = {
 		toggle: function(widthOffset){
 			this.isShowed ? this.hide() : this.show(widthOffset);
 		}
+	},
+	AjaxFragment: {
+		show: function(el, options, param, end_with) {
+			el = $(el);
+			this.init(el, param);
+			el.set("r_ajax_isShowed", 1);
+			el.style.overflow = "hidden";
+			new Request($merge(options,{onSuccess:function(response){
+				el.set('html', response);
+				el.tween(param,0,end_with);
+			}})).send();
+		},
+		hide: function(el, param, end_with) {
+			el = $(el);
+			el.tween(param, end_with, 0);
+			el.set("r_ajax_isShowed", 0);
+		},
+		init: function(el, param) {
+			if(el.get('r_ajax_isInitiated') == 1) return;
+			el.style[param] = 0;
+			el.set('r_ajax_isInitiated', 1);
+		},
+		toggle: function(el, options, param, end_with) {
+			el = $(el);
+			if(el.get("r_ajax_isShowed") == 1) this.hide(el, param);
+			else this.show(el, options, param, end_with);
+		}
 	}
 };

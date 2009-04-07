@@ -46,5 +46,3 @@ class R_Tpl_OpenId_Login extends R_Template {
 
 	}
 }
-
-?>
