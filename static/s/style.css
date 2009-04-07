@@ -1,0 +1,134 @@
+html,body {
+	padding: 0;
+	margin: 0;
+	background: #fff;
+	width: 100%;
+	height: 100%
+}
+
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box
+}
+
+#header {
+	height: 100px
+}
+
+#login-box {
+	float: right
+}
+
+#logo {
+	float: left
+}
+
+#logo a {
+	width: 100px;
+	height: 100px;
+	text-decoration: none;
+	content: 'Логотип';
+	color: black;
+	vertical-align: bottom;
+}
+
+#wrapper {
+	width: 100%;
+	float: left
+}
+
+#content {
+	width: 78%;
+	float: left;
+	padding: 20px;
+}
+
+#local-nav {
+	width: 22%;
+	float: right;
+	border-left: 1px dashed silver;
+	border-bottom: 1px dashed silver
+}
+
+#main-menu {
+	border-bottom: 1px solid silver;
+	height: 30px;
+	margin-top: -30px
+}
+
+#main-menu ul {
+	margin: 0;
+	padding: 0
+}
+
+#main-menu ul li {
+	display: inline;
+	padding-left: 10px
+}
+
+#main-menu ul li a {
+	color: black
+}
+
+.openid-focus {
+	color: black
+}
+
+.openid-blur {
+	color: silver;
+	font-style: italic
+}
+
+#openid {
+	padding-left: 22px;
+	background: url({%STATIC_PROJ%}im/openid.gif) 0 2px no-repeat;
+	height: 40px;
+	margin-top: 60px
+}
+
+#openid span {
+	display: block;
+	color: gray;
+	font-size: x-small
+}
+
+#openid form {
+	margin: 0
+}
+
+#footer {
+	border-top: 1px solid gray;
+	text-align: center;
+	float: left;
+	width: 100%
+}
+
+#footer span {
+	display: block;
+	color: silver
+}
+
+#footer span a {
+	color: gray;
+	text-decoration: none
+}
+
+#footer span a:hover {
+	text-decoration: underline
+}
+
+#shadow {
+	position: absolute;
+	z-index: 100;
+	background: #fff
+}
+
+#user-menu {
+	width: 22%;
+	position: absolute;
+	right: 0;
+	top: 100px;
+	visibility: hidden;
+	z-index: 200;
+	background: #fff
+}
