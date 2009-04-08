@@ -44,6 +44,17 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 		$this->about_page = new R_Mdl_Site_About( );
 	}
 
+	static public function getByHost( $host )
+	{
+		if (substr( $host, 0, 7 ) == "http://")
+			$host = substr( $host, 7 );
+		if (strpos( $host, "/" ))
+			$host = substr( $host, 0, strpos( $host, "/" ) );
+		if (!$host)
+			return;
+		return O_Dao_Query::get( __CLASS__ )->test( "host", $host )->getOne();
+	}
+
 	public function url( $sub = "", array $params = array() )
 	{
 		if (count( $params ))
@@ -71,7 +82,7 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 				if (R_Mdl_Session::can( "read " . $acc, $this ))
 					$accesses[] = $acc;
 			}
-			$this->available_systems = count($accesses) ? $this->systems->test( "access", $accesses ) : array();
+			$this->available_systems = count( $accesses ) ? $this->systems->test( "access", $accesses ) : array ();
 		}
 		return $this->available_systems;
 	}

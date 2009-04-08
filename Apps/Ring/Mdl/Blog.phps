@@ -5,19 +5,19 @@
  * @field system -owns one R_Mdl_Site_System -inverse blog
  * @field posts -owns many R_Mdl_Blog_Post -inverse blog -order-by time DESC
  * @field anonces -owns many R_Mdl_Blog_Anonce -inverse blog -order-by time DESC
- * @field title tinytext
- * @field perpage tinyint NOT NULL DEFAULT 15
+ * @field title tinytext -title Заголовок блога -edit -required Заголовок обязателен
+ * @field perpage tinyint NOT NULL DEFAULT 15 -title Количество записей на страницу -edit -required Какое-то количество должно быть обязательно
  */
 class R_Mdl_Blog extends O_Dao_ActiveRecord {
 
 	public function getCommand( $page )
 	{
 		$prefix = "R_Lf_Sys_Blog_Cmd_";
-		$matches = Array();
-	if($page == "SystemAdmin"){
-		$class = $prefix."SystemAdmin";
-		$cmd = new $class;
-	} elseif (preg_match( "#^form(/([0-9]*))?$#", $page, $matches )) {
+		$matches = Array ();
+		if ($page == "SystemAdmin") {
+			$class = $prefix . "SystemAdmin";
+			$cmd = new $class( );
+		} elseif (preg_match( "#^form(/([0-9]*))?$#", $page, $matches )) {
 			$class = $prefix . "Form";
 			$cmd = new $class( );
 			if (isset( $matches[ 2 ] ))
