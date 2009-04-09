@@ -18,7 +18,7 @@ html,body {
 
 #u {
 	height: 229px;
-	background: url(<?=$ this- > 
+	background: url(<?=$this->
 		staticUrl( "im/ctr/u.png" )?> ) repeat-x
 }
 
@@ -27,7 +27,7 @@ html,body {
 	float: left;
 	height: 229px;
 	width: 179px;
-	background: url(<?=$ this- > 
+	background: url(<?=$this->
 		staticUrl( "im/ctr/ul.png" )?> ) left top
 		no-repeat;
 }
@@ -37,26 +37,26 @@ html,body {
 	float: right;
 	height: 229px;
 	width: 179px;
-	background: url(<?=$ this- > 
+	background: url(<?=$this->
 		staticUrl( "im/ctr/ur.png" )?> ) left top
 		no-repeat;
 }
 
 #l {
-	background: url(<?=$ this- > 
+	background: url(<?=$this->
 		staticUrl( "im/ctr/l.png" )?> ) repeat-y;
 	width: 179px;
 }
 
 #r {
-	background: url(<?=$ this- > 
+	background: url(<?=$this->
 		staticUrl( "im/ctr/r.png" )?> ) repeat-y;
 	width: 179px
 }
 
 #d {
 	height: 248px;
-	background: url(<?=$ this- > 
+	background: url(<?=$this->
 		staticUrl( "im/ctr/d.png" )?> ) repeat-x
 }
 
@@ -65,7 +65,7 @@ html,body {
 	float: left;
 	height: 248px;
 	width: 179px;
-	background: url(<?=$ this- > 
+	background: url(<?=$this->
 		staticUrl( "im/ctr/dl.png" )?> ) left top
 		no-repeat;
 }
@@ -75,7 +75,7 @@ html,body {
 	float: right;
 	height: 248px;
 	width: 179px;
-	background: url(<?=$ this- > 
+	background: url(<?=$this->
 		staticUrl( "im/ctr/dr.png" )?> ) left top
 		no-repeat;
 }
@@ -99,7 +99,7 @@ html,body {
 }
 
 #openid {
-	background: url(<?=$ this- > 
+	background: url(<?=$this->
 		staticUrl( "im/openid.gif" )?> ) 0 2px
 		no-repeat;
 	height: 40px;
