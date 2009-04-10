@@ -54,6 +54,11 @@ class R_Mdl_Blog extends O_Dao_ActiveRecord {
 		return $this->setAccesses( $this->anonces );
 	}
 
+	public function getItem( $id )
+	{
+		return $this->getPosts()->test( "id", $id )->getOne();
+	}
+
 	private function setAccesses( O_Dao_Query $q )
 	{
 		$accesses = array ();

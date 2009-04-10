@@ -45,6 +45,9 @@
 	<Url pattern="openid/redirect">
 		<Command name="OpenId_Redirect" plugin="-"></Command>
 	</Url>
+	<Url pattern="comment">
+		<Command name="Comment" plugin="-"></Command>
+	</Url>
 	<Url pattern="">
 		<Command name="Home"></Command>
 	</Url>

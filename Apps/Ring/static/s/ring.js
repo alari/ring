@@ -51,30 +51,52 @@ var R = {
 		}
 	},
 	AjaxFragment: {
-		show: function(el, options, param, end_with) {
+		show: function(el, options) {
 			el = $(el);
-			this.init(el, param);
+			this.init(el);
 			el.set("r_ajax_isShowed", 1);
 			el.style.overflow = "hidden";
 			new Request($merge(options,{onSuccess:function(response){
 				el.set('html', response);
-				el.tween(param,0,end_with);
+				el.get('tween', {property:'height'}).start(0,el.getScrollSize().y).chain(function(){el.style.height='auto';el.style.overflow='visible';});
 			}})).send();
 		},
-		hide: function(el, param, end_with) {
+		hide: function(el) {
 			el = $(el);
-			el.tween(param, end_with, 0);
+			el.style.overflow='hidden';
+			el.get('tween',{property:'height'}).start(el.getScrollSize().y, 0);
 			el.set("r_ajax_isShowed", 0);
 		},
 		init: function(el, param) {
 			if(el.get('r_ajax_isInitiated') == 1) return;
-			el.style[param] = 0;
+			el.style.height = 0;
 			el.set('r_ajax_isInitiated', 1);
 		},
-		toggle: function(el, options, param, end_with) {
+		toggle: function(el, options) {
 			el = $(el);
-			if(el.get("r_ajax_isShowed") == 1) this.hide(el, param);
-			else this.show(el, options, param, end_with);
+			if(el.get("r_ajax_isShowed") == 1) this.hide(el);
+			else this.show(el, options);
+		}
+	},
+	Comment: {
+		showForm: function(el, url, root, parent, sys) {
+			e=el.retrieve("form-el");
+			if(!e) {
+				var e=new Element('div');
+				e.injectAfter(el);
+				el.store("form-el", e);
+			}
+			if(e.get("r_ajax_isShowed") == 1) {
+				return R.AjaxFragment.hide(e);
+			}
+			var action = parent?'comment-for':'comment-new';
+			options = {url:url, data:{
+				root: root,
+				action: action,
+				'parent-node': parent,
+				sys: sys},
+				evalScripts:true};
+			R.AjaxFragment.show(e, options);
 		}
 	}
 };

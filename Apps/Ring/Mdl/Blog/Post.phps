@@ -12,6 +12,8 @@
  *
  * @field access ENUM('public','protected','private','disable') NOT NULL DEFAULT 'public'
  *
+ * @field system -alias blog.system
+ *
  * @index blog,access,time
  */
 class R_Mdl_Blog_Post extends O_Dao_NestedSet_Root {
@@ -44,6 +46,11 @@ class R_Mdl_Blog_Post extends O_Dao_NestedSet_Root {
 		parent::save();
 		$this->anonce->save();
 		return true;
+	}
+
+	public function getSystemId()
+	{
+		return $this->blog[ "system" ];
 	}
 
 	public function url()
