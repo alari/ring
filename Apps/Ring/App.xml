@@ -13,8 +13,10 @@
 		</Host>
 		<Registry key="hosts/center" value="centralis"></Registry>
 		<Registry key="hosts/project" value="mirari"></Registry>
-		<Registry key="sites/static_urlbase" value="Apps/Ring/static/s/"></Registry>
+		<Registry key="sites/static_urlbase" value="/Apps/Ring/static/s/"></Registry>
 		<Registry key="sites/static_folder" value="./Apps/Ring/static/s/"></Registry>
+		<Registry key="users/static_urlbase" value="/Apps/Ring/static/u/"></Registry>
+		<Registry key="users/static_folder" value="./Apps/Ring/static/u/"></Registry>
 	</If>
 	<If mode="production">
 		<Registry key="db/default/engine" value="mysql"></Registry>
@@ -30,8 +32,10 @@
 		</Host>
 		<Registry key="hosts/center" value="centralis.name"></Registry>
 		<Registry key="hosts/project" value="mirari.name"></Registry>
-		<Registry key="sites/static_urlbase" value="static/s/"></Registry>
+		<Registry key="sites/static_urlbase" value="/static/s/"></Registry>
 		<Registry key="sites/static_folder" value="./static/s/"></Registry>
+		<Registry key="users/static_folder" value="./static/u/"></Registry>
+		<Registry key="users/static_urlbase" value="/static/u/"></Registry>
 	</If>
 	<Url pattern="openid/login">
 		<Command name="OpenId_Login" plugin="-"></Command>

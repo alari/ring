@@ -17,14 +17,16 @@ class R_Ctr_Cmd_Admin_User extends R_Command {
 				$user->role = $role;
 			$user->save();
 			return $this->redirect( O_UrlBuilder::get( "Admin/User", array ("id" => $user->id) ) );
+		// Create user
 		} elseif ($this->getParam( "action" ) == "create") {
 			try {
-				
+
 				$identity = $this->getParam( "identity" );
 				$role = O_Dao_ActiveRecord::getById( $this->getParam( "role" ), "O_Acl_Role" );
 				$pwd = $this->getParam( "pwd" );
 				O_Db_Manager::getConnection()->beginTransaction();
 				$user = new R_Mdl_User( $identity, $role );
+				// Our user has site
 				if ($user && $pwd) {
 					$user->setPwd( $pwd );
 					$user->site = new R_Mdl_Site( $identity );
@@ -44,7 +46,7 @@ class R_Ctr_Cmd_Admin_User extends R_Command {
 			$user->delete();
 			return $this->redirect( O_UrlBuilder::get( "Admin/User" ) );
 		}
-		
+
 		if ($user) {
 			$form = new O_Dao_Renderer_FormProcessor( );
 			$form->setActiveRecord( $user );
@@ -55,7 +57,7 @@ class R_Ctr_Cmd_Admin_User extends R_Command {
 		} else {
 			$form = null;
 		}
-		
+
 		$tpl = $this->getTemplate();
 		$tpl->form = $form;
 		$tpl->user = $user;

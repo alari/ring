@@ -25,7 +25,8 @@ abstract class R_Mdl_Comment extends O_Dao_NestedSet_Node {
 		}
 		?>
 <div style="margin-left:<?=$comment->level?>em">
-<?=$params->value()?>
+<span style="float:left;width:100px"><img src="<?=$comment->owner->avatarUrl()?>"/></span>
+<?=$params->value()?><br style="clear:left"/>
 </div>
 
 <?

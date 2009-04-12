@@ -3,6 +3,10 @@
  * @table user
  * @field site -owns one R_Mdl_Site -inverse owner
  *
+ * @field email VARCHAR(255) -edit -title Адрес электронной почты
+ * @field nickname VARCHAR(255) -edit -title Ник или псевдоним
+ * @field avatar_ext ENUM('-','gif','jpeg','png') DEFAULT '-'
+ *
  * @field friends -has many R_Mdl_User -inverse friend_of
  * @field friend_of -has many R_Mdl_User -inverse friends
  * @field friends_friends -alias friends.friends
@@ -17,6 +21,7 @@ class R_Mdl_User extends O_Acl_User {
 		O_OpenId_Provider_UserPlugin::normalize( $identity );
 		$this->identity = $identity;
 		$this->role = $role;
+		$this->nickname = $this->identity;
 		parent::__construct();
 	}
 
@@ -57,14 +62,42 @@ class R_Mdl_User extends O_Acl_User {
 	}
 
 	/**
-	 * Returns identity url
+	 * Returns profile url
 	 *
 	 * @return string
 	 */
 	public function url()
 	{
-		return $this->identity;
+		if($this["site"]) {
+			return $this->site->url("profile");
+		} else {
+			return $this->identity;
+		}
 	}
+
+	public function avatarUrl($full=false) {
+		$src = "ava".($full ? "-full" : ""). ".".($this->avatar_ext!="-" ? $this->avatar_ext : "gif");
+		return $this->avatar_ext != "-" ? $this->staticUrl($src) : O_Registry::get("app/users/static_urlbase").$src;
+		return O_UrlBuilder::getStatic($src);
+	}
+
+	public function staticUrl($filename) {
+		return O_Registry::get("app/users/static_urlbase").$this->id."/".$filename;
+	}
+
+	public function staticFilename($filename) {
+		return O_Registry::get("app/users/static_folder").$this->id."/".$filename;
+	}
+
+	public function createUserdir() {
+		if(!is_dir(O_Registry::get("app/users/static_folder").$this->id)) {
+			mkdir(O_Registry::get("app/users/static_folder").$this->id);
+		}
+	}
+
+
+
+
 
 	/**
 	 * Returns user by identity
