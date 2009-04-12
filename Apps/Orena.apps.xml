@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Applications>
+	<App ext="phps" name="Ring" prefix="R">
+		<Condition mode="development">
+			<Host pattern="([^\.]*)"></Host>
+		</Condition>
+		<Condition mode="production" pattern="any"></Condition>
+	</App>
+</Applications>
