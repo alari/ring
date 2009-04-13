@@ -59,7 +59,8 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 	{
 		if (count( $params ))
 			$sub .= "?" . O_UrlBuilder::buildQueryString( $params );
-		return "http://" . $this->host . "/" . $sub;
+		if(!$sub || $sub[0] != "/") $sub = "/".$sub;
+		return "http://" . $this->host . $sub;
 	}
 
 	public function staticUrl( $file )
