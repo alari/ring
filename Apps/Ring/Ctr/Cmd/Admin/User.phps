@@ -64,4 +64,9 @@ class R_Ctr_Cmd_Admin_User extends R_Command {
 		$tpl->roles = O_Dao_Query::get( "O_Acl_Role" );
 		return $tpl;
 	}
+
+	public function isAuthenticated() {
+		return $this->can("manage users");
+	}
+
 }

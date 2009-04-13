@@ -89,23 +89,7 @@ Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4
 			$this->userMenu()?></div>
 <?
 		} else {
-			?>
-<div id="openid">
-<form method="POST"
-	action="http://<?=O_Registry::get( "app/hosts/center" )?>/openid/login">
-
-<input type="text" name="openid_identifier" class="openid-blur"
-	value="OpenID"
-	onfocus="this.className='openid-focus';this.value=this.value=='OpenID'?'':this.value"
-	onblur="this.value = this.value ? this.value : 'OpenID';if(this.value=='OpenID') this.className = 'openid-blur'"
-	class="openid-blur" /> <input type="submit" value="Вход"
-	id="openid-signup" /> <span>(например, логин.livejournal.com)</span> <input
-	type="hidden" name="openid_action" value="login" /> <input
-	type="hidden" name="redirect"
-	value="http://<?=$_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ]?>" />
-</form>
-</div>
-<?
+			parent::openidBox();
 		}
 	}
 
@@ -139,12 +123,7 @@ Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4
 </ul>
 <?
 		}
-		?>
-<p><b><a href="<?=R_Mdl_Session::getUser()->url()?>">Ваш профиль</a></b></p>
-<ul>
-<li><a href="http://<?=O_Registry::get("app/hosts/center")?>/Own/EditProfile">Редактировать профиль</a></li>
-</ul>
-<?
+		parent::userMenu();
 	}
 
 }

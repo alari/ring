@@ -1,5 +1,5 @@
 <?php
-class R_Ctr_Lo_Main extends O_Html_Layout {
+class R_Ctr_Lo_Main extends R_Layout {
 
 	public function displayBody()
 	{
@@ -107,36 +107,21 @@ html,body {
 <?
 		if (R_Mdl_Session::isLogged()) {
 			?>
-Привет, <u><?=R_Mdl_Session::getUser()->identity?></u>! <a
+Привет, <a href="<?=R_Mdl_Session::getUser()->url()?>"><?=R_Mdl_Session::getUser()->nick?></a>! <a
 			href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a>
 <?
 		} else {
 			?>
 
 <center>
-		<div id="openid">
-		<form method="POST"
-			action="http://<?=O_Registry::get( "app/hosts/center" )?>/openid/login">
-
-		<input type="text" name="openid_identifier" class="openid-blur"
-			value="OpenID"
-			onfocus="this.className='openid-focus';this.value=this.value=='OpenID'?'':this.value"
-			onblur="this.value = this.value ? this.value : 'OpenID';if(this.value=='OpenID') this.className = 'openid-blur'"
-			class="openid-blur" /> <input type="submit" value="Вход"
-			id="openid-signup" /> <span>(например, логин.livejournal.com)</span>
-
-		<input type="hidden" name="openid_action" value="login" /> <input
-			type="hidden" name="redirect"
-			value="http://<?=$_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ]?>" />
-		</form>
-		</div>
+<?parent::openidBox();?>
 		</center>
 <?
 		}
 		$this->tpl->displayContents();
 		?>
 </td>
-		<td id="r">&nbsp;</td>
+		<td id="r"><?parent::userMenu()?></td>
 	</tr>
 	<tr>
 		<td colspan="3" id="d"><span id="dl"></span> <span id="dr"></span></td>
