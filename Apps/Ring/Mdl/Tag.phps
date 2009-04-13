@@ -24,14 +24,14 @@ class R_Mdl_Tag extends O_Dao_ActiveRecord {
 		$this->site = $site;
 	}
 
-	public function url()
+	public function url($urlbase="")
 	{
-		return $this->site->url( "tag/" . urlencode( $this->title ) );
+		return $this->site->url( ($urlbase?$urlbase."/":"")."tag/" . urlencode( $this->title ) );
 	}
 
-	public function link()
+	public function link(R_Mdl_Site_System $sys = null)
 	{
-		return "<a href=\"" . $this->url() . "\"" . ($this->description ? ' title="' . htmlspecialchars( 
+		return "<a href=\"" . $this->url($sys ? $sys->urlbase : "") . "\"" . ($this->description ? ' title="' . htmlspecialchars(
 				$this->description ) . '"' : '') . ">" . $this->title . "</a>";
 	}
 

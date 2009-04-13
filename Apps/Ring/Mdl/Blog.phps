@@ -44,6 +44,11 @@ class R_Mdl_Blog extends O_Dao_ActiveRecord {
 		return $this->system->url( $page > 1 ? "page-$page" : "" );
 	}
 
+	public function link() {
+		return "<a href=\"".$this->url()."\">".$this->title."</a>";
+	}
+
+
 	public function getPosts()
 	{
 		return $this->setAccesses( $this->posts );
