@@ -39,6 +39,8 @@
 		<Registry key="users/static_urlbase" value="/static/u/"></Registry>
 		<Registry key="html/static_root" value="/static/"></Registry>
 	</If>
+	<If plugin="Lf">
+		<Url pattern="about" command="About"></Url></If>
 	<Url pattern="openid/login">
 		<Command name="OpenId_Login" plugin="-"></Command>
 	</Url>
