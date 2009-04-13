@@ -107,7 +107,7 @@ html,body {
 <?
 		if (R_Mdl_Session::isLogged()) {
 			?>
-Привет, <a href="<?=R_Mdl_Session::getUser()->url()?>"><?=R_Mdl_Session::getUser()->nick?></a>! <a
+Привет, <a href="<?=R_Mdl_Session::getUser()->url()?>"><?=R_Mdl_Session::getUser()->nickname?></a>! <a
 			href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a>
 <?
 		} else {
