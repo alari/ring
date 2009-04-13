@@ -5,6 +5,8 @@ class R_Cmd_Comment extends R_Command {
 
 	public function process()
 	{
+		Header("Content-type: text/html; charset=utf-8");
+
 		if (!$this->can( "comment " . $this->system->access, $this->system->site )) {
 			return "Вы не можете оставлять отзывы. Вероятно, Вам просто нужно авторизоваться.";
 		}

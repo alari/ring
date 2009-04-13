@@ -1,11 +1,6 @@
 <?php
 abstract class R_Command extends O_Command {
 
-	public function __construct() {
-		Header("Content-type: text/html; charset=utf-8");
-	}
-
-
 	public function can( $action, O_Dao_ActiveRecord $resourse = null )
 	{
 		return R_Mdl_Session::getUser()->can( $action, $resourse );
