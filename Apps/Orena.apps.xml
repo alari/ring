@@ -2,7 +2,7 @@
 <Applications>
 	<App ext="phps" name="Ring" prefix="R">
 		<Condition mode="development">
-			<Host pattern="([^\.]*)"></Host>
+			<Host pattern="^([^\.]*)$"></Host>
 		</Condition>
 		<Condition mode="production" pattern="any"></Condition>
 	</App>
