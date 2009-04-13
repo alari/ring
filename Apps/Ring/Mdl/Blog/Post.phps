@@ -2,13 +2,14 @@
 /**
  * @table blog_post
  * @field owner -has one R_Mdl_User -inverse blog_posts
- * @field blog -has one R_Mdl_Blog -inverse posts --edit
- * @field tags -has many R_Mdl_Tag -inverse blog_posts --edit
  * @field anonce -owns one R_Mdl_Blog_Anonce -inverse post
  *
  * @field time int NOT NULL
  * @field title VARCHAR(255) -show-loop linkInContainer h2 -show container h1 -edit -title Заголовок записи
  * @field content MEDIUMTEXT -show -edit wysiwyg -required Текст записи необходим -check htmlPurify -title
+ *
+ * @field tags -has many R_Mdl_Tag -inverse blog_posts -edit selectRelationBox -title Метки
+ * @field blog -has one R_Mdl_Blog -inverse posts --edit
  *
  * @field access ENUM('public','protected','private','disable') NOT NULL DEFAULT 'public'
  *

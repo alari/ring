@@ -11,9 +11,9 @@ class R_Lf_Layout extends R_Layout {
 		$this->addCssSrc( $this->tpl->site->staticUrl( "style.css" ) );
 		if (!O_Registry::get( "app/env/process_url" ) && $this->tpl->site->owner)
 			$this->addHeadLink( "openid.provider", $this->tpl->site->url( "openid/provider" ) );
-		$this->addJavaScriptSrc(O_Registry::get( "app/sites/static_urlbase" ) . "ring.js" );
+		$this->addJavaScriptSrc( O_Registry::get( "app/sites/static_urlbase" ) . "ring.js" );
 		if (!R_Mdl_Session::isLogged())
-			$this->addJavaScriptSrc(
+			$this->addJavaScriptSrc( 
 					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . $this->tpl->site->host .
 						 $_SERVER[ 'REQUEST_URI' ] );
 		?>
@@ -98,7 +98,7 @@ Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4
 	 */
 	protected function userMenu()
 	{
-
+		
 		parent::userMenu();
 	}
 

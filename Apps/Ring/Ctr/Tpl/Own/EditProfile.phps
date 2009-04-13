@@ -5,7 +5,7 @@ class R_Ctr_Tpl_Own_EditProfile extends R_Ctr_Template {
 	public function displayContents()
 	{
 		$this->form->show( $this->layout() );
-
+		
 		?>
 <form method="post" enctype="multipart/form-data">
 <fieldset><legend>Фотография</legend>

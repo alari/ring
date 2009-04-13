@@ -68,41 +68,41 @@ class R_Mdl_User extends O_Acl_User {
 	 */
 	public function url()
 	{
-		if($this["site"]) {
-			return $this->site->url("profile");
+		if ($this[ "site" ]) {
+			return $this->site->url( "profile" );
 		} else {
 			return $this->identity;
 		}
 	}
 
-	public function avatarUrl($full=false) {
-		$src = "ava".($full ? "-full" : ""). ".".($this->avatar_ext!="-" ? $this->avatar_ext : "gif");
-		return $this->avatar_ext != "-" ? $this->staticUrl($src) : O_Registry::get("app/users/static_urlbase").$src;
-		return O_UrlBuilder::getStatic($src);
+	public function avatarUrl( $full = false )
+	{
+		$src = "ava" . ($full ? "-full" : "") . "." . ($this->avatar_ext != "-" ? $this->avatar_ext : "gif");
+		return $this->avatar_ext != "-" ? $this->staticUrl( $src ) : O_Registry::get( "app/users/static_urlbase" ) . $src;
+		return O_UrlBuilder::getStatic( $src );
 	}
 
-	public function staticUrl($filename) {
-		return O_Registry::get("app/users/static_urlbase").$this->id."/".$filename;
+	public function staticUrl( $filename )
+	{
+		return O_Registry::get( "app/users/static_urlbase" ) . $this->id . "/" . $filename;
 	}
 
-	public function staticFilename($filename) {
-		return O_Registry::get("app/users/static_folder").$this->id."/".$filename;
+	public function staticFilename( $filename )
+	{
+		return O_Registry::get( "app/users/static_folder" ) . $this->id . "/" . $filename;
 	}
 
-	public function createUserdir() {
-		if(!is_dir(O_Registry::get("app/users/static_folder").$this->id)) {
-			mkdir(O_Registry::get("app/users/static_folder").$this->id);
+	public function createUserdir()
+	{
+		if (!is_dir( O_Registry::get( "app/users/static_folder" ) . $this->id )) {
+			mkdir( O_Registry::get( "app/users/static_folder" ) . $this->id );
 		}
 	}
 
-	public function link() {
-		echo "<a href=\"".$this->url()."\">".$this->nickname."</a>";
+	public function link()
+	{
+		echo "<a href=\"" . $this->url() . "\">" . $this->nickname . "</a>";
 	}
-
-
-
-
-
 
 	/**
 	 * Returns user by identity

@@ -1,20 +1,20 @@
 <?php
 class R_Ctr_Tpl_Admin_User extends R_Ctr_Template {
-
+	
 	/**
 	 * Form with editable user fields
 	 *
 	 * @var O_Dao_Renderer_FormProcessor
 	 */
 	public $form;
-
+	
 	/**
 	 * Current user
 	 *
 	 * @var R_Mdl_User
 	 */
 	public $user;
-
+	
 	/**
 	 * Query with available user roles
 	 *
@@ -67,8 +67,7 @@ class R_Ctr_Tpl_Admin_User extends R_Ctr_Template {
 		<td>Адрес сайта:</td>
 		<td><a href="<?=$this->user->url()?>"><?=$this->user->identity?></a><?
 				if ($this->user->site) {
-					?>&nbsp; (<a
-			href="<?=$this->user->site->url("Admin/Site")?>">настройки</a>)<?
+					?>&nbsp; (<a href="<?=$this->user->site->url( "Admin/Site" )?>">настройки</a>)<?
 				}
 				?></td>
 	</tr>
@@ -108,11 +107,11 @@ class R_Ctr_Tpl_Admin_User extends R_Ctr_Template {
 </fieldset>
 </form>
 <?
-
+		
 		if ($this->form) {
 			$this->form->show( $this->layout() );
 		}
-
+		
 		if ($this->user) {
 			?>
 <form method="post"

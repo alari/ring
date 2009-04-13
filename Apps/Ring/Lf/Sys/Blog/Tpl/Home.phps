@@ -13,5 +13,4 @@ class R_Lf_Sys_Blog_Tpl_Home extends R_Lf_Sys_Blog_Template {
 			$this->paginator->show( $this->layout() );
 	}
 
-
 }

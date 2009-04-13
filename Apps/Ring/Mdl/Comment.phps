@@ -24,9 +24,10 @@ abstract class R_Mdl_Comment extends O_Dao_NestedSet_Node {
 			return;
 		}
 		?>
-<div style="margin-left:<?=$comment->level?>em">
-<span style="float:left;width:100px"><?=$comment->owner->link()?><br/><img src="<?=$comment->owner->avatarUrl()?>"/></span>
-<?=$params->value()?><br style="clear:left"/>
+<div style="margin-left:<?=$comment->level?>em"><span
+	style="float: left; width: 100px"><?=$comment->owner->link()?><br />
+<img src="<?=$comment->owner->avatarUrl()?>" /></span>
+<?=$params->value()?><br style="clear: left" />
 </div>
 
 <?
@@ -36,7 +37,7 @@ abstract class R_Mdl_Comment extends O_Dao_NestedSet_Node {
 	static public function addForm( $rootId, $systemId, $parent = 0 )
 	{
 		?>
-		<br style="clear:left"/>
+<br style="clear: left" />
 <div>
 <div align="right"><a href="javascript:void(0)"
 	onclick="R.Comment.showForm($(this).getParent(),'<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)"><?=($parent ? "Ответить" : "Оставить отзыв")?></a></div>

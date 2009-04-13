@@ -40,7 +40,8 @@
 		<Registry key="html/static_root" value="/static/"></Registry>
 	</If>
 	<If plugin="Lf">
-		<Url pattern="about" command="About"></Url></If>
+		<Url pattern="about" command="About"></Url>
+	</If>
 	<Url pattern="openid/login">
 		<Command name="OpenId_Login" plugin="-"></Command>
 	</Url>
@@ -82,7 +83,8 @@
 	<Registry key="paginator/prev" value="&lt;"></Registry>
 	<Registry key="paginator/next" value="&gt;"></Registry>
 	<Registry key="paginator/order_title" value="Сортировка"></Registry>
-	<Registry key="dao-params/default_tail" value="ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_unicode_ci"></Registry>
+	<Registry key="dao-params/default_tail"
+		value="ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_unicode_ci"></Registry>
 
 
 

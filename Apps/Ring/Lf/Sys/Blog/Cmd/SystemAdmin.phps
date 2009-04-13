@@ -1,11 +1,11 @@
 <?php
 class R_Lf_Sys_Blog_Cmd_SystemAdmin extends R_Lf_Sys_Blog_Command {
-
+	
 	public $blog;
 
 	public function process()
 	{
-
+		
 		$form_processor = new O_Dao_Renderer_FormProcessor( );
 		$form_processor->setActiveRecord( $this->blog );
 		$form_processor->setAjaxMode();

@@ -7,7 +7,7 @@ abstract class R_Lf_Sys_Blog_Command extends R_Lf_Command {
 		$tpl = parent::getTemplate( $tpl );
 		$tpl->site = $this->getSite();
 		$tpl->blog = $this->blog;
-		$tpl->can_write = $this->can("write", $tpl->site);
+		$tpl->can_write = $this->can( "write", $tpl->site );
 		return $tpl;
 	}
 }

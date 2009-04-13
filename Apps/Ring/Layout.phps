@@ -4,9 +4,9 @@ class R_Layout extends O_Html_Layout {
 
 	protected function userMenu()
 	{
-
+		
 		if (R_Mdl_Session::isLogged()) {
-
+			
 			$site = $this->site;
 			if (!$site)
 				$site = $this->tpl->site;
@@ -16,7 +16,7 @@ class R_Layout extends O_Html_Layout {
 				$can_write = R_Mdl_Session::can( "write", $site );
 				$systems = $site->getSystems();
 				?>
-<p><b><a href="/"><?=$site->title?></a></b></p>
+<p><b><a href="<?=$site->url()?>"><?=$site->title?></a></b></p>
 <ul><?
 				foreach ($systems as $sys) {
 					?>
@@ -29,6 +29,7 @@ class R_Layout extends O_Html_Layout {
 					?>
 <p><b><a href="<?=$site->url( "Admin/Site" )?>">Настройки сайта</a></b></p>
 <ul>
+	<li><a href="<?=$site->url( "Admin/Tags" )?>">Метки</a></li>
 	<li><a href="<?=$site->url( "Admin/About" )?>">Страница &laquo;О
 	сайте&raquo;</a></li>
 	<li><a href="<?=$site->url( "Admin/Systems" )?>">Список систем</a></li>
@@ -37,9 +38,9 @@ class R_Layout extends O_Html_Layout {
 </ul>
 <?
 				}
-
+			
 			}
-
+			
 			?>
 <p><b><a href="<?=R_Mdl_Session::getUser()->url()?>">Ваш профиль</a></b></p>
 <ul>
@@ -56,7 +57,7 @@ class R_Layout extends O_Html_Layout {
 </ul>
 <?
 		}
-
+		
 		?>
 <p><b>Управление</b></p>
 <ul>
@@ -73,7 +74,8 @@ class R_Layout extends O_Html_Layout {
 
 		if (R_Mdl_Session::can( "manage users" )) {
 			?>
-<li><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/Admin/User">Новый
+<li><a
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/Admin/User">Новый
 	пользователь</a></li>
 <?
 		}
