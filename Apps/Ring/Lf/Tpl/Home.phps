@@ -8,4 +8,13 @@ so homepage there
 <?
 	}
 
+	public function displayNav() {
+		if($this->site->owner){
+?>
+<img src="<?=$this->site->owner->avatarUrl(1)?>" alt="<?=htmlspecialchars($this->site->owner->nickname)?>"/>
+<?
+		}
+	}
+
+
 }

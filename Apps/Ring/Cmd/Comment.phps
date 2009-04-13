@@ -5,11 +5,11 @@ class R_Cmd_Comment extends R_Command {
 
 	public function process()
 	{
-		
+
 		if ($this->getParam( "action" ) == "comment-new" || $this->getParam( "action" ) == "comment-for") {
 			$this->handleForm();
 		}
-	
+
 	}
 
 	private function handleForm()
@@ -21,7 +21,9 @@ class R_Cmd_Comment extends R_Command {
 		$form->addHiddenField( "ajax-driven", "yes" );
 		$form->addHiddenField( "action", $this->getParam( "action" ) );
 		$form->setAjaxMode();
-		
+
+		$form->setSubmitButtonValue("Сохранить");
+
 		if ($this->getParam( "action" ) == "comment-for") {
 			$form->setCreateMode( array ($this->root) );
 			$form->setFormTitle( "Отозваться" );
@@ -34,7 +36,7 @@ class R_Cmd_Comment extends R_Command {
 			$form->setCreateMode( array ($this->root) );
 			$form->setFormTitle( "Оставить отзыв" );
 		}
-		
+
 		if ($this->getParam( "ajax-driven" ) == "yes" && $form->handle()) {
 			$comment = $form->getActiveRecord();
 			if (isset( $parent )) {
@@ -51,7 +53,7 @@ class R_Cmd_Comment extends R_Command {
 	{
 		if ($this->getParam( "ajax-driven" ) == "yes") {
 			if ($notFound)
-				echo json_encode( 
+				echo json_encode(
 						array ("status" => "FAILED", "errors" => array ("_" => "Error: parent node not found.")) );
 			$form->responseAjax();
 			return null;

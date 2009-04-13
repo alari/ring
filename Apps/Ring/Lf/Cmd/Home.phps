@@ -10,4 +10,5 @@ class R_Lf_Cmd_Home extends R_Lf_Command {
 		}
 		return $tpl;
 	}
+
 }

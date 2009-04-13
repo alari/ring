@@ -2,7 +2,7 @@
 /**
  * @table - -show:callback R_Mdl_Comment::showComment
  * @field time INT -show date
- * @field content TEXT -edit area -show -required Нужно обязательно что-то ввести
+ * @field content TEXT -edit area -show -required Нужно обязательно что-то ввести -title Комментарий
  */
 abstract class R_Mdl_Comment extends O_Dao_NestedSet_Node {
 	private static $form;
