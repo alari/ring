@@ -5,6 +5,9 @@ class R_Cmd_Comment extends R_Command {
 
 	public function process()
 	{
+		if (!$this->can( "comment " . $this->system->access, $this->system->site )) {
+			return "Вы не можете оставлять отзывы. Вероятно, Вам просто нужно авторизоваться.";
+		}
 
 		if ($this->getParam( "action" ) == "comment-new" || $this->getParam( "action" ) == "comment-for") {
 			$this->handleForm();
@@ -66,8 +69,6 @@ class R_Cmd_Comment extends R_Command {
 		$this->system = O_Dao_ActiveRecord::getById( $this->getParam( "sys" ), "R_Mdl_Site_System" );
 		if (!$this->system)
 			throw new O_Ex_PageNotFound( "System not found.", 404 );
-		if (!$this->can( "comment " . $this->system->access, $this->system->site ))
-			throw new O_Ex_AccessDenied( "You cannot comment this unit." );
 		$this->root = $this->system->getSystem()->getItem( $this->getParam( "root" ) );
 		if (!$this->root)
 			throw O_Ex_PageNotFound( "Parent not found.", 404 );
