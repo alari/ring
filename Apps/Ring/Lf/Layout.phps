@@ -98,30 +98,7 @@ Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4
 	 */
 	protected function userMenu()
 	{
-		$can_write = R_Mdl_Session::can( "write", $this->tpl->site );
-		$systems = $this->tpl->site->getSystems();
-		?>
-<p><b><a href="/"><?=$this->tpl->site->title?></a></b></p>
-<ul><?
-		foreach ($systems as $sys) {
-			?>
-<li><?=$sys->link() . ($can_write ? " <a href=\"" . $sys->url( "form" ) . "\" class=\"sys-add\">Добавить</a>" : "")?></li>
-<?
-		}
-		?></ul>
-<?
-		if ($can_write) {
-			?>
-<p><b><a href="<?=$this->url( "Admin/Site" )?>">Настройки сайта</a></b></p>
-<ul>
-	<li><a href="<?=$this->url( "Admin/About" )?>">Страница &laquo;О
-	сайте&raquo;</a></li>
-	<li><a href="<?=$this->url( "Admin/Systems" )?>">Список систем</a></li>
-	<li><a href="<?=$this->url( "Admin/SiteView" )?>">Редактировать
-	оформление</a></li>
-</ul>
-<?
-		}
+
 		parent::userMenu();
 	}
 

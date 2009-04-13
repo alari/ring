@@ -36,6 +36,7 @@ abstract class R_Mdl_Comment extends O_Dao_NestedSet_Node {
 	static public function addForm( $rootId, $systemId, $parent = 0 )
 	{
 		?>
+		<br style="clear:left"/>
 <div>
 <div align="right"><a href="javascript:void(0)"
 	onclick="R.Comment.showForm($(this).getParent(),'<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)"><?=($parent ? "Ответить" : "Оставить отзыв")?></a></div>

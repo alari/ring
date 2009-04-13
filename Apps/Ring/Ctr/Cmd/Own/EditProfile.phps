@@ -48,4 +48,9 @@ class R_Ctr_Cmd_Own_EditProfile extends R_Command {
 
 	}
 
+	public function isAuthenticated() {
+		return R_Mdl_Session::isLogged();
+	}
+
+
 }
