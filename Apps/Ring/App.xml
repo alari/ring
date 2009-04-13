@@ -17,6 +17,7 @@
 		<Registry key="sites/static_folder" value="./Apps/Ring/static/s/"></Registry>
 		<Registry key="users/static_urlbase" value="/Apps/Ring/static/u/"></Registry>
 		<Registry key="users/static_folder" value="./Apps/Ring/static/u/"></Registry>
+		<Registry key="html/static_root" value="/Apps/Ring/static/"></Registry>
 	</If>
 	<If mode="production">
 		<Registry key="db/default/engine" value="mysql"></Registry>
@@ -36,6 +37,7 @@
 		<Registry key="sites/static_folder" value="./static/s/"></Registry>
 		<Registry key="users/static_folder" value="./static/u/"></Registry>
 		<Registry key="users/static_urlbase" value="/static/u/"></Registry>
+		<Registry key="html/static_root" value="/static/"></Registry>
 	</If>
 	<Url pattern="openid/login">
 		<Command name="OpenId_Login" plugin="-"></Command>
@@ -55,7 +57,6 @@
 	<Url pattern="">
 		<Command name="Home"></Command>
 	</Url>
-	<Registry key="html/static_root" value="/Apps/Ring/static/"></Registry>
 	<Registry key="class/R_Mdl_User/plugins" type="add"
 		value="O_OpenId_Provider_UserPlugin"></Registry>
 	<Registry key="class/R_Mdl_Site/acl">
