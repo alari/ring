@@ -21,7 +21,7 @@ class R_Layout extends O_Html_Layout {
 <li><a href="http://<?=O_Registry::get("app/hosts/center")?>/Admin/Roles">Настройки ролей</a></li>
 <?}?>
 <?if(R_Mdl_Session::can("manage users")) {?>
-<li><a href="http://<?=O_Registry::get("app/hosts/center")?>/Admin/Users">Новый пользователь</a></li>
+<li><a href="http://<?=O_Registry::get("app/hosts/center")?>/Admin/User">Новый пользователь</a></li>
 <?}?>
 </ul>
 		<?

@@ -80,8 +80,7 @@ Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4
 		if (R_Mdl_Session::isLogged()) {
 			?>
 Привет,
-<u><?=R_Mdl_Session::getUser()->identity?></u>
-!
+<?=R_Mdl_Session::getUser()->link()?>!
 <a href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a>
 <br />
 <a href="javascript:void(0)" onclick="R.UserMenu.toggle()">Возможности</a>

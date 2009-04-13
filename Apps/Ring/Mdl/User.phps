@@ -95,6 +95,11 @@ class R_Mdl_User extends O_Acl_User {
 		}
 	}
 
+	public function link() {
+		echo "<a href=\"".$this->url()."\">".$this->nickname."</a>";
+	}
+
+
 
 
 
