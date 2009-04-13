@@ -27,12 +27,12 @@ class R_Layout extends O_Html_Layout {
 <?
 				if (R_Mdl_Session::can( "manage site", $site )) {
 					?>
-<p><b><a href="<?=$this->url( "Admin/Site" )?>">Настройки сайта</a></b></p>
+<p><b><a href="<?=$site->url( "Admin/Site" )?>">Настройки сайта</a></b></p>
 <ul>
-	<li><a href="<?=$this->url( "Admin/About" )?>">Страница &laquo;О
+	<li><a href="<?=$site->url( "Admin/About" )?>">Страница &laquo;О
 	сайте&raquo;</a></li>
-	<li><a href="<?=$this->url( "Admin/Systems" )?>">Список систем</a></li>
-	<li><a href="<?=$this->url( "Admin/SiteView" )?>">Редактировать
+	<li><a href="<?=$site->url( "Admin/Systems" )?>">Список систем</a></li>
+	<li><a href="<?=$site->url( "Admin/SiteView" )?>">Редактировать
 	оформление</a></li>
 </ul>
 <?
