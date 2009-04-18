@@ -1,6 +1,6 @@
 <?php
 abstract class R_Lf_Command extends R_Command {
-	
+
 	private $site = false;
 
 	/**
@@ -11,7 +11,7 @@ abstract class R_Lf_Command extends R_Command {
 	public function getSite()
 	{
 		if ($this->site === false) {
-			$this->site = O_Dao_Query::get( "R_Mdl_Site" )->test( "host", O_Registry::get( "app/env/http_host" ) )->getOne();
+			$this->site = O_Registry::get("app/current/site");
 			if (!$this->site)
 				throw new O_Ex_Redirect( "http://" . O_Registry::get( "app/hosts/project" ) . "/" );
 		}

@@ -24,11 +24,11 @@ abstract class R_Mdl_Comment extends O_Dao_NestedSet_Node {
 			return;
 		}
 		?>
-		<br style="clear:left"/>
+
 <div style="margin-left:<?=$comment->level?>em"><span
-	style="float: left; width: 100px"><?=$comment->owner->link()?><br />
+	style="float: left; width: 100px; clear: left"><?=$comment->owner->link()?><br />
 <img src="<?=$comment->owner->avatarUrl()?>" /></span>
-<?=$params->value()?><br style="clear: left" />
+<?=$params->value()?>
 </div>
 
 <?
@@ -45,6 +45,5 @@ abstract class R_Mdl_Comment extends O_Dao_NestedSet_Node {
 </div>
 <?
 	}
-
 
 }

@@ -21,7 +21,7 @@ class R_Mdl_User extends O_Acl_User {
 		O_OpenId_Provider_UserPlugin::normalize( $identity );
 		$this->identity = $identity;
 		$this->role = $role;
-		$this->nickname = $this->identity;
+		$this->nickname = $identity;
 		parent::__construct();
 	}
 
