@@ -6,7 +6,6 @@ class R_Mdl_RequestBugfixer {
 	{
 		$params = O_Registry::get( "app/env/params" );
 		array_walk_recursive( $params, array (__CLASS__, "callback") );
-		print_r($params);
 		O_Registry::set( "app/env/params", $params );
 	}
 
