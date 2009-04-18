@@ -5,7 +5,7 @@ class R_Mdl_RequestBugfixer {
 	static public function fix()
 	{
 		$params = O_Registry::get( "app/env/params" );
-		if(count($params)) print_r($params);
+		if(count($params)) {print_r($params);exit;}
 		array_walk_recursive( $params, array (__CLASS__, "callback") );
 		O_Registry::set( "app/env/params", $params );
 	}
