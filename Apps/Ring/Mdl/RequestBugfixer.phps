@@ -1,17 +1,20 @@
 <?php
 
 class R_Mdl_RequestBugfixer {
-	static public function fix() {
-		$params = O_Registry::get("app/env/params");
-		O_Registry::set("app/env/params", array_map(array(__CLASS__, "callback"), $params));
+
+	static public function fix()
+	{
+		$params = O_Registry::get( "app/env/params" );
+		array_walk_recursive( $params, array (__CLASS__, "callback") );
+		O_Registry::set( "app/env/params", $params );
 	}
 
-	static public function callback($param) {
-		if(is_string($param))return str_replace("�?", "ш", $param);
-		if(is_array($param)) return array_map(array(__CLASS__, "callback"), $param);
-		return $param;
+	static public function callback( &$param, $key )
+	{
+		if (is_string( $param ))
+			$param = str_replace( "�?", "ш", $param );
 	}
 
 }
 
-O_ClassManager::registerClassLoadedCallback(array("R_Mdl_RequestBugfixer", "fix"), "O_Command");
+O_ClassManager::registerClassLoadedCallback( array ("R_Mdl_RequestBugfixer", "fix"), "O_Command" );
