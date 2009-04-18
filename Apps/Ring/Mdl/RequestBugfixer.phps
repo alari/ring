@@ -3,7 +3,7 @@
 class R_Mdl_RequestBugfixer {
 	static public function fix() {
 		$params = O_Registry::get("app/env/params");
-		array_map(array(__CLASS__, "callback"), $params);
+		O_Registry::set("app/env/params", array_map(array(__CLASS__, "callback"), $params));
 	}
 
 	static public function callback($param) {
