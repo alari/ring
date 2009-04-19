@@ -1,14 +1,11 @@
 <?php
 /**
- * @table blog
+ * @table images
  *
- * @field:config system -inverse blog
- *
- * @field perpage tinyint NOT NULL DEFAULT 15 -title Количество записей на страницу -edit -required Какое-то количество должно быть обязательно
+ * @field:config system -inverse im
  */
-class R_Mdl_Blog extends R_Mdl_Site_SysInstance {
-
-	/**
+class R_Mdl_Im extends R_Mdl_Site_SysInstance {
+/**
 	 * Returns command instance to handle the request
 	 *
 	 * @param string $page
@@ -52,20 +49,4 @@ class R_Mdl_Blog extends R_Mdl_Site_SysInstance {
 	public function getCreative($id) {
 		return $this->getCreativeById($id, "R_Mdl_Blog_Post");
 	}
-
-	public function url( $page = 1 )
-	{
-		return $this->system->url( $page > 1 ? "page-$page" : "" );
-	}
-
-	private function setAccesses( O_Dao_Query $q )
-	{
-		$accesses = array ();
-		foreach (array_keys( R_Mdl_Site_System::getAccesses() ) as $level) {
-			if (R_Mdl_Session::can( "read " . $level, $this->site ))
-				$accesses[] = $level;
-		}
-		return $q->test( "access", $accesses );
-	}
-
 }

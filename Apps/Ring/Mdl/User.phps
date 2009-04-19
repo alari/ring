@@ -11,7 +11,8 @@
  * @field friend_of -has many R_Mdl_User -inverse friends
  * @field friends_friends -alias friends.friends
  *
- * @field blog_posts -owns many R_Mdl_Blog_Post -inverse owner
+ * @field anonces -owns many R_Mdl_Site_Anonce -inverse owner
+ *
  * @field blog_comments -owns many R_Mdl_Blog_Comment -inverse owner
  */
 class R_Mdl_User extends O_Acl_User {
@@ -21,8 +22,9 @@ class R_Mdl_User extends O_Acl_User {
 		O_OpenId_Provider_UserPlugin::normalize( $identity );
 		$this->identity = $identity;
 		$this->role = $role;
-		$this->nickname = $identity;
 		parent::__construct();
+		$this->nickname = $identity;
+		$this->createUserdir();
 	}
 
 	/**

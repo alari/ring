@@ -5,8 +5,6 @@
  * @field content TEXT -edit area -show -required Нужно обязательно что-то ввести -title Комментарий
  */
 abstract class R_Mdl_Comment extends O_Dao_NestedSet_Node {
-	private static $form;
-
 	public function __construct( O_Dao_ActiveRecord $root )
 	{
 		if (!R_Mdl_Session::isLogged())

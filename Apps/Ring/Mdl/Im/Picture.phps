@@ -1,13 +1,12 @@
 <?php
 /**
- * @table blog_post
+ * @table im_picture
  *
- * @field:config anonce -inverse blog_post
+ * @field:config anonce -inverse im_picture
  *
- * @field content MEDIUMTEXT -show -edit wysiwyg -required Текст записи необходим -check htmlPurify -title
  */
-class R_Mdl_Blog_Post extends R_Mdl_Site_Creative {
-	const NODES_CLASS = "R_Mdl_Blog_Comment";
+class R_Mdl_Im_Picture extends R_Mdl_Site_Creative {
+	const NODES_CLASS = "R_Mdl_Im_Comment";
 
 	public function save()
 	{

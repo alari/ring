@@ -6,24 +6,28 @@
  * @field owner_friends -alias owner.friends
  * @field owner_friends_friends -alias owner.friends.friends
  *
- * @field static_urlbase varchar(255) NOT NULL
- * @field static_folder varchar(255) NOT NULL
- * @field copyright varchar(255) NOT NULL DEFAULT 'Copyright holders' -edit -required Введите копирайт автора или авторов сайта -title Копирайты
  * @field systems -owns many R_Mdl_Site_System -inverse site -order-by position
- * @field title varchar(255) NOT NULL DEFAULT 'Сайт' -edit -required Введите название сайта -title Название сайта
+ * @field tags -owns many R_Mdl_Site_Tag -inverse site
+ * @field anonces -owns many R_Mdl_Site_Anonce -inverse site -order-by time desc
  *
  * @field about varchar(255) NOT NULL DEFAULT 'О сайте' -edit -required Введите название -title Название страницы "о сайте"
  * @field about_page -owns one R_Mdl_Site_About -inverse site
  *
- * @field blogs -owns many R_Mdl_Blog -inverse site
- *
- * @field tags -owns many R_Mdl_Tag -inverse site
+ * @field static_urlbase varchar(255) NOT NULL
+ * @field static_folder varchar(255) NOT NULL
+ * @field copyright varchar(255) NOT NULL DEFAULT 'Copyright holders' -edit -required Введите копирайт автора или авторов сайта -title Копирайты
+ * @field title varchar(255) NOT NULL DEFAULT 'Сайт' -edit -required Введите название сайта -title Название сайта
  *
  * @index host -unique
  */
 class R_Mdl_Site extends O_Dao_ActiveRecord {
 	private $available_systems;
 
+	/**
+	 * Creates new site
+	 *
+	 * @param string $host
+	 */
 	public function __construct( $host )
 	{
 		if (substr( $host, 0, 7 ) == "http://")
@@ -32,10 +36,12 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 			$host = substr( $host, 0, strpos( $host, "/" ) );
 		if ($host)
 			$this->host = $host;
-			// TODO get patterns from registry, create folder, copy default CSS into it
+
 		$this->static_urlbase = O_Registry::get( "app/sites/static_urlbase" ) . "$host/";
 		$this->static_folder = O_Registry::get( "app/sites/static_folder" ) . "$host/";
+
 		parent::__construct();
+
 		if (!is_dir( substr( $this->static_folder, 0, -1 ) ))
 			mkdir( substr( $this->static_folder, 0, -1 ), 0777 );
 		$style = file_get_contents( O_Registry::get( "app/sites/static_folder" ) . "style.css" );
@@ -44,6 +50,12 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 		$this->about_page = new R_Mdl_Site_About( );
 	}
 
+	/**
+	 * Returns site instance by its host name
+	 *
+	 * @param string $host
+	 * @return R_Mdl_Site
+	 */
 	static public function getByHost( $host )
 	{
 		if (substr( $host, 0, 7 ) == "http://")
@@ -51,10 +63,17 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 		if (strpos( $host, "/" ))
 			$host = substr( $host, 0, strpos( $host, "/" ) );
 		if (!$host)
-			return;
+			return null;
 		return O_Dao_Query::get( __CLASS__ )->test( "host", $host )->getOne();
 	}
 
+	/**
+	 * Returns url inside the site
+	 *
+	 * @param string $sub
+	 * @param array $params
+	 * @return string
+	 */
 	public function url( $sub = "", array $params = array() )
 	{
 		if (count( $params ))
@@ -64,11 +83,21 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 		return "http://" . $this->host . $sub;
 	}
 
+	/**
+	 * Returns url for site static file
+	 *
+	 * @param string $file
+	 * @return string
+	 */
 	public function staticUrl( $file )
 	{
 		return $this->url( $this->static_urlbase . $file );
 	}
 
+	/**
+	 * Deletes the entire site
+	 *
+	 */
 	public function delete()
 	{
 		$dir = substr( $this->static_folder, 0, -1 );
@@ -76,19 +105,25 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 		$this->rmdir( $dir );
 	}
 
-	public function getSystems()
-	{
-		if (!$this->available_systems) {
-			$accesses = Array ();
-			foreach (array_keys( R_Mdl_Site_System::getAccesses() ) as $acc) {
-				if (R_Mdl_Session::can( "read " . $acc, $this ))
-					$accesses[] = $acc;
-			}
-			$this->available_systems = count( $accesses ) ? $this->systems->test( "access", $accesses ) : array ();
+	/**
+	 * Returns array of currently available systems
+	 *
+	 * @return array
+	 */
+	public function getSystems() {
+		if(!$this->available_systems) {
+			$this->available_systems = R_Mdl_Session::setQueryAccesses($this->systems, $this);
 		}
 		return $this->available_systems;
 	}
 
+
+	/**
+	 * Recursively deletes the folder
+	 *
+	 * @todo move it somewhere
+	 * @param string $dirname
+	 */
 	private function rmdir( $dirname )
 	{
 		if (!is_dir( $dirname ))
