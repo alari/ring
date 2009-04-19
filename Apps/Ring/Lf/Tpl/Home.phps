@@ -10,7 +10,7 @@ so homepage there
 
 	public function displayNav()
 	{
-		if ($this->site->owner) {
+		if ($this->getSite()->owner) {
 			?>
 <img src="<?=$this->site->owner->avatarUrl( 1 )?>"
 	alt="<?=htmlspecialchars( $this->site->owner->nickname )?>" />

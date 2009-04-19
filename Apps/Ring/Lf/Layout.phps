@@ -7,19 +7,23 @@ class R_Lf_Layout extends R_Layout {
 	 */
 	public function displayBody()
 	{
+		if (!$this->site)
+			$this->site = O_Registry::get( "app/current/site" );
+
 		O_Js_Middleware::getFramework()->addSrc( $this );
-		$this->addCssSrc( $this->tpl->site->staticUrl( "style.css" ) );
-		if (!O_Registry::get( "app/env/process_url" ) && $this->tpl->site->owner)
-			$this->addHeadLink( "openid.provider", $this->tpl->site->url( "openid/provider" ) );
+
+		$this->addCssSrc( $this->site->staticUrl( "style.css" ) );
+
+		if (!O_Registry::get( "app/env/process_url" ) && $this->site->owner)
+			$this->addHeadLink( "openid.provider", $this->site->url( "openid/provider" ) );
 		$this->addJavaScriptSrc( O_Registry::get( "app/sites/static_urlbase" ) . "ring.js" );
 		if (!R_Mdl_Session::isLogged())
-			$this->addJavaScriptSrc( 
-					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . $this->tpl->site->host .
+			$this->addJavaScriptSrc(
+					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . $this->site->host .
 						 $_SERVER[ 'REQUEST_URI' ] );
 		?>
 <div id="header">
-<div id="logo"><a href="/" id="logo"
-	title="<?=$this->tpl->site->title?>">&nbsp;</a></div>
+<div id="logo"><a href="/" id="logo" title="<?=$this->site->title?>">&nbsp;</a></div>
 <div id="login-box"><?
 		$this->loginBox()?></div>
 </div>
@@ -43,12 +47,12 @@ class R_Lf_Layout extends R_Layout {
 </div>
 <div id="local-nav"><?=$this->tpl->displayNav()?></div>
 </div>
-<div id="footer"><span>&copy; <?=$this->tpl->site->copyright?></span> <span>Сайт
+<div id="footer"><span>&copy; <?=$this->site->copyright?></span> <span>Сайт
 входит в <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольцо
 Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?></span>
 </div>
 <?
-		$this->setTitle( $this->title . ($this->title ? " - " : "") . $this->tpl->site->title );
+		$this->setTitle( $this->title . ($this->title ? " - " : "") . $this->site->title );
 	}
 
 	/**
@@ -60,13 +64,13 @@ Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4
 		?>
 <ul>
 <?
-		foreach ($this->tpl->site->getSystems() as $sys) {
+		foreach ($this->site->getSystems() as $sys) {
 			?>
 <li><?=$sys->link()?></li>
 <?
 		}
 		?>
-<li><a href="/about"><?=$this->tpl->site->about?></a></li>
+<li><a href="/about"><?=$this->site->about?></a></li>
 </ul>
 <?
 	}
@@ -98,7 +102,7 @@ Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4
 	 */
 	protected function userMenu()
 	{
-		
+
 		parent::userMenu();
 	}
 

@@ -17,12 +17,4 @@ abstract class R_Lf_Command extends R_Command {
 		}
 		return $this->site;
 	}
-
-	public function getTemplate( $tpl = null )
-	{
-		$tpl = parent::getTemplate( $tpl );
-		$tpl->site = $this->getSite();
-		return $tpl;
-	}
-
 }

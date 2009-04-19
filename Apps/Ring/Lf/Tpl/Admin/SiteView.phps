@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
-	
+
 	public $css_source;
 	public $files = array ();
 
@@ -9,7 +9,7 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 		?>
 <form method="post" enctype="application/x-www-form-urlencoded">
 <fieldset><legend>Редактировать CSS-файл сайта</legend> <i>Корень для
-статических файлов оформления: <u><?=$this->site->staticUrl( "" )?></u></i>
+статических файлов оформления: <u><?=$this->getSite()->staticUrl( "" )?></u></i>
 <center><textarea style="width: 100%; height: 250px" name="css"><?=htmlspecialchars( $this->css_source )?></textarea>
 <input type="hidden" name="action" value="css" /> <input type="submit"
 	value="Сохранить файл" /></center>
@@ -27,7 +27,7 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 		foreach ($this->files as $f) {
 			?>
 <tr>
-		<td><a href="<?=$this->site->staticUrl( $f )?>" target="_blank"><?=$f?></a></td>
+		<td><a href="<?=$this->getSite()->staticUrl( $f )?>" target="_blank"><?=$f?></a></td>
 		<td><?=$this->site->staticUrl( $f )?></td>
 		<td align="center"><a href="?delete=<?=urlencode( $f )?>"
 			title="Удалить файл">x</a></td>

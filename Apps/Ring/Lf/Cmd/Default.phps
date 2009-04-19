@@ -9,14 +9,17 @@ class R_Lf_Cmd_Default extends R_Lf_Command {
 			list ($urlbase, $page) = explode( "/", $urlbase, 2 );
 		if (!$page)
 			$page = "Home";
-		
+
 		if (!$urlbase)
 			return $this->redirect( "http://" . O_Registry::get( "app/hosts/project" ) . "/" );
-		
+
 		$site = $this->getSite();
+
+		$site->systems;
 		$system = $site->systems->test( "urlbase", $urlbase )->getOne();
 		if ($system) {
-			return $system->handleRequest( $page );
+			$cmd = $system->instance->getCommand( $page );
+			if($cmd) return $cmd->run();
 		}
 		return $this->redirect( "/" );
 	}

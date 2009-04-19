@@ -7,7 +7,7 @@ class R_Lf_Sys_Blog_Cmd_Home extends R_Lf_Sys_Blog_Command {
 	{
 		$tpl = $this->getTemplate();
 		try {
-			$tpl->paginator = new O_Dao_Paginator( $this->blog->getPosts(), array ($this->blog, "url"),
+			$tpl->paginator = new O_Dao_Paginator( $this->blog->system->{"anonces.blog_post"}, array ($this->blog, "url"),
 					$this->blog->perpage );
 		}
 		catch (O_Ex_PageNotFound $e) {

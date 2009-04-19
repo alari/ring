@@ -1,5 +1,10 @@
 <?php
 class R_Layout extends O_Html_Layout {
+	/**
+	 * Current or relative to user site
+	 *
+	 * @var R_Mdl_Site
+	 */
 	protected $site;
 
 	protected function userMenu()

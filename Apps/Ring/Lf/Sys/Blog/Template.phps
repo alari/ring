@@ -1,6 +1,5 @@
 <?php
 abstract class R_Lf_Sys_Blog_Template extends R_Lf_Template {
-	public $site;
 	public $can_write;
 	public $tags;
 	public $blog;
