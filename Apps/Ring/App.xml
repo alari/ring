@@ -87,7 +87,7 @@
 	<Registry key="paginator/next" value="&gt;"></Registry>
 	<Registry key="paginator/order_title" value="Сортировка"></Registry>
 	<Registry key="dao-params/default_tail"
-		value="ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_unicode_ci"></Registry>
+		value="ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci"></Registry>
 
 
 
