@@ -12,7 +12,7 @@
  * @field title varchar(128) NOT NULL
  * @field position tinyint NOT NULL
  * @field urlbase varchar(128) NOT NULL
- * @field access ENUM('public','protected','private','disable') DEFAULT 'public'
+ * @field access ENUM('public','protected','private','disable') DEFAULT 'public' -enum public: Всем; protected: Друзьям и друзьям друзей; private: Друзьям; disable: Только себе
  *
  * @index site,position,access
  * @index site,urlbase -unique

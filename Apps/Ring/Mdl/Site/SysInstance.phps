@@ -33,7 +33,7 @@ abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {
 		$item = O_Dao_ActiveRecord::getById($id, $class);
 		if(!$item instanceof R_Mdl_Site_Creative) return false;
 		if($item->anonce->system->instance != $this) return false;
-		if(!R_Mdl_Session::can("read ".$item->anonce->access, $this->system->site)) return false;
+		if(!R_Mdl_Session::can("read ".$item->anonce["access"], $this->system->site)) return false;
 		return $item;
 	}
 }

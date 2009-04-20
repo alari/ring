@@ -20,7 +20,7 @@ class R_Lf_Sys_Blog_Cmd_Home extends R_Lf_Sys_Blog_Command {
 
 	public function isAuthenticated()
 	{
-		return $this->blog && $this->can( "read " . $this->blog->system->access, $this->getSite() );
+		return $this->blog && $this->can( "read " . $this->blog->system["access"], $this->getSite() );
 	}
 
 }
