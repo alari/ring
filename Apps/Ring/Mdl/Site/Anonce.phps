@@ -12,7 +12,7 @@
  * @field system -has one R_Mdl_Site_System -inverse anonces -preload
  * @field tags -has many R_Mdl_Site_Tag -inverse anonces
  *
- * @field access ENUM('public','protected','private','disable')
+ * @field access ENUM('public','protected','private','disable') NOT NULL DEFAULT 'disable'
  * @field time INT -show date
  * @field title VARCHAR(255) -show linkInContainer
  * @field description TEXT -show
@@ -20,7 +20,9 @@
  * @index time
  * @index system,time
  */
-class R_Mdl_Site_Anonce extends O_Dao_ActiveRecord {
+class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
+	const NODES_CLASS = "R_Mdl_Site_Comment";
+
 	public function __construct(R_Mdl_Site_Creative $creative, R_Mdl_Site_SysInstance $instance) {
 		parent::__construct();
 		$this->creative = $creative;

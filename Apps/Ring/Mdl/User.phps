@@ -13,7 +13,7 @@
  *
  * @field anonces -owns many R_Mdl_Site_Anonce -inverse owner
  *
- * @field blog_comments -owns many R_Mdl_Blog_Comment -inverse owner
+ * @field comments -owns many R_Mdl_Site_Comment -inverse owner
  */
 class R_Mdl_User extends O_Acl_User {
 

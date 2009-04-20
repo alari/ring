@@ -7,7 +7,6 @@
  * @field content MEDIUMTEXT -show -edit wysiwyg -required Текст записи необходим -check htmlPurify -title
  */
 class R_Mdl_Blog_Post extends R_Mdl_Site_Creative {
-	const NODES_CLASS = "R_Mdl_Blog_Comment";
 
 	public function save()
 	{

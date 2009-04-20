@@ -1,10 +1,15 @@
 <?php
 /**
- * @table - -show:callback R_Mdl_Comment::showComment
+ * @table site_comments -show:callback R_Mdl_Site_Comment::showComment
+ *
+ * @field owner -has one R_Mdl_User -inverse comments
+ *
  * @field time INT -show date
  * @field content TEXT -edit area -show -required Нужно обязательно что-то ввести -title Комментарий
  */
-abstract class R_Mdl_Comment extends O_Dao_NestedSet_Node {
+abstract class R_Mdl_Site_Comment extends O_Dao_NestedSet_Node {
+	const ROOT_CLASS = "R_Mdl_Site_Anonce";
+
 	public function __construct( O_Dao_ActiveRecord $root )
 	{
 		if (!R_Mdl_Session::isLogged())
@@ -30,7 +35,7 @@ abstract class R_Mdl_Comment extends O_Dao_NestedSet_Node {
 </div>
 
 <?
-		self::addForm( $comment[ "root" ], $comment->root->getSystemId(), $comment->id );
+		self::addForm( $comment[ "root" ], $comment->root->system->id, $comment->id );
 	}
 
 	static public function addForm( $rootId, $systemId, $parent = 0 )
@@ -40,7 +45,9 @@ abstract class R_Mdl_Comment extends O_Dao_NestedSet_Node {
 <div>
 <div align="right"><a href="javascript:void(0)"
 	onclick="R.Comment.showForm($(this).getParent(),'<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)"><?=($parent ? "Ответить" : "Оставить отзыв")?></a></div>
+<br style="clear: left" />
 </div>
+<br style="clear: left" />
 <?
 	}
 
