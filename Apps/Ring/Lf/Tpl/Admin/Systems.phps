@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
-
+	
 	public $systems;
 	public $types;
 	public $accesses;

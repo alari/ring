@@ -23,10 +23,12 @@
 class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	const NODES_CLASS = "R_Mdl_Site_Comment";
 
-	public function __construct(R_Mdl_Site_Creative $creative, R_Mdl_Site_SysInstance $instance) {
+	public function __construct( R_Mdl_Site_Creative $creative, R_Mdl_Site_SysInstance $instance )
+	{
 		parent::__construct();
 		$this->creative = $creative;
 		$this->system = $instance->system;
+		$this->site = $instance->system->site;
 		$this->time = $creative->time;
 		$this->access = $instance->system->access;
 		$this->owner = R_Mdl_Session::getUser();
@@ -38,8 +40,9 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 *
 	 * @return string
 	 */
-	public function url() {
-		$field = O_Dao_TableInfo::get(__CLASS__)->getFieldInfo("creative")->getRealField($this);
-		return $this->system->creativeUrl($this[$field]);
+	public function url()
+	{
+		$field = O_Dao_TableInfo::get( __CLASS__ )->getFieldInfo( "creative" )->getRealField( $this );
+		return $this->system->creativeUrl( $this[ $field ] );
 	}
 }

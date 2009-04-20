@@ -7,7 +7,7 @@
  * @field time INT -show date
  * @field content TEXT -edit area -show -required Нужно обязательно что-то ввести -title Комментарий
  */
-abstract class R_Mdl_Site_Comment extends O_Dao_NestedSet_Node {
+class R_Mdl_Site_Comment extends O_Dao_NestedSet_Node {
 	const ROOT_CLASS = "R_Mdl_Site_Anonce";
 
 	public function __construct( O_Dao_ActiveRecord $root )

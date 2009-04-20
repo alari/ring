@@ -19,8 +19,8 @@ class R_Lf_Sys_Blog_Cmd_Post extends R_Lf_Sys_Blog_Command {
 		$this->post = $this->blog->getCreative( $this->post_id );
 		if (!$this->post)
 			throw new O_Ex_PageNotFound( "Post not found", 404 );
-		return $this->can( "read " . $this->blog->system["access"], $this->getSite() ) && $this->can(
-				"read " . $this->post["access"], $this->getSite() );
+		return $this->can( "read " . $this->blog->system[ "access" ], $this->getSite() ) && $this->can( 
+				"read " . $this->post[ "access" ], $this->getSite() );
 	}
 
 }

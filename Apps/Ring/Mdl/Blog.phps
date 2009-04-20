@@ -49,8 +49,9 @@ class R_Mdl_Blog extends R_Mdl_Site_SysInstance {
 	 * @param int $id
 	 * @return R_Mdl_Blog_Post
 	 */
-	public function getCreative($id) {
-		return $this->getCreativeById($id, "R_Mdl_Blog_Post");
+	public function getCreative( $id )
+	{
+		return $this->getCreativeById( $id, "R_Mdl_Blog_Post" );
 	}
 
 	public function url( $page = 1 )

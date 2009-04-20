@@ -23,7 +23,7 @@ class R_Mdl_Site_Tag extends O_Dao_ActiveRecord {
 	 */
 	public function __construct( R_Mdl_Site $site )
 	{
-		$this["site"] = $site->id ;
+		$this[ "site" ] = $site->id;
 		$this->title = '';
 		parent::__construct();
 		$this->site = $site;
@@ -35,9 +35,9 @@ class R_Mdl_Site_Tag extends O_Dao_ActiveRecord {
 	 * @param string $urlbase
 	 * @return string
 	 */
-	public function url($urlbase="")
+	public function url( $urlbase = "" )
 	{
-		return $this->site->url( ($urlbase?$urlbase."/":"")."tag/" . urlencode( $this->title ) );
+		return $this->site->url( ($urlbase ? $urlbase . "/" : "") . "tag/" . urlencode( $this->title ) );
 	}
 
 	/**
@@ -46,9 +46,9 @@ class R_Mdl_Site_Tag extends O_Dao_ActiveRecord {
 	 * @param R_Mdl_Site_System $sys
 	 * @return string
 	 */
-	public function link(R_Mdl_Site_System $sys = null)
+	public function link( R_Mdl_Site_System $sys = null )
 	{
-		return "<a href=\"" . $this->url($sys ? $sys->urlbase : "") . "\"" . ($this->description ? ' title="' . htmlspecialchars(
+		return "<a href=\"" . $this->url( $sys ? $sys->urlbase : "" ) . "\"" . ($this->description ? ' title="' . htmlspecialchars( 
 				$this->description ) . '"' : '') . ">" . $this->title . "</a>";
 	}
 

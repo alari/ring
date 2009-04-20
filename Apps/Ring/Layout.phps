@@ -9,12 +9,12 @@ class R_Layout extends O_Html_Layout {
 
 	protected function userMenu()
 	{
-
+		
 		if (R_Mdl_Session::isLogged()) {
-
+			
 			$site = $this->site;
 			if (!$site)
-				$site = O_Registry::get("app/current/site");
+				$site = O_Registry::get( "app/current/site" );
 			if (!$site)
 				$site = R_Mdl_Session::getUser()->site;
 			if ($site instanceof R_Mdl_Site) {
@@ -43,9 +43,9 @@ class R_Layout extends O_Html_Layout {
 </ul>
 <?
 				}
-
+			
 			}
-
+			
 			?>
 <p><b><a href="<?=R_Mdl_Session::getUser()->url()?>">Ваш профиль</a></b></p>
 <ul>
@@ -62,7 +62,7 @@ class R_Layout extends O_Html_Layout {
 </ul>
 <?
 		}
-
+		
 		?>
 <p><b>Управление</b></p>
 <ul>

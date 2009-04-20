@@ -20,7 +20,7 @@
 class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 	private static $classes = Array ("blog" => "R_Mdl_Blog");
 	private static $titles = Array ("blog" => "Блог");
-	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям друзей", "private" => "Друзьям",
+	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям друзей", "private" => "Друзьям", 
 									"disable" => "Себе");
 
 	/**
@@ -28,8 +28,9 @@ class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 	 *
 	 * @param int $creative_id
 	 */
-	public function creativeUrl($creative_id) {
-		return $this->url($creative_id);
+	public function creativeUrl( $creative_id )
+	{
+		return $this->url( $creative_id );
 	}
 
 	/**

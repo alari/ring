@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
-
+	
 	public $css_source;
 	public $files = array ();
 

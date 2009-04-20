@@ -13,10 +13,12 @@
  * @field nodes -relative anonce->nodes
  */
 abstract class R_Mdl_Site_Creative extends O_Dao_ActiveRecord {
-	public function __construct(R_Mdl_Site_SysInstance $instance) {
-		$this["time"] = time();
+
+	public function __construct( R_Mdl_Site_SysInstance $instance )
+	{
+		$this[ "time" ] = time();
 		parent::__construct();
-		new R_Mdl_Site_Anonce($this, $instance);
+		new R_Mdl_Site_Anonce( $this, $instance );
 	}
 
 	/**
@@ -24,7 +26,8 @@ abstract class R_Mdl_Site_Creative extends O_Dao_ActiveRecord {
 	 *
 	 * @return string
 	 */
-	public function url() {
+	public function url()
+	{
 		return $this->anonce->url();
 	}
 

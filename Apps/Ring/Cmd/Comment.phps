@@ -6,31 +6,31 @@ class R_Cmd_Comment extends R_Command {
 	public function process()
 	{
 		Header( "Content-type: text/html; charset=utf-8" );
-
-		if (!$this->can( "comment " . $this->system->access, $this->system->site )) {
+		
+		if (!$this->can( "comment " . $this->system[ "access" ], $this->system->site )) {
 			return "Вы не можете оставлять отзывы. Вероятно, Вам просто нужно авторизоваться.";
 		}
-
+		
 		if ($this->getParam( "action" ) == "comment-new" || $this->getParam( "action" ) == "comment-for") {
 			$this->handleForm();
 		}
-
+	
 	}
 
 	private function handleForm()
 	{
 		$form = new O_Dao_Renderer_FormProcessor( );
-		$form->setClass( constant( get_class( $this->root ) . "::NODES_CLASS" ) );
+		$form->setClass( "R_Mdl_Site_Comment" );
 		$form->addHiddenField( "root", $this->root->id );
 		$form->addHiddenField( "sys", $this->system->id );
 		$form->addHiddenField( "ajax-driven", "yes" );
 		$form->addHiddenField( "action", $this->getParam( "action" ) );
 		$form->setAjaxMode();
-
+		
 		$form->setSubmitButtonValue( "Сохранить" );
-
+		
 		if ($this->getParam( "action" ) == "comment-for") {
-			$form->setCreateMode( array ($this->root) );
+			$form->setCreateMode( $this->root );
 			$form->setFormTitle( "Отозваться" );
 			$form->addHiddenField( "parent-node", $this->getParam( "parent-node" ) );
 			$parent = $this->root->nodes->test( "id", $this->getParam( "parent-node" ) )->getOne();
@@ -38,10 +38,10 @@ class R_Cmd_Comment extends R_Command {
 				return $this->returnForm( $form, 1 );
 			}
 		} elseif ($this->getParam( "action" ) == "comment-new") {
-			$form->setCreateMode( array ($this->root) );
+			$form->setCreateMode( $this->root );
 			$form->setFormTitle( "Оставить отзыв" );
 		}
-
+		
 		if ($this->getParam( "ajax-driven" ) == "yes" && $form->handle()) {
 			$comment = $form->getActiveRecord();
 			if (isset( $parent )) {
@@ -58,7 +58,7 @@ class R_Cmd_Comment extends R_Command {
 	{
 		if ($this->getParam( "ajax-driven" ) == "yes") {
 			if ($notFound)
-				echo json_encode(
+				echo json_encode( 
 						array ("status" => "FAILED", "errors" => array ("_" => "Error: parent node not found.")) );
 			$form->responseAjax();
 			return null;
@@ -71,9 +71,13 @@ class R_Cmd_Comment extends R_Command {
 		$this->system = O_Dao_ActiveRecord::getById( $this->getParam( "sys" ), "R_Mdl_Site_System" );
 		if (!$this->system)
 			throw new O_Ex_PageNotFound( "System not found.", 404 );
-		$this->root = $this->system->getSystem()->getItem( $this->getParam( "root" ) );
+		$this->root = $this->system->site->anonces->test( "id", $this->getParam( "root" ) )->getOne();
 		if (!$this->root)
-			throw O_Ex_PageNotFound( "Parent not found.", 404 );
+			throw new O_Ex_PageNotFound( "Parent not found.", 404 );
+		if ($this->root->system != $this->system)
+			return false;
+		if (!R_Mdl_Session::can( "read " . $this->root[ "access" ], $this->system->site ))
+			return false;
 		return true;
 	}
 
