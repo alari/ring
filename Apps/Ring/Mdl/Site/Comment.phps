@@ -41,13 +41,12 @@ class R_Mdl_Site_Comment extends O_Dao_NestedSet_Node {
 	static public function addForm( $rootId, $systemId, $parent = 0 )
 	{
 		?>
-<br style="clear: left" />
-<div>
+
+<div style="clear: left" >
 <div align="right"><a href="javascript:void(0)"
 	onclick="R.Comment.showForm($(this).getParent(),'<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)"><?=($parent ? "Ответить" : "Оставить отзыв")?></a></div>
 <br style="clear: left" />
 </div>
-<br style="clear: left" />
 <?
 	}
 

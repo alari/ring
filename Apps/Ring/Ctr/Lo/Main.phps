@@ -79,7 +79,7 @@ html,body {
 }
 
 #openid {
-	background: url(<?=$ this- > 
+	background: url(<?=$this->
 
 		  staticUrl("im/openid.gif") ?>       ) 0 2px no-repeat;
 	height: 40px;
