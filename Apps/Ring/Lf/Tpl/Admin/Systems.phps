@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
-	
+
 	public $systems;
 	public $types;
 	public $accesses;
@@ -24,8 +24,8 @@ class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
 	value="<?=htmlspecialchars( $sys->title )?>" /> &nbsp;&nbsp; Уровень
 доступа: <select name="access"><?
 		foreach ($this->accesses as $k => $v) {
-			?><option value="<?=$k?>"
-		<?=($sys->access == $k ? ' selected="yes"' : '')?>><?=$v?></option><?
+			?><option
+		<?=($sys->access == $v ? ' selected="yes"' : '')?>><?=$v?></option><?
 		}
 		?></select> &nbsp;&nbsp; <input type="submit" value="Сохранить"
 	id="sys-sbm-<?=$sys->id?>" /> <input type="hidden" name="action"
@@ -110,8 +110,8 @@ class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
 	<tr>
 		<td>Уровень доступа:</td>
 		<td><select name="access"><?
-		foreach ($this->accesses as $k => $v) {
-			?><option value="<?=$k?>"><?=$v?></option><?
+		foreach ($this->accesses as $v) {
+			?><option><?=$v?></option><?
 		}
 		?></select></td>
 	</tr>
