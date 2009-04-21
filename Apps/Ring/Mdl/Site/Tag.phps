@@ -7,12 +7,14 @@
  * @field description VARCHAR(255) -edit -title Описание или расшифровка
  * @field weight int NOT NULL DEFAULT 0
  *
- * @field anonces -has many R_Mdl_Site_Anonce -inverse tags
+ * @field anonces -has many R_Mdl_Site_Anonce -inverse tags -signal tags
  *
  * @index site,weight
  * @index weight
  * @index title
  * @index site,title -unique
+ *
+ * @registry app/dao-listeners/-/tags/R_Mdl_Site_Tag R_Mdl_Site_Tag::signalHandler -add
  */
 class R_Mdl_Site_Tag extends O_Dao_ActiveRecord {
 
@@ -48,8 +50,21 @@ class R_Mdl_Site_Tag extends O_Dao_ActiveRecord {
 	 */
 	public function link( R_Mdl_Site_System $sys = null )
 	{
-		return "<a href=\"" . $this->url( $sys ? $sys->urlbase : "" ) . "\"" . ($this->description ? ' title="' . htmlspecialchars( 
+		return "<a href=\"" . $this->url( $sys ? $sys->urlbase : "" ) . "\"" . ($this->description ? ' title="' . htmlspecialchars(
 				$this->description ) . '"' : '') . ">" . $this->title . "</a>";
+	}
+
+	/**
+	 * Tags creation/removal signals handler
+	 *
+	 * @param O_Dao_ActiveRecord $fieldValue
+	 * @param O_Dao_ActiveRecord $object
+	 * @param const $event
+	 */
+	public function signalHandler( $fieldValue, O_Dao_ActiveRecord $object, $event )
+	{
+		$object->weight = count( $object->anonces );
+		$object->save();
 	}
 
 }
