@@ -35,6 +35,12 @@ class R_Mdl_Blog extends R_Mdl_Site_SysInstance {
 			$cmd = new $class( );
 			if (isset( $matches[ 1 ] ))
 				O_Registry::set( "app/paginator/page", $matches[ 1 ] );
+		} elseif (preg_match( "#tag(/([0-9]+))?/(.+)$#", $page, $matches )) {
+			$class = $prefix . "Home";
+			$cmd = new $class( );
+			if (isset( $matches[ 2 ] ))
+				O_Registry::set( "app/paginator/page", $matches[ 1 ] );
+			$cmd->tag = $this->system->site->tags->test("title", urldecode($matches[3]))->getOne();
 		}
 		if (isset( $cmd ) && $cmd instanceof R_Lf_Command) {
 			$cmd->blog = $this;
