@@ -1,6 +1,11 @@
 <?php
 
 class R_Fr_Site_Comment {
+	/**
+	 * Shows comment itself with comment add form
+	 *
+	 * @param O_Dao_Renderer_Show_Params $params
+	 */
 	static public function showComment( O_Dao_Renderer_Show_Params $params )
 	{
 		$comment = $params->record();

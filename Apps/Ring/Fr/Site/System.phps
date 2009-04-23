@@ -1,7 +1,11 @@
 <?php
 
 class R_Fr_Site_System {
-
+	/**
+	 * Shows system with several anonces on frontpage
+	 *
+	 * @param O_Dao_Renderer_Show_Params $params
+	 */
 	static public function showSelf(O_Dao_Renderer_Show_Params $params) {
 		$system = $params->record();
 ?>

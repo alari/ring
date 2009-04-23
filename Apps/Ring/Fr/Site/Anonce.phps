@@ -1,8 +1,14 @@
 <?php
 
 class R_Fr_Site_Anonce {
+	/**
+	 * Shows anonces with creatives attached with them
+	 *
+	 * @param O_Dao_Renderer_Show_Params $params
+	 */
 	static public function showFullQuery( O_Dao_Renderer_Show_Params $params )
 	{
+		/* @var $q O_Dao_Query */
 		$q = $params->value();
 		if(!$q instanceof O_Dao_Query ) {
 			echo "Error<br>";
@@ -11,10 +17,15 @@ class R_Fr_Site_Anonce {
 
 		$q->preload(O_Dao_TableInfo::get($q->getClass())->getFieldInfo("creative")->getParam("one-of", 1));
 		foreach($q as $anonce) {
-			$anonce->creative->show();
+			$anonce->creative->show($params->layout(), "full");
 		}
 	}
 
+	/**
+	 * Shows anonces in tiny mode, for ex. on frontpage
+	 *
+	 * @param O_Dao_Renderer_Show_Params $params
+	 */
 	static public function showQuery(O_Dao_Renderer_Show_Params $params) {
 		$q = $params->value();
 		if(!$q instanceof O_Dao_Query ) {

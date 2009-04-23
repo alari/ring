@@ -3,7 +3,7 @@
  * @table systems -show:callback R_Fr_Site_System::showSelf
  *
  * @field site -has one R_Mdl_Site -inverse systems
- * @field anonces -owns many R_Mdl_Site_Anonce -inverse system -show-home
+ * @field anonces -owns many R_Mdl_Site_Anonce -inverse system -show-home -order-by time DESC
  *
  * @field cycles -owns many R_Mdl_Site_Cycle -inverse system
  *

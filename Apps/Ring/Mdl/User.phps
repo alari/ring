@@ -84,6 +84,11 @@ class R_Mdl_User extends O_Acl_User {
 		return O_UrlBuilder::getStatic( $src );
 	}
 
+	public function avatar($full=false) {
+		return "<img src=\"".$this->avatarUrl($full)."\" alt=\"".htmlspecialchars($this->nickname)."\"/>";
+	}
+
+
 	public function staticUrl( $filename )
 	{
 		return O_Registry::get( "app/users/static_urlbase" ) . $this->id . "/" . $filename;
