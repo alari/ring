@@ -8,6 +8,11 @@ abstract class R_Lf_Template extends R_Template {
 		echo "Naaav";
 	}
 
+	/**
+	 * Returns current site
+	 *
+	 * @return R_Mdl_Site
+	 */
 	protected function getSite()
 	{
 		if ($this->site === false) {

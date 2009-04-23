@@ -6,6 +6,9 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 		?>
 so homepage there
 <?
+		foreach($this->getSite()->getSystems() as $system) {
+			$system->show($this->layout(), "home");
+		}
 	}
 
 	public function displayNav()
@@ -16,6 +19,8 @@ so homepage there
 	alt="<?=htmlspecialchars( $this->site->owner->nickname )?>" />
 <?
 		}
+		$tags = $this->getSite()->tags;
+		R_Fr_Site_Tag::showCloud($tags);
 	}
 
 }

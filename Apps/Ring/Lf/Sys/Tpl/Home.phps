@@ -1,5 +1,5 @@
 <?php
-class R_Lf_Sys_Blog_Tpl_Home extends R_Lf_Sys_Blog_Template {
+class R_Lf_Sys_Tpl_Home extends R_Lf_Sys_Template {
 	public $paginator;
 	public $title;
 
@@ -10,7 +10,7 @@ class R_Lf_Sys_Blog_Tpl_Home extends R_Lf_Sys_Blog_Template {
 			$this->layout()->setTitle( $this->title );
 		}
 		if ($this->paginator)
-			$this->paginator->show( $this->layout() );
+			$this->paginator->show( $this->layout(), "full" );
 	}
 
 }
