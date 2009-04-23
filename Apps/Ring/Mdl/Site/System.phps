@@ -1,11 +1,13 @@
 <?php
 /**
- * @table systems
+ * @table systems -show:callback R_Fr_Site_System::showSelf
  *
  * @field site -has one R_Mdl_Site -inverse systems
- * @field anonces -owns many R_Mdl_Site_Anonce -inverse system
+ * @field anonces -owns many R_Mdl_Site_Anonce -inverse system -show-home
  *
- * @field instance -one-of blog, im
+ * @field cycles -owns many R_Mdl_Site_Cycle -inverse system
+ *
+ * @field instance -one-of blog; im
  * @field blog -owns one R_Mdl_Blog -inverse system
  * @field im -owns one R_Mdl_Im -inverse system
  *
@@ -20,7 +22,7 @@
 class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 	private static $classes = Array ("blog" => "R_Mdl_Blog");
 	private static $titles = Array ("blog" => "Блог");
-	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям друзей", "private" => "Друзьям", 
+	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям друзей", "private" => "Друзьям",
 									"disable" => "Себе");
 
 	/**

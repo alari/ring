@@ -1,13 +1,16 @@
 <?php
 /**
- * @table anonces
+ * @table anonces -loop-full:callback R_Fr_Site_Anonce::showFullQuery -loop:callback R_Fr_Site_Anonce::showQuery -show:callback R_Fr_Site_Anonce::showSelf
  *
  * @field site -has one R_Mdl_Site -inverse anonces -preload
  * @field owner -has one R_Mdl_User -inverse anonces -preload -show
  *
- * @field creative -one-of blog_post, im_picture
+ * @field creative -one-of blog_post; im_picture
  * @field blog_post -owns one R_Mdl_Blog_Post -inverse anonce
  * @field im_picture -owns one R_Mdl_Im_Picture -inverse anonce
+ *
+ * @field cycle -has one R_Mdl_Site_Cycle -inverse anonces
+ * @field position INT DEFAULT 0
  *
  * @field system -has one R_Mdl_Site_System -inverse anonces -preload
  * @field tags -has many R_Mdl_Site_Tag -inverse anonces
@@ -19,6 +22,8 @@
  *
  * @index time
  * @index system,time
+ * @index cycle,position
+ * @index position
  */
 class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	const NODES_CLASS = "R_Mdl_Site_Comment";
@@ -45,4 +50,9 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$field = O_Dao_TableInfo::get( __CLASS__ )->getFieldInfo( "creative" )->getRealField( $this );
 		return $this->system->creativeUrl( $this[ $field ] );
 	}
+
+	public function link() {
+		return "<a href=\"".$this->url()."\">".$this->title."</a>";
+	}
+
 }

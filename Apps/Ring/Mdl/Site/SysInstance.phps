@@ -5,13 +5,46 @@
  */
 abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {
 
-	/**
-	 * Returns command by page urlpart
+		/**
+	 * Returns command instance to handle the request
 	 *
 	 * @param string $page
 	 * @return R_Command
 	 */
-	abstract public function getCommand( $page );
+	public function getCommand( $page )
+	{
+		$prefix = "R_Lf_Sys_Cmd_";
+		$matches = Array ();
+		if ($page == "SystemAdmin") {
+			$class = $prefix . "SystemAdmin";
+			$cmd = new $class( );
+		} elseif (preg_match( "#^form(/([0-9]*))?$#", $page, $matches )) {
+			$class = $prefix . "Form";
+			$cmd = new $class( );
+			if (isset( $matches[ 2 ] ))
+				$cmd->creative_id = $matches[ 2 ];
+		} elseif (preg_match( "#^([0-9]+)$#", $page, $matches )) {
+			$class = $prefix . "Creative";
+			$cmd = new $class( );
+			$cmd->creative_id = $matches[ 1 ];
+		} elseif (preg_match( "#^page-([0-9]+)$#", $page, $matches ) || $page == "Home") {
+			$class = $prefix . "Home";
+			$cmd = new $class( );
+			if (isset( $matches[ 1 ] ))
+				O_Registry::set( "app/paginator/page", $matches[ 1 ] );
+		} elseif (preg_match( "#tag(/([0-9]+))?/(.+)$#", $page, $matches )) {
+			$class = $prefix . "Home";
+			$cmd = new $class( );
+			if (isset( $matches[ 2 ] ))
+				O_Registry::set( "app/paginator/page", $matches[ 1 ] );
+			$cmd->tag = $this->system->site->tags->test("title", urldecode($matches[3]))->getOne();
+		}
+		if (isset( $cmd ) && $cmd instanceof R_Lf_Command) {
+			$cmd->instance = $this;
+			return $cmd;
+		}
+		throw new O_Ex_PageNotFound( "Blog page not found", 404 );
+	}
 
 	/**
 	 * Returns one creative by its id, if it's in this system instance and can be viewed
