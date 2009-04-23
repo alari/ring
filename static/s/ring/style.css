@@ -23,7 +23,7 @@ div#main-menu ul li a,div#main-menu ul li a:hover,div#main-menu ul li a:visited{
 
 /*general engine*/
 #shadow{position:absolute;z-index:100;background:#fff;}
-#user-menu{width:22%;position:absolute;right:0;top:100px;visibility:hidden;z-index:200;background:#fff;}
+#user-menu{width:22%;position:absolute;right:0;top:100px;display:none;z-index:200;background:#fff;}
 
 /*elements*/
 h1{margin:0px;font-size:18pt;}
