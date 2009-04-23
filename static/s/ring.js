@@ -27,8 +27,8 @@ var R = {
 		el: null,
 		isShowed:0,
 		show: function(widthOffset){
-			this.getEl().style.width = $('wrapper').getParent().getScrollSize().x-widthOffset;
-			this.getEl().style.height = $('wrapper').getParent().getScrollSize().y;
+			this.getEl().style.width = $('wrap').getParent().getScrollSize().x-widthOffset;
+			this.getEl().style.height = $('wrap').getParent().getScrollSize().y;
 			this.getEl().fade(0.6);
 			this.isShowed = 1;
 		},
@@ -40,7 +40,7 @@ var R = {
 			if(!this.el) {
 				this.el = new Element("div", {id:"shadow"});
 				this.el.fade('hide');
-				$('wrapper').getParent().adopt(this.el);
+				$('wrap').getParent().adopt(this.el);
 				this.el.style.left = 0;
 				this.el.style.top = 0;
 			}

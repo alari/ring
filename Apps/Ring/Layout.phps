@@ -7,9 +7,20 @@ class R_Layout extends O_Html_Layout {
 	 */
 	protected $site;
 
+	/**
+	 * redefine O_Html_Layout::displayDoctype()
+	 *
+	 */
+	protected function displayDoctype()
+	{
+		?>
+<?= '<?xml version="1.0" encoding="UTF-8"?>' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><?
+	}
+	
 	protected function userMenu()
 	{
-		
 		if (R_Mdl_Session::isLogged()) {
 			
 			$site = $this->site;

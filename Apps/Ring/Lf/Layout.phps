@@ -22,16 +22,9 @@ class R_Lf_Layout extends R_Layout {
 					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . $this->site->host .
 						 $_SERVER[ 'REQUEST_URI' ] );
 		?>
-<div id="header">
-<div id="logo"><a href="/" id="logo" title="<?=$this->site->title?>">&nbsp;</a></div>
-<div id="login-box"><?
-		$this->loginBox()?></div>
-</div>
-<div id="wrapper">
-<div id="main-menu"><?
-		$this->mainMenu()?>
-</div>
-<div id="content">
+<div id="wrap">
+	<div id="cont">
+		<div class="cont">
 <?
 		if (isset( $_SESSION[ "notice" ] )) {
 			?>
@@ -44,13 +37,26 @@ class R_Lf_Layout extends R_Layout {
 
 		$this->tpl->displayContents();
 		?>
-</div>
-<div id="local-nav"><?=$this->tpl->displayNav()?></div>
-</div>
-<div id="footer"><span>&copy; <?=$this->site->copyright?></span> <span>Сайт
-входит в <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольцо
+		</div>
+	</div>
+	<div id="rcol">
+		<div class="cont"><?=$this->tpl->displayNav()?></div>
+	</div>
+	<div id="head">
+		<div id="logo"><a href="/" id="logo" title="<?=$this->site->title?>">&nbsp;</a></div>
+		<div id="login-box"><? $this->loginBox() ?></div>
+	</div>
+	<div id="main-menu"><? $this->mainMenu(); ?></div><!--[if IE]><br/><br/><![endif]-->
+	<div id="foot">
+		<div class="cont">
+			<span>&copy; <?=$this->site->copyright?></span>
+			<span>Сайт входит в <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольцо
 Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?></span>
+		</div>
+	</div>
 </div>
+
+
 <?
 		$this->setTitle( $this->title . ($this->title ? " - " : "") . $this->site->title );
 	}
