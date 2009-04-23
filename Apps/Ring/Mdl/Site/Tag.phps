@@ -7,7 +7,7 @@
  * @field description VARCHAR(255) -edit -title Описание или расшифровка
  * @field weight int NOT NULL DEFAULT 0
  *
- * @field anonces -has many R_Mdl_Site_Anonce -inverse tags -signal tags
+ * @field anonces -has many R_Mdl_Site_Anonce -inverse tags -signal tags -order-by time DESC
  *
  * @index site,weight
  * @index weight
@@ -37,9 +37,9 @@ class R_Mdl_Site_Tag extends O_Dao_ActiveRecord {
 	 * @param string $urlbase
 	 * @return string
 	 */
-	public function url( $urlbase = "" )
+	public function url( $urlbase = "", $page=1 )
 	{
-		return $this->site->url( ($urlbase ? $urlbase . "/" : "") . "tag/" . urlencode( $this->title ) );
+		return $this->site->url( ($urlbase ? $urlbase . "/" : "") . "tag/".($page>1?$page."/":"") . urlencode( $this->title ) );
 	}
 
 	/**

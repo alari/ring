@@ -39,10 +39,16 @@
 	</If>
 	<If plugin="Lf">
 		<Url pattern="about" command="About"></Url>
+		<Url pattern="tag/(([0-9]+)/)?(.+)">
+			<Registry key="current/tag" pocket="3"></Registry>
+			<Registry key="paginator/page" pocket="2"></Registry>
+			<Command name="Tag"></Command>
+			</Url>
 		<Host pattern="(.+)">
 			<Registry key="current/site" pocket="1" class="R_Mdl_Site"
 				method="getByHost"></Registry>
 		</Host>
+		
 	</If>
 	<Url pattern="openid/login">
 		<Command name="OpenId_Login" plugin="-"></Command>

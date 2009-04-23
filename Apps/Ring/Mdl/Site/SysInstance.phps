@@ -36,7 +36,7 @@ abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {
 			$class = $prefix . "Home";
 			$cmd = new $class( );
 			if (isset( $matches[ 2 ] ))
-				O_Registry::set( "app/paginator/page", $matches[ 1 ] );
+				O_Registry::set( "app/paginator/page", $matches[ 2 ] );
 			$cmd->tag = $this->system->site->tags->test("title", urldecode($matches[3]))->getOne();
 		}
 		if (isset( $cmd ) && $cmd instanceof R_Lf_Command) {
