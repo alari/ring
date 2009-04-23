@@ -36,12 +36,12 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 			$host = substr( $host, 0, strpos( $host, "/" ) );
 		if ($host)
 			$this->host = $host;
-		
+
 		$this->static_urlbase = O_Registry::get( "app/sites/static_urlbase" ) . "$host/";
 		$this->static_folder = O_Registry::get( "app/sites/static_folder" ) . "$host/";
-		
+
 		parent::__construct();
-		
+
 		if (!is_dir( substr( $this->static_folder, 0, -1 ) ))
 			mkdir( substr( $this->static_folder, 0, -1 ), 0777 );
 		$style = file_get_contents( O_Registry::get( "app/sites/static_folder" ) . "style.css" );
@@ -113,7 +113,8 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 	public function getSystems()
 	{
 		if (!$this->available_systems) {
-			$this->available_systems = R_Mdl_Session::setQueryAccesses( $this->systems, $this );
+			$this->available_systems = $this->systems->query();
+			R_Mdl_Session::setQueryAccesses( $this->available_systems, $this );
 		}
 		return $this->available_systems;
 	}
