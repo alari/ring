@@ -89,11 +89,10 @@ Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4
 	{
 		if (R_Mdl_Session::isLogged()) {
 			?>
-Привет,
-<?=R_Mdl_Session::getUser()->link()?>!
-<a href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a>
-<br />
-<a href="javascript:void(0)" onclick="R.UserMenu.toggle()">Возможности</a>
+<p>Привет,
+<?=R_Mdl_Session::getUser()->link()?>!</p>
+<p><a href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a></p>
+<p><a href="javascript:void(0)" onclick="R.UserMenu.toggle()">Возможности</a></p>
 <div id="user-menu"><?
 			$this->userMenu()?></div>
 <?

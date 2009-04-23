@@ -43,10 +43,10 @@ class R_Fr_Site_Anonce {
 		switch(get_class($record->creative)) {
 			case "R_Mdl_Blog_Post":
 				?>
-<span style="float:left;width:20%;border:1px solid orange;height:120px">
+<div class="announce"><div>
 <strong><?=$record->link()?></strong><br/>
 <?=$record->description?>
-</span>
+</div></div>
 				<?
 				break;
 default:

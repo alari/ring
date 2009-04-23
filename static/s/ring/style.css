@@ -15,15 +15,15 @@ div#foot{_float:left;display:block;clear:both;width:100%;}
 div#foot div.cont{padding:10px 0px 15px 0px;text-align:center;}
 div#foot span{display:block;text-align:center;}
 div#head{position:absolute;left:0px;top:0px;width:100%;height:118px;_height:120px;}
-div#head div#login-box{position:absolute;top:0px;right:0px;width:22%;}
+div#head div#login-box{position:absolute;z-index:1000;top:0px;right:0px;width:22%;}
 div#main-menu{position:absolute;left:0px;top:120px;width:100%;height:30px;}
 div#main-menu ul{list-style-type:none;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;}
 div#main-menu ul li{display:inline;float:left;_float:none;height:30px;padding:0px 15px 0px 15px;}
 div#main-menu ul li a,div#main-menu ul li a:hover,div#main-menu ul li a:visited{float:left;padding-top:7px;}
 
 /*general engine*/
-#shadow{position:absolute;z-index:100;background:#fff;}
-#user-menu{width:22%;position:absolute;right:0;top:100px;display:none;z-index:200;background:#fff;}
+#shadow{position:absolute;right:0;width:100%;z-index:100;background:#fff;}
+#user-menu{width:240px;position:absolute;right:0;top:100px;visibility:hidden;z-index:1200;background:#fff;}
 
 /*elements*/
 h1{margin:0px;font-size:18pt;}
@@ -42,6 +42,14 @@ div#head form label.button{margin-top:5px;}
 div#head form span{float:left;width:60px;padding:3px 3px 0px 0px;text-align:right;}
 div#head form input.text{width:110px;height:16px;}
 div#head form label.button input{height:16px;margin-left:63px;}
+div#login-box p{margin:12px 0px 0px 0px;padding-left:10px;}
+
+/*fragments - system*/
+div.system{padding-bottom:10px;}
+div.system h2{margin-bottom:10px;}
+div.announce{width:20%;height:120px;padding-top:1px;background-color:#ddd;}
+div.announce div{height:107px;_height:117px;margin:1px 2px 2px 2px;padding:5px;overflow:hidden;background-color:#eee;}
+div.announce div strong{margin-bottom:5px;}
 
 /*outer styles*/
 div#wrap{background-color:#eee;}
@@ -52,8 +60,8 @@ div#head form{border-left:1px dashed #aaa;}
 div#main-menu{border-bottom:2px solid #aaa;background-color:#666;}
 div#main-menu ul li{border-right:2px solid #666;background-color:#222;}
 div#main-menu ul li a,div#main-menu ul li a:hover,div#main-menu ul li a:visited{color:#eee;}
-div#foot{border-top:1px solid #aaa;background-image:url('bt-rt.gif');background-position:right bottom;background-repeat:no-repeat;}
-div#foot div.cont{background-image:url('bt-lf.gif');background-position:left bottom;background-repeat:no-repeat;}
+div#foot{border-top:1px solid #aaa;background-image:url('http://ring/static/s/ring/bt-rt.gif');background-position:right bottom;background-repeat:no-repeat;}
+div#foot div.cont{background-image:url('http://ring/static/s/ring/bt-lf.gif');background-position:left bottom;background-repeat:no-repeat;}
 
 /*outer elements styles*/
 *{color:#333333;}
