@@ -6,7 +6,7 @@ var R = {
 			this.isShowed ? this.hide() : this.show();
 		},
 		show: function(){
-			R.Shadow.show($('login-box').getSize().x);
+			R.Shadow.show(0*$('login-box').getSize().x);
 			this.getEl().fade('show');
 			this.isShowed = 1;
 		},
