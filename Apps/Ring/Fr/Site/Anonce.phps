@@ -43,7 +43,7 @@ class R_Fr_Site_Anonce {
 		switch(get_class($record->creative)) {
 			case "R_Mdl_Blog_Post":
 				?>
-<div class="announce"><div>
+<div class="anonce"><div>
 <strong><?=$record->link()?></strong><br/>
 <?=$record->description?>
 </div></div>

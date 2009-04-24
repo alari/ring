@@ -1,134 +1,82 @@
-html,body {
-	padding: 0;
-	margin: 0;
-	background: #fff;
-	width: 100%;
-	height: 100%
-}
+html,body{margin:0px;padding:0px;}
+body{_text-align:center;font-size:10pt;font-family:verdana,arial,sans-serif;}
 
-* {
-	box-sizing: border-box;
-	-moz-box-sizing: border-box
-}
+/*container*/
+div#wrap{position:relative;width:100%;min-width:850px;max-width:1200px;
+_width:expression(document.body.clientWidth<900?'900px':(document.body.clientWidth>1200?'1200px':'100%'));
+_text-align:left;
+margin:0px auto 0px auto;padding-top:150px;}
+div#cont{float:left;width:78%;_width:77%;padding-bottom:20px;}
+div#cont div.cont{padding:10px;}
+div#rcol{float:right;width:22%;margin-bottom:20px;}
+div#rcol div.cont{padding:10px;}
+div#foot{_float:left;display:block;clear:both;width:100%;}
+div#foot div.cont{padding:10px 0px 15px 0px;text-align:center;}
+div#foot span{display:block;text-align:center;}
+div#head{position:absolute;left:0px;top:0px;width:100%;height:118px;_height:120px;}
+div#head div#login-box{position:absolute;z-index:1000;top:0px;right:0px;text-align:right;}
+div#main-menu{position:absolute;left:0px;top:120px;width:100%;height:30px;}
+div#main-menu ul{list-style-type:none;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;}
+div#main-menu ul li{display:inline;float:left;_float:none;height:30px;padding:0px 15px 0px 15px;}
+div#main-menu ul li a{float:left;padding-top:7px;}
 
-#header {
-	height: 100px
-}
+/*general engine*/
+#shadow{position:absolute;right:0;width:100%;z-index:100;background:#fff;}
+#user-menu{width:240px;position:absolute;right:0;top:100px;visibility:hidden;z-index:1200;background:#fff;text-align:left;padding:4px;}
 
-#login-box {
-	float: right
-}
+/*elements*/
+h1{margin:0px;font-size:18pt;}
+h2{margin:0px;font-size:16pt;}
+h3{margin:0px;font-size:14pt;}
+h4{margin:0px;font-size:12pt;}
+h5{margin:0px;font-size:10pt;}
+form{margin:0;}
+a,a:hover,a:visited{text-decoration:none;}
+a:hover{text-decoration:underline;}
 
-#logo {
-	float: left
-}
+/*header login form*/
+#openid input.text{width:110px;height:16px;}
+.openid-focus {color: black}
+.openid-blur {color: silver;font-style: italic}
+#openid {padding-top:15px;padding-left:19px;padding-right:12px;background: url(./../../im/openid.gif) 0 16px no-repeat;height: 40px;white-space:nowrap;text-align:center;}
+#openid span {display: block;color: gray;font-size:8pt;white-space:nowrap;}
+#openid form {margin: 0}
 
-#logo a {
-	width: 100px;
-	height: 100px;
-	text-decoration: none;
-	content: 'Логотип';
-	color: black;
-	vertical-align: bottom;
-}
+/*header logo block*/
+#logo {float: left;}
+#logo a {width: 100px;height: 100px;text-decoration: none;content: 'Логотип';color: black;vertical-align: bottom;}
 
-#wrapper {
-	width: 100%;
-	float: left
-}
+/*fragments - system*/
+div.system{}
+div.system h2{border:1px solid orange;padding:5px;margin-bottom:1px;}
+div.anonce{width:20%;height:120px;padding-top:1px;float:left;background-color:#eee;}
+div.anonce div{height:107px;_height:117px;margin:1px 2px 2px 2px;overflow:hidden;background-color:#fff;padding:5px;}
+div.anonce div strong{margin-bottom:5px;}
 
-#content {
-	width: 78%;
-	float: left;
-	padding: 20px;
-}
+/*tags cloud*/
+div.tags-cloud{text-align:center;}
+div.tags-cloud span{padding:0 1px;}
+span.tag-0{font-size:80%;}
+span.tag-1{font-size:90%;}
+span.tag-2{font-size:100%;}
+span.tag-3{font-size:110%;}
+span.tag-4{font-size:120%;}
+span.tag-5{font-size:130%;}
+span.tag-6{font-size:140%;}
+span.tag-7{font-size:150%;}
+span.tag-8{font-size:160%;}
 
-#local-nav {
-	width: 22%;
-	float: right;
-	border-left: 1px dashed silver;
-	border-bottom: 1px dashed silver
-}
+/*outer styles*/
+div#wrap{background-color:#fff;}
+div#rcol div.cont{border:dashed #aaa;border-width:0px 0px 1px 1px;background-color:#f0f0f0;}
+div#head{border-bottom:2px solid #aaa;background-color:#fff;}
+div#head div#login-box{}
+div#main-menu{border-bottom:2px solid #aaa;background-color:#fff;}
+div#main-menu ul li{background-color:#fff;}
+div#main-menu ul li a{color:#333;}
+div#foot{border-top:1px solid #aaa;}
+div#foot div.cont{}
 
-#main-menu {
-	border-bottom: 1px solid silver;
-	height: 30px;
-	margin-top: -30px
-}
-
-#main-menu ul {
-	margin: 0;
-	padding: 0
-}
-
-#main-menu ul li {
-	display: inline;
-	padding-left: 10px
-}
-
-#main-menu ul li a {
-	color: black
-}
-
-.openid-focus {
-	color: black
-}
-
-.openid-blur {
-	color: silver;
-	font-style: italic
-}
-
-#openid {
-	padding-left: 22px;
-	background: url({%STATIC_PROJ%}im/openid.gif) 0 2px no-repeat;
-	height: 40px;
-	margin-top: 60px
-}
-
-#openid span {
-	display: block;
-	color: gray;
-	font-size: x-small
-}
-
-#openid form {
-	margin: 0
-}
-
-#footer {
-	border-top: 1px solid gray;
-	text-align: center;
-	float: left;
-	width: 100%
-}
-
-#footer span {
-	display: block;
-	color: silver
-}
-
-#footer span a {
-	color: gray;
-	text-decoration: none
-}
-
-#footer span a:hover {
-	text-decoration: underline
-}
-
-#shadow {
-	position: absolute;
-	z-index: 100;
-	background: #fff
-}
-
-#user-menu {
-	width: 22%;
-	position: absolute;
-	right: 0;
-	top: 100px;
-	visibility: hidden;
-	z-index: 200;
-	background: #fff
-}
+/*outer elements styles*/
+*{color:#333333;}
+a,a:hover,a:visited{color:#222277;}

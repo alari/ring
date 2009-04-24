@@ -20,10 +20,10 @@ class R_Fr_Site_Tag {
 		}
 		if(!$max_w) $max_w = 1;
 		if($min_w < 1) $min_w = 0;
-		echo "<div class=\"tags-cloud\" style='text-align:center'>Облако тегов<br/>";
+		echo "<div class=\"tags-cloud\">Облако тегов<br/>";
 		foreach($q as $tag) {
 			$level = round((($tag[$weightField] - $min_w)/($max_w-$min_w))*self::TAG_LEVELS);
-			echo "<span class='tag-$level'>";
+			echo " <span class='tag-$level'>";
 			echo $tag->link($system);
 			echo "</span>";
 		}
