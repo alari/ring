@@ -11,7 +11,7 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 		}
 
 		$form = new O_Dao_Renderer_FormProcessor( );
-		$form->setClass( constant(get_class($this->instance)."::CREATIVE_CLASS") );
+		$form->setClass( constant( get_class( $this->instance ) . "::CREATIVE_CLASS" ) );
 
 		$form->setRelationQuery( "tags", $this->getSite()->tags, "title", true );
 
@@ -24,6 +24,17 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 			$creative = $form->getActiveRecord();
 			$creative->owner = R_Mdl_Session::getUser();
 			$creative->save();
+			if ($this->getParam( "tag_new" )) {
+				$new_tag = $this->getSite()->tags->test( "title", $this->getParam( "tag_new" ) )->getOne();
+				if (!$new_tag) {
+					$new_tag = new R_Mdl_Site_Tag( $this->getSite() );
+					$new_tag->title = $this->getParam( "tag_new" );
+					$new_tag->save();
+				}
+
+				if ($new_tag)
+					$creative->tags[] = $new_tag;
+			}
 			return $this->redirect( $creative->url() );
 		}
 

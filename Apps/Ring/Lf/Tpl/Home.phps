@@ -11,12 +11,9 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 	public function displayNav()
 	{
 		if ($this->getSite()->owner) {
-			?>
-<img src="<?=$this->site->owner->avatarUrl( 1 )?>"
-	alt="<?=htmlspecialchars( $this->site->owner->nickname )?>" />
-<?
+			echo $this->getSite()->owner->avatar(1);
 		}
-		$tags = $this->getSite()->tags;
+		$tags = $this->getSite()->tags->limit(100);
 		R_Fr_Site_Tag::showCloud($tags);
 	}
 

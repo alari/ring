@@ -63,8 +63,9 @@ class R_Mdl_Site_Tag extends O_Dao_ActiveRecord {
 	 */
 	public function signalHandler( $fieldValue, O_Dao_ActiveRecord $object, $event )
 	{
+		try {
 		$object->weight = count( $object->anonces );
-		$object->save();
+		$object->save();} catch(PDOException $e){}
 	}
 
 }
