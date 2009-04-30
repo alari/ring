@@ -18,11 +18,11 @@ class R_Layout extends O_Html_Layout {
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><?
 	}
-	
+
 	protected function userMenu()
 	{
 		if (R_Mdl_Session::isLogged()) {
-			
+
 			$site = $this->site;
 			if (!$site)
 				$site = O_Registry::get( "app/current/site" );
@@ -54,10 +54,18 @@ class R_Layout extends O_Html_Layout {
 </ul>
 <?
 				}
-			
+
 			}
-			
+
+			$new_msgs = O_Dao_Query::get("R_Mdl_Msg")->test("readen", 0)->getFunc();
+
 			?>
+<p><b><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Msgs/">Внутренняя почта</a></b></p>
+<ul>
+<?if(R_Mdl_Session::can("write msgs")){?><li><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Msgs/Write">Написать</a></li><?}?>
+<li><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Msgs/">Входящие<?=($new_msgs?" <b>(+$new_msgs)</b>":"")?></a></li>
+</ul>
+
 <p><b><a href="<?=R_Mdl_Session::getUser()->url()?>">Ваш профиль</a></b></p>
 <ul>
 	<li><a
@@ -73,7 +81,8 @@ class R_Layout extends O_Html_Layout {
 </ul>
 <?
 		}
-		
+
+		if(R_Mdl_Session::can( "manage roles" ) || R_Mdl_Session::can( "manage users" )){
 		?>
 <p><b>Управление</b></p>
 <ul>
@@ -97,7 +106,7 @@ class R_Layout extends O_Html_Layout {
 		}
 		?>
 </ul>
-<?
+<?}
 	}
 
 	protected function openidBox()

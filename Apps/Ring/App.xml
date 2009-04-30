@@ -50,6 +50,17 @@
 		</Host>
 		
 	</If>
+	<If plugin="Ctr">
+		
+		<Url pattern="Own/Msgs/Read-([0-9]+)">
+			<Registry key="current/msg" pocket="1"></Registry>
+			<Command name="Own_Msgs_Read"></Command></Url>
+		<Url pattern="Own/Msgs/Write(-([0-9]+))?">
+			<Registry key="current/adresate" pocket="2"></Registry>
+			<Command name="Own_Msgs_Write"></Command></Url><Url pattern="Own/Msgs/(([a-zA-Z]+)(-([0-9]+))?)?">
+			<Registry key="current/box" pocket="2"></Registry>
+			<Registry key="paginator/page" pocket="4"></Registry>
+			<Command name="Own_Msgs_Box"></Command></Url></If>
 	<Url pattern="openid/login">
 		<Command name="OpenId_Login" plugin="-"></Command>
 	</Url>
