@@ -67,7 +67,7 @@ class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
 			?>
 <tr>
 		<th><a href="<?=$sys->url()?>"><?=$sys->title?></a></th>
-		<td><?=$this->types[ "blog" ]?></td>
+		<td><?=$sys->getType()?></td>
 		<td><small><a href="javascript:void(0)"
 			onclick="R.AjaxFragment.toggle('sys-ed-<?=$sys->id?>', {data:{sys:<?=$sys->id?>,action:'system-fragment'},evalScripts:true}, 'height', 40)">Доступ
 		и имя ссылки</a></small></td>

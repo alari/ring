@@ -1,6 +1,7 @@
 <?php
 
 class R_Fr_Site_Anonce {
+
 	/**
 	 * Shows anonces with creatives attached with them
 	 *
@@ -10,14 +11,14 @@ class R_Fr_Site_Anonce {
 	{
 		/* @var $q O_Dao_Query */
 		$q = $params->value();
-		if(!$q instanceof O_Dao_Query ) {
+		if (!$q instanceof O_Dao_Query) {
 			echo "Error<br>";
 			return;
 		}
 
-		$q->preload(O_Dao_TableInfo::get($q->getClass())->getFieldInfo("creative")->getParam("one-of", 1));
-		foreach($q as $anonce) {
-			$anonce->creative->show($params->layout(), "full");
+		$q->preload( O_Dao_TableInfo::get( $q->getClass() )->getFieldInfo( "creative" )->getParam( "one-of", 1 ) );
+		foreach ($q as $anonce) {
+			$anonce->creative->show( $params->layout(), "full" );
 		}
 	}
 
@@ -26,31 +27,51 @@ class R_Fr_Site_Anonce {
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showQuery(O_Dao_Renderer_Show_Params $params) {
+	static public function showQuery( O_Dao_Renderer_Show_Params $params )
+	{
 		$q = $params->value();
-		if(!$q instanceof O_Dao_Query ) {
+		if (!$q instanceof O_Dao_Query) {
 			echo "Error<br>";
 			return;
 		}
 
-		foreach($q as $anonce) {
+		foreach ($q as $anonce) {
 			$anonce->show();
 		}
 	}
 
-	static public function showSelf(O_Dao_Renderer_Show_Params $params) {
+	static public function showSelf( O_Dao_Renderer_Show_Params $params )
+	{
 		$record = $params->record();
-		switch(get_class($record->creative)) {
-			case "R_Mdl_Blog_Post":
+		switch (O_Dao_TableInfo::get( $record )->getFieldInfo( "creative" )->getRealField( $record )) {
+			case "blog_post" :
 				?>
-<div class="anonce"><div>
-<strong><?=$record->link()?></strong><br/>
-<?=$record->description?>
-</div></div>
-				<?
-				break;
-default:
-		echo "<a href=\"".$params->record()->url()."\">".$params->record()->title."</a><br/>";
+<div class="anonce">
+<div><strong><?=
+				$record->link()?></strong><br />
+<?=
+				$record->description?>
+</div>
+</div>
+<?
+			break;
+			case "im_picture" :
+				?>
+<div class="anonce">
+<div><strong><?=
+				$record->link()?></strong><br />
+<center><a href="<?=
+				$record->url()?>"><img
+	src="<?=
+				$record->creative->img_tiny?>"
+	alt="<?=
+				htmlspecialchars( $record->title . " - " . $record->description )?>" /></a></center>
+</div>
+</div>
+<?
+			break;
+			default :
+				echo "<a href=\"" . $params->record()->url() . "\">" . $params->record()->title . "</a><br/>";
 		}
 
 	}

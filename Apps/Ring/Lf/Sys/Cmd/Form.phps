@@ -17,10 +17,14 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 
 		$form->setRelationQuery("collection", $this->instance->system->collections, "title");
 
+		O_Registry::set("app/current/system", $this->instance->system);
+
 		if ($this->creative_id) {
 			$form->setActiveRecord( $creative );
+			$form->setType("up");
 		} else {
 			$form->setCreateMode( $this->instance );
+			$form->setType("new");
 		}
 		if ($form->handle()) {
 			$creative = $form->getActiveRecord();
