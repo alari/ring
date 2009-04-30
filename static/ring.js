@@ -18,7 +18,7 @@ var R = {
 		getEl: function(){
 			if(!this.el) {
 				this.el = $('user-menu');
-				this.el.style.width = $('login-box').getSize().x;
+				this.el.style.width = $('user-box').getSize().x;
 			}
 			return this.el;
 		}
