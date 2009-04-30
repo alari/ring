@@ -106,7 +106,6 @@ Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4
 	 */
 	protected function userMenu()
 	{
-
 		parent::userMenu();
 	}
 

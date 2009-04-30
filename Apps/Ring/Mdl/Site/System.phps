@@ -5,7 +5,7 @@
  * @field site -has one R_Mdl_Site -inverse systems
  * @field anonces -owns many R_Mdl_Site_Anonce -inverse system -show-home -order-by time DESC
  *
- * @field cycles -owns many R_Mdl_Site_Cycle -inverse system
+ * @field collections -owns many R_Mdl_Site_Collection -inverse system
  *
  * @field instance -one-of blog; im
  * @field blog -owns one R_Mdl_Blog -inverse system

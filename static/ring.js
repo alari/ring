@@ -6,7 +6,7 @@ var R = {
 			this.isShowed ? this.hide() : this.show();
 		},
 		show: function(){
-			R.Shadow.show(0*$('login-box').getSize().x);
+			R.Shadow.show();
 			this.getEl().fade('show');
 			this.isShowed = 1;
 		},
@@ -26,8 +26,8 @@ var R = {
 	Shadow: {
 		el: null,
 		isShowed:0,
-		show: function(widthOffset){
-			this.getEl().style.width = $('wrap').getParent().getScrollSize().x-widthOffset;
+		show: function(){
+			this.getEl().style.width = $('wrap').getParent().getScrollSize().x;
 			this.getEl().style.height = $('wrap').getParent().getScrollSize().y;
 			this.getEl().fade(0.6);
 			this.isShowed = 1;

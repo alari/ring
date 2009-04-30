@@ -9,7 +9,7 @@
  * @field blog_post -owns one R_Mdl_Blog_Post -inverse anonce
  * @field im_picture -owns one R_Mdl_Im_Picture -inverse anonce
  *
- * @field cycle -has one R_Mdl_Site_Cycle -inverse anonces
+ * @field collection -has one R_Mdl_Site_Collection -inverse anonces
  * @field position INT DEFAULT 0
  *
  * @field system -has one R_Mdl_Site_System -inverse anonces -preload
@@ -22,7 +22,7 @@
  *
  * @index time
  * @index system,time
- * @index cycle,position
+ * @index collection,position
  * @index position
  */
 class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
