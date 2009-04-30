@@ -37,6 +37,12 @@ class R_Ctr_Lo_Main extends R_Layout {
 		?>
 		</div>
 	</div>
+		<div id="foot">
+		<div class="cont">
+			<span>Сайт входит в <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольцо
+Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?></span>
+		</div>
+	</div>
 	
 </div>
 <?
