@@ -16,7 +16,7 @@ class R_Lf_Layout extends R_Layout {
 
 		if (!O_Registry::get( "app/env/process_url" ) && $this->site->owner)
 			$this->addHeadLink( "openid.provider", $this->site->url( "openid/provider" ) );
-		$this->addJavaScriptSrc( O_Registry::get( "app/sites/static_urlbase" ) . "ring.js" );
+		$this->addJavaScriptSrc( "ring.js" );
 		if (!R_Mdl_Session::isLogged())
 			$this->addJavaScriptSrc(
 					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . $this->site->host .
