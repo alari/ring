@@ -1,15 +1,14 @@
 <?php
 /**
- * @table blog_post
+ * @table libro_text
  *
- * @field:config anonce -inverse blog_post
+ * @field:config anonce -inverse libro_text
  *
- * @field content MEDIUMTEXT -show -edit wysiwyg -required Текст записи необходим -check htmlPurify -title
- *
- * @field:replace content,tags
- *
+ * @field:config content -required Текст произведения необходим
+ * @field collection -relative anonce->collection -edit -title Цикл
  */
-class R_Mdl_Blog_Post extends R_Mdl_Site_Creative {
+class R_Mdl_Libro_Text extends R_Mdl_Site_Creative {
+	const HAS_COLLECTIONS = 1;
 
 	public function save()
 	{

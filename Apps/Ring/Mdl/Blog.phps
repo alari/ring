@@ -3,8 +3,6 @@
  * @table blog
  *
  * @field:config system -inverse blog
- *
- * @field perpage tinyint NOT NULL DEFAULT 15 -title Количество записей на страницу -edit -required Какое-то количество должно быть обязательно
  */
 class R_Mdl_Blog extends R_Mdl_Site_SysInstance {
 	const CREATIVE_CLASS = "R_Mdl_Blog_Post";

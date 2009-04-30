@@ -95,6 +95,17 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 	}
 
 	/**
+	 * Path for a file attached with site
+	 *
+	 * @param string $file
+	 * @return string
+	 */
+	public function staticPath($file) {
+		return $this->static_folder.$file;
+	}
+
+
+	/**
 	 * Deletes the entire site
 	 *
 	 */

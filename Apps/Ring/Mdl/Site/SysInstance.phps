@@ -2,10 +2,11 @@
 /**
  * @field system -owns one R_Mdl_Site_System
  * @field title VARCHAR(255) -show linkInContainer
+ * @field perpage TINYINT NOT NULL DEFAULT 15 -title Количество записей на страницу -edit -required Какое-то количество должно быть обязательно
  */
 abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {
 
-		/**
+	/**
 	 * Returns command instance to handle the request
 	 *
 	 * @param string $page
@@ -37,7 +38,7 @@ abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {
 			$cmd = new $class( );
 			if (isset( $matches[ 2 ] ))
 				O_Registry::set( "app/paginator/page", $matches[ 2 ] );
-			$cmd->tag = $this->system->site->tags->test("title", urldecode($matches[3]))->getOne();
+			$cmd->tag = $this->system->site->tags->test( "title", urldecode( $matches[ 3 ] ) )->getOne();
 		}
 		if (isset( $cmd ) && $cmd instanceof R_Lf_Command) {
 			$cmd->instance = $this;

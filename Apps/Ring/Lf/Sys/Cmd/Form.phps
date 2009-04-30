@@ -15,6 +15,8 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 
 		$form->setRelationQuery( "tags", $this->getSite()->tags, "title", true );
 
+		$form->setRelationQuery("collection", $this->instance->system->collections, "title");
+
 		if ($this->creative_id) {
 			$form->setActiveRecord( $creative );
 		} else {

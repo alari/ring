@@ -6,7 +6,7 @@ class R_Ctr_Cmd_Own_EditProfile extends R_Command {
 		/* @var $user R_Mdl_User */
 		$user = R_Mdl_Session::getUser();
 		$form = $user->form();
-		
+
 		if ($this->getParam( "action" ) == "upload-ava") {
 			if ($user->avatar_ext != "-") {
 				if (is_file( $user->staticFilename( "ava." . $user->avatar_ext ) ))
@@ -16,18 +16,18 @@ class R_Ctr_Cmd_Own_EditProfile extends R_Command {
 				$user->avatar_ext = "-";
 				$user->save();
 			}
-			
+
 			if (!isset( $_FILES[ "ava" ] ) || !$_FILES[ "ava" ][ "size" ]) {
 				return $this->redirect();
 			}
-			
+
 			$file = $_FILES[ "ava" ];
 			$ava_file = $user->staticFilename( "ava" );
 			$user->createUserdir();
-			
+
 			try {
 				$resizer = new O_Image_Resizer( $file[ "tmp_name" ] );
-				
+
 				$resizer->resize( 200, 500, $ava_file . "-full", true );
 				preg_match( "#(gif|jpeg|png)$#", $resizer->resize( 80, 200, $ava_file, true ), $p );
 				$user->avatar_ext = $p[ 1 ];
@@ -42,16 +42,17 @@ class R_Ctr_Cmd_Own_EditProfile extends R_Command {
 				return $this->redirect();
 			}
 			$user->save();
-			
+			print_r($_POST);
+
 			return $this->redirect();
 		} else {
 			$form->handle();
 		}
-		
+
 		$tpl = $this->getTemplate();
 		$tpl->form = $form;
 		return $tpl;
-	
+
 	}
 
 	public function isAuthenticated()

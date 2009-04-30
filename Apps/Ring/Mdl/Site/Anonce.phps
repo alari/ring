@@ -5,9 +5,11 @@
  * @field site -has one R_Mdl_Site -inverse anonces -preload
  * @field owner -has one R_Mdl_User -inverse anonces -preload -show
  *
- * @field creative -one-of blog_post; im_picture
+ * @field creative -one-of blog_post; im_picture; libro_text; sound_track
  * @field blog_post -owns one R_Mdl_Blog_Post -inverse anonce
  * @field im_picture -owns one R_Mdl_Im_Picture -inverse anonce
+ * @field libro_text -owns one R_Mdl_Libro_Text -inverse anonce
+ * @field sound_track -owns one R_Mdl_Sound_Track -inverse anonce
  *
  * @field collection -has one R_Mdl_Site_Collection -inverse anonces
  * @field position INT DEFAULT 0
@@ -54,5 +56,28 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	public function link() {
 		return "<a href=\"".$this->url()."\">".$this->title."</a>";
 	}
+
+	public function getFilesDir() {
+		$dir = $this->site->staticPath("f");
+		if(!is_dir($dir)) mkdir($dir);
+		$dir .= "/".substr($this->id, 0, 1);
+		if(!is_dir($dir)) mkdir($dir);
+		$dir .= "/".substr($this->id, 1);
+		if(substr($dir, -1) == "/") $dir .= "x";
+		if(!is_dir($dir)) mkdir($dir);
+		$dir .= "/";
+		return $dir;
+	}
+
+	public function getFilesUrl() {
+		$dir = $this->site->staticUrl("f");
+		$dir .= "/".substr($this->id, 0, 1);
+		$dir .= "/".substr($this->id, 1);
+		if(substr($dir, -1) == "/") $dir .= "x";
+		$dir .= "/";
+		return $dir;
+	}
+
+
 
 }
