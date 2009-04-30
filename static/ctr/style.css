@@ -7,14 +7,14 @@ _width:expression(document.body.clientWidth<900?'900px':(document.body.clientWid
 _text-align:left;
 margin:0px auto 0px auto;padding-top:150px;}
 div#cont{float:left;width:78%;_width:77%;padding-bottom:20px;}
-div#cont div.cont{padding:10px;}
-div#rcol{float:right;width:22%;margin-bottom:20px;}
-div#rcol div.cont{padding:10px;}
-div#foot{_float:left;display:block;clear:both;width:100%;}
+div#cont div.cont{padding:10px;_padding:0px;}
+div#rcol{float:right;width:22%;_float:none;_width:auto;margin-bottom:20px;_margin-bottom:1px;}
+div#rcol div.cont{_float:right;_width:22%;padding:10px;}
+div#foot{display:block;clear:both;width:100%;}
 div#foot div.cont{padding:10px 0px 15px 0px;text-align:center;}
 div#foot span{display:block;text-align:center;}
 div#head{position:absolute;left:0px;top:0px;width:100%;height:118px;_height:120px;}
-div#head div#user-box{position:absolute;z-index:1000;top:0px;right:0px;text-align:right;}
+div#head div#user-box{position:absolute;z-index:1000;top:0px;right:0px;width:22%;text-align:right;}
 div#main-menu{position:absolute;left:0px;top:120px;width:100%;height:30px;}
 div#main-menu ul{list-style-type:none;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;}
 div#main-menu ul li{display:inline;float:left;_float:none;height:30px;padding:0px 15px 0px 15px;}
@@ -33,9 +33,11 @@ h5{margin:0px;font-size:10pt;}
 form{margin:0;}
 a,a:hover,a:visited{text-decoration:none;}
 a:hover{text-decoration:underline;}
+input{border:1px solid #333;}
 
 /*header login form*/
-#openid input.text{width:110px;height:16px;}
+#openid input{_height:19px;}
+.openid-focus,.openid-blur{width:130px;}
 .openid-focus {color: black}
 .openid-blur {color: silver;font-style: italic}
 #openid {padding-top:15px;padding-left:19px;padding-right:12px;background: url(./../../im/openid.gif) 0 16px no-repeat;height: 40px;white-space:nowrap;text-align:center;}
@@ -52,6 +54,8 @@ div.system h2{border:1px solid orange;padding:5px;margin-bottom:1px;}
 div.anonce{width:20%;height:120px;padding-top:1px;float:left;background-color:#eee;}
 div.anonce div{height:107px;_height:117px;margin:1px 2px 2px 2px;overflow:hidden;background-color:#fff;padding:5px;}
 div.anonce div strong{margin-bottom:5px;}
+
+/*fragments - edit role*/
 
 /*tags cloud*/
 div.tags-cloud{text-align:center;}
