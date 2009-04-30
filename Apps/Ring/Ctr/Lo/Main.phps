@@ -22,8 +22,8 @@ class R_Ctr_Lo_Main extends R_Layout {
 		if (R_Mdl_Session::isLogged()) {
 			?>
 			<div class="info-box">
-Привет, <?=R_Mdl_Session::getUser()->link()?>! <a
-			href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a>
+<p>Привет, <?=R_Mdl_Session::getUser()->link()?>!</p>
+<p><a href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a></p>
 			</div>
 <?
 		} else {

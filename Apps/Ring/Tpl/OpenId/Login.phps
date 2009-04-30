@@ -16,18 +16,18 @@ class R_Tpl_OpenId_Login extends R_Template {
 			case "auth" :
 			case "our" :
 				?>
-<form method="POST"
+<form method="POST" id="openid-login-form"
 	action="<?=
-				O_Registry::get( "app/env/request_url" )?>">OpenId: <input
+				O_Registry::get( "app/env/request_url" )?>"><label><span>OpenId:</span> <input
 	type="text" name="openid_identifier" value="<?=
-				$this->identity?>" />
+				$this->identity?>" /></label>
 
 	<?
 				if ($this->mode == "our") {
 					?>
 	<br />
-Пароль: <input type="password" name="pwd" /> <input type="submit"
-	value="Войти" />
+<label><span>Пароль:</span> <input type="password" name="pwd" /></label>
+<label><input type="submit" value="Войти" /></label>
 <?
 				} else {
 					?>
