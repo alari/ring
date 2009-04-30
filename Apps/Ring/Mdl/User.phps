@@ -20,8 +20,9 @@
  */
 class R_Mdl_User extends O_Acl_User {
 
-	public function __construct( $identity, O_Acl_Role $role )
+	public function __construct( $identity, O_Acl_Role $role=null )
 	{
+		if(!$role) $role = O_Acl_Role::getByName("OpenId User");
 		O_OpenId_Provider_UserPlugin::normalize( $identity );
 		$this->identity = $identity;
 		$this->role = $role;
