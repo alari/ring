@@ -26,7 +26,18 @@ class R_Ctr_Tpl_Own_EditProfile extends R_Ctr_Template {
 </table>
 </fieldset>
 </form>
-<?
+<?if(R_Mdl_Session::getUser()->isOurUser()){?>
+
+<form method="post" enctype="multipart/form-data">
+<fieldset><legend>Сменить пароль</legend>
+<table>
+	<tr><td>Новый пароль:</td><td><input type="password" name="pwd"/></td></tr>
+	<tr><td>Повторите пароль:</td><td><input type="password" name="pwd_reply"/></td></tr>
+	<tr><td>&nbsp;</td><td><input type="submit" value="Сменить"/><input type="hidden" name="action" value="ch-pwd"/></td></tr>
+</table>
+</fieldset>
+</form>
+<?}
 	}
 
 }

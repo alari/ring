@@ -6,15 +6,26 @@ class R_Ctr_Lo_Main extends R_Layout {
 		$this->addCssSrc('ctr/style.css');
 		?>
 <div id="wrap">
-	
+
 	<div id="cont">
-		<div class="cont"><?$this->tpl->displayContents();?></div>
+		<div class="cont">
+
+		<?
+		if (isset( $_SESSION[ "notice" ] )) {
+			?>
+<div id="notice" onclick="$(this).fade('out')" style="color:red;font-weight:bold;"><?=$_SESSION[ "notice" ]?></div>
+<?
+			unset( $_SESSION[ "notice" ] );
+		}
+		?>
+
+		<?$this->tpl->displayContents();?></div>
 	</div>
-	
+
 	<div id="rcol">
 		<div class="cont"><?parent::userMenu();?></div>
 	</div>
-	
+
 	<div id="head">
 		<div id="logo">&nbsp;</div>
 		<div id="user-box">
@@ -33,7 +44,7 @@ class R_Ctr_Lo_Main extends R_Layout {
 			</div>
 <?
 		}
-		
+
 		?>
 		</div>
 	</div>
@@ -43,7 +54,7 @@ class R_Ctr_Lo_Main extends R_Layout {
 Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?></span>
 		</div>
 	</div>
-	
+
 </div>
 <?
 	}

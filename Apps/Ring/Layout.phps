@@ -36,7 +36,7 @@ class R_Layout extends O_Html_Layout {
 <ul><?
 				foreach ($systems as $sys) {
 					?>
-<li><?=$sys->link() . ($can_write ? " <a href=\"" . $sys->url( "form" ) . "\" class=\"sys-add\">Добавить</a>" : "")?></li>
+<li><?=$sys->link() . ($can_write ? " &nbsp; <small><a href=\"" . $sys->url( "form" ) . "\">Добавить</a></small>" : "")?></li>
 <?
 				}
 				?></ul>

@@ -12,7 +12,13 @@ class R_Ctr_Cmd_Own_EditProfile extends R_Command {
 			$user->save();
 
 			return $this->redirect();
-		} else {
+		} elseif($this->getParam("action") == "ch-pwd") {
+			if($user->isOurUser() && strlen($this->getParam("pwd")) > 4 && $this->getParam("pwd") == $this->getParam("pwd_reply") && preg_match("#^[-_a-zA-Z0-9]$#i", $this->getParam("pwd"))) {
+				$user->setPwd($this->getParam("pwd"));
+				$this->setNotice("Пароль был успешно изменён.");
+				return $this->redirect();
+			} else $this->setNotice("Ошибка при смене пароля.");
+		}else{
 			$form->handle();
 		}
 
