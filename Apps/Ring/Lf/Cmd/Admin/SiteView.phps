@@ -23,6 +23,11 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 				return $this->redirect();
 			}
 		} else {
+			if($this->getParam("action") == "revert") {
+				file_put_contents($this->getSite()->static_folder."style.css", file_get_contents($this->getSite()->static_folder."../style.css"));
+				return $this->redirect();
+			}
+
 			$tpl = $this->getTemplate();
 			$tpl->css_source = file_get_contents( $this->getSite()->static_folder . "style.css" );
 			$d = opendir( $this->getSite()->static_folder );

@@ -5,7 +5,6 @@
  *
  * @field email VARCHAR(255) -edit -title Адрес электронной почты
  * @field nickname VARCHAR(255) -edit -title Ник или псевдоним
- * @field avatar_ext ENUM('-','gif','jpeg','png') DEFAULT '-'
  *
  * @field friends -has many R_Mdl_User -inverse friend_of
  * @field friend_of -has many R_Mdl_User -inverse friends
@@ -17,6 +16,9 @@
  * @field anonces -owns many R_Mdl_Site_Anonce -inverse owner
  *
  * @field comments -owns many R_Mdl_Site_Comment -inverse owner
+ *
+ * @field ava_full ENUM('-','gif','jpeg','png') DEFAULT '-' -image filepath: avaPath full; src: avaSrc full; width:190; height:500; cascade: ava_tiny; clear:1
+ * @field ava_tiny -image filepath: avaPath tiny; src: avaSrc tiny; width:80; height:200
  */
 class R_Mdl_User extends O_Acl_User {
 
@@ -29,6 +31,14 @@ class R_Mdl_User extends O_Acl_User {
 		parent::__construct();
 		$this->nickname = $identity;
 		$this->createUserdir();
+	}
+
+	public function avaSrc($type) {
+		return $this->staticUrl("ava-".$type.".".$this["ava_full"]);
+	}
+
+	public function avaPath($type, $ext=null) {
+		return $this->staticFilename("ava-".$type.($ext?$ext:".".$this["ava_full"]));
 	}
 
 	/**
@@ -81,15 +91,8 @@ class R_Mdl_User extends O_Acl_User {
 		}
 	}
 
-	public function avatarUrl( $full = false )
-	{
-		$src = "ava" . ($full ? "-full" : "") . "." . ($this->avatar_ext != "-" ? $this->avatar_ext : "gif");
-		return $this->avatar_ext != "-" ? $this->staticUrl( $src ) : O_Registry::get( "app/users/static_urlbase" ) . $src;
-		return O_UrlBuilder::getStatic( $src );
-	}
-
 	public function avatar($full=false) {
-		return "<img src=\"".$this->avatarUrl($full)."\" alt=\"".htmlspecialchars($this->nickname)."\"/>";
+		return "<img src=\"".($full?$this->ava_full:$this->ava_tiny)."\" alt=\"".htmlspecialchars($this->nickname)."\"/>";
 	}
 
 

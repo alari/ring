@@ -17,7 +17,7 @@ class R_Fr_Site_Comment {
 
 <div class="comm" style="margin-left:<?=$comment->level?>em">
 	<div class="comm-ava"><?=$comment->owner->link()?>
-	<img src="<?=$comment->owner->avatarUrl()?>" /></div>
+	<?=$comment->owner->avatar()?></div>
 <?=$comment->content?>
 </div>
 
