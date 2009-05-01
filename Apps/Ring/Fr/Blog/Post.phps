@@ -9,13 +9,14 @@ class R_Fr_Blog_Post {
 	static public function showSelf(O_Dao_Renderer_Show_Params $params) {
 		$post = $params->record();
 ?>
-<span class="prop-ava" style="float:right">
+<div class="prop-ava">
 <?=$post->owner->link()?><br/>
 <?=$post->owner->avatar()?>
-</span>
+</div>
+
 <h2><a href="<?=$post->url()?>"><?=$post->anonce->title?></a></h2>
 
-<?=$post->content?>
+<div class="content"><?=$post->content?></div>
 <?
 	}
 
@@ -28,23 +29,27 @@ class R_Fr_Blog_Post {
 		$post = $params->record();
 		$tags = $post->tags;
 ?>
-<div class="post" style="margin:5px;border:1px solid orange">
-<div class="prop" style="color:gray">
-<span class="prop-ava" style="float:right">
+<div class="post">
+<div class="prop">
+<div class="prop-ava">
 <?=$post->owner->link()?><br/>
 <?=$post->owner->avatar()?>
-</span>
-Добавлена: <?=date("d.m.Y H:i:s", $post->time)?>
+</div>
+
+<div class="date">Добавлена: <?=date("d.m.Y H:i:s", $post->time)?></div>
+
 <?if(count($tags)){
 $was_tag=0;
 	?>
-<br/>Теги: <?foreach($tags as $t){if($was_tag) echo ", "; else $was_tag=1; echo $t->link($post->system);}?>
+<div class="tags">Теги: <?foreach($tags as $t){if($was_tag) echo ", "; else $was_tag=1; echo $t->link($post->system);}?></div>
 <?}?>
 </div>
 <h2><a href="<?=$post->url()?>"><?=$post->anonce->title?></a></h2>
 
-<?=$post->content?>
-<div style="text-align:right"><a href="<?=$post->url()?>">Комментариев: <?=$post->anonce->nodes->getFunc()?></a></div>
+<div class="content"><?=$post->content?></div>
+
+<div class="comms"><a href="<?=$post->url()?>">Комментариев: <?=$post->anonce->nodes->getFunc()?></a></div>
+
 </div>
 <?
 	}

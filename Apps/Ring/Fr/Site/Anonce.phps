@@ -48,7 +48,7 @@ class R_Fr_Site_Anonce {
 				?>
 <div class="anonce">
 <div><strong><?=
-				$record->link()?></strong><br />
+				$record->link()?></strong>
 <?=
 				$record->description?>
 </div>
@@ -59,13 +59,13 @@ class R_Fr_Site_Anonce {
 				?>
 <div class="anonce">
 <div><strong><?=
-				$record->link()?></strong><br />
-<center><a href="<?=
+				$record->link()?></strong>
+<div class="img"><a href="<?=
 				$record->url()?>"><img
 	src="<?=
 				$record->creative->img_tiny?>"
 	alt="<?=
-				htmlspecialchars( $record->title . " - " . $record->description )?>" /></a></center>
+				htmlspecialchars( $record->title . " - " . $record->description )?>" /></a></div>
 </div>
 </div>
 <?
