@@ -60,7 +60,16 @@ div.anonce{width:20%;height:120px;padding-top:1px;float:left;background-color:#e
 div.anonce div{height:107px;_height:117px;margin:1px 2px 2px 2px;overflow:hidden;background-color:#fff;padding:5px;}
 div.anonce div strong{margin-bottom:5px;}
 
-/*fragments - edit role*/
+/*fragments - images*/
+div.post{margin-top:16px;}
+div.post div.prop{}
+div.prop-ava{float:right;margin:10px;padding:5px;text-align:center;}
+div.prop-ava a,div.prop-ava a:hover,div.prop-ava a:visited{display:block;margin-bottom:3px;}
+div.date{margin:10px 0px 0px 0px;font-size:8pt;}
+div.tags{}
+div.img{padding:5px 0px 10px 0px;text-align:center;}
+div.content{}
+div.comms{clear:both;margin:5px 0px 10px 0px;padding-right:10px;text-align:right;}
 
 /*tags cloud*/
 div.tags-cloud{text-align:center;}
@@ -88,4 +97,11 @@ div#foot div.cont{}
 
 /*outer elements styles*/
 *{color:#333333;}
-a,a:hover,a:visited{color:#222277;}
+a,a:hover,a:visited{text-decoration:none;color:#222277;}
+a:hover{text-decoration:underline;}
+a img{border:0;}
+div.system h2{border-bottom:1px solid #eeeeff;}
+div.anonce{border-right:1px solid #fff;}
+div.anonce,div.anonce div strong{background-color:#f5f5ff;}
+div.anonce div{background-color:#fff;}
+div.post,div.comm,div.comms.lined{border-top:1px solid #eeeeff;}

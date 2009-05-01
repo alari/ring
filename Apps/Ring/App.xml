@@ -60,7 +60,9 @@
 			<Command name="Own_Msgs_Write"></Command></Url><Url pattern="Own/Msgs/(([a-zA-Z]+)(-([0-9]+))?)?">
 			<Registry key="current/box" pocket="2"></Registry>
 			<Registry key="paginator/page" pocket="4"></Registry>
-			<Command name="Own_Msgs_Box"></Command></Url></If>
+			<Command name="Own_Msgs_Box"></Command></Url>
+		<Url pattern="Own/Friends-([0-9]+)" command="Own_Friends">
+			<Registry key="paginator/page" pocket="1"></Registry></Url></If>
 	<Url pattern="openid/login">
 		<Command name="OpenId_Login" plugin="-"></Command>
 	</Url>
