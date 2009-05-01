@@ -1,6 +1,7 @@
 <?php
 abstract class R_Lf_Sys_Template extends R_Lf_Template {
 	public $can_write;
+	public $can_delete;
 	public $tags;
 	public $instance;
 	public $creative;
@@ -9,31 +10,60 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 	public function displayNav()
 	{
 		?>
-<p><b><?=$this->instance->link()?></b></p>
+<p><b><?=$this->instance->system->link()?></b></p>
 <?
+		if ($this->creative) {
+			?>
+<p><b><?=$this->creative->anonce->link()?></b></p>
+<?
+			if ($this->creative->anonce->collection) {
+				?>
+<p><i><?=$this->creative->anonce->collection->link()?></i></p>
+<?
+			}
+		}
 		if ($this->can_write) {
 			?>
 <ul>
-	<li><a href="<?=$this->instance->system->url( "form" )?>">Добавить запись</a></li>
+	<li><a href="<?=$this->instance->system->url( "form" )?>">Добавить</a></li>
 <?
 
 			if ($this->creative) {
 				?>
 	<li><a
-		href="<?=$this->instance->system->url( "form/" . $this->creative->id )?>">Править
-	запись</a></li>
+		href="<?=$this->instance->system->url( "form/" . $this->creative->id )?>">Править</a></li>
+		<?
+				if ($this->can_delete) {
+					?>
+		<li><a href="?action=delete"
+		onclick="return confirm('Вы уверены? Восстановление будет невозможно!')">Удалить</a></li>
 <?
+				}
+				?>
+
+	<li><a
+		href="<?=$this->instance->system->url( "linked/" . $this->creative->id )?>">Связи</a></li>
+
+				<?
 			}
 
 			?></ul><?
 		}
 
-		if ($this->tags) {
+		if ($this->creative) {
+			?>
+
+<i>Внутренний ID для связей: <b><?=$this->creative[ "anonce" ]?></b></i>
+
+<?
+		}
+
+		if ($this->tags instanceof O_Dao_Query && count( $this->tags->getAll() )) {
 			?><p><b>Метки</b></p>
 <ul>
 <?
 			foreach ($this->tags as $tag) {
-				echo "<li>", $this->tag == $tag?"<b>":"", $tag->link( $this->instance->system ),$this->tag == $tag?"</b>":"", "</li>";
+				echo "<li>", $this->tag == $tag ? "<b>" : "", $tag->link( $this->instance->system ), $this->tag == $tag ? "</b>" : "", "</li>";
 			}
 			echo "</ul>";
 		}

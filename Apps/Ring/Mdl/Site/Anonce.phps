@@ -17,6 +17,8 @@
  * @field system -has one R_Mdl_Site_System -inverse anonces -preload
  * @field tags -has many R_Mdl_Site_Tag -inverse anonces
  *
+ * @field linked -has many R_Mdl_Site_Anonce -inverse linked
+ *
  * @field access ENUM('public','protected','private','disable') NOT NULL DEFAULT 'disable' -enum public: Всем; protected: Друзьям и друзьям друзей; private: Друзьям; disable: Только себе
  * @field time INT -show date
  * @field title VARCHAR(255) -show linkInContainer
@@ -56,6 +58,11 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	public function link() {
 		return "<a href=\"".$this->url()."\">".$this->title."</a>";
 	}
+
+	public function isVisible() {
+		return true;
+	}
+
 
 	public function getFilesDir() {
 		$dir = $this->site->staticPath("f");

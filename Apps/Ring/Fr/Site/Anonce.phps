@@ -35,9 +35,11 @@ class R_Fr_Site_Anonce {
 			return;
 		}
 
+		echo "<div>";
 		foreach ($q as $anonce) {
 			$anonce->show();
 		}
+		echo "<br clear='left'/></div>";
 	}
 
 	static public function showSelf( O_Dao_Renderer_Show_Params $params )

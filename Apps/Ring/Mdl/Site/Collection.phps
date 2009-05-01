@@ -53,6 +53,16 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 		throw new O_Dao_Renderer_Check_Exception("Collection is required.");
 	}
 
+	public function link() {
+		return "<a href=\"".$this->url()."\">".$this->title."</a>";
+	}
+
+	public function url() {
+		return $this->system->url("coll-".$this->id);
+	}
+
+
+
 
 
 }

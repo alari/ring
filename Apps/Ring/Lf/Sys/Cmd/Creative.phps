@@ -3,6 +3,12 @@ class R_Lf_Sys_Cmd_Creative extends R_Lf_Sys_Command {
 
 	public function process()
 	{
+		if($this->getParam("action") == "delete") {
+			if(!$this->can("delete", $this->getSite())) throw new O_Ex_AccessDenied("Вы не можете удалять записи на этом сайте.");
+			$this->creative->delete();
+			return $this->redirect($this->instance->system->url());
+		}
+
 		$tpl = $this->getTemplate();
 		$tpl->creative = $this->creative;
 		$tpl->tags = $this->creative->tags;

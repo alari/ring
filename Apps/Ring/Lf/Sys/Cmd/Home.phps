@@ -23,7 +23,7 @@ class R_Lf_Sys_Cmd_Home extends R_Lf_Sys_Command {
 		}
 		$tpl->site = $this->getSite();
 		$tpl->tag = $this->tag;
-		$tpl->tags = $this->instance->system->site->tags->test("weight", 0, ">");
+		$tpl->tags = $this->instance->system->{"anonces.tags"};
 		return $tpl;
 	}
 
