@@ -14,7 +14,7 @@ class R_Fr_Blog_Post {
 <?=$post->owner->avatar()?>
 </div>
 
-<h2><a href="<?=$post->url()?>"><?=$post->anonce->title?></a></h2>
+<?if($post->title){?><h1><?=$post->title?></h1><?}?>
 
 <div class="content"><?=$post->content?></div>
 <?
@@ -44,7 +44,7 @@ $was_tag=0;
 <div class="tags">Теги: <?foreach($tags as $t){if($was_tag) echo ", "; else $was_tag=1; echo $t->link($post->system);}?></div>
 <?}?>
 </div>
-<h2><a href="<?=$post->url()?>"><?=$post->anonce->title?></a></h2>
+<?if($post->title){?><h2><a href="<?=$post->url()?>"><?=$post->title?></a></h2><?}?>
 
 <div class="content"><?=$post->content?></div>
 
