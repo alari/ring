@@ -13,7 +13,7 @@ div#foot div.cont{}
 *{color:#333333;}
 a,a:hover,a:visited{text-decoration:none;color:#222277;}
 a:hover{text-decoration:underline;}
-a img,a:hover img,a:visited img{border:1px solid #222277;}
+a img,a:hover img,a:visited img{border:0px none;}
 div.system h2{border-bottom:1px solid #eeeeff;}
 div.anonce{border-right:1px solid #fff;}
 div.anonce,div.anonce div strong{background-color:#f5f5ff;}
