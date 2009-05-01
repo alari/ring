@@ -4,6 +4,9 @@ class R_Ctr_Tpl_Own_EditProfile extends R_Ctr_Template {
 
 	public function displayContents()
 	{
+		$this->layout()->setTitle("Ваш профиль - настройки");
+		?><h1>Ваш профиль - настройки</h1><?
+
 		$this->form->show( $this->layout() );
 
 		?>

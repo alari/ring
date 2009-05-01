@@ -4,6 +4,7 @@ class R_Ctr_Tpl_Own_Friends_List extends R_Ctr_Template {
 
 	public function displayContents()
 	{
+		$this->layout()->setTitle("Ваши друзья - список");
 		?>
 <h1>Ваши друзья</h1>
 <ul>
