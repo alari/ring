@@ -17,7 +17,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		} else
 			$root->role = $rootRole;
 
-		$root->setPwd( "12345" );
+		$root->setPwd( O_Registry::get("app/mode") == "production" ? "XKSLzapa" :"12345" );
 		$root->save();
 
 		if(!O_Dao_TableInfo::get("R_Mdl_Site_Anonce")->tableExists()) O_Dao_TableInfo::get("R_Mdl_Site_Anonce")->createTable();
