@@ -4,7 +4,7 @@
  *
  * @field:config system -inverse libro
  */
-class R_Mdl_Libro extends R_Mdl_Site_SysInstance {
+class R_Mdl_Sound extends R_Mdl_Site_SysInstance {
 	const CREATIVE_CLASS = "R_Mdl_Sound_Track";
 
 	/**
