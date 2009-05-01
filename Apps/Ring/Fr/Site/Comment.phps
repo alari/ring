@@ -15,25 +15,22 @@ class R_Fr_Site_Comment {
 		}
 		?>
 
-<div style="margin-left:<?=$comment->level?>em"><span
-	style="float: left; width: 100px; clear: left"><?=$comment->owner->link()?><br />
-<img src="<?=$comment->owner->avatarUrl()?>" /></span>
+<div class="comm" style="margin-left:<?=$comment->level?>em">
+	<div class="comm-ava"><?=$comment->owner->link()?>
+	<img src="<?=$comment->owner->avatarUrl()?>" /></div>
 <?=$comment->content?>
 </div>
 
+<?self::addForm( $comment[ "root" ], $comment->root->system->id, $comment->id );?>
 <?
-		self::addForm( $comment[ "root" ], $comment->root->system->id, $comment->id );
 	}
 
 	static public function addForm( $rootId, $systemId, $parent = 0 )
 	{
 		?>
 
-<div style="clear: left" >
-<div align="right"><a href="javascript:void(0)"
+<div class="comms<?=$parent?'':' lined'?>"><a href="javascript:void(0)"
 	onclick="R.Comment.showForm($(this).getParent(),'<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)"><?=($parent ? "Ответить" : "Оставить отзыв")?></a></div>
-<br style="clear: left" />
-</div>
 <?
 	}
 }

@@ -60,8 +60,13 @@ div.anonce div{height:122px;*width:100%;margin:1px 2px 2px 2px;_margin-top:2px;o
 div.anonce div strong{display:block;overflow:hidden;padding:2px 0px 3px 0px;text-align:center;}
 div.anonce div.img{text-align:center;}
 
-/**/
+/*blogs*/
 div.o-paginator{margin:10px 0px 0px 0px;}
+
+/*comments*/
+div.comm{clear:both;padding:10px 0px 10px 5px;}
+div.comm-ava{float:left;margin-right:16px;text-align:center;}
+div.comm-ava a,div.comm-ava a:hover,div.comm-ava a:visited{display:block;margin-bottom:3px;}
 
 /*fragments - images*/
 div.post{margin-top:16px;}
