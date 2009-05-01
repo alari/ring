@@ -1,5 +1,5 @@
 <?php
-class R_Ctr_Cmd_Own_Friends extends R_Command {
+class R_Ctr_Cmd_Own_Friends_List extends R_Command {
 
 	public function process()
 	{
@@ -7,10 +7,13 @@ class R_Ctr_Cmd_Own_Friends extends R_Command {
 
 		if ($this->isMethodPost() && $this->getParam( "friend_openid" )) {
 			$friend = R_Mdl_User::getByIdentity( $this->getParam( "friend_openid" ) );
-			if (!$friend)
-				$friend = new R_Mdl_User( $this->getParam( "friend_openid" ) );
-			$user->friends[] = $friend;
+			if($friend) $user->friends[] = $friend;
 			return $this->redirect();
+		}
+
+		if($this->getParam("remove")) {
+			$friend = O_Dao_ActiveRecord::getById($this->getParam("remove"), "R_Mdl_User");
+			if($friend) $user->friends->remove($friend);
 		}
 
 		$tpl = $this->getTemplate();

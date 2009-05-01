@@ -55,36 +55,75 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		return $this->system->creativeUrl( $this[ $field ] );
 	}
 
-	public function link() {
-		return "<a href=\"".$this->url()."\">".$this->title."</a>";
+	public function link()
+	{
+		return "<a href=\"" . $this->url() . "\">" . $this->title . "</a>";
 	}
 
-	public function isVisible() {
-		return true;
+	public function isVisible()
+	{
+		return R_Mdl_Session::can( "read " . $this->system[ "access" ], $this->site ) && $this->can(
+				"read " . $this[ "access" ], $this->site );
 	}
 
-
-	public function getFilesDir() {
-		$dir = $this->site->staticPath("f");
-		if(!is_dir($dir)) mkdir($dir);
-		$dir .= "/".substr($this->id, 0, 1);
-		if(!is_dir($dir)) mkdir($dir);
-		$dir .= "/".substr($this->id, 1);
-		if(substr($dir, -1) == "/") $dir .= "x";
-		if(!is_dir($dir)) mkdir($dir);
+	public function getFilesDir()
+	{
+		$dir = $this->site->staticPath( "f" );
+		if (!is_dir( $dir ))
+			mkdir( $dir );
+		$dir .= "/" . substr( $this->id, 0, 1 );
+		if (!is_dir( $dir ))
+			mkdir( $dir );
+		$dir .= "/" . substr( $this->id, 1 );
+		if (substr( $dir, -1 ) == "/")
+			$dir .= "x";
+		if (!is_dir( $dir ))
+			mkdir( $dir );
 		$dir .= "/";
 		return $dir;
 	}
 
-	public function getFilesUrl() {
-		$dir = $this->site->staticUrl("f");
-		$dir .= "/".substr($this->id, 0, 1);
-		$dir .= "/".substr($this->id, 1);
-		if(substr($dir, -1) == "/") $dir .= "x";
+	public function getFilesUrl()
+	{
+		$dir = $this->site->staticUrl( "f" );
+		$dir .= "/" . substr( $this->id, 0, 1 );
+		$dir .= "/" . substr( $this->id, 1 );
+		if (substr( $dir, -1 ) == "/")
+			$dir .= "x";
 		$dir .= "/";
 		return $dir;
 	}
 
+	static public function setQueryAccesses( O_Dao_Query $q )
+	{
+		if (!R_Mdl_Session::isLogged()) {
+			$q->test( "access", "public" );
+			return;
+		}
+		$anoncesTable = O_Dao_TableInfo::get( __CLASS__ )->getTableName();
+		/* @var $rel O_Dao_Relation_ManyToMany */
+		$rel = R_Mdl_Session::getUser()->friends;
+		$rel_table = $rel->getRelationTableName();
+		$rel_target = $rel->getTargetFieldName();
+		$rel_base = $rel->getBaseFieldName();
+		$userid = R_Mdl_Session::getUser()->id;
 
+		$q->where(
+				"access='public'
+			OR owner=?
+			OR (
+				(access='protected' OR access='private')
+					AND EXISTS (SELECT r1.$rel_target FROM $rel_table r1 WHERE r1.$rel_base=$anoncesTable.owner AND r1.$rel_target=?)
+			) OR (
+				access = 'private'
+					AND EXISTS (SELECT r2.$rel_target
+						FROM $rel_table r1
+						LEFT JOIN $rel_table r2
+							ON r2.$rel_base=r1.$rel_target
+						WHERE
+							r1.$rel_base=$anoncesTable.owner
+							AND r2.$rel_target=?)
+			)", $userid, $userid, $userid );
+	}
 
 }

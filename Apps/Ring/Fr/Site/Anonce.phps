@@ -17,9 +17,10 @@ class R_Fr_Site_Anonce {
 		}
 
 		$q->preload( O_Dao_TableInfo::get( $q->getClass() )->getFieldInfo( "creative" )->getParam( "one-of", 1 ) );
-		foreach ($q as $anonce) {
-			$anonce->creative->show( $params->layout(), "full" );
-		}
+		foreach ($q as $anonce)
+			if ($anonce->isVisible()) {
+				$anonce->creative->show( $params->layout(), "full" );
+			}
 	}
 
 	/**
@@ -36,9 +37,10 @@ class R_Fr_Site_Anonce {
 		}
 
 		echo "<div>";
-		foreach ($q as $anonce) {
-			$anonce->show();
-		}
+		foreach ($q as $anonce)
+			if ($anonce->isVisible()) {
+				$anonce->show();
+			}
 		echo "<br clear='left'/></div>";
 	}
 
@@ -63,8 +65,7 @@ class R_Fr_Site_Anonce {
 <div><strong><?=
 				$record->link()?></strong>
 <div class="img"><a href="<?=
-				$record->url()?>"><img
-	src="<?=
+				$record->url()?>"><img src="<?=
 				$record->creative->img_tiny?>"
 	alt="<?=
 				htmlspecialchars( $record->title . " - " . $record->description )?>" /></a></div>
@@ -77,6 +78,5 @@ class R_Fr_Site_Anonce {
 		}
 
 	}
-
 
 }

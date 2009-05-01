@@ -1,15 +1,15 @@
 <?php
-class R_Ctr_Tpl_Own_Friends extends R_Ctr_Template {
+class R_Ctr_Tpl_Own_Friends_List extends R_Ctr_Template {
 	public $friends;
 
 	public function displayContents()
 	{
 		?>
-		<h1>Ваши друзья</h1>
+<h1>Ваши друзья</h1>
 <ul>
 		<?
 		foreach ($this->friends as $friend)
-			echo "<li>", $friend->link(), "</li>";
+			echo "<li>", $friend->link(), " <small><a href=\"?remove=" . $friend->id . "\">Убрать из друзей</a></small></li>";
 		?>
 		</ul>
 
