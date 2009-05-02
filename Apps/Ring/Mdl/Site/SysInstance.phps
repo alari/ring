@@ -1,7 +1,8 @@
 <?php
 /**
  * @field system -owns one R_Mdl_Site_System
- * @field title VARCHAR(255) -show linkInContainer
+ *
+ * @field title -relative system->title
  * @field perpage TINYINT NOT NULL DEFAULT 15 -title Количество записей на страницу -edit -required Какое-то количество должно быть обязательно
  */
 abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {

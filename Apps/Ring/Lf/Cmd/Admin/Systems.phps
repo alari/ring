@@ -19,7 +19,6 @@ class R_Lf_Cmd_Admin_Systems extends R_Lf_Command {
 				if ($title && isset( $classes[ $type ] )) {
 					$class = $classes[ $type ];
 					$s = new $class( );
-					$s->title = $title;
 					$sys = new R_Mdl_Site_System( $title, $urlbase, $this->getSite() );
 					$sys->access = $this->getParam( "access", "public" );
 					$sys->instance = $s;
