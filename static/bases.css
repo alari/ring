@@ -91,3 +91,7 @@ span.tag-5{font-size:130%;}
 span.tag-6{font-size:140%;}
 span.tag-7{font-size:150%;}
 span.tag-8{font-size:160%;}
+
+/*text formatting*/
+p.prose{text-indent:2em;margin:0 1px;}
+p.poetry{white-space:pre;margin:0;}

@@ -15,8 +15,6 @@
  * @field:replace anonce,img_tiny
  */
 class R_Mdl_Im_Picture extends R_Mdl_Site_Creative {
-	const HAS_COLLECTIONS = 1;
-
 	public function save()
 	{
 		parent::save();

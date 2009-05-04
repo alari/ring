@@ -107,6 +107,7 @@
 	<Registry key="paginator/css_envelop" value="o-paginator"></Registry>
 	<Registry key="dao-params/default_tail"
 		value="ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci"></Registry>
+	<Registry key="js/fckeditor/config_path" value="/static/fckconfig.js"></Registry>
 
 
 
