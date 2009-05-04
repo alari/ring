@@ -10,7 +10,7 @@ class R_Lf_Sys_Cmd_Comments extends R_Lf_Sys_Command {
 
 		R_Mdl_Session::setQueryAccesses($query, $this->getSite());
 		$tpl->paginator = $query->getPaginator(
-				array ($this, "url"), 3 );
+				array ($this, "url") );
 
 		$tpl->site = $this->getSite();
 		return $tpl;
