@@ -60,9 +60,13 @@ $was_tag=0;
 <?}?>
 </div>
 
-<h2><a href="<?=$post->url()?>"><?=$post->title?></a></h2>
+<br/><br/>
 
-<div class="content"><?=$post->content?></div>
+<center>
+<h2><a href="<?=$post->url()?>"><?=$post->anonce->title?></a></h2>
+</center>
+
+<br/><br/>
 
 <div class="comms"><a href="<?=$post->url()?>">Комментариев: <?=$post->anonce->nodes->getFunc()?></a></div>
 
