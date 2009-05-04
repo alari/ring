@@ -6,6 +6,9 @@
  *
  * @field:config content -required Текст произведения необходим -edit wysiwyg Libro
  *
+ * @field write_time VARCHAR(255) -title Время написания -edit
+ * @field write_place VARCHAR(255) -title Место написания -edit
+ *
  * @field collection -relative anonce->collection -edit R_Fr_Libro_Text::editCycle -title Цикл -check R_Mdl_Site_Collection::checkCreate (без цикла)
  */
 class R_Mdl_Libro_Text extends R_Mdl_Site_Creative {

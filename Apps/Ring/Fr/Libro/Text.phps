@@ -26,6 +26,14 @@ class R_Fr_Libro_Text {
 
 <div class="content"><?=$post->content?></div>
 
+<?if($post->write_time || $post->write_place) {?>
+<div style="text-align:right;font-style:italic">
+<?
+	if($post->write_time) echo $post->write_time.($post->write_place?"<br/>":"");
+	echo $post->write_place;?>
+</div>
+<?}?>
+
 <?
 	}
 
