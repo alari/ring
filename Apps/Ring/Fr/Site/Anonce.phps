@@ -73,6 +73,18 @@ class R_Fr_Site_Anonce {
 </div>
 <?
 			break;
+case "libro_text":
+					?>
+<div class="anonce">
+<div><strong><?=
+				$record->link()?></strong>
+<div class="img">
+<i><?=$record->collection->link()?></i>
+</div>
+</div>
+</div>
+<?
+	break;
 			default :
 				echo "<a href=\"" . $params->record()->url() . "\">" . $params->record()->title . "</a><br/>";
 		}
