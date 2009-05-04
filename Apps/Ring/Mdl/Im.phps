@@ -19,4 +19,12 @@ class R_Mdl_Im extends R_Mdl_Site_SysInstance {
 	{
 		return $this->getCreativeById( $id, "R_Mdl_Im_Picture" );
 	}
+
+	public function addFormTitle() {
+		return "Новая работа, ".$this->title;
+	}
+
+	public function editFormTitle() {
+		return "Настройки картинки, ".$this->title;
+	}
 }

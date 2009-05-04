@@ -91,4 +91,9 @@ abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {
 			return false;
 		return $item;
 	}
+
+	public function addFormTitle() {
+		return "Новая запись";
+	}
+
 }
