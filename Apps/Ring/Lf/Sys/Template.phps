@@ -10,7 +10,7 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 	public function displayNav()
 	{
 		?>
-<p><b><?=$this->instance->system->link()?></b></p>
+<p><b><?=$this->instance->system->link()?></b> <small><a href="<?=$this->instance->system->url("comments")?>">Комментарии</a></small></p>
 <?
 		if ($this->creative) {
 			?>

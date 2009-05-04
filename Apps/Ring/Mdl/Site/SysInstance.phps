@@ -50,13 +50,19 @@ abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {
 			$class = $prefix . "Linked";
 			$cmd = new $class;
 			$cmd->creative_id = $matches[1];
+		// List of comments
+		} elseif (preg_match( "#^comments(-([0-9]+))?$#", $page, $matches )) {
+			$class = $prefix . "Comments";
+			$cmd = new $class( );
+			if (isset( $matches[ 2 ] ))
+				O_Registry::set( "app/paginator/page", $matches[ 2 ] );
 		}
 
 		if (isset( $cmd ) && $cmd instanceof R_Lf_Command) {
 			$cmd->instance = $this;
 			return $cmd;
 		}
-		throw new O_Ex_PageNotFound( "Blog page not found", 404 );
+		throw new O_Ex_PageNotFound( "System page not found", 404 );
 	}
 
 	/**

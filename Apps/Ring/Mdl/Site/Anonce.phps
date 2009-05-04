@@ -55,17 +55,32 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		return $this->system->creativeUrl( $this[ $field ] );
 	}
 
+	/**
+	 * Simple link for creative -- without author
+	 *
+	 * @return string
+	 */
 	public function link()
 	{
 		return "<a href=\"" . $this->url() . "\">" . $this->title . "</a>";
 	}
 
+	/**
+	 * Checks if current user can see this
+	 *
+	 * @return bool
+	 */
 	public function isVisible()
 	{
 		return R_Mdl_Session::can( "read " . $this->system[ "access" ], $this->site ) && R_Mdl_Session::can(
 				"read " . $this[ "access" ], $this->site );
 	}
 
+	/**
+	 * Returns directory to store files attached with this anonce in
+	 *
+	 * @return string
+	 */
 	public function getFilesDir()
 	{
 		$dir = $this->site->staticPath( "f" );
@@ -83,6 +98,11 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		return $dir;
 	}
 
+	/**
+	 * Returns url base to get urls to files attached with anonce
+	 *
+	 * @return string
+	 */
 	public function getFilesUrl()
 	{
 		$dir = $this->site->staticUrl( "f" );
@@ -94,6 +114,11 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		return $dir;
 	}
 
+	/**
+	 * Sets access conditions to anonces query
+	 *
+	 * @param O_Dao_Query $q
+	 */
 	static public function setQueryAccesses( O_Dao_Query $q )
 	{
 		if (!R_Mdl_Session::isLogged()) {
@@ -125,5 +150,17 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 							AND r2.$rel_target=?)
 			)", $userid, $userid, $userid );
 	}
+
+	/**
+	 * Deletes anonce
+	 *
+	 */
+	public function delete() {
+		if($this->collection) {
+			$this->collection->anonces->test("position", $this->position, ">")->field("position", "position-1", 1)->update();
+		}
+		parent::delete();
+	}
+
 
 }

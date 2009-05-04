@@ -32,5 +32,4 @@ abstract class R_Mdl_Site_Creative extends O_Dao_ActiveRecord {
 	{
 		return $this->anonce->url();
 	}
-
 }
