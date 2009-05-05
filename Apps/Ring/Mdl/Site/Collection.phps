@@ -3,16 +3,16 @@
  * @table collections
  * @field system -has one R_Mdl_Site_System -inverse collections
  *
- * @field title VARCHAR(64) -edit -required -title Название цикла
- * @field description VARCHAR(255) -edit -title Описание или расшифровка
- * @field year VARCHAR(255) -edit -title Год завершения или период работы
+ * @field title VARCHAR(64) -edit -required -title Название цикла -show-loop linkInContainer h2 -show-def container h1
+ * @field description VARCHAR(255) -edit -title Описание или расшифровка -show-loop container h3 -show-def container h2
+ * @field year VARCHAR(255) -edit -title Год завершения или период работы -show
  * @field position int NOT NULL DEFAULT 0
  *
- * @field anonces -has owns R_Mdl_Site_Anonce -inverse collection
+ * @field anonces -has many R_Mdl_Site_Anonce -inverse collection -order-by position
  *
  * @field info -owns one R_Mdl_Site_CollectionInfo -inverse collection
  *
- * @field content -relative info->content -show-def -edit wysiwyg -check htmlPurify -title Развёрнутое описание в свободной форме
+ * @field content -relative info->content -show-def -edit wysiwyg libro -check htmlPurify -title Развёрнутое описание в свободной форме
  *
  * @field time INT
  *

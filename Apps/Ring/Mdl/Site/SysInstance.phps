@@ -56,6 +56,12 @@ abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {
 			$cmd = new $class( );
 			if (isset( $matches[ 2 ] ))
 				O_Registry::set( "app/paginator/page", $matches[ 2 ] );
+		// One collection page
+		} elseif (preg_match( "#^coll-([0-9]+)$#", $page, $matches )) {
+			$class = $prefix . "Collection";
+			$cmd = new $class( );
+			if (isset( $matches[ 1 ] ))
+				$cmd->coll_id = $matches[1];
 		}
 
 		if (isset( $cmd ) && $cmd instanceof R_Lf_Command) {
