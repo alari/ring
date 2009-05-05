@@ -8,7 +8,7 @@ _width:expression(document.body.clientWidth<900?'900px':(document.body.clientWid
 _text-align:left;
 margin:0px auto 0px auto;padding-top:150px;}
 div#cont{float:left;width:78%;_width:77%;padding-bottom:20px;}
-div#cont div.cont{padding:0px 10px 0px 0px;_padding:0px;}
+div#cont div.cont{padding:0px 10px 0px 15px;_padding:0px 0px 0px 15px;}
 div#rcol{float:right;width:22%;_float:none;_width:auto;margin-bottom:20px;_margin-bottom:1px;}
 div#rcol div.cont{_float:right;_width:22%;padding:10px;}
 div#foot{display:block;clear:both;width:100%;}
