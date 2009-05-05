@@ -35,6 +35,7 @@ h5{margin:10px 0px 0px 0px;font-size:10pt;}
 p{margin:6px 0px 0px 0px;}
 form{margin:0;}
 div.oo-renderer-field{margin-bottom:5px;}
+textarea.oo-renderer-field-area{width:90%;height:160px;}
 #openid-login-form label{float:left;clear:both;width:220px;padding-bottom:5px;}
 #openid-login-form label span{float:left;}
 #openid-login-form label input{float:right;}
