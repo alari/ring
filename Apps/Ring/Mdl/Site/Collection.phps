@@ -8,7 +8,7 @@
  * @field year VARCHAR(255) -edit -title Год завершения или период работы -show
  * @field position int NOT NULL DEFAULT 0
  *
- * @field anonces -has many R_Mdl_Site_Anonce -inverse collection -order-by position
+ * @field anonces -has many R_Mdl_Site_Anonce -inverse collection -order-by position -show loop
  *
  * @field info -owns one R_Mdl_Site_CollectionInfo -inverse collection
  *
