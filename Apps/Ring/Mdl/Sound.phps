@@ -2,7 +2,7 @@
 /**
  * @table sound
  *
- * @field:config system -inverse libro
+ * @field:config system -inverse sound
  */
 class R_Mdl_Sound extends R_Mdl_Site_SysInstance {
 	const CREATIVE_CLASS = "R_Mdl_Sound_Track";

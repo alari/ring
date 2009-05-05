@@ -57,7 +57,7 @@ class R_Layout extends O_Html_Layout {
 
 			}
 
-			$new_msgs = O_Dao_Query::get("R_Mdl_Msg")->test("readen", 0)->getFunc();
+			$new_msgs = R_Mdl_Session::getUser()->msgs_own->test("readen", 0)->getFunc();
 
 			?>
 <p><b><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Msgs/">Внутренняя почта</a></b></p>

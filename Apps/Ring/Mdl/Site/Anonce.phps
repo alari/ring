@@ -35,13 +35,15 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	public function __construct( R_Mdl_Site_Creative $creative, R_Mdl_Site_SysInstance $instance )
 	{
 		parent::__construct();
-		$this->creative = $creative;
 		$this->system = $instance->system;
 		$this->site = $instance->system->site;
+		$this->save();
+		$this->creative = $creative;
 		$this->time = $creative->time;
 		$this->access = $instance->system->access;
 		$this->owner = R_Mdl_Session::getUser();
 		$this->save();
+		$this->creative->save();
 	}
 
 	/**
