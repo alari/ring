@@ -18,6 +18,7 @@
  * @field tags -has many R_Mdl_Site_Tag -inverse anonces
  *
  * @field linked -has many R_Mdl_Site_Anonce -inverse linked
+ * @field in_favorites -has many R_Mdl_User -inverse favorites
  *
  * @field access ENUM('public','protected','private','disable') NOT NULL DEFAULT 'disable' -enum public: Всем; protected: Друзьям и друзьям друзей; private: Друзьям; disable: Только себе
  * @field time INT -show date

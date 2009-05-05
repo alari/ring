@@ -54,6 +54,12 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 			?>
 
 <i>Внутренний ID для связей: <b><?=$this->creative[ "anonce" ]?></b></i>
+<?if(R_Mdl_Session::isLogged() && R_Mdl_Session::getUser() != $this->creative->anonce->owner){
+	$has_fovarites = R_Mdl_Session::getUser()->favorites->has($this->creative->anonce);
+	?>
+	<br/>
+<i><a href="javascript:void(0)" onclick="new Request({url:'<?=$this->creative->url()?>?action=fav',onComplete:function(){$(this).getParent().set('html', '<b><?=($has_fovarites?"Убрали":"Добавили")?></b>');}}).send();"><?=($has_fovarites?"Убрать из избранного":"Добавить в избранное")?></a></i>
+<?}?>
 
 <?
 		}

@@ -7,6 +7,15 @@ class R_Lf_Sys_Cmd_Creative extends R_Lf_Sys_Command {
 			if(!$this->can("delete", $this->getSite())) throw new O_Ex_AccessDenied("Вы не можете удалять записи на этом сайте.");
 			$this->creative->delete();
 			return $this->redirect($this->instance->system->url());
+		} elseif($this->getParam("action") == "fav") {
+			if(!R_Mdl_Session::isLogged()) return;
+			$user = R_Mdl_Session::getUser();
+			if($user->favorites->has($this->creative->anonce)) {
+				$user->favorites->remove($this->creative->anonce);
+			} else {
+				$user->favorites[] = $this->creative->anonce;
+			}
+			return;
 		}
 
 		$tpl = $this->getTemplate();

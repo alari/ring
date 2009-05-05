@@ -15,6 +15,8 @@
  *
  * @field anonces -owns many R_Mdl_Site_Anonce -inverse owner
  *
+ * @field favorites -has many R_Mdl_Site_Anonce -inverse in_favorites
+ *
  * @field comments -owns many R_Mdl_Site_Comment -inverse owner
  *
  * @field ava_full ENUM('-','gif','jpeg','png') DEFAULT '-' -image filepath: avaPath full; src: avaSrc full; width:190; height:500; cascade: ava_tiny; clear:1
