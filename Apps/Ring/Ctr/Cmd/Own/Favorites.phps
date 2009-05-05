@@ -1,6 +1,6 @@
 <?php
 
-class R_Ctr_Cmd_Own_Fravorites extends R_Command {
+class R_Ctr_Cmd_Own_Favorites extends R_Command {
 
 	public function process()
 	{
