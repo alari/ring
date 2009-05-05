@@ -4,7 +4,7 @@ class R_Ctr_Cmd_Own_Favorites extends R_Command {
 
 	public function process()
 	{
-		$tpl = $this->getTemplate("Friends");
+		$tpl = $this->getTemplate("Own_Friends");
 		$anonces = R_Mdl_Session::getUser()->favorites->orderBy("time DESC");
 		R_Mdl_Site_Anonce::setQueryAccesses($anonces);
 
