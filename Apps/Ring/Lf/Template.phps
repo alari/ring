@@ -5,7 +5,9 @@ abstract class R_Lf_Template extends R_Template {
 
 	public function displayNav()
 	{
-		echo "Naaav";
+		?>
+		<a href="http://<?=O_Registry::get("app/hosts/center")?>">centralis</a>
+<?
 	}
 
 	/**
