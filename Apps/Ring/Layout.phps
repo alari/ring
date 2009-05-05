@@ -74,6 +74,8 @@ class R_Layout extends O_Html_Layout {
 	<li><a
 		href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Friends">Друзья</a> &nbsp; <small><a
 		href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Friends/List">Кто</a></small></li>
+	<li><a
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Favorites">Избранное</a></li>
 <?
 			if (R_Mdl_Session::getUser()->site) {
 				?>
