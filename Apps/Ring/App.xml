@@ -80,7 +80,9 @@
 	</Url>
 	<Url pattern="">
 		<Command name="Home"></Command>
-	</Url><Registry key="sites/static_urlbase" value="/static/s/"></Registry><Registry key="sites/static_folder" value="./static/s/"></Registry><Registry key="users/static_folder" value="./static/u/"></Registry><Registry key="users/static_urlbase" value="/static/u/"></Registry>
+	</Url>
+	<Registry key="err_tpl" value="R_Tpl_Error"></Registry>
+	<Registry key="sites/static_urlbase" value="/static/s/"></Registry><Registry key="sites/static_folder" value="./static/s/"></Registry><Registry key="users/static_folder" value="./static/u/"></Registry><Registry key="users/static_urlbase" value="/static/u/"></Registry>
 	<Registry key="html/static_root" value="/static/"></Registry><Registry key="class/R_Mdl_User/plugins" type="add"
 		value="O_OpenId_Provider_UserPlugin"></Registry>
 	<Registry key="class/R_Mdl_Site/acl">
