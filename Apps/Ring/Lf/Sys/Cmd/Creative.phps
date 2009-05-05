@@ -12,10 +12,11 @@ class R_Lf_Sys_Cmd_Creative extends R_Lf_Sys_Command {
 			$user = R_Mdl_Session::getUser();
 			if($user->favorites->has($this->creative->anonce)) {
 				$user->favorites->remove($this->creative->anonce);
+				return "<b>Убрали</b>";
 			} else {
 				$user->favorites[] = $this->creative->anonce;
+				return "<b>Добавили</b>";
 			}
-			return;
 		}
 
 		$tpl = $this->getTemplate();

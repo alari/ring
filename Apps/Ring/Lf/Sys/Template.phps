@@ -58,7 +58,7 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 	$has_fovarites = R_Mdl_Session::getUser()->favorites->has($this->creative->anonce);
 	?>
 	<br/>
-<i><a href="javascript:void(0)" onclick="new Request({url:'<?=$this->creative->url()?>?action=fav',onComplete:function(){$(this).getParent().set('html', '<b><?=($has_fovarites?"Убрали":"Добавили")?></b>');}}).send();"><?=($has_fovarites?"Убрать из избранного":"Добавить в избранное")?></a></i>
+<i><a href="javascript:void(0)" onclick="new Request.HTML({url:'<?=$this->creative->url()?>?action=fav',update:$(this).getParent()}).send();"><?=($has_fovarites?"Убрать из избранного":"Добавить в избранное")?></a></i>
 <?}?>
 
 <?
