@@ -3,6 +3,7 @@ class R_Ctr_Lo_Main extends R_Layout {
 
 	public function displayBody()
 	{
+		$this->addCssSrc('bases.css');
 		$this->addCssSrc('ctr/style.css');
 		?>
 <div id="wrap">
