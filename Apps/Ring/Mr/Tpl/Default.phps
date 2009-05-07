@@ -1,5 +1,5 @@
 <?php
-class R_Ctr_Tpl_Default extends R_Template {
+class R_Mr_Tpl_Default extends R_Template {
 	protected $layoutClass = "R_Mr_Layout";
 
 	public function displayContents()
