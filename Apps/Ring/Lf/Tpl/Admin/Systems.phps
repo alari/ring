@@ -34,7 +34,12 @@ class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
 </form>
 <script type="text/javascript">
  tmp = function(){
- $('sys-sbm-<?=$sys->id?>').addEvent("click", function(e){
+	 el = $('sys-sbm-<?=$sys->id?>');
+		if(!el) {
+			tmp.delay(50);
+			return;
+		}
+ el.addEvent("click", function(e){
 	 e.stop();
  	$(this).disabled = true;
 
@@ -43,16 +48,16 @@ class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
 			if(response.refresh == 1) {
 				window.location.reload(true);
 			} else {
-				$('sys-sbm-<?=$sys->id?>').getParent().set('html', response.show);
+				el.getParent().set('html', response.show);
 			}
 		} else {
 			alert(response.error);
-			$('sys-sbm-<?=$sys->id?>').getElement('input[type=submit]').disabled = false;
+			el.getElement('input[type=submit]').disabled = false;
 		}
- 	 }}).post($('sys-sbm-<?=$sys->id?>').getParent().getParent());
+ 	 }}).post(el.getParent().getParent());
  });
  };
- tmp.delay(100);
+ tmp();
  </script>
 <?
 	}
@@ -69,7 +74,7 @@ class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
 		<th><a href="<?=$sys->url()?>"><?=$sys->title?></a></th>
 		<td><?=$sys->getType()?></td>
 		<td><small><a href="javascript:void(0)"
-			onclick="R.AjaxFragment.toggle('sys-ed-<?=$sys->id?>', {data:{sys:<?=$sys->id?>,action:'system-fragment'},evalScripts:true}, 'height', 40)">Доступ
+			onclick="R.AjaxFragment.toggle('sys-ed-<?=$sys->id?>', {url:'<?=$_SERVER['REQUEST_URI']?>',data:{sys:<?=$sys->id?>,action:'system-fragment'},evalScripts:true}, 'height', 40)">Доступ
 		и имя ссылки</a></small></td>
 		<td><small><a href="<?=$sys->url( "SystemAdmin" )?>">Остальные
 		настройки</a></small></td>

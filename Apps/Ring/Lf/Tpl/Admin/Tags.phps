@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Tpl_Admin_Tags extends R_Lf_Template {
-	
+
 	public $tags;
 	public $form;
 
@@ -12,7 +12,7 @@ class R_Lf_Tpl_Admin_Tags extends R_Lf_Template {
 <?
 			return;
 		}
-		
+
 		$this->form->show();
 	}
 
@@ -27,10 +27,10 @@ class R_Lf_Tpl_Admin_Tags extends R_Lf_Template {
 <tr>
 		<th><?=$tag->link()?></th>
 		<td><small><a href="javascript:void(0)"
-			onclick="R.AjaxFragment.toggle('tag-ed-<?=$tag->id?>', {data:{tag:<?=$tag->id?>,action:'tag-fragment'},evalScripts:true})">Править
+			onclick="R.AjaxFragment.toggle('tag-ed-<?=$tag->id?>', {url:'<?=$_SERVER['REQUEST_URI']?>',data:{tag:<?=$tag->id?>,action:'tag-fragment'},evalScripts:true})">Править
 		метку</a></small></td>
 		<td><small><a href="javascript:void(0)"
-			onclick="if(confirm('Вы уверены, что хотите удалить эту метку?')) R.AjaxFragment.toggle('tag-ed-<?=$tag->id?>', {data:{tag:<?=$tag->id?>,action:'tag-delete'},evalScripts:true})">Удалить</a></small></td>
+			onclick="if(confirm('Вы уверены, что хотите удалить эту метку?')) R.AjaxFragment.toggle('tag-ed-<?=$tag->id?>', {url:'<?=$_SERVER['REQUEST_URI']?>',data:{tag:<?=$tag->id?>,action:'tag-delete'},evalScripts:true})">Удалить</a></small></td>
 	</tr>
 	<tr>
 		<td colspan="3">
