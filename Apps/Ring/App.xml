@@ -69,7 +69,7 @@
 	<Url pattern="openid/logout">
 		<Command name="OpenId_Logout" plugin="-"></Command>
 	</Url>
-	<Url pattern="openid/server">
+	<Url pattern="openid/provider">
 		<Command name="OpenId_Provider" plugin="-"></Command>
 	</Url>
 	<Url pattern="openid/redirect">
