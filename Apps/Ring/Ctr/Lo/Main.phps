@@ -54,6 +54,9 @@ class R_Ctr_Lo_Main extends R_Layout {
 			<span>Сайт входит в <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольцо
 Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?></span>
 		</div>
+<div style="float:right">
+<?$this->showCounter();?>
+</div>
 	</div>
 
 </div>

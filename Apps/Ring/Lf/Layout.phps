@@ -53,6 +53,10 @@ class R_Lf_Layout extends R_Layout {
 			<span>&copy; <?=$this->site->copyright?></span>
 			<span>Сайт входит в <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольцо
 Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?></span>
+
+<div style="float:right">
+<?$this->showCounter();?>
+</div>
 		</div>
 	</div>
 </div>
