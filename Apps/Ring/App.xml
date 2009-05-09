@@ -24,10 +24,10 @@
 		<Registry key="db/default/dbname" value="mirari"></Registry>
 		<Registry key="db/default/user" value="mirari"></Registry>
 		<Registry key="db/default/password" value="XKSLzapa"></Registry>
-		<Host pattern="mirari\.name">
+		<Host pattern="(www\.)?mirari\.name">
 			<Plugin name="Mr"></Plugin>
 		</Host>
-		<Host pattern="centralis\.name">
+		<Host pattern="(www\.)?centralis\.name">
 			<Plugin name="Ctr"></Plugin>
 		</Host>
 		<Registry key="hosts/center" value="centralis.name"></Registry>

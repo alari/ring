@@ -27,7 +27,7 @@ class R_Fr_Sound_Track {
 <br/><br/>
 
 <div class="track-listen">
-<object type="application/x-shockwave-flash" data="<?=$params->layout()->staticUrl("swf/player_mp3_maxi.swf")?>" width="300" height="20">
+<object type="application/x-shockwave-flash" data="<?=$params->layout()->staticUrl("swf/player_mp3_maxi.swf")?>" width="400" height="20">
     <param name="movie" value="<?=$params->layout()->staticUrl("swf/player_mp3_maxi.swf")?>" />
     <param name="bgcolor" value="#ffffff" />
     <param name="FlashVars" value="mp3=<?=htmlspecialchars($post->file)?>&amp;loop=1&amp;showvolume=1&amp;showinfo=1&amp;volumewidth=40&amp;width=400" />
@@ -78,7 +78,7 @@ $was_tag=0;
 <br/><br/>
 
 <div class="track-listen">
-<object type="application/x-shockwave-flash" data="<?=$params->layout()->staticUrl("swf/player_mp3_maxi.swf")?>" width="300" height="20">
+<object type="application/x-shockwave-flash" data="<?=$params->layout()->staticUrl("swf/player_mp3_maxi.swf")?>" width="400" height="20">
     <param name="movie" value="<?=$params->layout()->staticUrl("swf/player_mp3_maxi.swf")?>" />
     <param name="bgcolor" value="#ffffff" />
     <param name="FlashVars" value="mp3=<?=htmlspecialchars($post->file)?>&amp;loop=0&amp;showvolume=1&amp;showinfo=1&amp;volumewidth=40&amp;width=400" />
