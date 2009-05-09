@@ -84,8 +84,8 @@ class R_Fr_Site_Anonce {
 </div>
 <?
 			break;
-case "sound_track":
-	?>
+			case "sound_track" :
+				?>
 <div class="anonce">
 <div><strong><?=
 				$record->link()?></strong>
@@ -93,8 +93,8 @@ case "sound_track":
 				$record->collection->link()?></i></div>
 </div>
 </div>
-	<?
-	break;
+<?
+			break;
 			default :
 				echo "<a href=\"" . $params->record()->url() . "\">" . $params->record()->title . "</a><br/>";
 		}
