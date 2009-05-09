@@ -108,4 +108,10 @@ class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 	{
 		return "<a href=\"" . $this->url() . "\">$this->title</a>";
 	}
+
+	public function delete() {
+		$this->site->systems->test("position", $this->position, ">")->field("position", "position-1", true)->update();
+		parent::delete();
+	}
+
 }

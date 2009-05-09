@@ -3,6 +3,11 @@ class R_Lf_Sys_Cmd_SystemAdmin extends R_Lf_Sys_Command {
 
 	public function process()
 	{
+		if($this->isMethodPost() && $this->getParam("action") == "delete"){
+			$this->setNotice("Система безвозвратно удалена.");
+			$this->instance->system->delete();
+			return $this->redirect("/");
+		}
 
 		$form_processor = new O_Dao_Renderer_FormProcessor( );
 		$form_processor->setActiveRecord( $this->instance );
