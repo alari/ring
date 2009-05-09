@@ -16,4 +16,13 @@ abstract class R_Command extends O_Command {
 		$_SESSION[ "notice" ] = $notice;
 	}
 
+	public function catchEx(Exception $e) {
+		if($e instanceof O_Ex_AccessDenied) {
+			$this->setNotice("Вы не авторизованы или у вас нет прав на просмотр страницы.");
+			throw new O_Ex_Redirect();
+		}
+		throw $e;
+	}
+
+
 }

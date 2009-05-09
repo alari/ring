@@ -19,7 +19,7 @@ class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
 			return;
 		}
 		?>
-<form method="post">
+<form method="post" action="<?=$_SERVER["REQUEST_URI"]?>">
 <center>Название ссылки: <input type="text" name="title"
 	value="<?=htmlspecialchars( $sys->title )?>" /> &nbsp;&nbsp; Уровень
 доступа: <select name="access"><?
@@ -43,7 +43,7 @@ class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
 	 e.stop();
  	$(this).disabled = true;
 
- 	new Request.JSON({onSuccess:function(response){
+ 	new Request.JSON({url:'<?=$_SERVER["REQUEST_URI"]?>',onSuccess:function(response){
 		if(response.status == 'SUCCEED') {
 			if(response.refresh == 1) {
 				window.location.reload(true);
