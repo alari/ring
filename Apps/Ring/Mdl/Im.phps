@@ -24,6 +24,11 @@ class R_Mdl_Im extends R_Mdl_Site_SysInstance {
 		return "Новая работа, ".$this->title;
 	}
 
+	public function url( $page = 1 )
+	{
+		return $this->system->url( $page > 1 ? "page-$page" : "" );
+	}
+
 	public function editFormTitle() {
 		return "Настройки картинки, ".$this->title;
 	}
