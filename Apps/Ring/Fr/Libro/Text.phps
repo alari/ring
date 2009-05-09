@@ -52,7 +52,7 @@ class R_Fr_Libro_Text {
 <?=$post->owner->link()?>
 <?=$post->owner->avatar()?>
 </div>
-<div class="date">Добавлена: <?=date("d.m.Y H:i:s", $post->time)?></div>
+<div class="date">Добавлено: <?=date("d.m.Y H:i:s", $post->time)?></div>
 <?if(count($tags)){
 $was_tag=0;
 	?>

@@ -61,7 +61,7 @@ class R_Fr_Sound_Track {
 <?=$post->owner->link()?>
 <?=$post->owner->avatar()?>
 </div>
-<div class="date">Добавлена: <?=date("d.m.Y H:i:s", $post->time)?></div>
+<div class="date">Добавлено: <?=date("d.m.Y H:i:s", $post->time)?></div>
 <?if(count($tags)){
 $was_tag=0;
 	?>
@@ -74,6 +74,22 @@ $was_tag=0;
 <center>
 <h2><a href="<?=$post->url()?>"><?=$post->anonce->title?></a></h2>
 </center>
+
+<br/><br/>
+
+<div class="track-listen">
+<object type="application/x-shockwave-flash" data="<?=$params->layout()->staticUrl("swf/player_mp3_maxi.swf")?>" width="300" height="20">
+    <param name="movie" value="<?=$params->layout()->staticUrl("swf/player_mp3_maxi.swf")?>" />
+    <param name="bgcolor" value="#ffffff" />
+    <param name="FlashVars" value="mp3=<?=htmlspecialchars($post->file)?>&amp;loop=0&amp;showvolume=1&amp;showinfo=1&amp;volumewidth=40&amp;width=400" />
+</object>
+</div>
+
+<br/>
+<div class="track-props">
+<p>Длительность: <?=floor($post->duration/60).":".($post->duration%60)?></p>
+<p>Битрейт: <?=$post->bitrate?> бит/сек</p>
+</div>
 
 <br/><br/>
 
