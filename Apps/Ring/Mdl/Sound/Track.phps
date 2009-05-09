@@ -32,10 +32,8 @@ class R_Mdl_Sound_Track extends R_Mdl_Site_Creative {
 
 		if(is_file($this->filePath()) && class_exists("ffmpeg_movie", false)) {
 			$movie = new ffmpeg_movie($this->filePath(), false);
-			$this["duration"] = $movie->getDuration();
+			$this["duration"] = round($movie->getDuration());
 			$this["bitrate"] = $movie->getBitRate();
-			print_r($this);
-			exit;
 			parent::save();
 		}
 
