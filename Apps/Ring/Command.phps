@@ -19,7 +19,8 @@ abstract class R_Command extends O_Command {
 	public function catchEx(Exception $e) {
 		if($e instanceof O_Ex_AccessDenied) {
 			$this->setNotice("Вы не авторизованы или у вас нет прав на просмотр страницы.");
-			throw new O_Ex_Redirect();
+			$this->redirect("/");
+			return;
 		}
 		throw $e;
 	}
