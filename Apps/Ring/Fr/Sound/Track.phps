@@ -27,8 +27,8 @@ class R_Fr_Sound_Track {
 <br/><br/>
 
 <div class="track-listen">
-<object type="application/x-shockwave-flash" data="/static/swf/player_mp3_maxi.swf" width="300" height="20">
-    <param name="movie" value="http://flash-mp3-player.net/medias/player_mp3_maxi.swf" />
+<object type="application/x-shockwave-flash" data="<?=$params->layout()->staticUrl("swf/player_mp3_maxi.swf")?>" width="300" height="20">
+    <param name="movie" value="<?=$params->layout()->staticUrl("swf/player_mp3_maxi.swf")?>" />
     <param name="bgcolor" value="#ffffff" />
     <param name="FlashVars" value="mp3=<?=htmlspecialchars($post->file)?>&amp;loop=1&amp;showvolume=1&amp;showinfo=1&amp;volumewidth=40&amp;width=400" />
 </object>
