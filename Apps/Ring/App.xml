@@ -16,6 +16,7 @@
 		</Host>
 		<Registry key="hosts/center" value="centralis"></Registry>
 		<Registry key="hosts/project" value="mirari"></Registry>
+		<Registry key="html/static_root" value="/static/"></Registry>
 	</If>
 	<If mode="production">
 		<Registry key="db/default/engine" value="mysql"></Registry>
@@ -31,11 +32,12 @@
 		</Host>
 		<Registry key="hosts/center" value="centralis.name"></Registry>
 		<Registry key="hosts/project" value="mirari.name"></Registry>
-		
-		
-		
-		
-		
+		<Registry key="html/static_root" value="http://centralis.name/static/"></Registry>
+
+
+
+
+
 	</If>
 	<If plugin="Lf">
 		<Url pattern="about" command="About"></Url>
@@ -82,8 +84,7 @@
 		<Command name="Home"></Command>
 	</Url>
 	<Registry key="err_tpl" value="R_Tpl_Error"></Registry>
-	<Registry key="sites/static_urlbase" value="/static/s/"></Registry><Registry key="sites/static_folder" value="./static/s/"></Registry><Registry key="users/static_folder" value="./static/u/"></Registry><Registry key="users/static_urlbase" value="/static/u/"></Registry>
-	<Registry key="html/static_root" value="/static/"></Registry><Registry key="class/R_Mdl_User/plugins" type="add"
+	<Registry key="sites/static_urlbase" value="/static/s/"></Registry><Registry key="sites/static_folder" value="./static/s/"></Registry><Registry key="users/static_folder" value="./static/u/"></Registry><Registry key="users/static_urlbase" value="/static/u/"></Registry><Registry key="class/R_Mdl_User/plugins" type="add"
 		value="O_OpenId_Provider_UserPlugin"></Registry>
 	<Registry key="class/R_Mdl_Site/acl">
 		<User-In field="owner">
