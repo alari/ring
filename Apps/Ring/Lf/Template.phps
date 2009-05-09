@@ -3,19 +3,26 @@ abstract class R_Lf_Template extends R_Template {
 	protected $layoutClass = "R_Lf_Layout";
 	public $site = false;
 
+	public function displayNav() {
+		?>
+<a href="http://<?=O_Registry::get("app/hosts/center")?>/">Р¦РµРЅС‚СЂ РљРѕР»СЊС†Р°</a>
+		<?
+	}
+
+
 	public function prepareMeta(){
 		$description = Array();
 		$keywords = Array();
 
 		if($this->getSite()->owner) {
-			$description[] = "Сайт автора: ".$this->site->owner->nickname;
-			$keywords[] = "автор";
+			$description[] = "РЎР°Р№С‚ Р°РІС‚РѕСЂР°: ".$this->site->owner->nickname;
+			$keywords[] = "Р°РІС‚РѕСЂ";
 			$keywords[] = $this->site->owner->nickname;
 		}
 
-		$description[] = "Сайт &laquo;".$this->getSite()->title."&raquo;";
+		$description[] = "РЎР°Р№С‚ &laquo;".$this->getSite()->title."&raquo;";
 
-		$description[] = "Входит в кольцо творческих сайтов Mirari.Name";
+		$description[] = "Р’С…РѕРґРёС‚ РІ РєРѕР»СЊС†Рѕ С‚РІРѕСЂС‡РµСЃРєРёС… СЃР°Р№С‚РѕРІ Mirari.Name";
 
 		$this->layout()->setMetaDescription($description);
 		$this->layout()->setMetaKeywords($keywords);

@@ -11,8 +11,6 @@ class R_Lf_Sys_Tpl_Home extends R_Lf_Sys_Template {
 		}
 		if ($this->paginator)
 			$this->paginator->show( $this->layout(), "full" );
-
-		$this->layout()->setMetaDescription($this->instance->title);
 	}
 
 }

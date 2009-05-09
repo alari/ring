@@ -24,8 +24,15 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 				$keywords[] = "автор";
 				$keywords[] = $this->creative->anonce->owner->nickname;
 			}
-		} elseif($this->getSite()->owner) {
-			$description[] = "Сайт автора: ".$this->site->owner->nickname;
+		}
+
+		if($this->instance) {
+			$description[] = $this->instance->title;
+			$keywords[] = $this->instance->title;
+		}
+
+		if(!$this->creative && $this->getSite()->owner) {
+			$description[] = "Автор: ".$this->site->owner->nickname;
 			$keywords[] = "автор";
 			$keywords[] = $this->site->owner->nickname;
 		}
