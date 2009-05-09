@@ -1,6 +1,13 @@
 <?php
 class R_Lf_Layout extends R_Layout {
 
+	protected $bodyClass;
+
+	public function setBodyClass($class) {
+		$this->bodyClass = $class;
+	}
+
+
 	/**
 	 * Main body
 	 *
@@ -23,7 +30,7 @@ class R_Lf_Layout extends R_Layout {
 					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . $this->site->host .
 						 $_SERVER[ 'REQUEST_URI' ] );
 		?>
-<div id="wrap">
+<div id="wrap<?=($this->bodyClass?" ".$this->bodyClass:"")?>">
 	<div id="cont">
 		<div class="cont">
 <?
