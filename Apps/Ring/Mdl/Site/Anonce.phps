@@ -92,7 +92,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$dir .= "/" . substr( $this->id, 0, 1 );
 		if (!is_dir( $dir ))
 			mkdir( $dir );
-		$dir .= "/" . substr( $this->id, 1 );
+		$dir .= "/" . substr( $this->id, 1, 2 );
 		if (substr( $dir, -1 ) == "/")
 			$dir .= "x";
 		if (!is_dir( $dir ))
@@ -110,7 +110,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	{
 		$dir = $this->site->staticUrl( "f" );
 		$dir .= "/" . substr( $this->id, 0, 1 );
-		$dir .= "/" . substr( $this->id, 1 );
+		$dir .= "/" . substr( $this->id, 1, 2 );
 		if (substr( $dir, -1 ) == "/")
 			$dir .= "x";
 		$dir .= "/";

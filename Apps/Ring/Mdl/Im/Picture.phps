@@ -32,11 +32,11 @@ class R_Mdl_Im_Picture extends R_Mdl_Site_Creative {
 	}
 
 	public function imgSrc($type) {
-		return $this->anonce->getFilesUrl().$type.".".$this["img_full"];
+		return $this->anonce->getFilesUrl().$this->anonce->id.$type.".".$this["img_full"];
 	}
 
 	public function imgPath($type, $ext=null) {
-		return $this->anonce->getFilesDir().$type.($ext?$ext:".".$this["img_full"]);
+		return $this->anonce->getFilesDir().$this->anonce->id.$type.($ext?$ext:".".$this["img_full"]);
 	}
 
 
