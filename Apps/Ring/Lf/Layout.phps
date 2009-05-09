@@ -29,6 +29,8 @@ class R_Lf_Layout extends R_Layout {
 			$this->addJavaScriptSrc(
 					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . $this->site->host .
 						 $_SERVER[ 'REQUEST_URI' ] );
+
+		$this->tpl->prepareMeta();
 		?>
 <div id="wrap<?=($this->bodyClass?" ".$this->bodyClass:"")?>">
 	<div id="cont">

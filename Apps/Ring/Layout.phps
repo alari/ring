@@ -1,11 +1,22 @@
 <?php
 class R_Layout extends O_Html_Layout {
 	/**
-	 * Current or relative to user site
+	 * Current or user-related site
 	 *
 	 * @var R_Mdl_Site
 	 */
 	protected $site;
+
+	public function setMetaDescription($args) {
+		parent::addMeta("description", join(" - ", $args));
+	}
+
+	public function setMetaKeywords($args) {
+		$args = array_merge($args, array("творчество", "проза", "стихи", "музыка", "песни", "авторы", "публикации", "читать", "слушать", "интересно"));
+		parent::addMeta("keywords", join(", ", $args));
+	}
+
+
 
 	/**
 	 * redefine O_Html_Layout::displayDoctype()

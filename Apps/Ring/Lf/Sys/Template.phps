@@ -7,6 +7,37 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 	public $creative;
 	public $tag;
 
+	public function prepareMeta(){
+		$description = Array();
+		$keywords = Array();
+
+		if($this->tags) foreach($this->tags as $tag) $keywords[] = $tag->title;
+
+		if($this->creative) {
+			$description[] = $this->creative->anonce->title;
+			$description[] = $this->instance->title;
+			if($this->creative->anonce->description) {
+				$description[] = $this->creative->anonce->description;
+			}
+			if($this->creative->anonce->owner) {
+				$description[] = "Автор: ".$this->creative->anonce->owner->nickname;
+				$keywords[] = "автор";
+				$keywords[] = $this->creative->anonce->owner->nickname;
+			}
+		} elseif($this->getSite()->owner) {
+			$description[] = "Сайт автора: ".$this->site->owner->nickname;
+			$keywords[] = "автор";
+			$keywords[] = $this->site->owner->nickname;
+		}
+
+		$description[] = "Сайт &laquo;".$this->getSite()->title."&raquo;";
+
+		$description[] = "Входит в кольцо творческих сайтов Mirari.Name";
+
+		$this->layout()->setMetaDescription($description);
+		$this->layout()->setMetaKeywords($keywords);
+	}
+
 	public function displayNav()
 	{
 		$this->layout()->setBodyClass("sys-".$this->instance->system->urlbase."-body");
