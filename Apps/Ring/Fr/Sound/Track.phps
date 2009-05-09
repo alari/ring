@@ -24,8 +24,24 @@ class R_Fr_Sound_Track {
 
 <h2><a href="<?=$post->url()?>"><?=$post->title?></a></h2>
 
+<br/><br/>
+
+<div class="track-listen">
+<object type="application/x-shockwave-flash" data="/static/swf/player_mp3_maxi.swf" width="300" height="20">
+    <param name="movie" value="http://flash-mp3-player.net/medias/player_mp3_maxi.swf" />
+    <param name="bgcolor" value="#ffffff" />
+    <param name="FlashVars" value="mp3=<?=htmlspecialchars($post->file)?>&amp;loop=1&amp;showvolume=1&amp;showinfo=1&amp;volumewidth=40&amp;width=400" />
+</object>
+</div>
+
+<br/>
+<div class="track-props">
+<p>Ссылка на файл: <a href="<?=$post->file?>"><?=$post->title?></a></p>
+<p>Длительность: <?=floor($post->duration/60).":".($post->duration%60)?></p>
+<p>Битрейт: <?=$post->bitrate?> бит/сек</p>
+</div>
+
 <div class="content"><?=$post->content?></div>
-<b><?=$post->file?></b>
 
 <?
 	}
