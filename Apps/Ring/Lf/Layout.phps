@@ -27,12 +27,7 @@ class R_Lf_Layout extends R_Layout {
 	<div id="cont">
 		<div class="cont">
 <?
-		if (isset( $_SESSION[ "notice" ] )) {
-			?>
-<div id="notice" onclick="$(this).fade('out')"><?=$_SESSION[ "notice" ]?></div>
-<?
-			unset( $_SESSION[ "notice" ] );
-		}
+		$this->showNotice();
 		?>
 <?
 

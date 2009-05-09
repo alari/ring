@@ -12,12 +12,7 @@ class R_Ctr_Lo_Main extends R_Layout {
 		<div class="cont">
 
 		<?
-		if (isset( $_SESSION[ "notice" ] )) {
-			?>
-<div id="notice" onclick="$(this).fade('out')" style="color:red;font-weight:bold;"><?=$_SESSION[ "notice" ]?></div>
-<?
-			unset( $_SESSION[ "notice" ] );
-		}
+		$this->showNotice();
 		?>
 
 		<?$this->tpl->displayContents();?></div>
@@ -51,7 +46,7 @@ class R_Ctr_Lo_Main extends R_Layout {
 	</div>
 		<div id="foot">
 		<div class="cont">
-			<span>Сайт входит в <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольцо
+			<span>Взгляд из центра <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольца творческих сайтов
 Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?></span>
 		</div>
 <div style="float:right">

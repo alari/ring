@@ -19,6 +19,16 @@ class R_Layout extends O_Html_Layout {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><?
 	}
 
+	protected function showNotice() {
+	if (isset( $_SESSION[ "notice" ] )) {
+			?>
+<div id="notice" onclick="$(this).fade('out')"><?=$_SESSION[ "notice" ]?></div>
+<?
+			unset( $_SESSION[ "notice" ] );
+		}
+	}
+
+
 	protected function userMenu()
 	{
 		if (R_Mdl_Session::isLogged()) {
