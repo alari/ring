@@ -24,8 +24,8 @@
 class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 	private static $classes = Array ("blog" => "R_Mdl_Blog", "im"=>"R_Mdl_Im", "sound"=>"R_Mdl_Sound", "libro"=>"R_Mdl_Libro");
 	private static $titles = Array ("blog" => "Блог", "im"=>"Изображения", "sound"=>"Музыка", "libro"=>"Литература");
-	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям друзей", "private" => "Друзьям",
-									"disable" => "Себе");
+	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям и друзьям друзей", "private" => "Друзьям",
+									"disable" => "Только себе");
 
 	public function getType() {
 		return self::$titles[O_Dao_TableInfo::get($this)->getFieldInfo("instance")->getRealField($this)];
