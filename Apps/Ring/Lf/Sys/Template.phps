@@ -92,12 +92,13 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 		if ($this->creative) {
 			?>
 
-<i>Внутренний ID для связей: <b><?=$this->creative[ "anonce" ]?></b></i>
+<p><i>Внутренний ID для связей: <b><?=$this->creative[ "anonce" ]?></b></i></p>
 <?if(R_Mdl_Session::isLogged() && R_Mdl_Session::getUser() != $this->creative->anonce->owner){
 	$has_fovarites = R_Mdl_Session::getUser()->favorites->has($this->creative->anonce);
 	?>
-	<br/>
+<p>
 <i><a href="javascript:void(0)" onclick="new Request.HTML({url:'<?=$this->creative->url()?>?action=fav',update:$(this).getParent()}).send();"><?=($has_fovarites?"Убрать из избранного":"Добавить в избранное")?></a></i>
+</p>
 <?}?>
 
 <?
@@ -115,8 +116,11 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 
 		if(count($this->instance->system->collections)) {
 			?>
-	<br/><br/>...<ul>
-	<?foreach($this->instance->system->collections as $coll) echo "<li><i>".$coll->link()."</i></li>";?>
+	<br/><br/><small>Сложены вместе</small><ul>
+	<?foreach($this->instance->system->collections as $coll) {
+		$is_current = $this->creative && $this->creative->anonce->collection == $coll ? 1 : 0;
+		echo "<li><i>".($is_current?"<b>":"").$coll->link().($is_current?"</b>":"")."</i></li>";
+	}?>
 	</ul>
 			<?
 		}
