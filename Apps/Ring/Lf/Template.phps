@@ -15,7 +15,7 @@ abstract class R_Lf_Template extends R_Template {
 		$keywords = Array();
 
 		if($this->getSite()->owner) {
-			$description[] = "Сайт автора: ".$this->site->owner->nickname;
+			$description[] = "Автор: ".$this->site->owner->nickname;
 			$keywords[] = "автор";
 			$keywords[] = $this->site->owner->nickname;
 		}

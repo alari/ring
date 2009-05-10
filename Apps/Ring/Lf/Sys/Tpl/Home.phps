@@ -11,6 +11,8 @@ class R_Lf_Sys_Tpl_Home extends R_Lf_Sys_Template {
 		}
 		if ($this->paginator)
 			$this->paginator->show( $this->layout(), "full" );
+
+		$this->layout()->addHeadLink("alternate", $this->instance->url("rss"), "application/rss+xml", "RSS");
 	}
 
 }

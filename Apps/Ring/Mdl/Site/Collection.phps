@@ -1,6 +1,6 @@
 <?php
 /**
- * @table collections
+ * @table collections -show-def:callback R_Fr_Site_Collection::showDef
  * @field system -has one R_Mdl_Site_System -inverse collections
  *
  * @field title VARCHAR(64) -edit -required -title Название цикла -show-loop linkInContainer h2 -show-def container h1
@@ -8,7 +8,7 @@
  * @field year VARCHAR(255) -edit -title Год завершения или период работы -show
  * @field position int NOT NULL DEFAULT 0
  *
- * @field anonces -has many R_Mdl_Site_Anonce -inverse collection -show loop
+ * @field anonces -has many R_Mdl_Site_Anonce -inverse collection -show loop -order-by position
  *
  * @field info -owns one R_Mdl_Site_CollectionInfo -inverse collection
  *

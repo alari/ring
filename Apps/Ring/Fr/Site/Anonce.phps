@@ -101,4 +101,19 @@ class R_Fr_Site_Anonce {
 
 	}
 
+	static public function showRssItem(O_Dao_Renderer_Show_Params $params) {
+		$record = $params->record();
+?>
+<item>
+  <guid isPermaLink='true'><?=$record->url()?></guid>
+  <pubDate><?=gmdate("D, d M Y H:i:s", $record->time)?> GMT</pubDate>
+  <title><?=$record->title?></title>
+  <link><?=$record->url()?></link>
+  <description><?=$record->description?></description>
+  <comments><?=$record->url()?></comments>
+</item>
+<?
+	}
+
+
 }
