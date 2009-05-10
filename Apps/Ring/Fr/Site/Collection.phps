@@ -19,7 +19,7 @@ class R_Fr_Site_Collection {
 ?>
 
 <h1>Альбом &laquo;<?=$collection->title?>&raquo;</h1>
-<div class="img">
+
 <object type="application/x-shockwave-flash" data="<?=$params->layout()->staticUrl("swf/player_mp3_multi.swf")?>" width="400" height="300">
     <param name="movie" value="<?=$params->layout()->staticUrl("swf/player_mp3_multi.swf")?>" />
     <param name="bgcolor" value="#ffffff" />

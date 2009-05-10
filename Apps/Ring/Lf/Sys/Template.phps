@@ -112,5 +112,13 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 			}
 			echo "</ul>";
 		}
+
+		if(count($this->instance->system->collections)) {
+			?>
+	<br/><br/>...<ul>
+	<?foreach($this->instance->system->collections as $coll) echo "<li><i>".$coll->link()."</i></li>";?>
+	</ul>
+			<?
+		}
 	}
 }
