@@ -18,11 +18,18 @@ class R_Fr_Site_Collection {
 				}
 ?>
 
+<h1>Альбом &laquo;<?=$collection->title?>&raquo;</h1>
+<div class="img">
 <object type="application/x-shockwave-flash" data="<?=$params->layout()->staticUrl("swf/player_mp3_multi.swf")?>" width="400" height="300">
     <param name="movie" value="<?=$params->layout()->staticUrl("swf/player_mp3_multi.swf")?>" />
     <param name="bgcolor" value="#ffffff" />
     <param name="FlashVars" value="mp3=<?=join("|", $files)?>&amp;title=<?=join("|", $titles)?>&amp;width=400&amp;height=300" />
 </object>
+
+</div>
+<div class="content">
+<?=$collection->content?>
+</div>
 
 <?
 			break;
