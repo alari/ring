@@ -41,6 +41,8 @@
 	</If>
 	<If plugin="Lf">
 		<Url pattern="about" command="About"></Url>
+		<Url pattern="comments(-([0-9]+))?" command="Comments">
+			<Registry key="paginator/page" pocket="2"></Registry></Url>
 		<Url pattern="tag/(([0-9]+)/)?(.+)">
 			<Registry key="current/tag" pocket="3"></Registry>
 			<Registry key="paginator/page" pocket="2"></Registry>
