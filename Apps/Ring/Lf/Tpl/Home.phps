@@ -19,6 +19,10 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 		}
 		$tags = $this->getSite()->tags->limit(100);
 		R_Fr_Site_Tag::showCloud($tags);
+		?>
+	<br/>
+<p><a href="<?=$this->getSite()->url("comments")?>">Комментарии на сайте</a></p>
+		<?php
 	}
 
 }

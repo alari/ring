@@ -5,7 +5,8 @@ abstract class R_Lf_Template extends R_Template {
 
 	public function displayNav() {
 		?>
-<a href="http://<?=O_Registry::get("app/hosts/center")?>/">Центр Кольца</a>
+<p><a href="http://<?=O_Registry::get("app/hosts/center")?>/">Центр Кольца</a></p>
+<p><a href="<?=$this->getSite()->url("comments")?>">Комментарии на сайте</a></p>
 		<?
 	}
 

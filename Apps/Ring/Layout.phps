@@ -60,7 +60,9 @@ class R_Layout extends O_Html_Layout {
 <li><?=$sys->link() . ($can_write ? " &nbsp; <small><a href=\"" . $sys->url( "form" ) . "\">Добавить</a></small>" : "")?></li>
 <?
 				}
-				?></ul>
+				?>
+				<li><i><a href="<?=$site->url("comments")?>">Комментарии на сайте</a></i></li>
+				</ul>
 <?
 				if (R_Mdl_Session::can( "manage site", $site )) {
 					?>
