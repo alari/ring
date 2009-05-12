@@ -5,11 +5,11 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 	{
 		try {
 		
-		$system = $this->getSite()->systems->test("urlbase", "poems")->getOne();
+		$system = $this->getSite()->systems->test("urlbase", "prose")->getOne();
 		//$system->collections->delete();
 		//$system->anonces->delete();
 		
-		$categ_r = O_Db_Query::get("kain_categories")->test("branch", "poems")
+		$categ_r = O_Db_Query::get("kain_categories")->test("branch", "prose")
 			->orderBy("order_index")->select(PDO::FETCH_OBJ);
 		$categs = Array();
 		$collections = Array();
@@ -36,7 +36,7 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 			$empty_coll->save();
 		}
 		
-		$poems_r = O_Db_Query::get("kain_poems")->select(PDO::FETCH_OBJ);
+		$poems_r = O_Db_Query::get("kain_prose")->select(PDO::FETCH_OBJ);
 		
 		foreach($poems_r as $p) {
 			//poetry
@@ -45,7 +45,7 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 				$poem = O_Dao_ActiveRecord::getById($p->anonce_id, "R_Mdl_Site_Anonce")->creative; 
 			}
 			if(!$poem) {
-				echo "no poem<br/>";
+				echo "no prose<br/>";
 				$poem = new R_Mdl_Libro_Text($system->instance);
 			} else echo $poem->id."\n";
 			$poem->time = $p->date;
@@ -60,17 +60,17 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 				$poem->collection = $empty_coll;
 			}
 			$poem->anonce->owner = $this->getSite()->owner;
-			$content = $this->prepareText($p->text, "poetry");
+			$content = $this->prepareText($p->text, "prose");
 			
 			if($p->epigraph) {
-				$content = $this->prepareText($p->epigraph, "poetry")."<br/>".$content;
+				$content = $this->prepareText($p->epigraph, "prose")."<br/>".$content;
 			}
 			
 			$poem->content = $content;
 			$poem->save();
 			$poem->anonce->save();
 			
-			O_Db_Query::get("kain_poems")->test("id", $p->id)->field("anonce_id", $poem["anonce"])->update();
+			O_Db_Query::get("kain_prose")->test("id", $p->id)->field("anonce_id", $poem["anonce"])->update();
 		}
 		
 		} catch(Exception $e) {
