@@ -45,8 +45,9 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 				$poem = O_Dao_ActiveRecord::getById($p->anonce_id, "R_Mdl_Site_Anonce")->creative; 
 			}
 			if(!$poem) {
+				echo "no poem<br/>";
 				$poem = new R_Mdl_Libro_Text($system->instance);
-			}
+			} else echo $poem->id."\n";
 			$poem->time = $p->date;
 			$poem->anonce->time = $p->date;
 			$poem->title = $p->title;
