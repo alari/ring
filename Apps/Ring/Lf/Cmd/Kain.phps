@@ -6,7 +6,7 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 		try {
 		
 		$system = $this->getSite()->systems->test("urlbase", "poems")->getOne();
-		$system->collections->delete();
+		//$system->collections->delete();
 		$system->anonces->delete();
 		
 		$categ_r = O_Db_Query::get("kain_categories")->test("branch", "poems")
@@ -29,7 +29,13 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 			}
 			$collections[$c->title_en] = $coll;
 		}
-		print_r($collections);return;
+		$empty_coll = $system->collections->test("title", "(без цикла)")->getOne();
+		if(!$empty_coll) {
+			$empty_coll = new R_Mdl_Site_Collection($system);
+			$empty_coll->title = "(без цикла)";
+			$empty_coll->save();
+		}
+		
 		$poems_r = O_Db_Query::get("kain_poems")->test("anonce_id", 0)->select(PDO::FETCH_OBJ);
 		
 		foreach($poems_r as $p) {
@@ -38,8 +44,14 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 			$poem->time = $p->date;
 			$poem->anonce->time = $p->date;
 			$poem->title = $p->title;
+			if(isset($collections[$p->category]) && $collections[$p->category] instanceof R_Mdl_Site_Collection) {
 			$poem->anonce->position = $collections[$p->category]->anonces->getFunc();
 			$poem->collection = $collections[$p->category];
+			}
+			else {
+				$poem->anonce->position = $empty_coll->anonces->getFunc();
+				$poem->collection = $empty_coll;
+			}
 			$poem->anonce->owner = $this->getSite()->owner;
 			$content = $this->prepareText($p->text, "poetry");
 			
