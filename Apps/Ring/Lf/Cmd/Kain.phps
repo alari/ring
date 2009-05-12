@@ -28,7 +28,7 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 			}
 			$collections[$c->title_en] = $coll;
 		}
-		
+		print_r($collections);return;
 		$poems_r = O_Db_Query::get("kain_poems")->test("anonce_id", 0)->select(PDO::FETCH_OBJ);
 		
 		foreach($poems_r as $p) {
