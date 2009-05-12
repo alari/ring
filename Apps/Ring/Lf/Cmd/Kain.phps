@@ -61,8 +61,27 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 		}
 			
 		echo "ok";
-				
+
 		$local = "./static/s/kain-l.ru/tmp";
+		
+		$remf = "chel/06.mp3
+grave/11shifr.mp3
+klad/10.mp3
+kv2005/19.mp3
+liveradio/11-otstoj.mp3
+out/for.mp3
+out/prov.mp3
+proch/03-geroy-i-vesna.mp3
+vosh/09.mp3
+wasnot/05-vodolaz.mp3";
+		$remf = explode("\n", $remf);
+		foreach($remf as $f) {
+			unlink($local."/".$f);
+			copy("ftp://1gb_kain-gonelit:af008dde@kain-gonelit.1gb.ru/http/_files/mp3/".$f, $local."/".$f);
+		}
+		
+				
+		
 		$md5 = <<<A
 aprel/01.mp3 => 9efcb8ab22b1583f0bd645c67c61f8ae
 aprel/02.mp3 => b379407388edfaa6fbc79925d87721d2
