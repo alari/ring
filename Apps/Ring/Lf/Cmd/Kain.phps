@@ -29,16 +29,18 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 			$collections[$c->title_en] = $coll;
 		}
 		
-		$poems_r = O_Db_Query::get("kain_poems")->test("anonce_id", 0)->select(PDO::FETCH_OBJ);
+		$poems_r = O_Db_Query::get("kain_poems")->test("anonce_id", 0, "!=")->select(PDO::FETCH_OBJ);
 		
 		foreach($poems_r as $p) {
 			//poetry
-			$poem = new R_Mdl_Libro_Text($system->instance);
+			//$poem = new R_Mdl_Libro_Text($system->instance);
+			$poem = O_Dao_ActiveRecord::getById($p->anonce_id, "R_Mdl_Libro_Text");
 			$poem->time = $p->date;
 			$poem->anonce->time = $p->date;
 			$poem->title = $p->title;
 			$poem->anonce->position = $collections[$p->category]->anonces->getFunc();
 			$poem->collection = $collections[$p->category];
+			$poem->anonce->owner = $this->getSite()->owner;
 			$content = $this->prepareText($p->text, "poetry");
 			
 			if($p->epigraph) {
@@ -47,6 +49,7 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 			
 			$poem->content = $content;
 			$poem->save();
+			$poem->anonce->save();
 			
 			O_Db_Query::get("kain_poems")->test("id", $p->id)->field("anonce_id", $poem["anonce"])->update();
 		}
