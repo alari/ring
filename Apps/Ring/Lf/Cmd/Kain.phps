@@ -14,8 +14,6 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 		$categs = Array();
 		$collections = Array();
 		foreach($categ_r as $c) {
-			$c = new ArrayObject($c);
-			print_r($c);
 			$categs[$c->title_en] = $c;
 			if($c->coll_id) {
 				$coll = $system->collections->test("id", $c->coll_id)->getOne();
@@ -30,14 +28,12 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 			}
 			$collections[$c->title_en] = $coll;
 		}
-		print_r($collections);return;
+		
 		$poems_r = O_Db_Query::get("kain_poems")->test("anonce_id", 0)->select(PDO::FETCH_OBJ);
 		
 		foreach($poems_r as $p) {
-			print_r($p);return;
 			//poetry
-			//$poem = new R_Mdl_Libro_Text($system->instance);
-			$poem = O_Dao_ActiveRecord::getById($p->anonce_id, "R_Mdl_Libro_Text");
+			$poem = new R_Mdl_Libro_Text($system->instance);
 			$poem->time = $p->date;
 			$poem->anonce->time = $p->date;
 			$poem->title = $p->title;
