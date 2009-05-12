@@ -2,7 +2,7 @@
 class R_Lf_Cmd_Kain extends R_Lf_Command {
 
 	public function process()
-	{
+	{/*
 		try {
 		
 		$system = $this->getSite()->systems->test("urlbase", "prose")->getOne();
@@ -80,7 +80,24 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 			exit;
 		}
 			
-		echo "ok";
+		echo "ok";*/
+		
+		$local = "./static/s/kain-l.ru/tmp";
+		if(!is_dir($local)) mkdir($local);
+		
+		$base = "ftp://1gb_kain-gonelit:af008dde@kain-gonelit.1gb.ru/http/_files/mp3";
+		$remote = opendir($base);
+		while($d = readdir($remote)) if($d != "." && $d != ".." && $d != "acss" && $d != "sunoac" && $d != "temp" && $d != "tofly" && $d != "yourgo") {
+			if(is_dir("$base/$d")) {
+				mkdir($local."/".$d);
+				$album = opendir($base."/".$d);
+				while($mp3 = readdir($album)) if($mp3 && substr($mp3, -4) == ".mp3") {
+					if(is_file($local."/".$d."/".$mp3)) continue;
+					copy($base."/".$d."/".$mp3, $local."/".$d."/".$mp3);
+				}
+			}
+		}
+		
 	}
 	
 	private function prepareText($text, $class="") {
