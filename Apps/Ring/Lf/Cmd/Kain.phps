@@ -3,18 +3,16 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 
 	public function process()
 	{
-		O_Db_Manager::getConnection()->beginTransaction();
-		
 		try {
 		
 		$system = $this->getSite()->systems->test("urlbase", "poems")->getOne();
+		$system->anonces->delete();
 		
 		$categ_r = O_Db_Query::get("kain_categories")->test("branch", "poems")
 			->orderBy("order_index")->select(PDO::FETCH_OBJ);
 		$categs = Array();
 		$collections = Array();
 		foreach($categ_r as $c) {
-			print_r($c);break;
 			$categs[$c->title_en] = $c;
 			if($c->coll_id) {
 				$coll = $system->collections->test("id", $c->coll_id)->getOne();
@@ -29,8 +27,8 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 			}
 			$collections[$c->title_en] = $coll;
 		}
-		
-		$poems_r = O_Db_Query::get("kain_poems")->test("anonce_id", 0, "!=")->select(PDO::FETCH_OBJ);
+		print_r($collections);return;
+		$poems_r = O_Db_Query::get("kain_poems")->test("anonce_id", 0)->select(PDO::FETCH_OBJ);
 		
 		foreach($poems_r as $p) {
 			print_r($p);return;
@@ -57,13 +55,12 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 		}
 		
 		} catch(Exception $e) {
-			O_Db_Manager::getConnection()->rollBack();
+			
 			
 			echo $e;
 			exit;
 		}
 			
-		O_Db_Manager::getConnection()->commit();
 		echo "ok";
 	}
 	
