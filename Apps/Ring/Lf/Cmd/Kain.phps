@@ -13,7 +13,9 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 			->orderBy("order_index")->select(PDO::FETCH_OBJ);
 		$categs = Array();
 		$collections = Array();
-		foreach($categ_r as $c) {print_r($c);
+		foreach($categ_r as $c) {
+			$c = new ArrayObject($c);
+			print_r($c);
 			$categs[$c->title_en] = $c;
 			if($c->coll_id) {
 				$coll = $system->collections->test("id", $c->coll_id)->getOne();
