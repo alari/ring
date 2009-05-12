@@ -15,6 +15,7 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 		$collections = Array();
 		foreach($categ_r as $c) {
 			$categs[$c->title_en] = $c;
+			$coll = null;
 			if($c->coll_id) {
 				$coll = $system->collections->test("id", $c->coll_id)->getOne();
 			}
