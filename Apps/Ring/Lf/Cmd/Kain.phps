@@ -40,7 +40,13 @@ class R_Lf_Cmd_Kain extends R_Lf_Command {
 		
 		foreach($poems_r as $p) {
 			//poetry
-			$poem = new R_Mdl_Libro_Text($system->instance);
+			$poem = null;
+			if($p->anonce_id) {
+				$poem = O_Dao_ActiveRecord::getById($p->anonce_id, "R_Mdl_Site_Anonce")->creative; 
+			}
+			if(!$poem) {
+				$poem = new R_Mdl_Libro_Text($system->instance);
+			}
 			$poem->time = $p->date;
 			$poem->anonce->time = $p->date;
 			$poem->title = $p->title;
