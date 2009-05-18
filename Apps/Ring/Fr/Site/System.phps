@@ -20,6 +20,40 @@ class R_Fr_Site_System {
 		$system = $params->record();
 
 		switch(get_class($system->instance)) {
+			case "R_Mdl_Libro":
+				$cycles = $system->collections;
+				foreach($cycles as $cycle) {
+					$anonces = $cycle->anonces;
+					R_Mdl_Session::setQueryAccesses($anonces, $system->site);
+					if(!count($anonces)) continue;
+					?>
+					<div class="cycle">
+					<h2><?=$cycle->link()?></h2>
+					<ul>
+						<?foreach($anonces as $a) echo "<li>", $a->link(), "</li>";?>
+					</ul>
+					</div>
+					<?
+				}
+				break;
+
+				case "R_Mdl_Sound":
+				$albums = $system->collections;
+				foreach($albums as $album) {
+					$anonces = $album->anonces;
+					R_Mdl_Session::setQueryAccesses($anonces, $system->site);
+					if(!count($anonces)) continue;
+					?>
+					<div class="cycle">
+					<h2><?=$album->link()?></h2>
+					<ul>
+						<?foreach($anonces as $a) echo "<li>", $a->link(), "</li>";?>
+					</ul>
+					</div>
+					<?
+				}
+				break;
+
 			default:
 				$query = $system->anonces;
 				R_Mdl_Session::setQueryAccesses($query, $system->site);
