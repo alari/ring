@@ -16,12 +16,15 @@ class R_Fr_Site_System {
 <?
 	}
 
-	static public function showSys(O_Dao_Renderer_Show_Params $params) {
+	static public function showOwn(O_Dao_Renderer_Show_Params $params) {
 		$system = $params->record();
 
 		switch(get_class($system->instance)) {
 			default:
-
+				$query = $system->anonces;
+				R_Mdl_Session::setQueryAccesses($query, $system->site);
+				/* @var $query O_Dao_Query */
+				$query->getPaginator(array($system->instance, "url"))->show($params->layout(), "full");
 		}
 	}
 

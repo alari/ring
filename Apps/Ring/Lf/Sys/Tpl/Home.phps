@@ -1,18 +1,14 @@
 <?php
 class R_Lf_Sys_Tpl_Home extends R_Lf_Sys_Template {
-	public $paginator;
-	public $title;
-
 	public function displayContents()
 	{
-		if ($this->title) {
-			echo "<h1>", $this->title, "</h1>";
-			$this->layout()->setTitle( $this->title );
-		}
-		if ($this->paginator)
-			$this->paginator->show( $this->layout(), "full" );
-
+		?>
+<h1><?=$this->instance->system->title?></h1>
+		<?
+		$this->layout()->setTitle( $this->instance->system->title );
 		$this->layout()->addHeadLink("alternate", $this->instance->system->url("rss"), "application/rss+xml", "RSS");
+
+		$this->instance->system->show($this->layout(), "own");
 	}
 
 }

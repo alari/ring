@@ -40,7 +40,7 @@ abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {
 				O_Registry::set( "app/paginator/page", $matches[ 1 ] );
 		// Creatives by tag
 		} elseif (preg_match( "#tag(/([0-9]+))?/(.+)$#", $page, $matches )) {
-			$class = $prefix . "Home";
+			$class = $prefix . "Tag";
 			$cmd = new $class( );
 			if (isset( $matches[ 2 ] ))
 				O_Registry::set( "app/paginator/page", $matches[ 2 ] );
