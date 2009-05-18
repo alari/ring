@@ -19,7 +19,10 @@ class R_Fr_Site_System {
 	static public function showSys(O_Dao_Renderer_Show_Params $params) {
 		$system = $params->record();
 
-		//switch()
+		switch(get_class($system->instance)) {
+			default:
+
+		}
 	}
 
 }

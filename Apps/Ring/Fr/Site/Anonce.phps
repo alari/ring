@@ -117,9 +117,9 @@ class R_Fr_Site_Anonce {
 <item>
   <guid isPermaLink='true'><?=$record->url()?></guid>
   <pubDate><?=gmdate("D, d M Y H:i:s", $record->time)?> GMT</pubDate>
-  <title><?=$record->title?></title>
+  <title><?=htmlspecialchars($record->title)?></title>
   <link><?=$record->url()?></link>
-  <description><?=$record->description?></description>
+  <description><?=htmlspecialchars($record->description)?></description>
   <comments><?=$record->url()?></comments>
 </item>
 <?

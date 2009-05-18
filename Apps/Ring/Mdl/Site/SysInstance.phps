@@ -62,6 +62,9 @@ abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {
 			$cmd = new $class( );
 			if (isset( $matches[ 1 ] ))
 				$cmd->coll_id = $matches[1];
+		} elseif ("rss" == $page) {
+			$class = $prefix . "RssFeed";
+			$cmd = new $class( );
 		}
 
 		if (isset( $cmd ) && $cmd instanceof R_Lf_Command) {
