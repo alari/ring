@@ -1,6 +1,6 @@
 <?php
 /**
- * @table sound_track -show-full:callback R_Fr_Sound_Track::showInLoop -show-def:callback R_Fr_Sound_Track::showSelf
+ * @table sound_track -show-full:callback R_Fr_Sound_Track::showFullInLoop -show-def:callback R_Fr_Sound_Track::showDef
  *
  * @field:config anonce -inverse sound_track
  * @field collection -relative anonce->collection -edit R_Fr_Sound_Track::editAlbum -title Альбом -check R_Mdl_Site_Collection::checkCreate (без альбома)

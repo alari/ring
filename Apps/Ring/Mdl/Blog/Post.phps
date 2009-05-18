@@ -1,6 +1,6 @@
 <?php
 /**
- * @table blog_post -show-full:callback R_Fr_Blog_Post::showInLoop -show-def:callback R_Fr_Blog_Post::showSelf
+ * @table blog_post -show-full:callback R_Fr_Blog_Post::showFullInLoop -show-def:callback R_Fr_Blog_Post::showDef
  *
  * @field:config anonce -inverse blog_post
  *

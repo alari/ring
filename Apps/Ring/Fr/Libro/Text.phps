@@ -10,11 +10,11 @@ class R_Fr_Libro_Text {
 	}
 
 	/**
-	 * Shows blog post on its own page
+	 * Shows text on its own page
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showSelf(O_Dao_Renderer_Show_Params $params) {
+	static public function showDef(O_Dao_Renderer_Show_Params $params) {
 		$post = $params->record();
 ?>
 <div class="prop-ava">
@@ -38,11 +38,11 @@ class R_Fr_Libro_Text {
 	}
 
 	/**
-	 * Shows blog post in a loop -- on tag or blog page
+	 * Shows text as announce in a loop -- on tag or friends page
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showInLoop(O_Dao_Renderer_Show_Params $params) {
+	static public function showFullInLoop(O_Dao_Renderer_Show_Params $params) {
 		$post = $params->record();
 		$tags = $post->tags;
 ?>
@@ -58,6 +58,7 @@ $was_tag=0;
 	?>
 <div class="tags">Теги: <?foreach($tags as $t){if($was_tag) echo ", "; else $was_tag=1; echo $t->link($post->system);}?></div>
 <?}?>
+<div class="date">Цикл: <?=$post->collection->link()?></div>
 </div>
 
 <br/><br/>

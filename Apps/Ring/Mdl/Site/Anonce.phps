@@ -1,7 +1,7 @@
 <?php
 /**
- * @table anonces -loop-full:callback R_Fr_Site_Anonce::showFullQuery -show-rss:callback R_Fr_Site_Anonce::showRssItem \
- * 			-loop:callback R_Fr_Site_Anonce::showQuery -show:callback R_Fr_Site_Anonce::showSelf
+ * @table anonces -loop-full:callback R_Fr_Site_Anonce::showFullQueryCallback -show-rss:callback R_Fr_Site_Anonce::showRssCallback \
+ * 			-loop:callback R_Fr_Site_Anonce::showQueryCallback -show:callback R_Fr_Site_Anonce::showDef
  *
  * @field site -has one R_Mdl_Site -inverse anonces -preload
  * @field owner -has one R_Mdl_User -inverse anonces -preload -show

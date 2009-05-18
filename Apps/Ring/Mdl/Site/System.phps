@@ -1,6 +1,6 @@
 <?php
 /**
- * @table systems -show:callback R_Fr_Site_System::showSelf
+ * @table systems -show:callback R_Fr_Site_System::showDefCallback
  *
  * @field site -has one R_Mdl_Site -inverse systems
  * @field anonces -owns many R_Mdl_Site_Anonce -inverse system -show-home -order-by time DESC

@@ -29,6 +29,7 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 		if($this->instance) {
 			$description[] = $this->instance->title;
 			$keywords[] = $this->instance->title;
+			$this->layout()->setBodyClass("sys-".$this->instance->system->urlbase."-body");
 		}
 
 		if(!$this->creative && $this->getSite()->owner) {
@@ -118,7 +119,7 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 			?>
 	<br/><br/><small>Сложены вместе</small><ul>
 	<?foreach($this->instance->system->collections as $coll) {
-		$is_current = $this->creative && $this->creative->anonce->collection == $coll ? 1 : 0;
+		$is_current = ($this->creative && $this->creative->anonce->collection == $coll) ? 1 : 0;
 		echo "<li><i>".($is_current?"<b>":"").$coll->link().($is_current?"</b>":"")."</i></li>";
 	}?>
 	</ul>

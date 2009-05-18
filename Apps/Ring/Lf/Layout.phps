@@ -32,7 +32,7 @@ class R_Lf_Layout extends R_Layout {
 
 		$this->tpl->prepareMeta();
 		?>
-<div id="wrap<?=($this->bodyClass?" ".$this->bodyClass:"")?>">
+<div id="wrap"<?=($this->bodyClass?" class=\"".$this->bodyClass."\"":"")?>>
 	<div id="cont">
 		<div class="cont">
 <?

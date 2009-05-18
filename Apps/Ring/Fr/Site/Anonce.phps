@@ -3,11 +3,11 @@
 class R_Fr_Site_Anonce {
 
 	/**
-	 * Shows anonces with creatives attached with them
+	 * Shows anonces with creatives attached with them -- on tag or friends page
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showFullQuery( O_Dao_Renderer_Show_Params $params )
+	static public function showFullQueryCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		/* @var $q O_Dao_Query */
 		$q = $params->value();
@@ -24,11 +24,11 @@ class R_Fr_Site_Anonce {
 	}
 
 	/**
-	 * Shows anonces in tiny mode, for ex. on frontpage
+	 * Shows anonces list in tiny mode, for ex. on frontpage
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showQuery( O_Dao_Renderer_Show_Params $params )
+	static public function showQueryCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		$q = $params->value();
 		if (!$q instanceof O_Dao_Query) {
@@ -44,7 +44,12 @@ class R_Fr_Site_Anonce {
 		echo "<br clear='left'/></div>";
 	}
 
-	static public function showSelf( O_Dao_Renderer_Show_Params $params )
+	/**
+	 * Shows one anonce in tiny mode, e.g. on frontpage
+	 *
+	 * @param O_Dao_Renderer_Show_Params $params
+	 */
+	static public function showDef( O_Dao_Renderer_Show_Params $params )
 	{
 		$record = $params->record();
 		switch (O_Dao_TableInfo::get( $record )->getFieldInfo( "creative" )->getRealField( $record )) {
@@ -101,7 +106,12 @@ class R_Fr_Site_Anonce {
 
 	}
 
-	static public function showRssItem(O_Dao_Renderer_Show_Params $params) {
+	/**
+	 * Shows RSS anonce
+	 *
+	 * @param O_Dao_Renderer_Show_Params $params
+	 */
+	static public function showRssCallback(O_Dao_Renderer_Show_Params $params) {
 		$record = $params->record();
 ?>
 <item>

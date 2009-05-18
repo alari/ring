@@ -6,7 +6,7 @@ class R_Fr_Blog_Post {
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showSelf(O_Dao_Renderer_Show_Params $params) {
+	static public function showDef(O_Dao_Renderer_Show_Params $params) {
 		$post = $params->record();
 ?>
 <div class="prop-ava">
@@ -25,7 +25,7 @@ class R_Fr_Blog_Post {
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showInLoop(O_Dao_Renderer_Show_Params $params) {
+	static public function showFullInLoop(O_Dao_Renderer_Show_Params $params) {
 		$post = $params->record();
 		$tags = $post->tags;
 ?>
@@ -36,7 +36,7 @@ class R_Fr_Blog_Post {
 <?=$post->owner->avatar()?>
 </div>
 
-<div class="date">Добавлена: <?=date("d.m.Y H:i:s", $post->time)?></div>
+<div class="date">Пост добавлен: <?=date("d.m.Y H:i:s", $post->time)?></div>
 
 <?if(count($tags)){
 $was_tag=0;
