@@ -6,6 +6,8 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 		foreach($this->getSite()->getSystems() as $system) {
 			$system->show($this->layout(), "home");
 		}
+
+		$this->layout()->addHeadLink("alternate", $this->getSite()->url("rss"), "application/rss+xml", "RSS");
 	}
 
 	public function displayNav()
