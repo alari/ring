@@ -13,10 +13,14 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 				if (!isset( $_FILES[ "f" ] ) || !$_FILES[ "f" ][ "size" ])
 					return $this->redirect();
 				$file = $_FILES[ "f" ];
-				if ($file[ "size" ] > 120 * 1024 * 1024)
+				if ($file[ "size" ] > 120 * 1024) {
+					$this->setNotice("Файл слишком большой.");
 					return $this->redirect();
-				if (!preg_match( "#^[-_\\.[:alnum:]]+\\.(jpg|gif|png)$#", $file[ "name" ] ))
+				}
+				if (!preg_match( "#^[-_\\.[:alnum:]]+\\.(jpg|gif|png)$#", $file[ "name" ] )) {
+					$this->setNotice("Картинка должна быть в jpg, gif или png и иметь название, написанное латиницей.");
 					return $this->redirect();
+				}
 				if (file_exists( $this->getSite()->static_folder . $file[ "name" ] ))
 					unlink( $this->getSite()->static_folder . $file[ "name" ] );
 				move_uploaded_file( $file[ "tmp_name" ], $this->getSite()->static_folder . $file[ "name" ] );

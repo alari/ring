@@ -22,7 +22,7 @@ class R_Fr_Im_Picture {
 <?=$post->owner->avatar()?>
 </div>
 
-<h2><a href="<?=$post->url()?>"><?=$post->anonce->title?></a></h2>
+<h1><?=$post->anonce->title?></h1>
 
 <div class="img"><a href="<?=$post->img_full?>"><img src="<?=$post->img_preview?>" alt="<?=htmlspecialchars($post->anonce->title." - ".$post->anonce->description)?>"/></a></div>
 

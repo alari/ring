@@ -22,7 +22,9 @@ class R_Fr_Libro_Text {
 <?=$post->owner->avatar()?>
 </div>
 
-<h2><a href="<?=$post->url()?>"><?=$post->title?></a></h2>
+<h1><?=$post->title?></h1>
+
+<br/><br/><br/>
 
 <div class="content"><?=$post->content?></div>
 

@@ -14,7 +14,7 @@ class R_Fr_Blog_Post {
 <?=$post->owner->avatar()?>
 </div>
 
-<?if($post->title){?><h1><?=$post->title?></h1><?}?>
+<?if($post->title){?><h1><?=$post->title?></h1><br/><br/><?}?>
 
 <div class="content"><?=$post->content?></div>
 <?
