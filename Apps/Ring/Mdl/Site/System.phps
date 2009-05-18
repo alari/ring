@@ -1,9 +1,9 @@
 <?php
 /**
- * @table systems -show:callback R_Fr_Site_System::showDefCallback
+ * @table systems -show-home:callback R_Fr_Site_System::showHome
  *
  * @field site -has one R_Mdl_Site -inverse systems
- * @field anonces -owns many R_Mdl_Site_Anonce -inverse system -show-home -order-by time DESC
+ * @field anonces -owns many R_Mdl_Site_Anonce -inverse system -order-by time DESC
  *
  * @field collections -owns many R_Mdl_Site_Collection -inverse system
  *
