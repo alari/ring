@@ -113,13 +113,17 @@ class R_Fr_Site_Anonce {
 	 */
 	static public function showRssCallback(O_Dao_Renderer_Show_Params $params) {
 		$record = $params->record();
+
+		ob_start();
+		$record->creative->show(null, "rsscont");
+		$descr = ob_get_clean();
 ?>
 <item>
   <guid isPermaLink='true'><?=$record->url()?></guid>
   <pubDate><?=gmdate("D, d M Y H:i:s", $record->time)?> GMT</pubDate>
   <title><?=htmlspecialchars($record->title)?></title>
   <link><?=$record->url()?></link>
-  <description><?=htmlspecialchars($record->description)?></description>
+  <description><?=htmlspecialchars($descr)?></description>
   <comments><?=$record->url()?></comments>
 </item>
 <?

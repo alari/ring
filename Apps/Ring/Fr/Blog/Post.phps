@@ -20,6 +20,11 @@ class R_Fr_Blog_Post {
 <?
 	}
 
+	static public function showRssCont(O_Dao_Renderer_Show_Params $params ) {
+		echo $params->record()->content;
+	}
+
+
 	/**
 	 * Shows blog post in a loop -- on tag or blog page
 	 *
