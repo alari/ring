@@ -6,17 +6,10 @@ class R_Lf_Sys_Cmd_RssFeed extends R_Lf_Sys_Command {
 		$query = $this->instance->system->anonces;
 		R_Mdl_Session::setQueryAccesses($query, $this->getSite());
 		$query->orderBy("time DESC")->limit(15);
-		echo '<?xml version="1.0" encoding="utf-8"?>';
-		?>
-<rss version="2.0">
-  <channel>
-    <title><?=$this->instance->system->title?></title>
-    <link><?=$this->instance->url()?></link>
-    <lastBuildDate><?=gmdate("D, d M Y H:i:s")?> GMT</lastBuildDate>
-    <generator>Mirari.Name via Orena.org</generator>
-		<?
-    foreach($query as $a) $a->show(null, "rss");
-    echo "</channel></rss>";
+
+		$feed = new O_Feed_Rss($query, $this->instance->url(), $this->instance->system->title);
+		if(count($query)) $feed->setLastBuildDate($query->current()->time);
+		$feed->show();
 	}
 
 	public function isAuthenticated()

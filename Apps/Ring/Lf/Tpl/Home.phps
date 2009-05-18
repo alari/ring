@@ -24,7 +24,7 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 		?>
 	<br/>
 <p><a href="<?=$this->getSite()->url("comments")?>">Комментарии на сайте</a></p>
-		<?php
+		<?
 	}
 
 }
