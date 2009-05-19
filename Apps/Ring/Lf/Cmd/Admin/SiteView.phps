@@ -25,6 +25,21 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 					unlink( $this->getSite()->static_folder . $file[ "name" ] );
 				move_uploaded_file( $file[ "tmp_name" ], $this->getSite()->static_folder . $file[ "name" ] );
 				return $this->redirect();
+			} elseif($this->getParam("action") == "favicon") {
+				
+				if (file_exists( $this->getSite()->staticPath( "favicon.ico") ))
+					unlink( $this->getSite()->staticPath( "favicon.ico") );
+					
+				if (!isset( $_FILES[ "f" ] ) || !$_FILES[ "f" ][ "size" ])
+					return $this->redirect();
+				$file = $_FILES["f"];
+				if(substr($file["name"], -4) != ".ico") {
+					$this->setNotice("Иконка должна быть в формате .ico");
+					return $this->redirect();
+				}
+				
+				move_uploaded_file( $file[ "tmp_name" ], $this->getSite()->staticPath( "favicon.ico" ) );
+				return $this->redirect();
 			}
 		} else {
 			if($this->getParam("action") == "revert") {

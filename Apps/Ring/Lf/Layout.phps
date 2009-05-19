@@ -30,6 +30,10 @@ class R_Lf_Layout extends R_Layout {
 					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . $this->site->host .
 						 $_SERVER[ 'REQUEST_URI' ] );
 
+		if(is_file($this->site->staticPath( "favicon.ico"))) {
+			$this->addHeadLink("SHORTCUT ICON", $this->site->staticUrl("favicon.ico"));
+		}
+						 
 		$this->tpl->prepareMeta();
 		?>
 <div id="wrap"<?=($this->bodyClass?" class=\"".$this->bodyClass."\"":"")?>>

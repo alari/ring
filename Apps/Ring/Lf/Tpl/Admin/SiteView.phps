@@ -45,6 +45,14 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 </table>
 </fieldset>
 <input type="hidden" name="action" value="file" /></form>
+
+<form method="post" enctype="multipart/form-data">
+<fieldset><legend>Иконка сайта</legend>
+<p>Иконка отображается в заголовке браузера, инексируется поисковыми системами, существует для красоты. Должна быть в формате .ico</p>
+<center><input type="file" name="f" /> <input
+			type="submit" value="Обновить иконку" /></center>
+</fieldset><input type="hidden" name="action" value="favicon" />
+</form>
 <?
 	}
 
