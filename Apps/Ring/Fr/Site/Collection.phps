@@ -24,9 +24,10 @@ class R_Fr_Site_Collection {
 
 <h1><?=$collection->title?></h1>
 
-<?if($collection->year){?><div>Год: <?=$collection->year?></div><?}?>
-
 <div class="audioalbum">
+				
+<?if($collection->year){?><div class="year">Год: <?=$collection->year?></div><?}?>
+
 <div class="audioplayer"><object type="application/x-shockwave-flash"
 	data="<?=
 				$params->layout()->staticUrl( "swf/player_mp3_multi.swf" )?>"

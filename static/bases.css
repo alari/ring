@@ -64,6 +64,7 @@ div.anonce div.img{text-align:center;}
 
 /*fragments - audioalbum*/
 div.audioalbum{}
+div.audioalbum div.year{padding:0px 0px 10px 0px;}
 div.audioalbum div.audioplayer{float:left;}
 div.audioalbum div.tracklist{float:left;width:30%;padding-left:10px;}
 div.audioalbum div.tracklist ol{margin:0px 0px 0px 0px;}
