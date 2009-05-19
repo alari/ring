@@ -53,7 +53,7 @@ class R_Lf_Layout extends R_Layout {
 	</div>
 	<div id="head">
 		<div id="logo"><a href="/" id="logo" title="<?=$this->site->title?>">&nbsp;</a></div>
-		<div id="user-box"><? $this->loginBox() ?></div>
+		<div id="user-box"><div class="info-box"><? $this->loginBox() ?></div></div>
 	</div>
 	<div id="main-menu"><? $this->mainMenu(); ?></div><!--[if IE]><br/><br/><![endif]-->
 	<div id="foot">

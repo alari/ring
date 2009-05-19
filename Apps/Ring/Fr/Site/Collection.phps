@@ -22,17 +22,15 @@ class R_Fr_Site_Collection {
 				}
 				?>
 
-<h1>Альбом &laquo;<?=$collection->title?>&raquo;</h1>
+<h1><?=$collection->title?></h1>
 
 <?if($collection->year){?><div>Год: <?=$collection->year?></div><?}?>
 
-<table>
-<tr><td width="400" valign="top">
-
-<object type="application/x-shockwave-flash"
+<div class="audioalbum">
+<div class="audioplayer"><object type="application/x-shockwave-flash"
 	data="<?=
 				$params->layout()->staticUrl( "swf/player_mp3_multi.swf" )?>"
-	width="400" height="300">
+	width="400" height="30">
 	<param name="movie"
 		value="<?=
 				$params->layout()->staticUrl( "swf/player_mp3_multi.swf" )?>" />
@@ -42,28 +40,26 @@ class R_Fr_Site_Collection {
 				join( "|", $files )?>&amp;title=<?=
 				join( "|", $titles )?>&amp;width=400&amp;height=300&amp;showvolume=1&amp;volumewidth=40" />
 </object>
-</td><td valign="top">
-<ul>
+</div>
+<div class="tracklist"><ol>
 <?foreach($collection->anonces as $anonce) if($anonce->isVisible()) echo "<li title=\"", htmlspecialchars($anonce->description),"\">", $anonce->link(), "</li>";?>
-</ul>
-</td>
-
-</table>
+</ol>
+</div>
 
 <div class="content">
 <?=$collection->content?>
 </div>
-
+</div>
 <?
 			break;
 
 			case "R_Mdl_Libro" :
 				?>
-<h1>Цикл &laquo;<?=$collection->title?>&raquo;</h1>
+<h1><?=$collection->title?></h1>
 <div class="content">
 <?=$collection->content?>
 </div>
-<ul>
+<ul class="anonces">
 <?foreach($collection->anonces as $anonce) if($anonce->isVisible()) echo "<li title=\"", htmlspecialchars($anonce->description),"\">", $anonce->link(), "</li>";?>
 </ul>
 				<?
@@ -71,7 +67,7 @@ class R_Fr_Site_Collection {
 
 			case "R_Mdl_Im" :
 					?>
-<h1>Галерея &laquo;<?=$collection->title?>&raquo;</h1>
+<h1><?=$collection->title?></h1>
 <div class="content">
 <?=$collection->content?>
 </div>
