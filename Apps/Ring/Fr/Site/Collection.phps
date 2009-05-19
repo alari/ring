@@ -30,7 +30,7 @@ class R_Fr_Site_Collection {
 <div class="audioplayer"><object type="application/x-shockwave-flash"
 	data="<?=
 				$params->layout()->staticUrl( "swf/player_mp3_multi.swf" )?>"
-	width="400" height="30">
+	width="400" height="300">
 	<param name="movie"
 		value="<?=
 				$params->layout()->staticUrl( "swf/player_mp3_multi.swf" )?>" />
