@@ -3,7 +3,6 @@
 class R_Fr_Libro_Text {
 	static public function editCycle(O_Dao_Renderer_Edit_Params $params) {
 		O_Dao_Renderer_Edit_Callbacks::selectRelation($params);
-		echo "<br/>";
 		?>
 <div class="oo-renderer-field"><div class="oo-renderer-title">Новый цикл:</div>
 <input class="text" type="text" name="collection_new" value=""/></div>
