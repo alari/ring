@@ -34,6 +34,8 @@
 class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	const NODES_CLASS = "R_Mdl_Site_Comment";
 
+	private $_updateCollectionPosition = 0;
+	
 	public function __construct( R_Mdl_Site_Creative $creative, R_Mdl_Site_SysInstance $instance )
 	{
 		parent::__construct();
@@ -76,8 +78,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 */
 	public function isVisible()
 	{
-		return R_Mdl_Session::can( "read " . $this->system[ "access" ], $this->site ) && R_Mdl_Session::can(
-				"read " . $this[ "access" ], $this->site );
+		return R_Mdl_Session::can( "read " . $this->system[ "access" ], $this->site ) && R_Mdl_Session::can( "read " . $this[ "access" ], $this->site );
 	}
 
 	/**
@@ -136,9 +137,8 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$rel_target = $rel->getTargetFieldName();
 		$rel_base = $rel->getBaseFieldName();
 		$userid = R_Mdl_Session::getUser()->id;
-
-		$q->where(
-				"access='public'
+		
+		$q->where( "access='public'
 			OR owner=?
 			OR (
 				(access='protected' OR access='private')
@@ -159,12 +159,57 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 * Deletes anonce
 	 *
 	 */
-	public function delete() {
-		if($this->collection) {
-			$this->collection->anonces->test("position", $this->position, ">")->field("position", "position-1", 1)->update();
+	public function delete()
+	{
+		if ($this->collection) {
+			$this->collection->anonces->test( "position", $this->position, ">" )->field( "position", "position-1", 1 )->update();
 		}
 		parent::delete();
 	}
 
-
+	public function save()
+	{
+		parent::save();
+		// Check validity of position in the cycle
+		if(!$this->_updateCollectionPosition && $this->collection) {
+			// If there's more then one anonce with current position
+			if($this->collection->anonces->test("position", $this->position)->test("id", $this->id, "!=")->getOne()) {
+				// Set for number of anonces -- making this last anonce
+				$this->position = count($this->collection->anonces);
+				parent::save();
+				// There is still error in position -- update all positions in collection
+				if($this->collection->anonces->test("position", $this->position)->test("id", $this->id, "!=")->getOne()) {
+					$i = 0;
+					foreach($this->collection->anonces as $a) {
+						$a->_updateCollectionPosition = 1;
+						$a->position = ++$i;
+						$a->save();
+						$a->_updateCollectionPosition = 0;
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Sets anonce position in collection
+	 *
+	 * @param int $newPosition
+	 */
+	public function setPosition($newPosition) {
+		if($newPosition == $this->position) return;
+		if($newPosition <= 0 || $newPosition > count($this->collection->anonces)) return;
+		/* @var $anonces O_Dao_Query */
+		$anonces = $this->collection->anonces;
+		
+		if($newPosition > $this->position) {
+			$anonces->test("position", $this->position, ">")->test("position", $newPosition, "<=")->field("position", "position-1", 1)->update();
+		} else {
+			$anonces->test("position", $this->position, ">")->test("position", $newPosition, ">=")->field("position", "position+1", 1)->update();
+		}
+		
+		$this->position = $newPosition;
+		parent::save();
+	}
+	
 }

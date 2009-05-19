@@ -3,7 +3,7 @@
  * @table collections -show-def:callback R_Fr_Site_Collection::showDef
  * @field system -has one R_Mdl_Site_System -inverse collections
  *
- * @field title VARCHAR(64) -edit -required -title Название цикла -show-loop linkInContainer h2 -show-def container h1
+ * @field title VARCHAR(64) -edit -required -title Название -show-loop linkInContainer h2 -show-def container h1
  * @field description VARCHAR(255) -edit -title Описание или расшифровка -show-loop container h3 -show-def container h2
  * @field year VARCHAR(255) -edit -title Год завершения или период работы -show
  * @field position int NOT NULL DEFAULT 0

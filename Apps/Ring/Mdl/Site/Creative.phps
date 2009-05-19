@@ -14,8 +14,6 @@
  * @field nodes -relative anonce->nodes
  */
 abstract class R_Mdl_Site_Creative extends O_Dao_ActiveRecord {
-	const HAS_COLLECTIONS = 0;
-
 	public function __construct( R_Mdl_Site_SysInstance $instance )
 	{
 		$this[ "time" ] = time();
@@ -31,5 +29,5 @@ abstract class R_Mdl_Site_Creative extends O_Dao_ActiveRecord {
 	public function url()
 	{
 		return $this->anonce->url();
-	}
+	}	
 }
