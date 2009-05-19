@@ -106,3 +106,8 @@ span.tag-8{font-size:160%;}
 /*text formatting*/
 p.prose{text-indent:2em;margin:0 1px;}
 p.poetry{white-space:pre;margin:0;}
+
+/*forms*/
+div.oo-renderer-field,div.oo-renderer-buttons{clear:both;margin:0px 0px 12px 0px;padding:3px 5px 3px 5px;background-color:#fbfbff;}
+div.oo-renderer-title{float:left;width:150px;text-align:right;padding:2px 10px 0px 0px;}
+div.oo-renderer-field select,div.oo-renderer-field input.file,div.oo-renderer-field input.text{width:250px;}

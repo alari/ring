@@ -34,7 +34,8 @@ class R_Fr_Site_Tag {
 	static public function editList(O_Dao_Renderer_Edit_Params $params) {
 		O_Dao_Renderer_Edit_Callbacks::selectRelationBox($params);
 		?>
-<div>Добавить тег: <input type="text" name="tag_new"/></div>
+<div class="oo-renderer-field"><div class="oo-renderer-title">Добавить тег:</div>
+<input class="text" type="text" name="tag_new"/></div>
 		<?
 	}
 

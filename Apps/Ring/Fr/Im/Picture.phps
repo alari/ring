@@ -5,7 +5,8 @@ class R_Fr_Im_Picture {
 		O_Dao_Renderer_Edit_Callbacks::selectRelation($params);
 		echo "<br/>";
 		?>
-<div>Новая галерея: <input type="text" name="collection_new" value=""/></div>
+<div class="oo-renderer-field"><div class="oo-renderer-title">Новая галерея:</div>
+<input class="text" type="text" name="collection_new" value=""/></div>
 		<?
 	}
 

@@ -3,9 +3,9 @@
 class R_Fr_Sound_Track {
 	static public function editAlbum(O_Dao_Renderer_Edit_Params $params) {
 		O_Dao_Renderer_Edit_Callbacks::selectRelation($params);
-		echo "<br/>";
 		?>
-<div>Новый альбом: <input type="text" name="collection_new" value=""/></div>
+<div class="oo-renderer-field"><div class="oo-renderer-title">Новый альбом:</div>
+<input class="text" type="text" name="collection_new" value=""/></div>
 		<?
 	}
 

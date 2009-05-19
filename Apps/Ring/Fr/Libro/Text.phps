@@ -5,7 +5,8 @@ class R_Fr_Libro_Text {
 		O_Dao_Renderer_Edit_Callbacks::selectRelation($params);
 		echo "<br/>";
 		?>
-<div>Новый цикл: <input type="text" name="collection_new" value=""/></div>
+<div class="oo-renderer-field"><div class="oo-renderer-title">Новый цикл:</div>
+<input class="text" type="text" name="collection_new" value=""/></div>
 		<?
 	}
 
