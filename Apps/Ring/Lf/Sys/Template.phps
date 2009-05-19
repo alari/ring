@@ -6,6 +6,7 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 	public $instance;
 	public $creative;
 	public $tag;
+	public $collection;
 
 	public function prepareMeta(){
 		$description = Array();
@@ -119,7 +120,7 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 			?>
 	<br/><br/><small>Сложены вместе</small><ul>
 	<?foreach($this->instance->system->collections as $coll) {
-		$is_current = ($this->creative && $this->creative->anonce->collection == $coll) ? 1 : 0;
+		$is_current = ($this->creative && $this->creative->anonce->collection == $coll) || $this->collection == $coll ? 1 : 0;
 		echo "<li><i>".($is_current?"<b>":"").$coll->link().($is_current?"</b>":"")."</i></li>";
 	}?>
 	</ul>
