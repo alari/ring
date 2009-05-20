@@ -24,8 +24,6 @@ class R_Fr_Libro_Text {
 
 <h1><?=$post->title?></h1>
 
-<br/><br/><br/>
-
 <div class="content"><?=$post->content?></div>
 
 <?if($post->write_time || $post->write_place) {?>

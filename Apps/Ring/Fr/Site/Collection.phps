@@ -43,7 +43,7 @@ class R_Fr_Site_Collection {
 </object>
 </div>
 <div class="tracklist"><ol>
-<?foreach($collection->anonces as $anonce) if($anonce->isVisible()) echo "<li title=\"", htmlspecialchars($anonce->description),"\">", $anonce->link(), "</li>";?>
+<?foreach($collection->anonces as $anonce) if($anonce->isVisible()) echo "<li title=\"", htmlspecialchars($anonce->description),"\">", $anonce->link(), "</li> ";?>
 </ol>
 </div>
 

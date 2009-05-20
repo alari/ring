@@ -19,7 +19,7 @@ class R_Fr_Site_Comment {
 	<div class="comm-ava"><?=$comment->owner->link()?>
 	<?=$comment->owner->avatar()?></div>
 
-	<?=date("d.m.Y H:i:s", $comment->time)?><br/><br/>
+	<div class="comment-time"><?=date("d.m.Y H:i:s", $comment->time)?></div>
 
 <?=$comment->content?>
 </div>
@@ -54,7 +54,7 @@ class R_Fr_Site_Comment {
 Комментарий на: <?=$comment->root->link()?> - <i><?=$comment->root->owner->link()?></i>; <?=$comment->root->system->link()?>
 </div>
 
-	<?=date("d.m.Y H:i:s", $comment->time)?><br/><br/>
+	<div class="comment-time"><?=date("d.m.Y H:i:s", $comment->time)?></div>
 
 <?=$comment->content?>
 

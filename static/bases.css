@@ -76,11 +76,14 @@ div.o-paginator{margin:10px 0px 0px 0px;}
 
 /*literature*/
 div.time-place{text-align:right;font-style:italic;}
+div.cycle.libro{margin-bottom:25px;}
+div.cycle.libro li{list-style-type:none;display:inline;margin-right:25px;}
 
 /*comments*/
 div.comm{clear:both;padding:10px 0px 10px 5px;}
 div.comm-ava{float:left;margin-right:16px;text-align:center;}
 div.comm-ava a,div.comm-ava a:hover,div.comm-ava a:visited{display:block;margin-bottom:3px;}
+div.comm div.comment-time{font-size:80%;margin-bottom:12px;}
 
 /*fragments - images*/
 div.post{margin-top:16px;}

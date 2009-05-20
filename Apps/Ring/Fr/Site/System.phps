@@ -27,10 +27,10 @@ class R_Fr_Site_System {
 					R_Mdl_Session::setQueryAccesses($anonces, $system->site);
 					if(!count($anonces)) continue;
 					?>
-					<div class="cycle">
+					<div class="cycle libro">
 					<h2><?=$cycle->link()?></h2>
 					<ul>
-						<?foreach($anonces as $a) echo "<li>", $a->link(), "</li>";?>
+						<?foreach($anonces as $a) echo "<li>", $a->link(), "</li> ";?>
 					</ul>
 					</div>
 					<?
@@ -46,9 +46,9 @@ class R_Fr_Site_System {
 					?>
 					<div class="cycle">
 					<h2><?=$album->link()?></h2>
-					<ul>
-						<?foreach($anonces as $a) echo "<li>", $a->link(), "</li>";?>
-					</ul>
+					<ol>
+						<?foreach($anonces as $a) echo "<li>", $a->link(), "</li> ";?>
+					</ol>
 					</div>
 					<?
 				}
