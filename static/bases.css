@@ -52,7 +52,7 @@ textarea.oo-renderer-field-area{width:90%;height:160px;}
 
 /*header logo block*/
 #logo {float:left;position:absolute;}
-#logo a {width: 100px;height:100px;text-decoration: none;content: 'Логотип';color: black;vertical-align: bottom;}
+#logo a {width: 100px;height:100px;text-decoration: none;color: black;vertical-align: bottom;}
 
 /*fragments - system*/
 div.system{clear:both;padding-bottom:2px;}
