@@ -3,7 +3,9 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 
 	public function displayContents()
 	{
-		?><h1><?=$this->site->title?></h1><?
+		?>
+		<h1><?=$this->site->title?></h1>
+		<?
 		foreach($this->getSite()->getSystems() as $system) {
 			$system->show($this->layout(), "home");
 		}
