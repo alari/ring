@@ -30,7 +30,7 @@ class R_Fr_Site_System {
 					<div class="cycle libro">
 					<h2><?=$cycle->link()?></h2>
 					<ul>
-						<?foreach($anonces as $a) echo "<li>", $a->link(), "</li> ";?>
+						<?foreach($anonces as $a) echo "<li title=\"", $a->description, "\">", $a->link(), "</li> ";?>
 					</ul>
 					</div>
 					<?
