@@ -14,7 +14,7 @@ div#rcol div.cont{_float:right;_width:22%;padding:10px;}
 div#foot{display:block;clear:both;width:100%;}
 div#foot div.cont{padding:10px 0px 15px 0px;text-align:center;}
 div#foot span{display:block;text-align:center;}
-div#head{position:absolute;left:0px;top:0px;width:100%;height:118px;_height:120px;}
+div#head{position:absolute;left:0px;top:0px;width:100%;height:118px;*height:120px;}
 div#head div#user-box{position:absolute;z-index:910;top:0px;right:0px;width:22%;text-align:right;}
 div#head div.info-box{padding:22px 14px 0px 0px;}
 div#main-menu{position:absolute;left:0px;top:120px;z-index:50;width:100%;height:30px;}
@@ -51,8 +51,8 @@ textarea.oo-renderer-field-area{width:90%;height:160px;}
 #openid form {margin: 0}
 
 /*header logo block*/
-#logo {float: left;}
-#logo a {width: 100px;height: 100px;text-decoration: none;content: 'Логотип';color: black;vertical-align: bottom;}
+#logo {float:left;position:absolute;}
+#logo a {width: 100px;height:100px;text-decoration: none;content: 'Логотип';color: black;vertical-align: bottom;}
 
 /*fragments - system*/
 div.system{clear:both;padding-bottom:2px;}
