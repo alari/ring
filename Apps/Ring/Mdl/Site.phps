@@ -1,6 +1,6 @@
 <?php
 /**
- * @table site
+ * @table site -show-loop:callback R_Fr_Site::showInLoop
  * @field host varchar(255) NOT NULL
  * @field owner -has one R_Mdl_User -inverse site
  * @field owner_friends -alias owner.friends
