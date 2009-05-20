@@ -74,6 +74,9 @@ div.audioalbum div.content{clear:both;padding:12px 0px 12px 0px;}
 /*blogs*/
 div.o-paginator{margin:10px 0px 0px 0px;}
 
+/*literature*/
+div.time-place{text-align:right;font-style:italic;}
+
 /*comments*/
 div.comm{clear:both;padding:10px 0px 10px 5px;}
 div.comm-ava{float:left;margin-right:16px;text-align:center;}
