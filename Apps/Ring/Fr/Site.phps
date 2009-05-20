@@ -11,7 +11,7 @@ class R_Fr_Site {
 	{
 		$site = $params->record();
 		?>
-<div style="padding: 20px; text-align: center">
+<div class="comm" style="padding: 20px; text-align: center">
 <?
 		if ($site->owner) {
 			?>
