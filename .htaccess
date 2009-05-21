@@ -5,3 +5,4 @@ RewriteCond %{REQUEST_FILENAME} !-l
 RewriteRule .* /entry.php [L]
 
 php_value upload_max_filesize 12M
+php_value session.gc_maxlifetime 864000
