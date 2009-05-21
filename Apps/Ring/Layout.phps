@@ -62,6 +62,10 @@ class R_Layout extends O_Html_Layout {
 				}
 				?>
 				<li><i><a href="<?=$site->url("comments")?>">Комментарии на сайте</a></i></li>
+				<?if(!R_Mdl_Session::can( "manage site", $site ) && R_Mdl_Session::can("manage styles", $site)) {?>
+<li><a href="<?=$site->url( "Admin/SiteView" )?>">Редактировать
+	оформление</a></li>
+				<?}?>
 				</ul>
 <?
 				if (R_Mdl_Session::can( "manage site", $site )) {
@@ -72,12 +76,13 @@ class R_Layout extends O_Html_Layout {
 	<li><a href="<?=$site->url( "Admin/About" )?>">Страница &laquo;О
 	сайте&raquo;</a></li>
 	<li><a href="<?=$site->url( "Admin/Systems" )?>">Список систем</a></li>
+	<?if(R_Mdl_Session::can("manage styles", $site)){?>
 	<li><a href="<?=$site->url( "Admin/SiteView" )?>">Редактировать
 	оформление</a></li>
+	<?}?>
 </ul>
 <?
 				}
-
 			}
 
 			$new_msgs = R_Mdl_Session::getUser()->msgs_own->test("readen", 0)->getFunc();
