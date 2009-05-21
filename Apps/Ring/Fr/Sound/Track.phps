@@ -72,9 +72,7 @@ $was_tag=0;
 
 <br/><br/>
 
-<center>
 <h2><a href="<?=$post->url()?>"><?=$post->anonce->title?></a></h2>
-</center>
 
 <br/><br/>
 
