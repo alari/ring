@@ -89,9 +89,6 @@ $was_tag=0;
 <p>Длительность: <?=floor($post->duration/60).":".($post->duration%60)?></p>
 <p>Битрейт: <?=round($post->bitrate/1000)?> Кбит/сек</p>
 </div>
-
-<br/><br/>
-
 <div class="comms"><a href="<?=$post->url()?>">Комментариев: <?=$post->anonce->nodes->getFunc()?></a></div>
 
 </div>
