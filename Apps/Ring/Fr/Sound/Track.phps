@@ -70,11 +70,11 @@ $was_tag=0;
 <div class="date">Альбом: <?=$post->collection->link()?></div>
 </div>
 
-<br/><br/>
+<br/>
 
 <h2><a href="<?=$post->url()?>"><?=$post->anonce->title?></a></h2>
 
-<br/><br/>
+<br/>
 
 <div class="track-listen">
 <object type="application/x-shockwave-flash" data="<?=$params->layout()->staticUrl("swf/player_mp3_maxi.swf")?>" width="400" height="20">
