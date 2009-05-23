@@ -63,21 +63,23 @@ class R_Layout extends O_Html_Layout {
 				?>
 				<li><i><a href="<?=$site->url("comments")?>">Комментарии на сайте</a></i></li>
 				<?if(!R_Mdl_Session::can( "manage site", $site ) && R_Mdl_Session::can("manage styles", $site)) {?>
-<li><a href="<?=$site->url( "Admin/SiteView" )?>">Редактировать
+<li><a href="<?=$site->url( "admin/site-view" )?>">Редактировать
 	оформление</a></li>
 				<?}?>
 				</ul>
+				
+				<p><i><a href="http://<?=O_Registry::get("app/hosts/center")?>/">Взглянуть из центра</a></i></p>
 <?
 				if (R_Mdl_Session::can( "manage site", $site )) {
 					?>
-<p><b><a href="<?=$site->url( "Admin/Site" )?>">Настройки сайта</a></b></p>
+<p><b><a href="<?=$site->url( "admin/site" )?>">Настройки сайта</a></b></p>
 <ul>
-	<li><a href="<?=$site->url( "Admin/Tags" )?>">Метки</a></li>
-	<li><a href="<?=$site->url( "Admin/About" )?>">Страница &laquo;О
+	<li><a href="<?=$site->url( "admin/tags" )?>">Метки</a></li>
+	<li><a href="<?=$site->url( "admin/about" )?>">Страница &laquo;О
 	сайте&raquo;</a></li>
-	<li><a href="<?=$site->url( "Admin/Systems" )?>">Список систем</a></li>
+	<li><a href="<?=$site->url( "admin/systems" )?>">Список систем</a></li>
 	<?if(R_Mdl_Session::can("manage styles", $site)){?>
-	<li><a href="<?=$site->url( "Admin/SiteView" )?>">Редактировать
+	<li><a href="<?=$site->url( "admin/site-view" )?>">Редактировать
 	оформление</a></li>
 	<?}?>
 </ul>
@@ -88,22 +90,22 @@ class R_Layout extends O_Html_Layout {
 			$new_msgs = R_Mdl_Session::getUser()->msgs_own->test("readen", 0)->getFunc();
 
 			?>
-<p><b><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Msgs/">Внутренняя почта</a></b></p>
+<p><b><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/msgs/">Внутренняя почта</a></b></p>
 <ul>
-<?if(R_Mdl_Session::can("write msgs")){?><li><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Msgs/Write">Написать</a></li><?}?>
-<li><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Msgs/">Входящие<?=($new_msgs?" <b>(+$new_msgs)</b>":"")?></a></li>
+<?if(R_Mdl_Session::can("write msgs")){?><li><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/msgs/write">Написать</a></li><?}?>
+<li><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/msgs/">Входящие<?=($new_msgs?" <b>(+$new_msgs)</b>":"")?></a></li>
 </ul>
 
 <p><b><a href="<?=R_Mdl_Session::getUser()->url()?>">Ваш профиль</a></b></p>
 <ul>
 	<li><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/EditProfile">Редактировать
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/edit-profile">Редактировать
 	профиль</a></li>
 	<li><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Friends">Друзья</a> &nbsp; <small><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Friends/List">Кто</a></small></li>
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends">Друзья</a> &nbsp; <small><a
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends/list">Кто</a></small></li>
 	<li><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/Own/Favorites">Избранное</a></li>
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/favorites">Избранное</a></li>
 <?
 			if (R_Mdl_Session::getUser()->site) {
 				?>
@@ -123,7 +125,7 @@ class R_Layout extends O_Html_Layout {
 		if (R_Mdl_Session::can( "manage roles" )) {
 			?>
 <li><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/Admin/Roles">Настройки
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/admin/roles">Настройки
 	ролей</a></li>
 <?
 		}
@@ -133,7 +135,7 @@ class R_Layout extends O_Html_Layout {
 		if (R_Mdl_Session::can( "manage users" )) {
 			?>
 <li><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/Admin/User">Новый
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/admin/user">Новый
 	пользователь</a></li>
 <?
 		}
