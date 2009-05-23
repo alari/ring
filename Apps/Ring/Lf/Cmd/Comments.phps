@@ -6,7 +6,6 @@ class R_Lf_Cmd_Comments extends R_Lf_Command {
 		$tpl = $this->getTemplate();
 
 		$query = $this->getSite()->{"anonces.nodes"}->orderBy("time DESC");
-		$tpl->title = $this->instance->title;
 
 		R_Mdl_Session::setQueryAccesses($query, $this->getSite());
 		$tpl->paginator = $query->getPaginator(
