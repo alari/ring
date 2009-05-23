@@ -55,7 +55,7 @@ class R_Fr_Site_Anonce {
 		switch (O_Dao_TableInfo::get( $record )->getFieldInfo( "creative" )->getRealField( $record )) {
 			case "blog_post" :
 				?>
-<div class="anonce">
+<div class="anonce blog">
 <div><strong><?=
 				$record->link()?></strong>
 <?=
@@ -66,7 +66,7 @@ class R_Fr_Site_Anonce {
 			break;
 			case "im_picture" :
 				?>
-<div class="anonce">
+<div class="anonce im">
 <div><strong><?=
 				$record->link()?></strong>
 <div class="img"><a href="<?=
@@ -80,7 +80,7 @@ class R_Fr_Site_Anonce {
 			break;
 			case "libro_text" :
 				?>
-<div class="anonce">
+<div class="anonce libro">
 <div><strong><?=
 				$record->link()?></strong>
 <div class="img"><i><?=
@@ -91,7 +91,7 @@ class R_Fr_Site_Anonce {
 			break;
 			case "sound_track" :
 				?>
-<div class="anonce">
+<div class="anonce sound">
 <div><strong><?=
 				$record->link()?></strong>
 <div class="img">Альбом: <i><?=
