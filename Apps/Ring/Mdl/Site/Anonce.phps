@@ -78,7 +78,6 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 */
 	public function isVisible()
 	{
-		echo "<!--",$this->system["access"]."&".$this["access"],"-->";
 		return R_Mdl_Session::can( "read " . $this->system[ "access" ], $this->site ) && R_Mdl_Session::can( "read " . $this[ "access" ], $this->site );
 	}
 
