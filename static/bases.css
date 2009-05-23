@@ -39,7 +39,7 @@ textarea.oo-renderer-field-area{width:90%;height:160px;}
 #openid-login-form label{float:left;clear:both;width:220px;padding-bottom:5px;}
 #openid-login-form label span{float:left;}
 #openid-login-form label input{float:right;}
-#notice {text-align:center; border:1px solid #aaa; color:darkred;padding:3px;margin:5px;}
+#notice {margin:5px;padding:3px;text-align:center;border:2px solid #aaa;font-size:110%;color:#f11313;font-weight:bold;background-color:white;}
 
 /*header login form*/
 #openid input{_height:19px;}
