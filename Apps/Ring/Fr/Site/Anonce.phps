@@ -8,7 +8,7 @@ class R_Fr_Site_Anonce {
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
 	static public function showFullQueryCallback( O_Dao_Renderer_Show_Params $params )
-	{
+	{echo "<!--full callback-->";
 		/* @var $q O_Dao_Query */
 		$q = $params->value();
 		if (!$q instanceof O_Dao_Query) {

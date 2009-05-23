@@ -8,10 +8,12 @@ class R_Fr_Site_System {
 	 */
 	static public function showHome(O_Dao_Renderer_Show_Params $params) {
 		$system = $params->record();
+		$q = $system->anonces;
+		R_Mdl_Session::setQueryAccesses($q, $system->site);
 ?>
 <div class="system">
 <h2><?=$system->link()?></h2>
-<?$system->anonces->limit(5)->show($params->layout())?>
+<?$q->limit(5)->show($params->layout())?>
 </div>
 <?
 	}
