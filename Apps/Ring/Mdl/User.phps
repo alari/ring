@@ -24,23 +24,28 @@
  */
 class R_Mdl_User extends O_Acl_User {
 
-	public function __construct( $identity, O_Acl_Role $role=null )
+	public function __construct( $identity, O_Acl_Role $role = null )
 	{
-		if(!$role) $role = O_Acl_Role::getByName("OpenId User");
+		if (!$role)
+			$role = O_Acl_Role::getByName( "OpenId User" );
 		O_OpenId_Provider_UserPlugin::normalize( $identity );
 		$this->identity = $identity;
 		$this->role = $role;
 		parent::__construct();
-		$this->nickname = $identity;
+		$this->nickname = rtrim( substr( $identity, 7 ), "/" );
 		$this->createUserdir();
 	}
 
-	public function avaSrc($type) {
-		return $this->staticUrl("ava-".$type.".".$this["ava_full"]);
+	public function avaSrc( $type )
+	{
+		if ($this[ "ava_full" ] == "-")
+			return O_Registry::get( "app/users/static_urlbase" ) . "ava-" . $type . ".gif";
+		return $this->staticUrl( "ava-" . $type . "." . $this[ "ava_full" ] );
 	}
 
-	public function avaPath($type, $ext=null) {
-		return $this->staticFilename("ava-".$type.($ext?$ext:".".$this["ava_full"]));
+	public function avaPath( $type, $ext = null )
+	{
+		return $this->staticFilename( "ava-" . $type . ($ext ? $ext : "." . $this[ "ava_full" ]) );
 	}
 
 	/**
@@ -93,10 +98,10 @@ class R_Mdl_User extends O_Acl_User {
 		}
 	}
 
-	public function avatar($full=false) {
-		return "<img src=\"".($full?$this->ava_full:$this->ava_tiny)."\" alt=\"".htmlspecialchars($this->nickname)."\"/>";
+	public function avatar( $full = false )
+	{
+		return "<img src=\"" . ($full ? $this->ava_full : $this->ava_tiny) . "\" alt=\"" . htmlspecialchars( $this->nickname ) . "\"/>";
 	}
-
 
 	public function staticUrl( $filename )
 	{
