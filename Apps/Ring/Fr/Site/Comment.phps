@@ -66,7 +66,7 @@ class R_Fr_Site_Comment {
   <pubDate><?=gmdate("D, d M Y H:i:s", $record->time)?> GMT</pubDate>
   <title><?=htmlspecialchars($record->root->title)?></title>
   <link><?=$record->root->url()?></link>
-  <description><?=htmlspecialchars($record->content)?></description>
+  <description><?=htmlspecialchars($record->owner->link()." пишет:<br/><br/>".$record->content)?></description>
 </item>
 <?
 	}
