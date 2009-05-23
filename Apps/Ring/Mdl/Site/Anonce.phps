@@ -35,7 +35,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	const NODES_CLASS = "R_Mdl_Site_Comment";
 
 	private $_updateCollectionPosition = 0;
-	
+
 	public function __construct( R_Mdl_Site_Creative $creative, R_Mdl_Site_SysInstance $instance )
 	{
 		parent::__construct();
@@ -78,6 +78,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 */
 	public function isVisible()
 	{
+		echo "<!--",$this->system["access"]."&".$this["access"],"-->";
 		return R_Mdl_Session::can( "read " . $this->system[ "access" ], $this->site ) && R_Mdl_Session::can( "read " . $this[ "access" ], $this->site );
 	}
 
@@ -137,7 +138,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$rel_target = $rel->getTargetFieldName();
 		$rel_base = $rel->getBaseFieldName();
 		$userid = R_Mdl_Session::getUser()->id;
-		
+
 		$q->where( "access='public'
 			OR owner=?
 			OR (
@@ -190,7 +191,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			}
 		}
 	}
-	
+
 	/**
 	 * Sets anonce position in collection
 	 *
@@ -201,15 +202,15 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		if($newPosition <= 0 || $newPosition > count($this->collection->anonces)) return;
 		/* @var $anonces O_Dao_Query */
 		$anonces = $this->collection->anonces;
-		
+
 		if($newPosition > $this->position) {
 			$anonces->test("position", $this->position, ">")->test("position", $newPosition, "<=")->field("position", "position-1", 1)->update();
 		} else {
 			$anonces->test("position", $this->position, ">")->test("position", $newPosition, ">=")->field("position", "position+1", 1)->update();
 		}
-		
+
 		$this->position = $newPosition;
 		parent::save();
 	}
-	
+
 }
