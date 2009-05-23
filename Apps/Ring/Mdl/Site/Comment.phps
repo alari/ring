@@ -1,6 +1,8 @@
 <?php
 /**
- * @table site_comments -show:callback R_Fr_Site_Comment::showComment -show-list:callback R_Fr_Site_Comment::showListComment
+ * @table site_comments -show:callback R_Fr_Site_Comment::showCallback \
+ * 		-show-list:callback R_Fr_Site_Comment::showListCallback \
+ * 		-show-rss:callback R_Fr_Site_Comment::showRssCallback
  *
  * @field owner -has one R_Mdl_User -inverse comments
  *

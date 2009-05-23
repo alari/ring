@@ -6,7 +6,7 @@ class R_Fr_Site_Comment {
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showComment( O_Dao_Renderer_Show_Params $params )
+	static public function showCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		$comment = $params->record();
 		if (!$comment instanceof R_Mdl_Site_Comment ) {
@@ -28,6 +28,13 @@ class R_Fr_Site_Comment {
 <?
 	}
 
+	/**
+	 * Shows add comment form
+	 *
+	 * @param int $rootId
+	 * @param int $systemId
+	 * @param int $parent
+	 */
 	static public function addForm( $rootId, $systemId, $parent = 0 )
 	{
 		?>
@@ -37,7 +44,12 @@ class R_Fr_Site_Comment {
 <?
 	}
 
-	static public function showListComment(O_Dao_Renderer_Show_Params $params) {
+	/**
+	 * Shows comment without indentation, with links to roots 
+	 *
+	 * @param O_Dao_Renderer_Show_Params $params
+	 */
+	static public function showListCallback(O_Dao_Renderer_Show_Params $params) {
 		$comment = $params->record();
 		if (!$comment instanceof R_Mdl_Site_Comment ) {
 			echo "Error<br/>";
@@ -63,5 +75,24 @@ class R_Fr_Site_Comment {
 
 <?
 	}
+	
+	/**
+	 * Shows RSS comment
+	 *
+	 * @param O_Dao_Renderer_Show_Params $params
+	 */
+	static public function showRssCallback(O_Dao_Renderer_Show_Params $params) {
+		$record = $params->record();
+?>
+<item>
+  <guid isPermaLink='true'><?=$record->root->url()?></guid>
+  <pubDate><?=gmdate("D, d M Y H:i:s", $record->time)?> GMT</pubDate>
+  <title><?=htmlspecialchars($record->root->title)?></title>
+  <link><?=$record->root->url()?></link>
+  <description><?=htmlspecialchars($record->content)?></description>
+</item>
+<?
+	}
+	
 
 }
