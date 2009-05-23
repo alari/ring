@@ -1,5 +1,5 @@
 <?php
-class R_Lf_Cmd_RssFeed extends R_Lf_Command {
+class R_Lf_Cmd_Rss extends R_Lf_Command {
 
 	public function process()
 	{

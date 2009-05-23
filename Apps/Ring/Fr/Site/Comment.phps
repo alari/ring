@@ -13,18 +13,26 @@ class R_Fr_Site_Comment {
 			echo "Error<br/>";
 			return;
 		}
+		$isList = $params->params() == "list";
+		if($isList && !$comment->root->isVisible()) return;
 		?>
 
-<div class="comm" style="margin-left:<?=$comment->level?>em">
+<div class="comm"<?if(!$isList){?> style="margin-left:<?=$comment->level?>em"<?}?>>
 	<div class="comm-ava"><?=$comment->owner->link()?>
 	<?=$comment->owner->avatar()?></div>
+
+<?if($isList){?>
+<div class="comm-post" style="padding:10px">
+Комментарий на: <?=$comment->root->link()?> - <i><?=$comment->root->owner->link()?></i>; <?=$comment->root->system->link()?>
+</div>
+<?}?>
 
 	<div class="comment-time"><?=date("d.m.Y H:i:s", $comment->time)?></div>
 
 <?=$comment->content?>
 </div>
 
-<?self::addForm( $comment[ "root" ], $comment->root->system->id, $comment->id );?>
+<?if(!$isList) self::addForm( $comment[ "root" ], $comment->root->system->id, $comment->id );?>
 <?
 	}
 
@@ -43,39 +51,7 @@ class R_Fr_Site_Comment {
 	onclick="R.Comment.showForm($(this).getParent(),'<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)"><?=($parent ? "Ответить" : "Оставить отзыв")?></a></div>
 <?
 	}
-
-	/**
-	 * Shows comment without indentation, with links to roots 
-	 *
-	 * @param O_Dao_Renderer_Show_Params $params
-	 */
-	static public function showListCallback(O_Dao_Renderer_Show_Params $params) {
-		$comment = $params->record();
-		if (!$comment instanceof R_Mdl_Site_Comment ) {
-			echo "Error<br/>";
-			return;
-		}
-		if(!$comment->root->isVisible()) return;
-		?>
-
-<div class="comm">
-	<div class="comm-ava"><?=$comment->owner->link()?>
-	<?=$comment->owner->avatar()?></div>
-
-<div class="comm-post" style="padding:10px">
-Комментарий на: <?=$comment->root->link()?> - <i><?=$comment->root->owner->link()?></i>; <?=$comment->root->system->link()?>
-</div>
-
-	<div class="comment-time"><?=date("d.m.Y H:i:s", $comment->time)?></div>
-
-<?=$comment->content?>
-
-</div>
-
-
-<?
-	}
-	
+		
 	/**
 	 * Shows RSS comment
 	 *
