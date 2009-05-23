@@ -40,7 +40,6 @@
 
 	</If>
 	<If plugin="Lf">
-		<Url pattern="about" command="About"></Url>
 		<Url pattern="comments(-([0-9]+))?" command="Comments">
 			<Registry key="paginator/page" pocket="2"></Registry></Url>
 		<Url pattern="tag/(([0-9]+)/)?(.+)">
@@ -48,7 +47,6 @@
 			<Registry key="paginator/page" pocket="2"></Registry>
 			<Command name="Tag"></Command>
 			</Url>
-		<Url pattern="rss" command="RssFeed"></Url>
 		<Host pattern="(www\.|openid\.)?(.+)">
 			<Registry key="current/site" pocket="2" class="R_Mdl_Site"
 				method="getByHost"></Registry>

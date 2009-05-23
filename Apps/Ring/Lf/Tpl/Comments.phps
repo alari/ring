@@ -10,6 +10,9 @@ class R_Lf_Tpl_Comments extends R_Lf_Template {
 
 		if ($this->paginator)
 			$this->paginator->show( $this->layout(), "list" );
+			
+		
+		$this->layout()->addHeadLink("alternate", $this->getSite()->url("rss-comments"), "application/rss+xml", "RSS: комментарии на сайте");
 	}
 
 }

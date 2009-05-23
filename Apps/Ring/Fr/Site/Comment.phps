@@ -20,6 +20,7 @@ class R_Fr_Site_Comment {
 <div class="comm"<?if(!$isList){?> style="margin-left:<?=$comment->level?>em"<?}?>>
 	<div class="comm-ava"><?=$comment->owner->link()?>
 	<?=$comment->owner->avatar()?></div>
+<a name="comment<?=$comment->id?>"></a>
 
 <?if($isList){?>
 <div class="comm-post" style="padding:10px">
@@ -61,7 +62,7 @@ class R_Fr_Site_Comment {
 		$record = $params->record();
 ?>
 <item>
-  <guid isPermaLink='true'><?=$record->root->url()?></guid>
+  <guid isPermaLink='true'><?=$record->root->url()?>#comment<?=$record->id?></guid>
   <pubDate><?=gmdate("D, d M Y H:i:s", $record->time)?> GMT</pubDate>
   <title><?=htmlspecialchars($record->root->title)?></title>
   <link><?=$record->root->url()?></link>

@@ -11,7 +11,6 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 		}
 
 		$this->layout()->addHeadLink("alternate", $this->getSite()->url("rss"), "application/rss+xml", "RSS: новое на сайте");
-		$this->layout()->addHeadLink("alternate", $this->getSite()->url("rss-comments"), "application/rss+xml", "RSS: комментарии на сайте");
 	}
 
 	public function displayNav()
