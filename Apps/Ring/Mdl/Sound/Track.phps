@@ -49,4 +49,9 @@ class R_Mdl_Sound_Track extends R_Mdl_Site_Creative {
 		return $this->anonce->getFilesDir().$this->id.".mp3";
 	}
 
+	public function getDuration() {
+		return floor($this->duration/60).":".sprintf("%02d", $this->duration%60);
+	}
+
+
 }

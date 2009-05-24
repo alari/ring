@@ -37,7 +37,7 @@ class R_Fr_Sound_Track {
 <br/>
 <div class="track-props">
 <p>Ссылка на файл: <a href="<?=$post->file?>"><?=$post->title?></a></p>
-<p>Длительность: <?=floor($post->duration/60).":".($post->duration%60)?></p>
+<p>Длительность: <?=$post->getDuration()?></p>
 <p>Битрейт: <?=round($post->bitrate/1000)?> Кбит/сек</p>
 </div>
 
@@ -86,7 +86,7 @@ $was_tag=0;
 
 <br/>
 <div class="track-props">
-<p>Длительность: <?=floor($post->duration/60).":".($post->duration%60)?></p>
+<p>Длительность: <?=$post->getDuration()?></p>
 <p>Битрейт: <?=round($post->bitrate/1000)?> Кбит/сек</p>
 </div>
 <div class="comms"><a href="<?=$post->url()?>">Комментариев: <?=$post->anonce->nodes->getFunc()?></a></div>
