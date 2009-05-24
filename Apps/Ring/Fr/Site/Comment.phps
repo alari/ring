@@ -6,7 +6,7 @@ class R_Fr_Site_Comment {
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showCallback( O_Dao_Renderer_Show_Params $params )
+	static public function showLoopCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		$comment = $params->record();
 		if (!$comment instanceof R_Mdl_Site_Comment ) {
@@ -52,7 +52,7 @@ class R_Fr_Site_Comment {
 	onclick="R.Comment.showForm($(this).getParent(),'<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)"><?=($parent ? "Ответить" : "Оставить отзыв")?></a></div>
 <?
 	}
-		
+
 	/**
 	 * Shows RSS comment
 	 *
@@ -70,6 +70,6 @@ class R_Fr_Site_Comment {
 </item>
 <?
 	}
-	
+
 
 }

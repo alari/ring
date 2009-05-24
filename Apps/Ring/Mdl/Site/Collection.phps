@@ -1,6 +1,6 @@
 <?php
 /**
- * @table collections -show-def:callback R_Fr_Site_Collection::showDef
+ * @table collections
  * @field system -has one R_Mdl_Site_System -inverse collections
  *
  * @field title VARCHAR(64) -edit -required -title Название -show-loop linkInContainer h2 -show-def container h1

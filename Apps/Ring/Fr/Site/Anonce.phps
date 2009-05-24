@@ -7,7 +7,7 @@ class R_Fr_Site_Anonce {
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showFullQueryCallback( O_Dao_Renderer_Show_Params $params )
+	static public function loopFullCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		/* @var $q O_Dao_Query */
 		$q = $params->value();
@@ -28,7 +28,7 @@ class R_Fr_Site_Anonce {
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showQueryCallback( O_Dao_Renderer_Show_Params $params )
+	static public function loopCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		$q = $params->value();
 		if (!$q instanceof O_Dao_Query) {
@@ -49,7 +49,7 @@ class R_Fr_Site_Anonce {
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showDef( O_Dao_Renderer_Show_Params $params )
+	static public function showDefCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		$record = $params->record();
 		switch (O_Dao_TableInfo::get( $record )->getFieldInfo( "creative" )->getRealField( $record )) {
@@ -115,7 +115,7 @@ class R_Fr_Site_Anonce {
 		$record = $params->record();
 
 		ob_start();
-		$record->creative->show(null, "rsscont");
+		$record->creative->show(null, "rss-cont");
 		$descr = ob_get_clean();
 ?>
 <item>

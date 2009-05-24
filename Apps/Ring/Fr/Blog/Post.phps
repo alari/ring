@@ -6,7 +6,7 @@ class R_Fr_Blog_Post {
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showDef(O_Dao_Renderer_Show_Params $params) {
+	static public function showDefCallback(O_Dao_Renderer_Show_Params $params) {
 		$post = $params->record();
 ?>
 <div class="prop-ava">
@@ -30,7 +30,7 @@ class R_Fr_Blog_Post {
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showFullInLoop(O_Dao_Renderer_Show_Params $params) {
+	static public function showFullCallback(O_Dao_Renderer_Show_Params $params) {
 		$post = $params->record();
 		$tags = $post->tags;
 ?>

@@ -1,6 +1,6 @@
 <?php
 /**
- * @table im_picture -show-full:callback R_Fr_Im_Picture::showFullInLoop -show-def:callback R_Fr_Im_Picture::showDef
+ * @table im_picture
  *
  * @field:config anonce -inverse im_picture
  *

@@ -31,6 +31,11 @@ class R_Fr_Site_Tag {
 		echo "</div>";
 	}
 
+	/**
+	 * Prints "add tag" block
+	 *
+	 * @param O_Dao_Renderer_Edit_Params $params
+	 */
 	static public function editList(O_Dao_Renderer_Edit_Params $params) {
 		O_Dao_Renderer_Edit_Callbacks::selectRelationBox($params);
 		?>

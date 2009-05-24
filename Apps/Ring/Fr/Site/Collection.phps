@@ -7,7 +7,7 @@ class R_Fr_Site_Collection {
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showDef( O_Dao_Renderer_Show_Params $params )
+	static public function showDefCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		$collection = $params->record();
 		$system = $collection->system;
@@ -25,7 +25,7 @@ class R_Fr_Site_Collection {
 <h1><?=$collection->title?></h1>
 
 <div class="audioalbum">
-				
+
 <?if($collection->year){?><div class="year">Год: <?=$collection->year?></div><?}?>
 
 <div class="audioplayer"><object type="application/x-shockwave-flash"

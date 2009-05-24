@@ -1,6 +1,6 @@
 <?php
 /**
- * @table libro_text -show-full:callback R_Fr_Libro_Text::showFullInLoop -show-def:callback R_Fr_Libro_Text::showDef
+ * @table libro_text
  *
  * @field:config anonce -inverse libro_text
  *
