@@ -62,7 +62,7 @@ div.anonce div.cvr{_width:100%;height:122px;*+height:114px;_height:122px;margin:
 div.anonce div strong{display:block;overflow:hidden;padding:2px 0px 3px 0px;text-align:center;}
 div.anonce div.cnt{margin:0px 0px 0px 0px;text-align:center;}
 div.anonce.blog div.cnt{text-align:left;}
-div.anonce.im div.cnt{padding-top:10px}
+div.anonce.im div.cnt{padding-top:5px}
 div.anonce.libro div.cnt{}
 div.anonce.sound div.cnt{}
 
