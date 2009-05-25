@@ -36,7 +36,7 @@ class R_Fr_Site_Anonce {
 			return;
 		}
 
-		echo "<div>";
+		echo "<div class=\"associations\">";
 		foreach ($q as $anonce)
 			if ($anonce->isVisible()) {
 				$anonce->show();
