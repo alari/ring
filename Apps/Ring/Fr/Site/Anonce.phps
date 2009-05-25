@@ -83,8 +83,8 @@ class R_Fr_Site_Anonce {
 <div class="anonce libro">
 <div class="cvr"><strong><?=
 				$record->link()?></strong>
-<div class="cnt"><i><?=
-				$record->collection->link()?></i></div>
+<div class="cnt">(<?=
+				$record->collection->link()?>)</div>
 </div>
 </div>
 <?
@@ -94,8 +94,8 @@ class R_Fr_Site_Anonce {
 <div class="anonce sound">
 <div class="cvr"><strong><?=
 				$record->link()?></strong>
-<div class="cnt">Альбом: <i><?=
-				$record->collection->link()?></i></div>
+<div class="cnt">(<?=
+				$record->collection->link()?>)</div>
 </div>
 </div>
 <?

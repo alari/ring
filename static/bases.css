@@ -63,8 +63,8 @@ div.anonce div strong{display:block;overflow:hidden;padding:2px 0px 3px 0px;text
 div.anonce div.cnt{margin:0px 0px 0px 0px;text-align:center;}
 div.anonce.blog div.cnt{text-align:left;}
 div.anonce.im div.cnt{padding-top:5px}
-div.anonce.libro div.cnt{}
-div.anonce.sound div.cnt{}
+div.anonce.libro div.cnt{font-style:italic;}
+div.anonce.sound div.cnt{font-style:italic;}
 
 /*fragments - audioalbum*/
 div.audioalbum{}
