@@ -56,10 +56,10 @@ class R_Fr_Site_Anonce {
 			case "blog_post" :
 				?>
 <div class="anonce blog">
-<div><strong><?=
+<div class="cvr"><strong><?=
 				$record->link()?></strong>
-<?=
-				$record->description?>
+<div class="cnt"><?=
+				$record->description?>...</div>
 </div>
 </div>
 <?
@@ -67,9 +67,9 @@ class R_Fr_Site_Anonce {
 			case "im_picture" :
 				?>
 <div class="anonce im">
-<div><strong><?=
+<div class="cvr"><strong><?=
 				$record->link()?></strong>
-<div class="img"><a href="<?=
+<div class="cnt"><a href="<?=
 				$record->url()?>"><img src="<?=
 				$record->creative->img_tiny?>"
 	alt="<?=
@@ -81,9 +81,9 @@ class R_Fr_Site_Anonce {
 			case "libro_text" :
 				?>
 <div class="anonce libro">
-<div><strong><?=
+<div class="cvr"><strong><?=
 				$record->link()?></strong>
-<div class="img"><i><?=
+<div class="cnt"><i><?=
 				$record->collection->link()?></i></div>
 </div>
 </div>
@@ -92,9 +92,9 @@ class R_Fr_Site_Anonce {
 			case "sound_track" :
 				?>
 <div class="anonce sound">
-<div><strong><?=
+<div class="cvr"><strong><?=
 				$record->link()?></strong>
-<div class="img">Альбом: <i><?=
+<div class="cnt">Альбом: <i><?=
 				$record->collection->link()?></i></div>
 </div>
 </div>

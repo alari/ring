@@ -58,9 +58,13 @@ textarea.oo-renderer-field-area{width:90%;height:160px;}
 div.system{clear:both;padding-bottom:2px;}
 div.system h2{padding:5px;margin-bottom:3px;font-size:12pt;}
 div.anonce{width:20%;_width:expression((this.parentNode.offsetWidth / 5)+'px');height:126px;margin:5px 0px 5px 0px;padding-top:1px;float:left;}
-div.anonce div{_width:100%;height:122px;*+height:114px;_height:122px;margin:1px 2px 2px 2px;_margin-top:2px;overflow:hidden;padding:5px;}
+div.anonce div.cvr{_width:100%;height:122px;*+height:114px;_height:122px;margin:1px 2px 2px 2px;_margin-top:2px;overflow:hidden;padding:5px;}
 div.anonce div strong{display:block;overflow:hidden;padding:2px 0px 3px 0px;text-align:center;}
-div.anonce div.img{text-align:center;}
+div.anonce div.cnt{margin:0px 0px 0px 0px;text-align:center;}
+div.anonce.blog div.cnt{text-align:left;}
+div.anonce.im div.cnt{padding-top:5px}
+div.anonce.libro div.cnt{}
+div.anonce.sound div.cnt{}
 
 /*fragments - audioalbum*/
 div.audioalbum{}
