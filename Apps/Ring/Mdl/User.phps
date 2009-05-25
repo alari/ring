@@ -122,7 +122,7 @@ class R_Mdl_User extends O_Acl_User {
 
 	public function link()
 	{
-		return "<a href=\"" . $this->url() . "\">" . $this->nickname . "</a>";
+		return "<a href=\"" . $this->url() . "\">" . ($this->nickname ? $this->nickname : $this->identity) . "</a>";
 	}
 
 	/**
