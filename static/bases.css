@@ -21,6 +21,7 @@ div#main-menu{position:absolute;left:0px;top:120px;z-index:50;width:100%;height:
 div#main-menu ul{list-style-type:none;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;}
 div#main-menu ul li{display:inline;float:left;_float:none;_height:30px;padding:0px 15px 0px 15px;}
 div#main-menu ul li a{float:left;padding-top:7px;}
+.move-me{cursor:move;}
 
 /*general engine*/
 #shadow{position:absolute;right:0;width:100%;z-index:100;background:#fff;}

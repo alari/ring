@@ -49,6 +49,7 @@ class R_Fr_Site_Collection {
 <?if(R_Mdl_Session::can("manage site", $collection->system->site)){?>
 <script type="text/javascript">
 R.Anonce.setSortable(".tracklist ol", null, '<?=$system->site->host?>');
+$$('.tracklist ol li').addClass('move-me');
 </script>
 <?}?>
 
