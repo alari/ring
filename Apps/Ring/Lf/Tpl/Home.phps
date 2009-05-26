@@ -17,7 +17,7 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 <script type="text/javascript">
 new Sortables("#sys-sort", {handle:'.system', onComplete:function(el){
  	el = $(el);
- 	var newPosition = el.getAllPrevious().length;
+ 	var newPosition = el.getAllPrevious().length+1;
  	
  	var elId = el.get("id").replace(/^sysid-(.+)$/, "$1");
  	new Request({url:'/admin/system-position',data:{base:elId,pos:newPosition}}).post();
