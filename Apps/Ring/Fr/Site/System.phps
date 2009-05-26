@@ -11,7 +11,7 @@ class R_Fr_Site_System {
 		$q = $system->anonces;
 		R_Mdl_Session::setQueryAccesses($q, $system->site);
 ?>
-<div class="system">
+<div class="system" id="sysid-<?=$system->urlbase?>">
 <h2><?=$system->link()?></h2>
 <?$q->limit(5)->show($params->layout())?>
 </div>
