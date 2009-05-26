@@ -121,7 +121,7 @@ class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 	 */
 	public function setPosition($newPosition) {
 		if($newPosition == $this->position) return "equal";
-		if($newPosition <= 0 || $newPosition > count($this->getSite()->systems)) return "($newPosition|".count($this->getSite()->systems).")";
+		if($newPosition <= 0 || $newPosition > count($this->site->systems)) return "($newPosition|".count($this->site->systems).")";
 		/* @var $anonces O_Dao_Query */
 		$systems = $this->site->systems;
 
