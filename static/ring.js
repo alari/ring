@@ -103,10 +103,9 @@ var R = {
 		url: null,
 		setSortable: function(list, handle, host) {
 			this.url = 'http://'+host+'/admin/system-position';
-			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete.bind(this)});
+			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart.bind(R.SortableUtils), onComplete:this.onComplete.bind(this)});
 		},
 		onComplete:function(el){
-			alert(this.url);
 			el = $(el);
 			 var newPosition = el.getAllPrevious().length+1;
 			 if(newPosition == R.SortableUtils.oldPosition) return;
@@ -119,7 +118,7 @@ var R = {
 		url: null,
 		setSortable: function(list, handle, host) {
 			this.url = 'http://'+host+'/admin/collection-position';
-			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete});
+			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart.bind(R.SortableUtils), onComplete:this.onComplete.bind(this)});
 		},
 		onComplete:function(el){
 			el = $(el);
@@ -134,7 +133,7 @@ var R = {
 		url: null,
 		setSortable: function(list, handle, host) {
 			this.url = 'http://'+host+'/admin/anonce-position';
-			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete});
+			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart.bind(R.SortableUtils), onComplete:this.onComplete.bind(this)});
 		},
 		onComplete: function(el) {
 			 el = $(el);
