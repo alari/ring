@@ -36,7 +36,7 @@ class R_Fr_Site_System {
 					if(!count($anonces)) continue;
 					?>
 					<div class="cycle libro" id="collid-<?=$cycle->id?>">
-					<h2><?=$cycle->link()?></h2>
+					<h2><?=$cycle->position?>/<?=$cycle->link()?></h2>
 					<ul>
 						<?foreach($anonces as $a) echo "<li title=\"", $a->description, "\">", $a->link(), "</li> ";?>
 					</ul>
@@ -62,7 +62,7 @@ R.Collection.setSortable("#coll-sort", '.cycle.libro', '<?=$system->site->host?>
 					if(!count($anonces)) continue;
 					?>
 					<div class="cycle" id="collid-<?=$cycle->id?>">
-					<h2><?=$album->link()?></h2>
+					<h2><?=$album->position?>/<?=$album->link()?></h2>
 					<ol>
 						<?foreach($anonces as $a) echo "<li>", $a->link(), "</li> ";?>
 					</ol>
