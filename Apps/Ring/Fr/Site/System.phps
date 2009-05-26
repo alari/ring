@@ -70,7 +70,7 @@ R.Collection.setSortable("#coll-sort", '.cycle.libro', '<?=$system->site->host?>
 					if (!count( $anonces ))
 						continue;
 					?>
-<div class="cycle" id="collid-<?=$cycle->id?>">
+<div class="cycle" id="collid-<?=$album->id?>">
 <h2><?=$album->position?>/<?=$album->link()?></h2>
 <ol>
 						<?
