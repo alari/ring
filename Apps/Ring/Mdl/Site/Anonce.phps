@@ -197,7 +197,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 */
 	public function setPosition($newPosition) {
 		if($newPosition == $this->position) return;
-		if($newPosition <= 0 || $newPosition > count($this->collection->anonces)) return;
+		if($newPosition <= 0 || $newPosition > count($this->collection->anonces)+1) return;
 		/* @var $anonces O_Dao_Query */
 		$anonces = $this->collection->anonces;
 
