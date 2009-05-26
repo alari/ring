@@ -138,7 +138,7 @@ var R = {
 		onComplete: function(el) {
 			 el = $(el);
 			 var newPosition = el.getAllPrevious().length+1;
-			 if(newPosition == R.SortableUtils.oldPosition) return;
+			 if(newPosition == R.SortableUtils.oldPosition-1) return;
 			 	
 			 var elId = el.get("id").replace(/^anonceid-(.+)$/, "$1");
 			 new Request({url:this.url,data:{anonce:elId,pos:newPosition}}).post();
