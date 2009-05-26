@@ -103,7 +103,7 @@ var R = {
 		url: null,
 		setSortable: function(list, handle, host) {
 			this.url = 'http://'+host+'/admin/system-position';
-			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete});
+			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete.bind(this)});
 		},
 		onComplete:function(el){
 			alert(this.url);
