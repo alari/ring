@@ -28,14 +28,14 @@ class R_Fr_Site_System {
 
 		switch(get_class($system->instance)) {
 			case "R_Mdl_Libro":
-				$cycles = $system->collections->orderBy("position");
+				$cycles = $system->collections;
 				echo "<div id='coll-sort'>";
 				foreach($cycles as $cycle) {
 					$anonces = $cycle->anonces;
 					R_Mdl_Session::setQueryAccesses($anonces, $system->site);
 					if(!count($anonces)) continue;
 					?>
-					<div class="cycle libro" id="collid-<?=$cycle->id?>" title="<?=$cycle->position?>">
+					<div class="cycle libro" id="collid-<?=$cycle->id?>">
 					<h2><?=$cycle->link()?></h2>
 					<ul>
 						<?foreach($anonces as $a) echo "<li title=\"", $a->description, "\">", $a->link(), "</li> ";?>
@@ -55,12 +55,13 @@ R.Collection.setSortable("#coll-sort", '.cycle.libro', '<?=$system->site->host?>
 
 				case "R_Mdl_Sound":
 				$albums = $system->collections;
+				echo "<div id='coll-sort'>";
 				foreach($albums as $album) {
 					$anonces = $album->anonces;
 					R_Mdl_Session::setQueryAccesses($anonces, $system->site);
 					if(!count($anonces)) continue;
 					?>
-					<div class="cycle">
+					<div class="cycle" id="collid-<?=$cycle->id?>">
 					<h2><?=$album->link()?></h2>
 					<ol>
 						<?foreach($anonces as $a) echo "<li>", $a->link(), "</li> ";?>
@@ -68,6 +69,14 @@ R.Collection.setSortable("#coll-sort", '.cycle.libro', '<?=$system->site->host?>
 					</div>
 					<?
 				}
+				if(R_Mdl_Session::can("manage site", $system->site)){
+					?>
+<script type="text/javascript">
+R.Collection.setSortable("#coll-sort", '.cycle', '<?=$system->site->host?>');
+</script>
+					<?
+				}
+				echo "</div>";
 				break;
 
 			default:
