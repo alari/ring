@@ -100,48 +100,55 @@ var R = {
 		}
 	},
 	System: {
+		url: null,
 		setSortable: function(list, handle, host) {
-			new Sortables(list, {'handle':handle, onStart:function(el){
-			 	el = $(el);
-			 	var oldPosition = el.getAllPrevious().length+1;
-			 }, onComplete:function(el){
-			 	el = $(el);
-			 	var newPosition = el.getAllPrevious().length+1;
-			 	if(newPosition == oldPosition) return;
-			 	
-			 	var elId = el.get("id").replace(/^sysid-(.+)$/, "$1");
-			 	new Request({url:'http://'+host+'/admin/system-position',data:{base:elId,pos:newPosition}}).post();
-			 }});
-		}
+			this.url = 'http://'+host+'/admin/system-position';
+			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete});
+		},
+		onComplete:function(el){
+			el = $(el);
+			 var newPosition = el.getAllPrevious().length+1;
+			 if(newPosition == R.SortableUtils.oldPosition) return;
+		 	
+		 	var elId = el.get("id").replace(/^sysid-(.+)$/, "$1");
+		 	new Request({url:this.url,data:{base:elId,pos:newPosition}}).post();
+		 }
 	},
 	Collection: {
+		url: null,
 		setSortable: function(list, handle, host) {
-			new Sortables(list, {'handle':handle, onStart:function(el){
-			 	el = $(el);
-			 	var oldPosition = el.getAllPrevious().length+1;
-			 }, onComplete:function(el){
-			 	el = $(el);
-			 	var newPosition = el.getAllPrevious().length+1;
-			 	if(newPosition == oldPosition) return;
-			 	
-			 	var elId = el.get("id").replace(/^collid-([0-9]+)$/, "$1");
-			 	new Request({url:'http://'+host+'/admin/collection-position',data:{coll:elId,pos:newPosition}}).post();
-			 }});
-		}
+			this.url = 'http://'+host+'/admin/collection-position';
+			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete});
+		},
+		onComplete:function(el){
+			el = $(el);
+			 var newPosition = el.getAllPrevious().length+1;
+			 if(newPosition == R.SortableUtils.oldPosition) return;
+		 	
+		 	var elId = el.get("id").replace(/^collid-([0-9]+)$/, "$1");
+		 	new Request({url:this.url,data:{coll:elId,pos:newPosition}}).post();
+		 }
 	},
 	Anonce: {
+		url: null,
 		setSortable: function(list, handle, host) {
-			new Sortables(list, {'handle':handle, onStart:function(el){
-			 	el = $(el);
-			 	var oldPosition = el.getAllPrevious().length+1;
-			 }, onComplete:function(el){
-			 	el = $(el);
-			 	var newPosition = el.getAllPrevious().length+1;
-			 	if(newPosition == oldPosition) return;
+			this.url = 'http://'+host+'/admin/anonce-position';
+			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete});
+		},
+		onComplete: function(el) {
+			 el = $(el);
+			 var newPosition = el.getAllPrevious().length+1;
+			 if(newPosition == R.SortableUtils.oldPosition) return;
 			 	
-			 	var elId = el.get("id").replace(/^anonceid-(.+)$/, "$1");
-			 	new Request({url:'http://'+host+'/admin/anonce-position',data:{anonce:elId,pos:newPosition}}).post();
-			 }});
+			 var elId = el.get("id").replace(/^anonceid-(.+)$/, "$1");
+			 new Request({url:this.url,data:{anonce:elId,pos:newPosition}}).post();
+		}
+	},
+	SortableUtils: {
+		oldPosition: null,
+		onStart: function(el) {
+			el = $(el);
+			this.oldPosition = el.getAllPrevious().length+1; 
 		}
 	}
 };
