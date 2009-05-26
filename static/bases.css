@@ -78,7 +78,7 @@ div.audioalbum div.tracklist ol li{*margin-left:40px;white-space:normal;}
 div.audioalbum div.content{clear:both;padding:12px 0px 12px 0px;}
 
 /*blogs*/
-div.o-paginator{margin:10px 0px 0px 0px;}
+div.o-paginator{clear:both;padding:10px 0px 0px 0px;}
 div.post_date{margin:-14px 0px 14px 0px;text-align:center;font-size:80%;}
 
 /*literature*/
