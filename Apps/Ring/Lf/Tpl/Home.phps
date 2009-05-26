@@ -5,15 +5,17 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 	{
 		?>
 		<h1><?=$this->site->title?></h1>
+		<div id="sys-sort">
 		<?
 		foreach($this->getSite()->getSystems() as $system) {
 			$system->show($this->layout(), "home");
 		}
+		echo "</div>";
 		
 		if(R_Mdl_Session::can("write", $this->getSite())) {
 		?>
 <script type="text/javascript">
-new Sortables(".system");
+new Sortables("#sys-sort", {handle:'.system'});
 </script>
 		<?
 		}
