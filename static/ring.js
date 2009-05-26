@@ -108,8 +108,6 @@ var R = {
 		onComplete:function(el){
 			el = $(el);
 			 var newPosition = el.getAllPrevious().length+1;
-
-				alert(this.url + "\n" + R.SortableUtils.oldPosition+"\n"+newPosition);
 			 if(newPosition == R.SortableUtils.oldPosition) return;
 		 	
 		 	var elId = el.get("id").replace(/^sysid-(.+)$/, "$1");
@@ -150,7 +148,7 @@ var R = {
 		oldPosition: null,
 		onStart: function(el) {
 			el = $(el);
-			R.SortableUtils.oldPosition = el.getAllPrevious().length+1; 
+			R.SortableUtils.oldPosition = el.getAllPrevious().length; 
 		}
 	}
 };
