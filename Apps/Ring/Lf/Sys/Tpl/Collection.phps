@@ -8,7 +8,10 @@ class R_Lf_Sys_Tpl_Collection extends R_Lf_Sys_Template {
 	}
 	
 	public function displayNav() {
+		if(R_Mdl_Session::can("write", $this->getSite())){
 		?><p><i><a href="<?=$this->collection->url()?>/form">Редактировать коллекцию</a></i></p><?
+		}
+		parent::displayNav();
 	}
 	
 }
