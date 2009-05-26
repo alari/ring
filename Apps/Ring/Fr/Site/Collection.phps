@@ -74,6 +74,7 @@ $$('.tracklist ol li').addClass('move-me');
 <?if(R_Mdl_Session::can("manage site", $collection->system->site)){?>
 <script type="text/javascript">
 R.Anonce.setSortable("#anonce-sort ul", null, '<?=$system->site->host?>');
+$$('#anonce-sort li').addClass('move-me');
 </script>
 <?}?>
 				<?
