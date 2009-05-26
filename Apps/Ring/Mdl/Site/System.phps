@@ -113,5 +113,27 @@ class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 		$this->site->systems->test("position", $this->position, ">")->field("position", "position-1", true)->update();
 		parent::delete();
 	}
+	
+	/**
+	 * Sets system position
+	 *
+	 * @param int $newPosition
+	 */
+	public function setPosition($newPosition) {
+		if($newPosition == $this->position) return;
+		if($newPosition <= 0 || $newPosition > count($this->collection->anonces)) return;
+		/* @var $anonces O_Dao_Query */
+		$systems = $this->site->systems;
+
+		if($newPosition > $this->position) {
+			$systems->test("position", $this->position, ">")->test("position", $newPosition, "<=")->field("position", "position-1", 1)->update();
+		} else {
+			$systems->test("position", $this->position, ">")->test("position", $newPosition, ">=")->field("position", "position+1", 1)->update();
+		}
+
+		$this->position = $newPosition;
+		parent::save();
+	}
+	
 
 }

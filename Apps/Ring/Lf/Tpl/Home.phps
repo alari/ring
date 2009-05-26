@@ -9,6 +9,14 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 		foreach($this->getSite()->getSystems() as $system) {
 			$system->show($this->layout(), "home");
 		}
+		
+		if(R_Mdl_Session::can("write", $this->getSite())) {
+		?>
+<script type="text/javascript">
+new Sortables(".system", {handle:'h2'});
+</script>
+		<?
+		}
 
 		$this->layout()->addHeadLink("alternate", $this->getSite()->url("rss"), "application/rss+xml", "RSS: новое на сайте");
 	}
