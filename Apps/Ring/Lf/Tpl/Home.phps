@@ -15,7 +15,7 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 		if(R_Mdl_Session::can("manage site", $this->getSite())) {
 		?>
 <script type="text/javascript">
-R.System.setSortable("#sys-sort", '.system');
+R.System.setSortable("#sys-sort", '.system', '<?=$this->getSite()->host?>');
 </script>
 		<?
 		}

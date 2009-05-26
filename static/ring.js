@@ -100,7 +100,7 @@ var R = {
 		}
 	},
 	System: {
-		setSortable: function(list, handle) {
+		setSortable: function(list, handle, host) {
 			new Sortables(list, {'handle':handle, onStart:function(el){
 			 	el = $(el);
 			 	var oldPosition = el.getAllPrevious().length+1;
@@ -110,12 +110,12 @@ var R = {
 			 	if(newPosition == oldPosition) return;
 			 	
 			 	var elId = el.get("id").replace(/^sysid-(.+)$/, "$1");
-			 	new Request({url:'/admin/system-position',data:{base:elId,pos:newPosition}}).post();
+			 	new Request({url:'http://'+host+'/admin/system-position',data:{base:elId,pos:newPosition}}).post();
 			 }});
 		}
 	},
 	Collection: {
-		setSortable: function(list, handle) {
+		setSortable: function(list, handle, host) {
 			new Sortables(list, {'handle':handle, onStart:function(el){
 			 	el = $(el);
 			 	var oldPosition = el.getAllPrevious().length+1;
@@ -125,12 +125,12 @@ var R = {
 			 	if(newPosition == oldPosition) return;
 			 	
 			 	var elId = el.get("id").replace(/^collid-([0-9]+)$/, "$1");
-			 	new Request({url:'/admin/collection-position',data:{coll:elId,pos:newPosition}}).post();
+			 	new Request({url:'http://'+host+'/admin/collection-position',data:{coll:elId,pos:newPosition}}).post();
 			 }});
 		}
 	},
 	Anonce: {
-		setSortable: function(list, handle) {
+		setSortable: function(list, handle, host) {
 			new Sortables(list, {'handle':handle, onStart:function(el){
 			 	el = $(el);
 			 	var oldPosition = el.getAllPrevious().length+1;
@@ -140,7 +140,7 @@ var R = {
 			 	if(newPosition == oldPosition) return;
 			 	
 			 	var elId = el.get("id").replace(/^anonceid-(.+)$/, "$1");
-			 	new Request({url:'/admin/anonce-position',data:{anonce:elId,pos:newPosition}}).post();
+			 	new Request({url:'http://'+host+'/admin/anonce-position',data:{anonce:elId,pos:newPosition}}).post();
 			 }});
 		}
 	}

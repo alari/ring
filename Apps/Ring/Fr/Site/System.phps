@@ -46,7 +46,7 @@ class R_Fr_Site_System {
 				if(R_Mdl_Session::can("manage site", $system->site)){
 					?>
 <script type="text/javascript">
-R.Collection.setSortable("#coll-sort", '.cycle.libro');
+R.Collection.setSortable("#coll-sort", '.cycle.libro', '<?=$system->site->host?>');
 </script>
 					<?
 				}
