@@ -15,7 +15,7 @@ class R_Fr_Blog_Post {
 </div>
 
 <?if($post->title){?><h1><?=$post->title?></h1><?}?>
-<?if($post->time){?><?=date('d.m.Y, H:i',$post->time)?><?}?>
+<?if($post->time){?><div class="post_date"><?=date('d.m.Y, H:i',$post->time)?></div><?}?>
 
 <div class="content"><?=$post->content?></div>
 <?
