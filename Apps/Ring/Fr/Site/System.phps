@@ -28,14 +28,14 @@ class R_Fr_Site_System {
 
 		switch(get_class($system->instance)) {
 			case "R_Mdl_Libro":
-				$cycles = $system->collections;
+				$cycles = $system->collections->orderBy("position");
 				echo "<div id='coll-sort'>";
 				foreach($cycles as $cycle) {
 					$anonces = $cycle->anonces;
 					R_Mdl_Session::setQueryAccesses($anonces, $system->site);
 					if(!count($anonces)) continue;
 					?>
-					<div class="cycle libro" id="collid-<?=$cycle->id?>">
+					<div class="cycle libro" id="collid-<?=$cycle->id?>" title="<?=$cycle->position?>">
 					<h2><?=$cycle->link()?></h2>
 					<ul>
 						<?foreach($anonces as $a) echo "<li title=\"", $a->description, "\">", $a->link(), "</li> ";?>
