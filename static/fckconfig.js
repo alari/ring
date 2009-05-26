@@ -1,6 +1,6 @@
 FCKConfig.ToolbarSets["Libro"] = [
-['Source','Preview','-','Templates'],
-['Cut','Copy','Paste','PasteText','PasteWord','-'],
+['Source','Preview','-'],
+['Cut','Copy','Paste','PasteText','-'],
 ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
 ['Link','Unlink','Anchor'],
 ['Image','Flash','Table','Rule','SpecialChar','PageBreak'],
@@ -11,7 +11,7 @@ FCKConfig.ToolbarSets["Libro"] = [
 '/',
 ['Style','FontFormat','FontName','FontSize'],
 ['TextColor','BGColor'],
-['FitWindow','ShowBlocks'] // No comma for the last row.
+['ShowBlocks'] // No comma for the last row.
 ] ;
 
 FCKConfig.EditorAreaCSS = '/static/fck_editorarea.css' ;
@@ -112,7 +112,7 @@ FCKConfig.ToolbarSets["Sample"] = [
 ] ;
 
 FCKConfig.EnterMode = 'p' ;			// p | div | br
-FCKConfig.ShiftEnterMode = 'br' ;	// p | div | br
+FCKConfig.ShiftEnterMode = 'p' ;	// p | div | br
 
 FCKConfig.Keystrokes = [
 	[ CTRL + 65 /*A*/, true ],
