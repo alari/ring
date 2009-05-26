@@ -4,7 +4,7 @@
  *
  * @field:config anonce -inverse libro_text
  *
- * @field:config content -required Текст произведения необходим -edit wysiwyg Libro
+ * @field:config content -required Текст произведения необходим -edit wysiwyg Libro 650
  *
  * @field write_time VARCHAR(255) -title Время написания -edit
  * @field write_place VARCHAR(255) -title Место написания -edit

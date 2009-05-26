@@ -12,7 +12,7 @@
  *
  * @field info -owns one R_Mdl_Site_CollectionInfo -inverse collection
  *
- * @field content -relative info->content -show-def -edit wysiwyg libro -check htmlPurify -title Развёрнутое описание в свободной форме
+ * @field content -relative info->content -show-def -edit wysiwyg Libro -check htmlPurify -title Развёрнутое описание в свободной форме
  *
  * @field time INT
  *
