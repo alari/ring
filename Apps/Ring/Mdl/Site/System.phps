@@ -128,7 +128,7 @@ class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 		if($newPosition > $this->position) {
 			$systems->test("position", $this->position, ">")->test("position", $newPosition, "<=")->field("position", "position-1", 1)->update();
 		} else {
-			$systems->test("position", $this->position, ">")->test("position", $newPosition, ">=")->field("position", "position+1", 1)->update();
+			$systems->test("position", $this->position, "<")->test("position", $newPosition, ">=")->field("position", "position+1", 1)->update();
 		}
 
 		$this->position = $newPosition;

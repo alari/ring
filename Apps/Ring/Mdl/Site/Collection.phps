@@ -77,7 +77,7 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 		if($newPosition > $this->position) {
 			$colls->test("position", $this->position, ">")->test("position", $newPosition, "<=")->field("position", "position-1", 1)->update();
 		} else {
-			$colls->test("position", $this->position, ">")->test("position", $newPosition, ">=")->field("position", "position+1", 1)->update();
+			$colls->test("position", $this->position, "<")->test("position", $newPosition, ">=")->field("position", "position+1", 1)->update();
 		}
 
 		$this->position = $newPosition;

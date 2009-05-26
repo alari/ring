@@ -204,7 +204,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		if($newPosition > $this->position) {
 			$anonces->test("position", $this->position, ">")->test("position", $newPosition, "<=")->field("position", "position-1", 1)->update();
 		} else {
-			$anonces->test("position", $this->position, ">")->test("position", $newPosition, ">=")->field("position", "position+1", 1)->update();
+			$anonces->test("position", $this->position, "<")->test("position", $newPosition, ">=")->field("position", "position+1", 1)->update();
 		}
 
 		$this->position = $newPosition;
