@@ -65,12 +65,14 @@ R.Anonce.setSortable(".tracklist ol", null, '<?=$system->site->host?>');
 <div class="content">
 <?=$collection->content?>
 </div>
+<div id="anonce-sort">
 <ul class="anonces">
 <?foreach($collection->anonces as $anonce) if($anonce->isVisible()) echo "<li id=\"anonceid-".$anonce->id."\" title=\"", htmlspecialchars($anonce->description),"\">", $anonce->link(), "</li>";?>
 </ul>
+</div>
 <?if(R_Mdl_Session::can("manage site", $collection->system->site)){?>
 <script type="text/javascript">
-R.Anonce.setSortable("ul.anonces", null, '<?=$system->site->host?>');
+R.Anonce.setSortable("#anonce-sort ul", null, '<?=$system->site->host?>');
 </script>
 <?}?>
 				<?
