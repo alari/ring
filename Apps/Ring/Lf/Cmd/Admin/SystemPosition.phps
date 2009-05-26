@@ -3,18 +3,19 @@ class R_Lf_Cmd_Admin_SystemPosition extends R_Lf_Command {
 
 	public function process()
 	{
-		echo "OK";
+		echo "OK\n";
 		echo $base = $this->getParam("base");
 		echo $position = $this->getParam("pos");
 		
 		$sys = $this->getSite()->systems->test("urlbase", $base)->getOne();
+		echo "TUT";
 		if($sys && $position) {
-			echo "was ".$sys->position."\n";
+			echo "\nwas ".$sys->position."\n";
 			$sys->setPosition($position);
 			echo "now ".$sys->position;
 		} else {
-			if(!$sys) echo "sys NF";
-			if(!$position) echo "pos=0";
+			if(!$sys) echo "\nsys NF";
+			if(!$position) echo "\npos=0";
 		}
 	}
 
