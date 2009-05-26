@@ -6,8 +6,8 @@ class R_Lf_Cmd_Admin_CollectionPosition extends R_Lf_Command {
 		$coll = $this->getParam("coll");
 		$position = $this->getParam("pos");
 		
-		$coll = $this->getSite()->{"systems.collections"}->test("id", $coll)->getOne();
-		if($coll && $position) {
+		$coll = O_Dao_ActiveRecord::getById($coll, "R_Mdl_Site_Collection");
+		if($coll && $position && $coll->site == $this->getSite()) {
 			$coll->setPosition($position);
 		}
 	}
