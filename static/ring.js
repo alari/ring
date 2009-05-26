@@ -103,7 +103,7 @@ var R = {
 		url: null,
 		setSortable: function(list, handle, host) {
 			this.url = 'http://'+host+'/admin/system-position';
-			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart.bind(R.SortableUtils), onComplete:this.onComplete.bind(this)});
+			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete.bind(this)});
 		},
 		onComplete:function(el){
 			el = $(el);
@@ -118,7 +118,7 @@ var R = {
 		url: null,
 		setSortable: function(list, handle, host) {
 			this.url = 'http://'+host+'/admin/collection-position';
-			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart.bind(R.SortableUtils), onComplete:this.onComplete.bind(this)});
+			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete.bind(this)});
 		},
 		onComplete:function(el){
 			el = $(el);
@@ -133,7 +133,7 @@ var R = {
 		url: null,
 		setSortable: function(list, handle, host) {
 			this.url = 'http://'+host+'/admin/anonce-position';
-			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart.bind(R.SortableUtils), onComplete:this.onComplete.bind(this)});
+			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete.bind(this)});
 		},
 		onComplete: function(el) {
 			 el = $(el);
@@ -148,7 +148,7 @@ var R = {
 		oldPosition: null,
 		onStart: function(el) {
 			el = $(el);
-			this.oldPosition = el.getAllPrevious().length+1; 
+			R.SortableUtils.oldPosition = el.getAllPrevious().length+1; 
 		}
 	}
 };
