@@ -11,8 +11,8 @@ class R_Lf_Cmd_Admin_SystemPosition extends R_Lf_Command {
 		echo "TUT";
 		if($sys && $position) {
 			echo "\nwas ".$sys->position."\n";
-			$sys->setPosition($position);
-			echo "now ".$sys->position;
+			echo $sys->setPosition($position);
+			echo "\nnow ".$sys->position;
 		} else {
 			if(!$sys) echo "\nsys NF";
 			if(!$position) echo "\npos=0";

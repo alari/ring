@@ -83,7 +83,7 @@ class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 	{
 		$this->title = $title;
 		$this->urlbase = $urlbase;
-		$this->position = count( $site->systems );
+		$this->position = count( $site->systems )+1;
 		parent::__construct();
 		$this->site = $site;
 	}
@@ -120,8 +120,8 @@ class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 	 * @param int $newPosition
 	 */
 	public function setPosition($newPosition) {
-		if($newPosition == $this->position) return;
-		if($newPosition <= 0 || $newPosition > count($this->getSite()->systems)) return;
+		if($newPosition == $this->position) return "equal";
+		if($newPosition <= 0 || $newPosition > count($this->getSite()->systems)) return "($newPosition|".count($this->getSite()->systems).")";
 		/* @var $anonces O_Dao_Query */
 		$systems = $this->site->systems;
 
