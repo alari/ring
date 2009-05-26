@@ -63,6 +63,25 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 
 
 
+	/**
+	 * Sets collection position
+	 *
+	 * @param int $newPosition
+	 */
+	public function setPosition($newPosition) {
+		if($newPosition == $this->position) return;
+		if($newPosition <= 0 || $newPosition > count($this->system->collections)) return;
+		
+		$colls = $this->system->collections;
 
+		if($newPosition > $this->position) {
+			$colls->test("position", $this->position, ">")->test("position", $newPosition, "<=")->field("position", "position-1", 1)->update();
+		} else {
+			$colls->test("position", $this->position, ">")->test("position", $newPosition, ">=")->field("position", "position+1", 1)->update();
+		}
+
+		$this->position = $newPosition;
+		parent::save();
+	}
 
 }

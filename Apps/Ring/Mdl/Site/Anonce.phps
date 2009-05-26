@@ -174,7 +174,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			// If there's more then one anonce with current position
 			if($this->collection->anonces->test("position", $this->position)->test("id", $this->id, "!=")->getOne()) {
 				// Set for number of anonces -- making this last anonce
-				$this->position = count($this->collection->anonces);
+				$this->position = count($this->collection->anonces)+1;
 				parent::save();
 				// There is still error in position -- update all positions in collection
 				if($this->collection->anonces->test("position", $this->position)->test("id", $this->id, "!=")->getOne()) {

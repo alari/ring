@@ -29,12 +29,13 @@ class R_Fr_Site_System {
 		switch(get_class($system->instance)) {
 			case "R_Mdl_Libro":
 				$cycles = $system->collections;
+				echo "<div id='coll-sort'>";
 				foreach($cycles as $cycle) {
 					$anonces = $cycle->anonces;
 					R_Mdl_Session::setQueryAccesses($anonces, $system->site);
 					if(!count($anonces)) continue;
 					?>
-					<div class="cycle libro">
+					<div class="cycle libro" id="collid-<?=$cycle->id?>">
 					<h2><?=$cycle->link()?></h2>
 					<ul>
 						<?foreach($anonces as $a) echo "<li title=\"", $a->description, "\">", $a->link(), "</li> ";?>
@@ -42,6 +43,14 @@ class R_Fr_Site_System {
 					</div>
 					<?
 				}
+				if(R_Mdl_Session::can("manage site", $system->site)){
+					?>
+<script type="text/javascript">
+R.Collection.setSortable("#coll-sort", '.cycle.libro');
+</script>
+					<?
+				}
+				echo "</div>";
 				break;
 
 				case "R_Mdl_Sound":

@@ -15,20 +15,7 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 		if(R_Mdl_Session::can("manage site", $this->getSite())) {
 		?>
 <script type="text/javascript">
-var mScroller = new Scroller(window);
-new Sortables("#sys-sort", {handle:'.system', onStart:function(el){
-	mScroller.start();
- 	el = $(el);
- 	var oldPosition = el.getAllPrevious().length+1;
- }, onComplete:function(el){
-	 mScroller.stop();
- 	el = $(el);
- 	var newPosition = el.getAllPrevious().length+1;
- 	if(newPosition == oldPosition) return;
- 	
- 	var elId = el.get("id").replace(/^sysid-(.+)$/, "$1");
- 	new Request({url:'/admin/system-position',data:{base:elId,pos:newPosition}}).post();
- }});
+R.System.setSortable("#sys-sort", '.system');
 </script>
 		<?
 		}
