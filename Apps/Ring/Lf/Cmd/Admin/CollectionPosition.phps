@@ -8,7 +8,7 @@ class R_Lf_Cmd_Admin_CollectionPosition extends R_Lf_Command {
 		
 		$coll = O_Dao_ActiveRecord::getById($coll, "R_Mdl_Site_Collection");
 		echo $coll ? "AGA" : "NEA";
-		if($coll && $position && $coll->site == $this->getSite()) {
+		if($coll && $position && $coll->system->site == $this->getSite()) {
 			echo "OK";
 			$coll->setPosition($position);
 		}
