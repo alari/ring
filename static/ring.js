@@ -108,6 +108,8 @@ var R = {
 		onComplete:function(el){
 			el = $(el);
 			 var newPosition = el.getAllPrevious().length+1;
+
+				alert(this.url + "\n" + R.SortableUtils.oldPosition+"\n"+newPosition);
 			 if(newPosition == R.SortableUtils.oldPosition) return;
 		 	
 		 	var elId = el.get("id").replace(/^sysid-(.+)$/, "$1");
