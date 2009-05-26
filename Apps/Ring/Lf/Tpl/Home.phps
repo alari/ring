@@ -13,7 +13,7 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 		if(R_Mdl_Session::can("write", $this->getSite())) {
 		?>
 <script type="text/javascript">
-new Sortables(".system", {handle:'h2'});
+new Sortables(".system");
 </script>
 		<?
 		}
