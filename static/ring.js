@@ -123,8 +123,7 @@ var R = {
 		onComplete:function(el){
 			el = $(el);
 			 var newPosition = el.getAllPrevious().length+1;
-			 alert(newPosition+"\n"+R.SortableUtils.oldPosition);
-			 if(newPosition == R.SortableUtils.oldPosition) return;
+			 if(newPosition == R.SortableUtils.oldPosition-1) return;
 		 	
 		 	var elId = el.get("id").replace(/^collid-([0-9]+)$/, "$1");
 		 	new Request({url:this.url,data:{coll:elId,pos:newPosition}}).post();
