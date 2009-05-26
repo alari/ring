@@ -66,7 +66,7 @@ R.Anonce.setSortable(".tracklist ol", null, '<?=$system->site->host?>');
 <?=$collection->content?>
 </div>
 <ul class="anonces">
-<?foreach($collection->anonces as $anonce) if($anonce->isVisible()) echo "<li title=\"", htmlspecialchars($anonce->description),"\">", $anonce->link(), "</li>";?>
+<?foreach($collection->anonces as $anonce) if($anonce->isVisible()) echo "<li id=\"anonceid-".$anonce->id."\" title=\"", htmlspecialchars($anonce->description),"\">", $anonce->link(), "</li>";?>
 </ul>
 <?if(R_Mdl_Session::can("manage site", $collection->system->site)){?>
 <script type="text/javascript">
