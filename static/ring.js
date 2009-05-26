@@ -106,6 +106,7 @@ var R = {
 			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete});
 		},
 		onComplete:function(el){
+			alert(this.url);
 			el = $(el);
 			 var newPosition = el.getAllPrevious().length+1;
 			 if(newPosition == R.SortableUtils.oldPosition) return;
