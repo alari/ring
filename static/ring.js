@@ -123,6 +123,7 @@ var R = {
 		onComplete:function(el){
 			el = $(el);
 			 var newPosition = el.getAllPrevious().length+1;
+			 alert(newPosition+"\n"+R.SortableUtils.oldPosition);
 			 if(newPosition == R.SortableUtils.oldPosition) return;
 		 	
 		 	var elId = el.get("id").replace(/^collid-([0-9]+)$/, "$1");
