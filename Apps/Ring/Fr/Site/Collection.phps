@@ -43,9 +43,14 @@ class R_Fr_Site_Collection {
 </object>
 </div>
 <div class="tracklist"><ol>
-<?foreach($collection->anonces as $anonce) if($anonce->isVisible()) echo "<li title=\"", htmlspecialchars($anonce->description),"\">", $anonce->link(), "</li> ";?>
+<?foreach($collection->anonces as $anonce) if($anonce->isVisible()) echo "<li id=\"anonceid-".$anonce->id."\" title=\"", htmlspecialchars($anonce->description),"\">", $anonce->position."/". $anonce->link(), "</li> ";?>
 </ol>
 </div>
+<?if(R_Mdl_Session::can("manage site", $collection->system->site)){?>
+<script type="text/javascript">
+R.Anonce.setSortable(".tracklist ol", null, '<?=$system->site->host?>');
+</script>
+<?}?>
 
 <div class="content">
 <?=$collection->content?>
