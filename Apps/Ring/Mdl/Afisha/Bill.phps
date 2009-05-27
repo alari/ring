@@ -2,24 +2,25 @@
 /**
  * @table im_picture
  *
- * @field:config anonce -inverse im_picture
+ * @field:config anonce -inverse afisha_bill
+ * @field:config title -required Введите название события
+ *
+ * @field event_time -relative anonce->time -edit timestamp -check timestamp -title Время события
  *
  * @field description -relative anonce->description -edit -title Кр. опис.
- * @field collection -relative anonce->collection -edit R_Fr_Im_Picture::editGallery -title Галерея -check R_Mdl_Site_Collection::checkCreate
  *
- * @field img_full ENUM('png','gif','jpeg','-') -image src: imgSrc full; filepath: imgPath full; width: 1600; height: 1600; cascade: img_preview, img_loop, img_tiny -edit -title Картинка -required-new Укажите файл картинки
- * @field img_preview -image src: imgSrc preview; filepath: imgPath preview; width: 700; height: 700
- * @field img_loop -image src: imgSrc loop; filepath: imgPath loop; width: 400; height: 400
+ * @field img_full ENUM('png','gif','jpeg','-') -image src: imgSrc full; filepath: imgPath full; width: 1280; height: 1280 cascade: img_preview, img_tiny -edit -title Картинка
+ * @field img_preview -image src: imgSrc preview; filepath: imgPath preview; width: 500; height: 500
  * @field img_tiny -image src: imgSrc tiny; filepath: imgPath tiny; width: 100; height: 90
  *
  * @field:replace anonce,img_tiny
  */
-class R_Mdl_Im_Picture extends R_Mdl_Site_Creative {
+class R_Mdl_Afisha_Bill extends R_Mdl_Site_Creative {
 	public function save()
 	{
 		parent::save();
 		if(!$this->title) {
-			$this->title = "Картинка";
+			$this->title = "Событие";
 			parent::save();
 		}
 		if (!$this->anonce) {

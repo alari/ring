@@ -54,51 +54,19 @@ class R_Fr_Site_Anonce {
 		$record = $params->record();
 		switch (O_Dao_TableInfo::get( $record )->getFieldInfo( "creative" )->getRealField( $record )) {
 			case "blog_post" :
-				?>
-<div class="anonce blog">
-<div class="cvr"><strong><?=
-				$record->link()?></strong>
-<div class="cnt"><?=
-				$record->description?>...</div>
-</div>
-</div>
-<?
+				R_Fr_Blog_Post::showAnonce($params);
 			break;
 			case "im_picture" :
-				?>
-<div class="anonce im">
-<div class="cvr"><strong><?=
-				$record->link()?></strong>
-<div class="cnt"><a href="<?=
-				$record->url()?>"><img src="<?=
-				$record->creative->img_tiny?>"
-	alt="<?=
-				htmlspecialchars( $record->title . " - " . $record->description )?>" /></a></div>
-</div>
-</div>
-<?
+				R_Fr_Im_Picture::showAnonce($params);
 			break;
 			case "libro_text" :
-				?>
-<div class="anonce libro">
-<div class="cvr"><strong><?=
-				$record->link()?></strong>
-<div class="cnt">(<?=
-				$record->collection->link()?>)</div>
-</div>
-</div>
-<?
+				R_Fr_Libro_Text::showAnonce($params);
 			break;
 			case "sound_track" :
-				?>
-<div class="anonce sound">
-<div class="cvr"><strong><?=
-				$record->link()?></strong>
-<div class="cnt">(<?=
-				$record->collection->link()?>)</div>
-</div>
-</div>
-<?
+				R_Fr_Sound_Track::showAnonce($params);
+			break;
+			case "afisha_bill" :
+				R_Fr_Afisha_Bill::showAnonce($params);
 			break;
 			default :
 				echo "<a href=\"" . $params->record()->url() . "\">" . $params->record()->title . "</a><br/>";

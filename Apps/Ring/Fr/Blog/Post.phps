@@ -59,4 +59,23 @@ $was_tag=0;
 </div>
 <?
 	}
+
+	/**
+	 * Shows anonce on frontpage or in relations
+	 *
+	 * @param O_Dao_Renderer_Show_Params $params
+	 */
+	static public function showAnonce(O_Dao_Renderer_Show_Params $params) {
+		$record = $params->record();
+		?>
+<div class="anonce blog">
+<div class="cvr"><strong><?=
+				$record->link()?></strong>
+<div class="cnt"><?=
+				$record->description?>...</div>
+</div>
+</div>
+<?
+	}
+
 }

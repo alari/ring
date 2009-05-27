@@ -11,6 +11,9 @@ class R_Fr_Site_System {
 	{
 		$system = $params->record();
 		$q = $system->anonces;
+		// FIXME: HARDCODE!!!
+		if($system->instance instanceof R_Mdl_Afisha_System ) $q->test("time", time(), ">");
+
 		R_Mdl_Session::setQueryAccesses( $q, $system->site );
 		?>
 <div class="system" id="sysid-<?=$system->urlbase?>">
@@ -29,7 +32,7 @@ class R_Fr_Site_System {
 	static public function showOwnCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		$system = $params->record();
-		
+
 		switch (get_class( $system->instance )) {
 			case "R_Mdl_Libro" :
 				$cycles = $system->collections;
@@ -60,7 +63,7 @@ R.Collection.setSortable("#coll-sort", '.cycle.libro', '<?=$system->site->host?>
 				}
 				echo "</div>";
 			break;
-			
+
 			case "R_Mdl_Sound" :
 				$albums = $system->collections;
 				echo "<div id='coll-sort'>";
@@ -90,7 +93,7 @@ R.Collection.setSortable("#coll-sort", '.cycle', '<?=$system->site->host?>');
 				}
 				echo "</div>";
 			break;
-			
+
 			default :
 				$query = $system->anonces;
 				R_Mdl_Session::setQueryAccesses( $query, $system->site );

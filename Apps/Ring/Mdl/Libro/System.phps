@@ -1,11 +1,11 @@
 <?php
 /**
- * @table blog
+ * @table libro
  *
- * @field:config system -inverse blog
+ * @field:config system -inverse libro
  */
-class R_Mdl_Blog extends R_Mdl_Site_SysInstance {
-	const CREATIVE_CLASS = "R_Mdl_Blog_Post";
+class R_Mdl_Libro_System extends R_Mdl_Site_SysInstance {
+	const CREATIVE_CLASS = "R_Mdl_Libro_Text";
 
 	/**
 	 * Returns creative by its id, if accessible
@@ -15,7 +15,7 @@ class R_Mdl_Blog extends R_Mdl_Site_SysInstance {
 	 */
 	public function getCreative( $id )
 	{
-		return $this->getCreativeById( $id, "R_Mdl_Blog_Post" );
+		return $this->getCreativeById( $id, "R_Mdl_Libro_Text" );
 	}
 
 	public function url( $page = 1 )
@@ -24,11 +24,11 @@ class R_Mdl_Blog extends R_Mdl_Site_SysInstance {
 	}
 
 	public function addFormTitle() {
-		return "Новая запись в блоге, ".$this->title;
+		return "Новое лит. произведение, ".$this->title;
 	}
 
 	public function editFormTitle() {
-		return "Правка записи в блоге, ".$this->title;
+		return "Правка произведения, ".$this->title;
 	}
 
 }

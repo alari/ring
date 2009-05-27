@@ -7,11 +7,12 @@
  *
  * @field collections -owns many R_Mdl_Site_Collection -inverse system -order-by position
  *
- * @field instance -one-of blog; im; libro; sound
- * @field blog -owns one R_Mdl_Blog -inverse system
- * @field im -owns one R_Mdl_Im -inverse system
- * @field libro -owns one R_Mdl_Libro -inverse system
- * @field sound -owns one R_Mdl_Sound -inverse system
+ * @field instance -one-of blog; im; libro; sound; afisha
+ * @field blog -owns one R_Mdl_Blog_System -inverse system
+ * @field im -owns one R_Mdl_Im_System -inverse system
+ * @field libro -owns one R_Mdl_Libro_System -inverse system
+ * @field sound -owns one R_Mdl_Sound_System -inverse system
+ * @field afisha -owns one R_Mdl_Afisha_System -inverse system
  *
  * @field title varchar(128) NOT NULL
  * @field position tinyint NOT NULL
@@ -22,8 +23,8 @@
  * @index site,urlbase -unique
  */
 class R_Mdl_Site_System extends O_Dao_ActiveRecord {
-	private static $classes = Array ("blog" => "R_Mdl_Blog", "im"=>"R_Mdl_Im", "sound"=>"R_Mdl_Sound", "libro"=>"R_Mdl_Libro");
-	private static $titles = Array ("blog" => "Блог", "im"=>"Изображения", "sound"=>"Музыка", "libro"=>"Литература");
+	private static $classes = Array ("blog" => "R_Mdl_Blog_System", "im"=>"R_Mdl_Im_System", "sound"=>"R_Mdl_Sound_System", "libro"=>"R_Mdl_Libro_System", "afisha"=>"R_Mdl_Afisha_System");
+	private static $titles = Array ("blog" => "Блог", "im"=>"Изображения", "sound"=>"Музыка", "libro"=>"Литература", "afisha"=>"Афиша");
 	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям и друзьям друзей", "private" => "Друзьям",
 									"disable" => "Только себе");
 
@@ -113,7 +114,7 @@ class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 		$this->site->systems->test("position", $this->position, ">")->field("position", "position-1", true)->update();
 		parent::delete();
 	}
-	
+
 	/**
 	 * Sets system position
 	 *
@@ -122,7 +123,7 @@ class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 	public function setPosition($newPosition) {
 		if($newPosition == $this->position) return;
 		if($newPosition <= 0 || $newPosition > count($this->site->systems)+1) return;
-		
+
 		$systems = $this->site->systems;
 
 		if($newPosition > $this->position) {
@@ -134,6 +135,6 @@ class R_Mdl_Site_System extends O_Dao_ActiveRecord {
 		$this->position = $newPosition;
 		parent::save();
 	}
-	
+
 
 }

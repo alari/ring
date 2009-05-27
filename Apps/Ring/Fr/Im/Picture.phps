@@ -67,4 +67,26 @@ $was_tag=0;
 </div>
 <?
 	}
+
+	/**
+	 * Shows anonce on frontpage or in relations
+	 *
+	 * @param O_Dao_Renderer_Show_Params $params
+	 */
+	static public function showAnonce(O_Dao_Renderer_Show_Params $params) {
+		$record = $params->record();
+		?>
+<div class="anonce im">
+<div class="cvr"><strong><?=
+				$record->link()?></strong>
+<div class="cnt"><a href="<?=
+				$record->url()?>"><img src="<?=
+				$record->creative->img_tiny?>"
+	alt="<?=
+				htmlspecialchars( $record->title . " - " . $record->description )?>" /></a></div>
+</div>
+</div>
+<?
+	}
+
 }
