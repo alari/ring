@@ -10,9 +10,12 @@ class R_Fr_Site_System {
 	static public function showHomeCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		$system = $params->record();
+		/* @var $q O_Dao_Query */
 		$q = $system->anonces;
 		// FIXME: HARDCODE!!!
-		if($system->instance instanceof R_Mdl_Afisha_System ) $q->test("time", time(), ">");
+		if($system->instance instanceof R_Mdl_Afisha_System ){
+			$q->test("time", time(), ">")->clearOrders()->orderBy("time");
+		}
 
 		R_Mdl_Session::setQueryAccesses( $q, $system->site );
 		?>
