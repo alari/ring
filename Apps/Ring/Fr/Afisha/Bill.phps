@@ -80,17 +80,8 @@ $was_tag=0;
 <div class="cvr"><strong><?=
 				$record->link()?> / <?=date("d.m.Y", $record->time)?></strong>
 <div class="cnt">
-
 <?if($record->description){?><?=$record->description?><?}?>
-
-<?if(false && $record->creative["img_full"] && $record->creative["img_full"] != "-"){?>
-<a href="<?=
-				$record->url()?>"><img src="<?=
-				$record->creative->img_tiny?>"
-	alt="<?=
-				htmlspecialchars( $record->title . " - " . $record->description )?>" /></a>
-<?} else echo $record->description;?>
-				</div>
+</div>
 </div>
 </div>
 <?
