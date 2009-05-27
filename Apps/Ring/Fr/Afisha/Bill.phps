@@ -76,17 +76,19 @@ $was_tag=0;
 	static public function showAnonce(O_Dao_Renderer_Show_Params $params) {
 		$record = $params->record();
 		?>
-<div class="anonce im">
+<div class="anonce bill">
 <div class="cvr"><strong><?=
 				$record->link()?> / <?=date("d.m.Y", $record->time)?></strong>
 <div class="cnt">
 
-<?if($record->creative["img_full"] && $record->creative["img_full"] != "-"){?>
+<?if($record->description){?><?=$record->description?><?}?>
+
+<?if(false && $record->creative["img_full"] && $record->creative["img_full"] != "-"){?>
 <a href="<?=
 				$record->url()?>"><img src="<?=
 				$record->creative->img_tiny?>"
 	alt="<?=
-				htmlspecialchars( $record->title . " - " . $record->description )?>" /></a>
+				htmlspecialchars( $record->title . " - " .  )?>" /></a>
 <?} else echo $record->description;?>
 				</div>
 </div>
