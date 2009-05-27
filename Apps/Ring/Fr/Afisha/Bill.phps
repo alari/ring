@@ -88,7 +88,7 @@ $was_tag=0;
 				$record->url()?>"><img src="<?=
 				$record->creative->img_tiny?>"
 	alt="<?=
-				htmlspecialchars( $record->title . " - " .  )?>" /></a>
+				htmlspecialchars( $record->title . " - " . $record->description )?>" /></a>
 <?} else echo $record->description;?>
 				</div>
 </div>
