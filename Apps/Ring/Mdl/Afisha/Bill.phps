@@ -9,7 +9,7 @@
  *
  * @field description -relative anonce->description -edit -title Кр. опис.
  *
- * @field img_full ENUM('png','gif','jpeg','-') -image src: imgSrc full; filepath: imgPath full; width: 1280; height: 1280 cascade: img_preview, img_tiny -edit -title Картинка
+ * @field img_full ENUM('png','gif','jpeg','-') -image src: imgSrc full; filepath: imgPath full; width: 1280; height: 1280; cascade: img_preview, img_tiny -edit -title Картинка
  * @field img_preview -image src: imgSrc preview; filepath: imgPath preview; width: 500; height: 500
  * @field img_tiny -image src: imgSrc tiny; filepath: imgPath tiny; width: 100; height: 90
  *
