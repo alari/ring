@@ -81,7 +81,7 @@ class R_Fr_Site_Anonce {
 	 */
 	static public function showRssCallback(O_Dao_Renderer_Show_Params $params) {
 		$record = $params->record();
-
+		if(!$record->isVisible()) return;
 		ob_start();
 		$record->creative->show(null, "rss-cont");
 		$descr = ob_get_clean();
