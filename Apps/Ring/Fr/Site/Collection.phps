@@ -13,7 +13,7 @@ class R_Fr_Site_Collection {
 		$system = $collection->system;
 
 		switch (get_class( $system->instance )) {
-			case "R_Mdl_Sound" :
+			case "R_Mdl_Sound_System" :
 				$files = array ();
 				$titles = array ();
 				foreach ($collection->anonces as $anonce) if($anonce->isVisible()) {
@@ -60,7 +60,7 @@ $$('.tracklist ol li').addClass('move-me');
 <?
 			break;
 
-			case "R_Mdl_Libro" :
+			case "R_Mdl_Libro_System" :
 				?>
 <h1><?=$collection->title?></h1>
 <div class="content">
@@ -80,7 +80,7 @@ $$('#anonce-sort li').addClass('move-me');
 				<?
 			break;
 
-			case "R_Mdl_Im" :
+			case "R_Mdl_Im_System" :
 					?>
 <h1><?=$collection->title?></h1>
 <div class="content">
