@@ -5,7 +5,7 @@ class R_Lf_Cmd_Rss extends R_Lf_Command {
 	{
 		$query = $this->getSite()->anonces;
 		R_Mdl_Session::setQueryAccesses($query, $this->getSite());
-		$query->orderBy("time DESC")->limit(20);
+		$query->orderBy("id DESC")->limit(20);
 
 		$feed = new O_Feed_Rss($query, $this->getSite()->url(), $this->getSite()->title);
 		if(count($query)) $feed->setLastBuildDate($query->current()->time);
