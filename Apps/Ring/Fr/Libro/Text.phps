@@ -61,13 +61,7 @@ $was_tag=0;
 <div class="date">Цикл: <?=$post->collection->link()?></div>
 </div>
 
-<br/><br/>
-
-<center>
 <h2><a href="<?=$post->url()?>"><?=$post->anonce->title?></a></h2>
-</center>
-
-<br/><br/>
 
 <div class="comms"><a href="<?=$post->url()?>">Комментариев: <?=$post->anonce->nodes->getFunc()?></a></div>
 
