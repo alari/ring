@@ -85,14 +85,14 @@ class R_Mdl_User extends O_Acl_User {
 	}
 
 	/**
-	 * Returns profile url
+	 * Returns identity url
 	 *
 	 * @return string
 	 */
 	public function url()
 	{
 		if ($this[ "site" ]) {
-			return $this->site->url( "profile" );
+			return $this->site->url();
 		} else {
 			return $this->identity;
 		}

@@ -8,7 +8,7 @@ class R_Cmd_OpenId_Provider extends R_Command {
 		if (!$user || !$user->isOurUser()) {
 			return $this->redirect( "/" );
 		}
-		
+
 		// User must log in at first
 		if (isset( $_GET[ "openid_action" ] ) && $_GET[ "openid_action" ] == "login" && (!R_Mdl_Session::isLogged() ||
 						 R_Mdl_Session::getUser()->id != $user->id)) {
@@ -25,12 +25,12 @@ class R_Cmd_OpenId_Provider extends R_Command {
 			$tpl->error = "Вы должны быть авторизованы, чтобы войти на другой сайт с помощью OpenId.";
 			return $tpl;
 		}
-		
+
 		$server = new O_OpenId_Provider( );
-		
+
 		if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST' && isset( $_POST[ 'openid_action' ] ) && $_POST[ 'openid_action' ] ===
 			 'trust') {
-				
+
 				if (isset( $_POST[ 'allow' ] )) {
 					if (isset( $_POST[ 'forever' ] )) {
 						$server->allowSite( $server->getSiteRoot( $_GET ) );
