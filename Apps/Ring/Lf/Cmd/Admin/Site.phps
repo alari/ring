@@ -7,9 +7,21 @@ class R_Lf_Cmd_Admin_Site extends R_Lf_Command {
 		$formProcessor->setActiveRecord( $this->getSite() );
 		$formProcessor->setAjaxMode();
 		$formProcessor->addHiddenField( "action", "main-process" );
-		if (O_Registry::get( "app/env/request_method" ) == "POST" && $this->getParam( "action" ) == "main-process") {
+		if ($this->isMethodPost() && $this->getParam( "action" ) == "main-process") {
 			$formProcessor->responseAjax( 1 );
 			return null;
+		} elseif ($this->isMethodPost() && $this->getParam( "action" ) == "tech:host" && $this->can(
+				"manage tech" )) {
+			$host = $this->getParam( "host" );
+			$pwd = $this->getParam( "pwd", "12345" );
+			if ($this->getSite()->setHost( $host, $pwd )) {
+				$this->setNotice(
+						"Сайт был успешно переименован. Отредактируйте стили и уведомьте владельца о новом пароле!" );
+				return $this->redirect( $this->getSite()->url() );
+			} else {
+				$this->setNotice( "Сайт не был переименован." );
+				return $this->redirect();
+			}
 		} else {
 			$tpl = $this->getTemplate();
 			$tpl->form = $formProcessor;

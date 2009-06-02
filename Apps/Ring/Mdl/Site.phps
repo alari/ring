@@ -152,4 +152,44 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 		rmdir( $dirname );
 	}
 
+	/**
+	 * Updates site's host
+	 * Also updates site owner's identity and password, if needed
+	 *
+	 * @param string $host
+	 * @param string $pwd
+	 * @return bool
+	 */
+	public function setHost($host, $pwd="12345") {
+		if (substr( $host, 0, 7 ) == "http://")
+			$host = substr( $host, 7 );
+		if (strpos( $host, "/" ))
+			$host = substr( $host, 0, strpos( $host, "/" ) );
+		if (!$host || $host == $this->host) return;
+
+		$old_host = $this->host;
+		$this->host = $host;
+		try {
+			$this->save();
+		} catch (PDOException $e) {
+			return false;
+		}
+
+		if(!rename(substr($this->static_folder, 0, -1), O_Registry::get( "app/sites/static_folder" ) . $host)) {
+			$this->host = $old_host;
+			$this->save();
+			return false;
+		}
+
+		$this->static_urlbase = O_Registry::get( "app/sites/static_urlbase" ) . "$host/";
+		$this->static_folder = O_Registry::get( "app/sites/static_folder" ) . "$host/";
+		$this->save();
+
+		if($this->owner && $this->owner->identity == $this->url()) {
+			$this->owner->setIdentity($this->host, $pwd);
+		}
+		return true;
+	}
+
+
 }

@@ -61,6 +61,25 @@ class R_Mdl_User extends O_Acl_User {
 	}
 
 	/**
+	 * Updates identity and password for user
+	 *
+	 * @param string $identity
+	 * @param string $pwd
+	 * @return bool
+	 */
+	public function setIdentity($identity, $pwd) {
+		O_OpenId_Provider_UserPlugin::normalize( $identity );
+		$this->identity = $identity;
+		try {
+			$this->save();
+		} catch(PDOException $e) {
+			return false;
+		}
+		return $this->setPwd($pwd);
+	}
+
+
+	/**
 	 * Returns true if user was registered on our site, false -- if it's other openid user
 	 *
 	 * @return bool

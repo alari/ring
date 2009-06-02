@@ -4,6 +4,8 @@ class R_Cmd_OpenId_Provider extends R_Command {
 	public function process()
 	{
 		$identity = O_Registry::get( "app/env/http_host" );
+		if (strpos( $identity, "openid." ) === 0 || strpos( $identity, "www." ) === 0)
+			list (, $identity) = explode( ".", $identity, 2 );
 		$user = R_Mdl_User::getByIdentity( $identity );
 		if (!$user || !$user->isOurUser()) {
 			return $this->redirect( "/" );
@@ -13,7 +15,7 @@ class R_Cmd_OpenId_Provider extends R_Command {
 		if (isset( $_GET[ "openid_action" ] ) && $_GET[ "openid_action" ] == "login" && (!R_Mdl_Session::isLogged() ||
 						 R_Mdl_Session::getUser()->id != $user->id)) {
 							if ($_SERVER[ 'REQUEST_METHOD' ] == "POST") {
-								$user = R_Mdl_User::getByIdentity( O_Registry::get( "app/env/http_host" ) );
+								$user = R_Mdl_User::getByIdentity( $identity );
 				if ($user && $user->login( $_POST[ "pwd" ] )) {
 					unset( $_GET[ 'openid_action' ] );
 					Zend_OpenId::redirect( Zend_OpenId::selfUrl(), $_GET );
@@ -40,7 +42,8 @@ class R_Cmd_OpenId_Provider extends R_Command {
 				if (isset( $_POST[ 'forever' ] )) {
 					$server->denySite( $server->getSiteRoot( $_GET ) );
 				}
-				Zend_OpenId::redirect( $_GET[ 'openid_return_to' ], array ('openid.mode' => 'cancel') );
+				Zend_OpenId::redirect( $_GET[ 'openid_return_to' ],
+						array ('openid.mode' => 'cancel') );
 			}
 		} elseif ($_SERVER[ 'REQUEST_METHOD' ] == 'GET' && isset( $_GET[ 'openid_action' ] ) && $_GET[ 'openid_action' ] ===
 					 'trust') {

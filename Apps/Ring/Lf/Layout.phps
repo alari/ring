@@ -22,9 +22,13 @@ class R_Lf_Layout extends R_Layout {
 		$this->addCssSrc('bases.css');
 		$this->addCssSrc( $this->site->staticUrl( "style.css" ) );
 
+		// Openid provider
 		if (!O_Registry::get( "app/env/process_url" ) && $this->site->owner)
-			$this->addHeadLink( "openid.provider", $this->site->url( "openid/provider" ) );
+			$this->addHeadLink( "openid.provider", "http://".O_Registry::get("app/env/http_host")."/openid/provider" );
+
 		$this->addJavaScriptSrc( "ring.js" );
+
+		// Authentication
 		if (!R_Mdl_Session::isLogged())
 			$this->addJavaScriptSrc(
 					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . $this->site->host .
@@ -33,7 +37,7 @@ class R_Lf_Layout extends R_Layout {
 		if(is_file($this->site->staticPath( "favicon.ico"))) {
 			$this->addHeadLink("SHORTCUT ICON", $this->site->staticUrl("favicon.ico"));
 		}
-						 
+
 		$this->tpl->prepareMeta();
 		?>
 <div id="wrap"<?=($this->bodyClass?" class=\"".$this->bodyClass."\"":"")?>>
@@ -60,7 +64,7 @@ class R_Lf_Layout extends R_Layout {
 		<div class="cont">
 			<span>&copy; <?=$this->site->copyright?></span>
 			<span>Сайт входит в <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольцо
-Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?></span>
+Mirari.Name</a></span>
 
 <div style="float:right">
 <?$this->showCounter();?>
