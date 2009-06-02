@@ -2,7 +2,7 @@
 /**
  * @table info_topic -loop:envelop container ul
  *
- * @field title VARCHAR(255) -edit -show-def linkInContainer h1 -show-loop linkInContainer li -required Введите! -title Название рубрики
+ * @field title VARCHAR(255) -edit -show-def сontainer h1 -show-loop linkInContainer li -required Введите! -title Название рубрики
  * 
  * @field pages -has many R_Mdl_Info_Page -inverse topics -show-def
  * 
