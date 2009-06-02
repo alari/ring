@@ -5,6 +5,7 @@ class R_Mr_Layout extends R_Layout {
 	{
 		$this->addCssSrc('bases.css');
 		$this->addCssSrc('ctr/style.css');
+		$this->addCssSrc('mr/style.css');
 		O_Js_Middleware::getFramework()->addSrc($this);
 		
 		// Authentication
