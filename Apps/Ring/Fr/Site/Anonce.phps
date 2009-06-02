@@ -108,6 +108,7 @@ class R_Fr_Site_Anonce {
 		ob_start();
 		$record->creative->show(null, "rss-cont");
 		$descr = ob_get_clean();
+		$date = date("Y-m-d", $record->time)."T".date("H:i:s", $record->time);
 ?>
 
 <entry>
@@ -115,8 +116,8 @@ class R_Fr_Site_Anonce {
        <link rel="alternate" type="text/html"
         href="<?=$record->url()?>"/>
        <id><?=$record->url()?></id>
-       <updated><?=date("Y-m-dTH:i:s", $record->time)?></updated>
-       <published><?=date("Y-m-dTH:i:s", $record->time)?></published>
+       <updated><?=$date?></updated>
+       <published><?=$date?></published>
        <author>
          <name><?=$record->owner->nickname?></name>
          <uri><?=$record->owner->url()?></uri>
