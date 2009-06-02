@@ -5,6 +5,7 @@ class R_Ctr_Lo_Main extends R_Layout {
 	{
 		$this->addCssSrc('bases.css');
 		$this->addCssSrc('ctr/style.css');
+		O_Js_Middleware::getFramework()->addSrc($this);
 		?>
 <div id="wrap">
 
@@ -47,7 +48,7 @@ class R_Ctr_Lo_Main extends R_Layout {
 		<div id="foot">
 		<div class="cont">
 			<span>Взгляд из центра <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольца творческих сайтов
-Mirari.Name</a> <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?></span>
+Mirari.Name</a></span>
 		</div>
 <div style="float:right">
 <?$this->showCounter();?>
