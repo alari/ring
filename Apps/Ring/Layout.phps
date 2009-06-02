@@ -72,8 +72,9 @@ class R_Layout extends O_Html_Layout {
 <?
 				if (R_Mdl_Session::can( "manage site", $site )) {
 					?>
-<p><b><a href="<?=$site->url( "admin/site" )?>">Настройки сайта</a></b></p>
+<p><b>Настройки сайта</b></p>
 <ul>
+	<li><a href="<?=$site->url( "admin/site" )?>">Общие настройки</a></li>
 	<li><a href="<?=$site->url( "admin/tags" )?>">Метки</a></li>
 	<li><a href="<?=$site->url( "admin/about" )?>">Страница &laquo;О
 	сайте&raquo;</a></li>
