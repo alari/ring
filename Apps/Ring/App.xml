@@ -101,7 +101,7 @@
 	<Registry key="class/R_Mdl_Site_Comment/acl">
 		<User-In field="owner">
 			<Role name="Content Owner"></Role></User-In>
-		<User-In field="site-&gt;owner">
+		<User-In field="root-&gt;site-&gt;owner">
 			<Role name="Site Owner"></Role></User-In></Registry>
 	<Registry key="uses" type="add" value="R_Mdl_Session"></Registry>
 	<Registry key="classnames/session" value="R_Mdl_Session"></Registry>
