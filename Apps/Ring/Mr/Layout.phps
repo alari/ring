@@ -36,6 +36,14 @@ class R_Mr_Layout extends R_Layout {
 </div>
 <?
 	}
+	
+	public function rightColumn() {
+		?>
+<p><a href="/">Кольцо творческих сайтов</a></p>
+<p><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/">Оглядеться из центра</a></p>
+		<?
+	}
+	
 		
 	public function setTitle($title="") {
 		parent::setTitle($title . ($title ? " - " : "") . "Кольцо творческих сайтов");
