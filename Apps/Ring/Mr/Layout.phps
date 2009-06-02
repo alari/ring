@@ -10,7 +10,7 @@ class R_Mr_Layout extends R_Layout {
 		// Authentication
 		if (!R_Mdl_Session::isLogged())
 			$this->addJavaScriptSrc(
-					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . $this->site->host .
+					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . O_Registry::get("app/hosts/project") .
 						 $_SERVER[ 'REQUEST_URI' ] );
 		?>
 <div id="wrap">
