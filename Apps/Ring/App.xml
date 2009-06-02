@@ -68,6 +68,10 @@
 			<Registry key="paginator/page" pocket="1"></Registry></Url></If>
 	<Url pattern="openid/redirect">
 		<Command name="OpenId_Redirect" plugin="-"></Command>
+	</Url><Url pattern="openid/login">
+		<Command name="OpenId_Login" plugin="-"></Command>
+	</Url><Url pattern="openid/logout">
+		<Command name="OpenId_Logout" plugin="-"></Command>
 	</Url><If plugin="Mr">
 		<Url pattern="topic:(.+)" command="Topic">
 			<Registry key="current/topic" pocket="1"
@@ -77,18 +81,15 @@
 		<Url pattern="edit:(.+)" command="EditPage">
 			<Registry key="current/page" pocket="1"
 				class="R_Mdl_Info_Page" method="getByUrlName">
-			</Registry></Url>
+			</Registry>
+			<Registry key="tmp/page" pocket="1"></Registry></Url>
 		<Url pattern="(.+)" command="Page">
 			<Registry key="current/page" pocket="1"
 				class="R_Mdl_Info_Page" method="getByUrlName">
 			</Registry></Url>
 		<Registry key="layout_class" value="R_Mr_Layout"></Registry></If>
-	<Url pattern="openid/login">
-		<Command name="OpenId_Login" plugin="-"></Command>
-	</Url>
-	<Url pattern="openid/logout">
-		<Command name="OpenId_Logout" plugin="-"></Command>
-	</Url>
+	
+	
 	<Url pattern="openid/provider">
 		<Command name="OpenId_Provider" plugin="-"></Command>
 	</Url>

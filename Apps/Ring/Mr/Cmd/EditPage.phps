@@ -8,7 +8,7 @@ class R_Mr_Cmd_EditPage extends R_Command {
 		if($page instanceof R_Mdl_Info_Page ) {
 			$form->setActiveRecord($page);
 		} else {
-			$form->setCreateMode(urldecode(substr(O_Registry::get("app/env/process_url"), 5)));
+			$form->setCreateMode(strtr(urldecode(substr(O_Registry::get("app/env/process_url"), 5)), "_", " "));
 		}
 		$form->setRelationQuery("topics", O_Dao_Query::get("R_Mdl_Info_Topic"), "title", true);
 		
