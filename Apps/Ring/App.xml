@@ -66,6 +66,20 @@
 			<Command name="Own_Msgs_Box"></Command></Url>
 		<Url pattern="Own/Friends-([0-9]+)" command="Own_Friends">
 			<Registry key="paginator/page" pocket="1"></Registry></Url></If>
+	<If plugin="Mr">
+		<Url pattern="topic:(.+)" command="Topic">
+			<Registry key="current/topic" pocket="1"
+				class="R_Mdl_Info_Topic" method="getByUrlName">
+			</Registry>
+		</Url>
+		<Url pattern="edit:(.+)" command="EditPage">
+			<Registry key="current/page" pocket="1"
+				class="R_Mdl_Info_Page" method="getByUrlName">
+			</Registry></Url>
+		<Url pattern="(.+)" command="Page">
+			<Registry key="current/page" pocket="1"
+				class="R_Mdl_Info_Page" method="getByUrlName">
+			</Registry></Url></If>
 	<Url pattern="openid/login">
 		<Command name="OpenId_Login" plugin="-"></Command>
 	</Url>
