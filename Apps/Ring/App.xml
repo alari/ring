@@ -66,7 +66,9 @@
 			<Command name="Own_Msgs_Box"></Command></Url>
 		<Url pattern="Own/Friends-([0-9]+)" command="Own_Friends">
 			<Registry key="paginator/page" pocket="1"></Registry></Url></If>
-	<If plugin="Mr">
+	<Url pattern="openid/redirect">
+		<Command name="OpenId_Redirect" plugin="-"></Command>
+	</Url><If plugin="Mr">
 		<Url pattern="topic:(.+)" command="Topic">
 			<Registry key="current/topic" pocket="1"
 				class="R_Mdl_Info_Topic" method="getByUrlName">
@@ -90,9 +92,7 @@
 	<Url pattern="openid/provider">
 		<Command name="OpenId_Provider" plugin="-"></Command>
 	</Url>
-	<Url pattern="openid/redirect">
-		<Command name="OpenId_Redirect" plugin="-"></Command>
-	</Url>
+	
 	<Url pattern="comment">
 		<Command name="Comment" plugin="-"></Command>
 	</Url>
