@@ -115,8 +115,8 @@ class R_Fr_Site_Anonce {
        <link rel="alternate" type="text/html"
         href="<?=$record->url()?>"/>
        <id><?=$record->url()?></id>
-       <updated><?=date("Y-m-dTH:i:sZ", $record->time)?></updated>
-       <published><?=date("Y-m-dTH:i:sZ", $record->time)?></published>
+       <updated><?=date("Y-m-dTH:i:s", $record->time)?></updated>
+       <published><?=date("Y-m-dTH:i:s", $record->time)?></published>
        <author>
          <name><?=$record->owner->nickname?></name>
          <uri><?=$record->owner->url()?></uri>
