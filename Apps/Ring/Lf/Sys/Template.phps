@@ -91,11 +91,11 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 			?></ul><?
 		}
 
-		if ($this->creative) {
+		if (R_Mdl_Session::isLogged() && $this->creative) {
 			?>
 
 <p><i>Внутренний ID для связей: <b><?=$this->creative[ "anonce" ]?></b></i></p>
-<?if(R_Mdl_Session::isLogged() && R_Mdl_Session::getUser() != $this->creative->anonce->owner){
+<?if(R_Mdl_Session::getUser() != $this->creative->anonce->owner){
 	$has_fovarites = R_Mdl_Session::getUser()->favorites->has($this->creative->anonce);
 	?>
 <p>
