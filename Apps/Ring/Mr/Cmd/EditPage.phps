@@ -29,4 +29,9 @@ class R_Mr_Cmd_EditPage extends R_Command {
 		return $tpl;
 	}
 	
+	public function isAuthenticated() {
+		return R_Mdl_Session::isLogged() && R_Mdl_Session::getUser()->isOurUser();
+	}
+	
+	
 }
