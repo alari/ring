@@ -1,6 +1,6 @@
 <?php
 /**
- * @table info_topic -loop:envelop container ul
+ * @table info_topic -loop:envelop envelop ul
  *
  * @field title VARCHAR(255) -edit -show-def linkInContainer h1 -show-loop linkInContainer li -required Введите! -title Название рубрики
  * 
