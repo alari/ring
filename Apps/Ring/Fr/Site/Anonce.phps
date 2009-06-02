@@ -96,6 +96,37 @@ class R_Fr_Site_Anonce {
 </item>
 <?
 	}
+	
+	/**
+	 * Shows Atom anonce
+	 *
+	 * @param O_Dao_Renderer_Show_Params $params
+	 */
+	static public function showAtomCallback(O_Dao_Renderer_Show_Params $params) {
+		$record = $params->record();
+		if(!$record->isVisible()) return;
+		ob_start();
+		$record->creative->show(null, "rss-cont");
+		$descr = ob_get_clean();
+?>
+
+<entry>
+       <title><?=htmlspecialchars($record->title)?></title>
+       <link rel="alternate" type="text/html"
+        href="<?=$record->url()?>"/>
+       <id><?=$record->url()?></id>
+       <updated><?=date("Y-m-dTH:i:sZ", $record->time)?></updated>
+       <published><?=date("Y-m-dTH:i:sZ", $record->time)?></published>
+       <author>
+         <name><?=$record->owner->nickname?></name>
+         <uri><?=$record->owner->url()?></uri>
+       </author>
+       <content type="html">
+       <?=htmlspecialchars($descr)?>
+       </content>
+     </entry>
+<?
+	}
 
 
 }

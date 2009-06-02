@@ -21,6 +21,7 @@ R.System.setSortable("#sys-sort", '.system', '<?=$this->getSite()->host?>');
 		}
 
 		$this->layout()->addHeadLink("alternate", $this->getSite()->url("rss"), "application/rss+xml", "RSS: новое на сайте");
+		$this->layout()->addHeadLink("alternate", $this->getSite()->url("atom"), "application/atom+xml", "Atom: новое на сайте");
 	}
 
 	public function displayNav()
