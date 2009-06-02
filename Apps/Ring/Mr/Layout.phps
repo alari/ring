@@ -16,6 +16,10 @@ class R_Mr_Layout extends R_Layout {
 <?$this->showCounter();?>
 </div>
 <?
-		$this->setTitle( "Кольцо творческих сайтов" );
 	}
+	
+	public function setTitle($title) {
+		parent::setTitle($title . ($title ? " - " : "") . "Кольцо творческих сайтов");
+	}
+	
 }

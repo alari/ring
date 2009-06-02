@@ -10,8 +10,15 @@ class R_Mr_Cmd_EditPage extends R_Command {
 		} else {
 			$form->setCreateMode(urldecode(substr(O_Registry::get("app/env/process_url"), 5)));
 		}
+		$form->setRelationQuery("topics", O_Dao_Query::get("R_Mdl_Info_Topic"), "title", true);
 		
 		if($form->handle()) {
+			if($this->getParam("topic_new")) {
+				try {
+					$topic = new R_Mdl_Info_Topic($this->getParam("topic_new"));
+					$form->getActiveRecord()->topics[] = $topic;
+				} catch(Exception $e) {}
+			}
 			return $this->redirect($form->getActiveRecord()->url());
 		}
 		
