@@ -79,7 +79,8 @@
 		<Url pattern="(.+)" command="Page">
 			<Registry key="current/page" pocket="1"
 				class="R_Mdl_Info_Page" method="getByUrlName">
-			</Registry></Url></If>
+			</Registry></Url>
+		<Registry key="layout_class" value="R_Mr_Layout"></Registry></If>
 	<Url pattern="openid/login">
 		<Command name="OpenId_Login" plugin="-"></Command>
 	</Url>
