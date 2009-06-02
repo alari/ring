@@ -1,6 +1,6 @@
 <?php
 /**
- * @table info_page -show-loop:callback container ul
+ * @table info_page -loop:callback container ul
  *
  * @field title VARCHAR(255) -edit -show-def container h1 -show-loop linkInContainer li -title Название и заголовок странички
  * @field content MEDIUMTEXT -edit wysiwyg Libro 650 -check htmlPurify -show-def -title
