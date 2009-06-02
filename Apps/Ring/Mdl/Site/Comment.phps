@@ -4,6 +4,8 @@
  *
  * @field owner -has one R_Mdl_User -inverse comments
  *
+ * @field site_owner -relative root.site->owner
+ *
  * @field time INT -show date
  * @field content TEXT -edit area -show -required Нужно обязательно что-то ввести -title Комментарий -check R_Mdl_Site_Comment::checkContent
  */
