@@ -38,6 +38,8 @@ class R_Mr_Layout extends R_Layout {
 <?$this->showCounter();?>
 </div>
 	</div>
+	
+	<div id="head"></div>
 
 </div>
 <?
