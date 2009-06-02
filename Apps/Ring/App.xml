@@ -102,7 +102,7 @@
 		<User-In field="owner">
 			<Role name="Content Owner"></Role></User-In>
 		<User-In field="site_owner">
-			<Role>Site Owner</Role></User-In></Registry>
+			<Role name="Site Owner"></Role></User-In></Registry>
 	<Registry key="uses" type="add" value="R_Mdl_Session"></Registry>
 	<Registry key="classnames/session" value="R_Mdl_Session"></Registry>
 	<Registry key="classnames/user" value="R_Mdl_User"></Registry>
