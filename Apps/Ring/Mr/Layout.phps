@@ -6,6 +6,12 @@ class R_Mr_Layout extends R_Layout {
 		$this->addCssSrc('bases.css');
 		$this->addCssSrc('ctr/style.css');
 		O_Js_Middleware::getFramework()->addSrc($this);
+		
+		// Authentication
+		if (!R_Mdl_Session::isLogged())
+			$this->addJavaScriptSrc(
+					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . $this->site->host .
+						 $_SERVER[ 'REQUEST_URI' ] );
 		?>
 <div id="wrap">
 

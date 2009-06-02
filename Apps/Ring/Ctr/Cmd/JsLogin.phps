@@ -15,7 +15,7 @@ class R_Ctr_Cmd_JsLogin extends R_Command {
 		if (!$ref) {
 			return "//no url";
 		}
-		if (!R_Mdl_Site::getByHost( $ref )) {
+		if (!R_Mdl_Site::getByHost( $ref ) && $ref != O_Registry::get("app/hosts/project")) {
 			return "//no site";
 		}
 		$_SESSION[ "redirect" ] = $this->getParam( "ref" );
