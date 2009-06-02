@@ -99,9 +99,10 @@ var R = {
 				evalScripts:true};
 			R.AjaxFragment.show(e, options);
 		},
-		delete: function(url, root, comm, sys) {
+		remove: function(url, root, comm, sys) {
 			if(!confirm("Удалить комментарий со всеми ответами на него?")) return;
-			$$('comm-'+comm, 'comm-add-'+comm).fade(0.5);
+			$('comm-'+comm).fade(0.5);
+			$('comm-add-'+comm).fade(0.4);
 			new Request.JSON({url:url, data:{
 				root: root,
 				action: 'delete',
@@ -113,7 +114,8 @@ var R = {
 					}
 					for(j in response.comments) {
 						i = response.comments[j];
-						$$('comm-'+i, 'comm-add-'+i).dispose();
+						$('comm-'+i).dispose();
+						$('comm-add-'+i).dispose();
 					}
 				}}).send();
 		}

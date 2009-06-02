@@ -49,10 +49,10 @@ class R_Fr_Site_Comment {
 	{
 		?>
 
-<div class="comms<?=$parent?'':' lined'?>" id="c-add-<?=$parent?>">
+<div class="comms<?=$parent?'':' lined'?>" id="comm-add-<?=$parent?>">
 <?if($canDelete){?>
 <a href="javascript:void(0)"
-	onclick="R.Comment.delete('<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)">Удалить</a></div>
+	onclick="R.Comment.remove('<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)">Удалить</a>
 <?}?>
 <a href="javascript:void(0)"
 	onclick="R.Comment.showForm(this,'<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)"><?=($parent ? "Ответить" : "Оставить отзыв")?></a></div>

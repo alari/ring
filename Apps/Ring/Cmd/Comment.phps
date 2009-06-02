@@ -12,6 +12,7 @@ class R_Cmd_Comment extends R_Command {
 				return "Вы не можете оставлять отзывы. Вероятно, Вам просто нужно авторизоваться.";
 			}
 			$this->handleForm();
+			return;
 		}
 
 		if ($this->getParam( "action" ) == "delete") {
@@ -20,12 +21,14 @@ class R_Cmd_Comment extends R_Command {
 				return json_encode(
 						array ("status" => "FAILED", "message" => "Комментарий не найден.") );
 			if (!$this->can( "delete", $comment ))
-				return json_encode( array ("status" => "FAILED", "message" => "Недостаточно прав.") );
+				return json_encode(
+						array ("status" => "FAILED", "message" => "Недостаточно прав.") );
 			$ids = Array ();
 			/* @var $comment R_Mdl_Site_Comment */
-			foreach ($comment->getBranch()->field( "id" )->select() as $id) {
+			foreach ($comment->getChilds()->field( "id" )->select() as $id) {
 				$ids[] = $id[ "id" ];
 			}
+			$ids[] = $comment->id;
 			$comment->delete( true );
 			return json_encode( array ("status" => "SUCCEED", "comments" => $ids) );
 		}
