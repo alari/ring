@@ -18,7 +18,7 @@ class R_Mr_Layout extends R_Layout {
 <?
 	}
 	
-	public function setTitle($title) {
+	public function setTitle($title="") {
 		parent::setTitle($title . ($title ? " - " : "") . "Кольцо творческих сайтов");
 	}
 	
