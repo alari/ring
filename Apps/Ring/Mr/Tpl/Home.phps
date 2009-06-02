@@ -5,7 +5,7 @@ class R_Mr_Tpl_Home extends R_Template {
 	public function displayContents()
 	{
 		$this->page = R_Mdl_Info_Page::getByTitle("Заглавная страница");
-		if($this->page) $this->page->show($this->layout());
+		if($this->page) echo $this->page->content;
 		$this->layout()->setTitle();
 	}
 	
