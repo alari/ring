@@ -35,7 +35,7 @@ class R_Lf_Tpl_Admin_Site extends R_Lf_Template {
 		<th><input type="submit" value="Сменить хост" /></th>
 	</tr>
 </table>
-<input type="hidden" name="action" value="tech:host" />"</fieldset>
+<input type="hidden" name="action" value="tech:host" /></fieldset>
 </form>
 <?
 		}

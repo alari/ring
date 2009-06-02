@@ -24,7 +24,7 @@ class R_Lf_Layout extends R_Layout {
 
 		// Openid provider
 		if (!O_Registry::get( "app/env/process_url" ) && $this->site->owner)
-			$this->addHeadLink( "openid.provider", "http://".O_Registry::get("app/env/http_host")."/openid/provider" );
+			$this->addHeadLink( "openid.server", "http://".O_Registry::get("app/env/http_host")."/openid/provider" );
 
 		$this->addJavaScriptSrc( "ring.js" );
 
