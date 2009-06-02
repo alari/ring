@@ -17,11 +17,11 @@ class R_Mdl_Info_Page extends O_Dao_ActiveRecord {
 	}
 	
 	public function url($mode="") {
-		return O_UrlBuilder::get(($mode?$mode.":":"").urlencode($this->title));
+		return O_UrlBuilder::get(($mode?$mode.":":"").urlencode(strtr($this->title, " ", "_")));
 	}
 	
 	static public function getByUrlName($name) {
-		return self::getByTitle(urldecode($name));
+		return self::getByTitle(strtr(urldecode($name), "_", " "));
 	}
 	
 	static public function getByTitle($title) {
