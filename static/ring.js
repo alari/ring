@@ -80,6 +80,7 @@ var R = {
 	},
 	Comment: {
 		showForm: function(el, url, root, parent, sys) {
+			el = $(el).getParent();
 			e=el.retrieve("form-el");
 			if(!e) {
 				var e=new Element('div');
@@ -97,6 +98,24 @@ var R = {
 				sys: sys},
 				evalScripts:true};
 			R.AjaxFragment.show(e, options);
+		},
+		delete: function(url, root, comm, sys) {
+			if(!confirm("Удалить комментарий со всеми ответами на него?")) return;
+			$$('comm-'+comm, 'comm-add-'+comm).fade(0.5);
+			new Request.JSON({url:url, data:{
+				root: root,
+				action: 'delete',
+				comm: comm,
+				sys: sys}, onSuccess:function(response){
+					if(response.status == "FAILED") {
+						alert("Ошибка! Удалить комментарий не удалось.");
+						return;
+					}
+					for(j in response.comments) {
+						i = response.comments[j];
+						$$('comm-'+i, 'comm-add-'+i).dispose();
+					}
+				}}).send();
 		}
 	},
 	System: {

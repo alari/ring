@@ -6,15 +6,32 @@ class R_Cmd_Comment extends R_Command {
 	public function process()
 	{
 		Header( "Content-type: text/html; charset=utf-8" );
-		
-		if (!$this->can( "comment " . $this->system[ "access" ], $this->system->site )) {
-			return "Вы не можете оставлять отзывы. Вероятно, Вам просто нужно авторизоваться.";
-		}
-		
+
 		if ($this->getParam( "action" ) == "comment-new" || $this->getParam( "action" ) == "comment-for") {
+			if (!$this->can( "comment " . $this->system[ "access" ], $this->system->site )) {
+				return "Вы не можете оставлять отзывы. Вероятно, Вам просто нужно авторизоваться.";
+			}
 			$this->handleForm();
 		}
-	
+
+		if ($this->getParam( "action" ) == "delete") {
+			$comment = $this->root->nodes->test( "id", $this->getParam( "comm" ) )->getOne();
+			if (!$comment)
+				return json_encode(
+						array ("status" => "FAILED", "message" => "Комментарий не найден.") );
+			if (!$this->can( "delete", $comment ))
+				return json_encode( array ("status" => "FAILED", "message" => "Недостаточно прав.") );
+			$ids = Array ();
+			/* @var $comment R_Mdl_Site_Comment */
+			foreach ($comment->getBranch()->field( "id" )->select() as $id) {
+				$ids[] = $id[ "id" ];
+			}
+			$comment->delete( true );
+			return json_encode( array ("status" => "SUCCEED", "comments" => $ids) );
+		}
+
+		return "Неизвестное действие.";
+
 	}
 
 	private function handleForm()
@@ -26,9 +43,9 @@ class R_Cmd_Comment extends R_Command {
 		$form->addHiddenField( "ajax-driven", "yes" );
 		$form->addHiddenField( "action", $this->getParam( "action" ) );
 		$form->setAjaxMode();
-		
+
 		$form->setSubmitButtonValue( "Сохранить" );
-		
+
 		if ($this->getParam( "action" ) == "comment-for") {
 			$form->setCreateMode( $this->root );
 			$form->setFormTitle( "Отозваться" );
@@ -41,7 +58,7 @@ class R_Cmd_Comment extends R_Command {
 			$form->setCreateMode( $this->root );
 			$form->setFormTitle( "Оставить отзыв" );
 		}
-		
+
 		if ($this->getParam( "ajax-driven" ) == "yes" && $form->handle()) {
 			$comment = $form->getActiveRecord();
 			if (isset( $parent )) {
@@ -58,8 +75,10 @@ class R_Cmd_Comment extends R_Command {
 	{
 		if ($this->getParam( "ajax-driven" ) == "yes") {
 			if ($notFound)
-				echo json_encode( 
-						array ("status" => "FAILED", "errors" => array ("_" => "Error: parent node not found.")) );
+				echo json_encode(
+						array ("status" => "FAILED",
+									"errors" => array (
+																"_" => "Error: parent node not found.")) );
 			$form->responseAjax();
 			return null;
 		}

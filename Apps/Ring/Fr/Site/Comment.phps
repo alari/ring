@@ -17,7 +17,7 @@ class R_Fr_Site_Comment {
 		if($isList && !$comment->root->isVisible()) return;
 		?>
 
-<div class="comm"<?if(!$isList){?> style="margin-left:<?=$comment->level?>em"<?}?>>
+<div class="comm"<?if(!$isList){?> style="margin-left:<?=$comment->level?>em"<?}?> id="comm-<?=$comment->id?>">
 	<div class="comm-ava"><?=$comment->owner->link()?>
 	<?=$comment->owner->avatar()?></div>
 <a name="comment<?=$comment->id?>"></a>
@@ -33,8 +33,9 @@ class R_Fr_Site_Comment {
 <?=$comment->content?>
 </div>
 
-<?if(!$isList) self::addForm( $comment[ "root" ], $comment->root->system->id, $comment->id );?>
-<?
+<?if(!$isList) {
+	self::addForm( $comment[ "root" ], $comment->root->system->id, $comment->id, R_Mdl_Session::can("delete", $comment) );
+}
 	}
 
 	/**
@@ -44,12 +45,17 @@ class R_Fr_Site_Comment {
 	 * @param int $systemId
 	 * @param int $parent
 	 */
-	static public function addForm( $rootId, $systemId, $parent = 0 )
+	static public function addForm( $rootId, $systemId, $parent = 0, $canDelete = false )
 	{
 		?>
 
-<div class="comms<?=$parent?'':' lined'?>"><a href="javascript:void(0)"
-	onclick="R.Comment.showForm($(this).getParent(),'<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)"><?=($parent ? "Ответить" : "Оставить отзыв")?></a></div>
+<div class="comms<?=$parent?'':' lined'?>" id="c-add-<?=$parent?>">
+<?if($canDelete){?>
+<a href="javascript:void(0)"
+	onclick="R.Comment.delete('<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)">Удалить</a></div>
+<?}?>
+<a href="javascript:void(0)"
+	onclick="R.Comment.showForm(this,'<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)"><?=($parent ? "Ответить" : "Оставить отзыв")?></a></div>
 <?
 	}
 
