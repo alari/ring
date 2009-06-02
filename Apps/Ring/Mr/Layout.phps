@@ -12,7 +12,8 @@ class R_Mr_Layout extends R_Layout {
 			$this->addJavaScriptSrc(
 					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" . O_Registry::get("app/hosts/project") .
 						 $_SERVER[ 'REQUEST_URI' ] );
-		?>
+		$this->addJavaScriptSrc( "ring.js" );
+?>
 <div id="wrap">
 
 	<div id="cont">
@@ -29,6 +30,9 @@ class R_Mr_Layout extends R_Layout {
 		<div class="cont"><?$this->rightColumn();?></div>
 	</div>
 
+	<div id="head">
+		<div id="user-box"><div class="info-box"><? $this->loginBox() ?></div></div>
+	</div>
 	
 		<div id="foot">
 		<div class="cont">
@@ -38,9 +42,6 @@ class R_Mr_Layout extends R_Layout {
 <?$this->showCounter();?>
 </div>
 	</div>
-	
-	<div id="head"></div>
-
 </div>
 <?
 	}

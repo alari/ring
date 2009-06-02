@@ -99,25 +99,6 @@ Mirari.Name</a></span>
 	}
 
 	/**
-	 * Login box / logged abilities
-	 *
-	 */
-	protected function loginBox()
-	{
-		if (R_Mdl_Session::isLogged()) {
-			?>
-<p>Привет,
-<?=R_Mdl_Session::getUser()->link()?>! <a href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a></p>
-<p><a href="javascript:void(0)" onclick="R.UserMenu.toggle()">Возможности</a></p>
-<div id="user-menu"><?
-			$this->userMenu()?></div>
-<?
-		} else {
-			parent::openidBox();
-		}
-	}
-
-	/**
 	 * User menu contents
 	 *
 	 */
