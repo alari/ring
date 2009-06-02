@@ -50,9 +50,11 @@ class R_Mr_Layout extends R_Layout {
 		?>
 <p><a href="/">Кольцо творческих сайтов</a></p>
 <p><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/">Оглядеться из центра</a></p>
-<br/><br/>
 		<?
-		if(method_exists($this->tpl, "displayRightColumn")) $this->tpl->displayRightColumn();
+		if(method_exists($this->tpl, "displayRightColumn")) {
+			echo "<br/>";
+			$this->tpl->displayRightColumn();
+		}
 	}
 	
 		

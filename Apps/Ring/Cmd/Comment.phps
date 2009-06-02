@@ -9,7 +9,7 @@ class R_Cmd_Comment extends R_Command {
 
 		if ($this->getParam( "action" ) == "comment-new" || $this->getParam( "action" ) == "comment-for") {
 			if (!$this->can( "comment " . $this->system[ "access" ], $this->system->site )) {
-				return "Вы не можете оставлять отзывы. Вероятно, Вам просто нужно авторизоваться.";
+				return "Вы не можете оставлять отзывы. Вероятно, Вам просто нужно авторизоваться. (<a href='http://".O_Registry::get("app/hosts/project")."/OpenId' target='_blank'>Как?</a>)";
 			}
 			$this->handleForm();
 			return;
