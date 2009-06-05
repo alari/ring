@@ -51,7 +51,8 @@
 			<Registry key="current/site" pocket="2" class="R_Mdl_Site"
 				method="getByHost"></Registry>
 		</Host>
-		
+		<Registry key="layout_class" value="R_Lf_Layout"></Registry>
+
 	</If>
 	<If plugin="Ctr">
 		
@@ -65,7 +66,10 @@
 			<Registry key="paginator/page" pocket="4"></Registry>
 			<Command name="Own_Msgs_Box"></Command></Url>
 		<Url pattern="Own/Friends-([0-9]+)" command="Own_Friends">
-			<Registry key="paginator/page" pocket="1"></Registry></Url></If>
+			<Registry key="paginator/page" pocket="1"></Registry></Url>
+		<Registry key="layout_class" value="R_Ctr_Layout"></Registry>
+		<Registry key="locale/default/base/class" value="O_Locale_Dictionary_IniFile"></Registry>
+		<Registry key="locale/default/base/params/filebase" value="Apps/Ring/Ctr/dict."></Registry></If>
 	<Url pattern="openid/redirect">
 		<Command name="OpenId_Redirect" plugin="-"></Command>
 	</Url><Url pattern="openid/login">

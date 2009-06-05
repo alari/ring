@@ -1,5 +1,5 @@
 <?php
-class R_Ctr_Lo_Main extends R_Layout {
+class R_Ctr_Layout extends R_Layout {
 
 	public function displayBody()
 	{
@@ -47,8 +47,7 @@ class R_Ctr_Lo_Main extends R_Layout {
 	</div>
 		<div id="foot">
 		<div class="cont">
-			<span>Взгляд из центра <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольца творческих сайтов
-Mirari.Name</a></span>
+			<span><?=$this->getPhrase("lo.bottom", "http://".O_Registry::get( "app/hosts/project" )."/")?></span>
 		</div>
 <div style="float:right">
 <?$this->showCounter();?>
