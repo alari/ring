@@ -1,8 +1,6 @@
 <?php
 class R_Tpl_OpenId_Login extends R_Template {
-	
-	protected $layoutClass = "R_Ctr_Lo_Main";
-	
+
 	public $mode;
 	public $error;
 	public $identity;
@@ -11,7 +9,7 @@ class R_Tpl_OpenId_Login extends R_Template {
 	{
 		if ($this->error)
 			echo "<h1>", $this->error, "</h1>";
-		
+
 		switch ($this->mode) {
 			case "auth" :
 			case "our" :
@@ -43,6 +41,6 @@ class R_Tpl_OpenId_Login extends R_Template {
 <?
 			break;
 		}
-	
+
 	}
 }
