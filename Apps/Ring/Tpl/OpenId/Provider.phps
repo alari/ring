@@ -1,15 +1,20 @@
 <?php
 class R_Tpl_OpenId_Provider extends R_Template {
-	
+
 	public $mode;
 	public $error;
 	public $site;
+
+	public function prepareMeta() {
+		;
+	}
+
 
 	public function displayContents()
 	{
 		if ($this->error)
 			echo "<h1>", $this->error, "</h1>";
-		
+
 		switch ($this->mode) {
 			case "auth" :
 				?>
@@ -45,7 +50,7 @@ class R_Tpl_OpenId_Provider extends R_Template {
 <?
 			break;
 		}
-	
+
 	}
 }
 

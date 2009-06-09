@@ -5,6 +5,10 @@ class R_Tpl_OpenId_Login extends R_Template {
 	public $error;
 	public $identity;
 
+	public function prepareMeta() {
+		;
+	}
+
 	public function displayContents()
 	{
 		if ($this->error)
