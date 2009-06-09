@@ -9,6 +9,11 @@ class R_Tpl_OpenId_Provider extends R_Template {
 		;
 	}
 
+	public function displayNav() {
+		;
+	}
+
+
 
 	public function displayContents()
 	{
