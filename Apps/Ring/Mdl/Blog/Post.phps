@@ -4,7 +4,7 @@
  *
  * @field:config anonce -inverse blog_post
  *
- * @field:config content -required Текст записи необходим
+ * @field:config content -required Текст записи необходим -edit wysiwyg Libro 550
  */
 class R_Mdl_Blog_Post extends R_Mdl_Site_Creative {
 
