@@ -37,8 +37,26 @@ class R_Layout extends O_Html_Layout {
 			define( '_SAPE_USER', '78e3b4251484822d768fa71f69ef1d4a' );
 		}
 		require_once './' . _SAPE_USER . '/sape.php';
-		$this->sape = new SAPE_client( array("charset"=>"UTF-8", "multi_site"=>true));
+		$this->sape = new SAPE_client( array ("charset" => "UTF-8", "multi_site" => true) );
 		return $this->sape;
+	}
+
+	/**
+	 * Returns linkfeed client
+	 *
+	 * @return LinkfeedClient
+	 */
+	public function linkfeed()
+	{
+		if ($this->linkfeed) {
+			return $this->linkfeed;
+		}
+		define( 'LINKFEED_USER', '22b3dae89af246203ae6df09b8b0200f1540c101' );
+
+		require_once './' . LINKFEED_USER . '/linkfeed.php';
+
+		$this->linkfeed = new LinkfeedClient( array ("charset" => "UTF-8", "multi_site" => true) );
+		return $this->linkfeed;
 	}
 
 	/**

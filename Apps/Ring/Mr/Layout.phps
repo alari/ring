@@ -40,7 +40,7 @@ class R_Mr_Layout extends R_Layout {
 			<span>Кольцо творческих сайтов Mirari.Name | <a href="http://<?=O_Registry::get( "app/hosts/center" )?>/">Оглядеться из центра</a></span>
 		</div>
 <div style="float:right">
-<?$this->showCounter();?><?=$this->sape()->return_links()?>
+<?=$this->linkfeed()->return_links()?><?$this->showCounter();?><?=$this->sape()->return_links()?>
 </div>
 	</div>
 </div>
