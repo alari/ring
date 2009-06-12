@@ -7,16 +7,39 @@ class R_Layout extends O_Html_Layout {
 	 */
 	protected $site;
 
-	public function setMetaDescription($args) {
-		parent::addMeta("description", join(" - ", $args));
+	private $sape;
+	private $linkfeed;
+
+	public function setMetaDescription( $args )
+	{
+		parent::addMeta( "description", join( " - ", $args ) );
 	}
 
-	public function setMetaKeywords($args) {
-		$args = array_merge($args, array("творчество", "проза", "стихи", "музыка", "песни", "авторы", "публикации", "читать", "слушать", "интересно"));
-		parent::addMeta("keywords", join(", ", $args));
+	public function setMetaKeywords( $args )
+	{
+		$args = array_merge( $args,
+				array ("творчество", "проза", "стихи", "музыка", "песни", "авторы", "публикации",
+						"читать", "слушать", "интересно") );
+		parent::addMeta( "keywords", join( ", ", $args ) );
 	}
 
-
+	/**
+	 * Returns sape client
+	 *
+	 * @return SAPE_client
+	 */
+	public function sape()
+	{
+		if ($this->sape) {
+			return $this->sape;
+		}
+		if (!defined( '_SAPE_USER' )) {
+			define( '_SAPE_USER', '78e3b4251484822d768fa71f69ef1d4a' );
+		}
+		require_once './' . _SAPE_USER . '/sape.php';
+		$this->sape = new SAPE_client( array("charset"=>"UTF-8", "multi_site"=>true));
+		return $this->sape;
+	}
 
 	/**
 	 * redefine O_Html_Layout::displayDoctype()
@@ -25,20 +48,23 @@ class R_Layout extends O_Html_Layout {
 	protected function displayDoctype()
 	{
 		?>
-<?= '<?xml version="1.0" encoding="UTF-8"?>' ?>
+<?=
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><?
+		'<?xml version="1.0" encoding="UTF-8"?>'?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?
 	}
 
-	protected function showNotice() {
-	if (isset( $_SESSION[ "notice" ] )) {
+	protected function showNotice()
+	{
+		if (isset( $_SESSION[ "notice" ] )) {
 			?>
 <div id="notice" onclick="$(this).fade('out')"><?=$_SESSION[ "notice" ]?></div>
 <?
 			unset( $_SESSION[ "notice" ] );
 		}
 	}
-
 
 	protected function userMenu()
 	{
@@ -61,14 +87,20 @@ class R_Layout extends O_Html_Layout {
 <?
 				}
 				?>
-				<li><i><a href="<?=$site->url("comments")?>">Комментарии на сайте</a></i></li>
-				<?if(!R_Mdl_Session::can( "manage site", $site ) && R_Mdl_Session::can("manage styles", $site)) {?>
+				<li><i><a href="<?=$site->url( "comments" )?>">Комментарии на сайте</a></i></li>
+				<?
+				if (!R_Mdl_Session::can( "manage site", $site ) && R_Mdl_Session::can(
+						"manage styles", $site )) {
+					?>
 <li><a href="<?=$site->url( "admin/site-view" )?>">Редактировать
 	оформление</a></li>
-				<?}?>
+				<?
+				}
+				?>
 				</ul>
-				
-				<p><i><a href="http://<?=O_Registry::get("app/hosts/center")?>/">Взглянуть из центра</a></i></p>
+
+<p><i><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/">Взглянуть
+из центра</a></i></p>
 <?
 				if (R_Mdl_Session::can( "manage site", $site )) {
 					?>
@@ -79,22 +111,34 @@ class R_Layout extends O_Html_Layout {
 	<li><a href="<?=$site->url( "admin/about" )?>">Страница &laquo;О
 	сайте&raquo;</a></li>
 	<li><a href="<?=$site->url( "admin/systems" )?>">Список систем</a></li>
-	<?if(R_Mdl_Session::can("manage styles", $site)){?>
+	<?
+					if (R_Mdl_Session::can( "manage styles", $site )) {
+						?>
 	<li><a href="<?=$site->url( "admin/site-view" )?>">Редактировать
 	оформление</a></li>
-	<?}?>
+	<?
+					}
+					?>
 </ul>
 <?
 				}
 			}
 
-			$new_msgs = R_Mdl_Session::getUser()->msgs_own->test("readen", 0)->getFunc();
+			$new_msgs = R_Mdl_Session::getUser()->msgs_own->test( "readen", 0 )->getFunc();
 
 			?>
-<p><b><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/msgs/">Внутренняя почта</a></b></p>
+<p><b><a
+	href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/msgs/">Внутренняя
+почта</a></b></p>
 <ul>
-<?if(R_Mdl_Session::can("write msgs")){?><li><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/msgs/write">Написать</a></li><?}?>
-<li><a href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/msgs/">Входящие<?=($new_msgs?" <b>(+$new_msgs)</b>":"")?></a></li>
+<?
+			if (R_Mdl_Session::can( "write msgs" )) {
+				?><li><a
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/msgs/write">Написать</a></li><?
+			}
+			?>
+<li><a
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/msgs/">Входящие<?=($new_msgs ? " <b>(+$new_msgs)</b>" : "")?></a></li>
 </ul>
 
 <p><b><a href="<?=R_Mdl_Session::getUser()->url()?>">Ваш профиль</a></b></p>
@@ -103,7 +147,8 @@ class R_Layout extends O_Html_Layout {
 		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/edit-profile">Редактировать
 	профиль</a></li>
 	<li><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends">Друзья</a> &nbsp; <small><a
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends">Друзья</a>
+	&nbsp; <small><a
 		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends/list">Кто</a></small></li>
 	<li><a
 		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/favorites">Избранное</a></li>
@@ -118,41 +163,44 @@ class R_Layout extends O_Html_Layout {
 <?
 		}
 
-		if(R_Mdl_Session::can( "manage roles" ) || R_Mdl_Session::can( "manage users" )){
-		?>
+		if (R_Mdl_Session::can( "manage roles" ) || R_Mdl_Session::can( "manage users" )) {
+			?>
 <p><b>Управление</b></p>
 <ul>
 <?
-		if (R_Mdl_Session::can( "manage roles" )) {
-			?>
+			if (R_Mdl_Session::can( "manage roles" )) {
+				?>
 <li><a
 		href="http://<?=O_Registry::get( "app/hosts/center" )?>/admin/roles">Настройки
 	ролей</a></li>
 <?
-		}
-		?>
+			}
+			?>
 <?
 
-		if (R_Mdl_Session::can( "manage users" )) {
-			?>
+			if (R_Mdl_Session::can( "manage users" )) {
+				?>
 <li><a
 		href="http://<?=O_Registry::get( "app/hosts/center" )?>/admin/user">Новый
 	пользователь</a></li>
 <?
-		}
-		?>
+			}
+			?>
 </ul>
-<?}
+<?
+		}
 	}
 
 	protected function showCounter()
 	{
-		if(O_Registry::get("app/mode") != "production") return;
-?>
-<!--LiveInternet counter--><script type="text/javascript">document.write("<a href='http://www.liveinternet.ru/click;ring' target=_blank><img src='http://counter.yadro.ru/hit;ring?t26.1;r" + escape(document.referrer) + ((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth)) + ";u" + escape(document.URL) +";i" + escape("Жж"+document.title.substring(0,80)) + ";" + Math.random() + "' border=0 width=88 height=15 alt='' title='LiveInternet: показано число посетителей за сегодня'><\/a>")</script><!--/LiveInternet-->
+		if (O_Registry::get( "app/mode" ) != "production")
+			return;
+		?>
+<!--LiveInternet counter-->
+<script type="text/javascript">document.write("<a href='http://www.liveinternet.ru/click;ring' target=_blank><img src='http://counter.yadro.ru/hit;ring?t26.1;r" + escape(document.referrer) + ((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth)) + ";u" + escape(document.URL) +";i" + escape("Жж"+document.title.substring(0,80)) + ";" + Math.random() + "' border=0 width=88 height=15 alt='' title='LiveInternet: показано число посетителей за сегодня'><\/a>")</script>
+<!--/LiveInternet-->
 <?
 	}
-
 
 	/**
 	 * Login box / logged abilities
@@ -163,7 +211,8 @@ class R_Layout extends O_Html_Layout {
 		if (R_Mdl_Session::isLogged()) {
 			?>
 <p>Привет,
-<?=R_Mdl_Session::getUser()->link()?>! <a href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a></p>
+<?=R_Mdl_Session::getUser()->link()?>! <a
+	href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a></p>
 <p><a href="javascript:void(0)" onclick="R.UserMenu.toggle()">Возможности</a></p>
 <div id="user-menu"><?
 			$this->userMenu()?></div>
@@ -172,7 +221,7 @@ class R_Layout extends O_Html_Layout {
 			$this->openidBox();
 		}
 	}
-	
+
 	protected function openidBox()
 	{
 		?>

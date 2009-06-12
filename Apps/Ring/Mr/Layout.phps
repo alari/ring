@@ -7,7 +7,7 @@ class R_Mr_Layout extends R_Layout {
 		$this->addCssSrc('ctr/style.css');
 		$this->addCssSrc('mr/style.css');
 		O_Js_Middleware::getFramework()->addSrc($this);
-		
+
 		// Authentication
 		if (!R_Mdl_Session::isLogged())
 			$this->addJavaScriptSrc(
@@ -34,19 +34,19 @@ class R_Mr_Layout extends R_Layout {
 	<div id="head">
 		<div id="user-box"><div class="info-box"><? $this->loginBox() ?></div></div>
 	</div>
-	
+
 		<div id="foot">
 		<div class="cont">
 			<span>Кольцо творческих сайтов Mirari.Name | <a href="http://<?=O_Registry::get( "app/hosts/center" )?>/">Оглядеться из центра</a></span>
 		</div>
 <div style="float:right">
-<?$this->showCounter();?>
+<?$this->showCounter();?><?=$this->sape()->return_links()?>
 </div>
 	</div>
 </div>
 <?
 	}
-	
+
 	public function rightColumn() {
 		?>
 <p><a href="/">Кольцо творческих сайтов</a></p>
@@ -57,10 +57,10 @@ class R_Mr_Layout extends R_Layout {
 			$this->tpl->displayRightColumn();
 		}
 	}
-	
-		
+
+
 	public function setTitle($title="") {
 		parent::setTitle($title . ($title ? " - " : "") . "Кольцо творческих сайтов");
 	}
-	
+
 }

@@ -67,7 +67,7 @@ class R_Lf_Layout extends R_Layout {
 Mirari.Name</a></span>
 
 <div style="float:right">
-<?$this->showCounter();?>
+<?$this->showCounter();?><?=$this->sape()->return_links()?>
 </div>
 		</div>
 	</div>
