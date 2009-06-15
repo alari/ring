@@ -47,7 +47,7 @@ class R_Ctr_Layout extends R_Layout {
 	</div>
 		<div id="foot">
 		<div class="cont">
-			<span><?=$this->getPhrase("lo.bottom", "http://".O_Registry::get( "app/hosts/project" )."/")?></span>
+			<span><?=$this->_("lo.bottom", "http://".O_Registry::get( "app/hosts/project" )."/")?></span>
 		</div>
 <div style="float:right">
 <?=$this->linkfeed()->return_links()?><?$this->showCounter();?><?=$this->sape()->return_links()?>

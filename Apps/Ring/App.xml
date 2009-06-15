@@ -68,8 +68,7 @@
 		<Url pattern="Own/Friends-([0-9]+)" command="Own_Friends">
 			<Registry key="paginator/page" pocket="1"></Registry></Url>
 		<Registry key="layout_class" value="R_Ctr_Layout"></Registry>
-		<Registry key="locale/default/base/class" value="O_Locale_Dictionary_IniFile"></Registry>
-		<Registry key="locale/default/base/params/filebase" value="Apps/Ring/Ctr/dict."></Registry></If>
+		<Registry key="dict/default/base/filebase" value="Apps/Ring/Ctr/dict."></Registry></If>
 	<Url pattern="openid/redirect">
 		<Command name="OpenId_Redirect" plugin="-"></Command>
 	</Url><Url pattern="openid/login">
