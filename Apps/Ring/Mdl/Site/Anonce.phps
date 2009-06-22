@@ -26,6 +26,8 @@
  * @field title VARCHAR(255) -show linkInContainer
  * @field description TEXT -show
  *
+ * @field flags INT(64) NOT NULL DEFAULT 0 -enum 0: Всем; 3: Друзьям и друзьям друзей; 1: Друзьям; 32: Только себе -edit
+ *
  * @index time
  * @index system,time
  * @index collection,position
@@ -154,6 +156,17 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 							AND r2.$rel_target=?)
 			)", $userid, $userid, $userid );
 	}
+
+	static public function getByUserRelations($user, $flags) {
+		$q = O_Dao_Query::get(__CLASS__);
+		$tbl = O_Dao_TableInfo::get(__CLASS__)->getTableName();
+		$r_tbl = O_Dao_TableInfo::get("R_Mdl_User_Relation")->getTableName();
+		$q->join($r_tbl, "$r_tbl.site=$tbl.site OR $r_tbl.system=$tbl.system");
+		$q->test($r_tbl.".user", $user)->where($r_tbl.".flags & $flags");
+		$q->where("$tbl.flags = 0 OR ".$r_tbl.".flags & $tbl.flags OR $tbl.owner=".$user->id);
+		return $q;
+	}
+
 
 	/**
 	 * Deletes anonce

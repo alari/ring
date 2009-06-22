@@ -6,12 +6,12 @@
  * @field email VARCHAR(255) -edit -title Адрес электронной почты
  * @field nickname VARCHAR(255) -edit -title Ник или псевдоним
  *
- * @field friends -has many R_Mdl_User -inverse friend_of
- * @field friend_of -has many R_Mdl_User -inverse friends
- * @field friends_friends -alias friends.friends
- *
- * @field usr_related -owns many R_Mdl_User_Relation -inverse site
+ * @field usr_related -owns many R_Mdl_User_Relation -inverse author
  * @field relations -owns many R_Mdl_User_Relation -inverse user
+ *
+ * @field friends -alias relations.author -where flags & 1 AND author>0
+ * @field friend_of -alias usr_related.user -where flags & 1
+ * @field friends_friends -alias relations.author -where flags & 2 AND author>0
  *
  * @field msgs_own -owns many R_Mdl_Msg -inverse owner -order-by time DESC
  * @field msgs_target -owns many R_Mdl_Msg -inverse target
@@ -146,6 +146,15 @@ class R_Mdl_User extends O_Acl_User {
 	{
 		return "<a href=\"" . $this->url() . "\">" . ($this->nickname ? $this->nickname : $this->identity) . "</a>";
 	}
+
+	public function addFriend(O_Dao_ActiveRecord $object) {
+		R_Mdl_User_Relation::addFriend($this, $object);
+	}
+
+	public function removeFriend(O_Dao_ActiveRecord $object) {
+		R_Mdl_User_Relation::removeFriend($this, $object);
+	}
+
 
 	/**
 	 * Returns user by identity

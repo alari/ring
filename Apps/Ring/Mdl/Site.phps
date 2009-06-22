@@ -3,8 +3,8 @@
  * @table site -show-loop:callback R_Fr_Site::showInLoop
  * @field host varchar(255) NOT NULL
  * @field owner -has one R_Mdl_User -inverse site
- * @field owner_friends -alias owner.friends
- * @field owner_friends_friends -alias owner.friends.friends
+ * @field owner_friends -alias owner.relations.author -where flags & 1 AND author>0
+ * @field owner_friends_friends -alias owner.relations.author -where flags & 2 AND author>0
  *
  * @field usr_related -owns many R_Mdl_User_Relation -inverse site
  * @-field members -alias usr_related.user -where flags & 4
@@ -184,13 +184,13 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 			return false;
 		}
 
+		if(R_Mdl_User::getByIdentity($old_host) == $this->owner) {
+			$this->owner->setIdentity($this->host, $pwd);
+		}
+
 		$this->static_urlbase = O_Registry::get( "app/sites/static_urlbase" ) . "$host/";
 		$this->static_folder = O_Registry::get( "app/sites/static_folder" ) . "$host/";
 		$this->save();
-
-		if($this->owner && $this->owner->identity == $this->url()) {
-			$this->owner->setIdentity($this->host, $pwd);
-		}
 		return true;
 	}
 

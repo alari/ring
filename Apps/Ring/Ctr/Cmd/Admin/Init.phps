@@ -21,12 +21,10 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		$root->save();
 
 		if(!O_Dao_TableInfo::get("R_Mdl_Site_Anonce")->tableExists()) O_Dao_TableInfo::get("R_Mdl_Site_Anonce")->createTable();
+		if(!O_Dao_TableInfo::get("R_Mdl_User_Relation")->tableExists()) O_Dao_TableInfo::get("R_Mdl_User_Relation")->createTable();
 
 		$rootRole->allow( "manage roles" );
 		$rootRole->allow( "log in" );
-		foreach (O_Dao_Query::get( "O_Acl_Action" ) as $action) {
-			$rootRole->allow( $action->name );
-		}
 
 		return $this->redirect( "/" );
 	}

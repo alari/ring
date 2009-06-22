@@ -20,7 +20,7 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	const FLAG_BANNED = 4;
 	const FLAG_ADMIN = 8;
 	const FLAG_MEMBER = 16;
-	const FLAG_READER = 32;
+	const FLAG_OWNER = 32;
 
 	public function __construct( R_Mdl_User $user, O_Dao_ActiveRecord $object, $flags )
 	{
@@ -64,16 +64,19 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	{
 		// Add a relation
 		$rel = self::getRelation( $user, $object );
-		if (!$rel)
+		if (!$rel) {
 			$rel = new self( $user, $object, self::FLAG_FRIEND );
-			// Find friends to set FRIEND_FRIEND relations
-		$friends = $user->relations->test( "flags", self::FLAG_FRIEND, "&" )->test(
-				"author", 0, ">" )->getAll();
+		}
+		// Friend friends are available only if $object is user
+		if (!$object instanceof R_Mdl_User)
+			return;
+			// Find object friends
+		$friends = $object->friends;
 		foreach ($friends as $friend) {
-			$r = self::getRelation( $friend, $object );
-			if (!$r)
-				new self( $friend, $object, self::FLAG_FRIEND_FRIEND );
-			else {
+			$r = self::getRelation( $user, $friend );
+			if (!$r) {
+				new self( $user, $friend, self::FLAG_FRIEND_FRIEND );
+			} else {
 				$r->flags = $r->flags | self::FLAG_FRIEND_FRIEND;
 				$r->save();
 			}
@@ -89,6 +92,7 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	static public function removeFriend( $user, $object )
 	{
 		$rel = self::getRelation( $user, $object );
+
 		if (!$rel || $rel->flags & self::FLAG_FRIEND == 0)
 			return;
 		if ($rel->flags & ~self::FLAG_FRIEND > 0) {
@@ -101,22 +105,33 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 			$rel->save();
 			$rel->delete();
 		}
+		// Friends friends are available only for users
+		if (!$object instanceof R_Mdl_User)
+			return;
+
 		// Remove FRIEND_FRIEND flags for relations got this flag by current
 		$tbl = O_Dao_TableInfo::get( __CLASS__ )->getTableName();
-		/* @var $q O_Dao_Query */
-		// Connections with this object
-		$q = $object->usr_related;
-		// Theirs owners are friends of $user
-		$q->test( "user", $user->relations->field( "author" ), O_Dao_Query::IN );
-		// They have no other friends with $object
-		$q->clearFrom()->from( $tbl, "usr_rel" );
-		$q->where( "NOT EXISTS ?",
-				$object->usr_related->test( "user", $user, "!=" )->where( "author=usr_rel.user" ) );
-		// If there's only FRIEND_FRIEND flag, delete relation
-		$q1 = clone $q;
-		$q1->test( "flags", self::FLAG_FRIEND_FRIEND )->delete();
-		// Else remove flag
-		$q->field( "flags", "flags &~ " . self::FLAG_FRIEND_FRIEND, true )->update();
+		$q = O_Dao_Query::get( __CLASS__, "u_rel" )->field( "u_rel.*" );
+		// It's connected with this object and other user
+		$q->test( "u_rel.author", $object )->test( "u_rel.user", $user, "!=" );
+		// It has friend friend flag
+		$q->where( "u_rel.flags & " . self::FLAG_FRIEND_FRIEND );
+		// It has current user in friends
+		$q->where(
+				"EXISTS (SELECT * FROM $tbl ru WHERE ru.user=u_rel.user AND ru.author=? AND ru.flags & 1)",
+				$user );
+		// It has no other friends between it and object
+		$q->where(
+				"NOT EXISTS (SELECT * FROM $tbl r0 CROSS JOIN $tbl r1 ON r1.user=r0.author WHERE r0.user=u_rel.user AND r1.author=u_rel.author AND r0.flags & 1 AND r1.flags & 1 AND r1.user != ?)",
+				$user );
+		foreach ($q as $r) {
+			if ($r[ "flags" ] == self::FLAG_FRIEND_FRIEND) {
+				$r->delete();
+				continue;
+			}
+			$r[ "flags" ] = $r[ "flags" ] & ~self::FLAG_FRIEND_FRIEND;
+			$r->save();
+		}
 	}
 
 	/**
