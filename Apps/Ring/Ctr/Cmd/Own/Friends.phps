@@ -8,6 +8,7 @@ class R_Ctr_Cmd_Own_Friends extends R_Command {
 		//$anonces = R_Mdl_Session::getUser()->{"friends.anonces"}->orderBy("id DESC");
 		//R_Mdl_Site_Anonce::setQueryAccesses($anonces);
 		$anonces = R_Mdl_Site_Anonce::getByUserRelations(R_Mdl_Session::getUser(), R_Mdl_User_Relation::FLAG_FRIEND);
+		$anonces->orderBy("id DESC");
 
 		$tpl->paginator = $anonces->getPaginator( array ($this, "url") );
 		$tpl->title = "Лента друзей";
