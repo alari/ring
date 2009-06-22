@@ -7,6 +7,8 @@
  *
  * @field collections -owns many R_Mdl_Site_Collection -inverse system -order-by position
  *
+ * @field usr_related -owns many R_Mdl_User_Relation -inverse system
+ *
  * @field instance -one-of blog; im; libro; sound; afisha
  * @field blog -owns one R_Mdl_Blog_System -inverse system
  * @field im -owns one R_Mdl_Im_System -inverse system

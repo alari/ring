@@ -10,6 +10,9 @@
  * @field friend_of -has many R_Mdl_User -inverse friends
  * @field friends_friends -alias friends.friends
  *
+ * @field usr_related -owns many R_Mdl_User_Relation -inverse site
+ * @field relations -owns many R_Mdl_User_Relation -inverse user
+ *
  * @field msgs_own -owns many R_Mdl_Msg -inverse owner -order-by time DESC
  * @field msgs_target -owns many R_Mdl_Msg -inverse target
  *

@@ -6,6 +6,9 @@
  * @field owner_friends -alias owner.friends
  * @field owner_friends_friends -alias owner.friends.friends
  *
+ * @field usr_related -owns many R_Mdl_User_Relation -inverse site
+ * @-field members -alias usr_related.user -where flags & 4
+ *
  * @field systems -owns many R_Mdl_Site_System -inverse site -order-by position
  * @field tags -owns many R_Mdl_Site_Tag -inverse site
  * @field anonces -owns many R_Mdl_Site_Anonce -inverse site -order-by time DESC
