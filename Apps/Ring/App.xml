@@ -20,27 +20,6 @@
 		<Registry key="hosts/project" value="mirari"></Registry>
 		<Registry key="html/static_root" value="/static/"></Registry>
 	</If>
-	<If mode="production">
-		<Registry key="db/default/engine" value="mysql"></Registry>
-		<Registry key="db/default/host" value="localhost"></Registry>
-		<Registry key="db/default/dbname" value="mirari_testing"></Registry>
-		<Registry key="db/default/user" value="mirari"></Registry>
-		<Registry key="db/default/password" value="XKSLzapa"></Registry>
-		<Host pattern="(www\.)?creo\.su">
-			<Plugin name="Mr"></Plugin>
-		</Host>
-		<Host pattern="ctr\.creo\.su">
-			<Plugin name="Ctr"></Plugin>
-		</Host>
-		<Registry key="hosts/center" value="ctr.creo.su"></Registry>
-		<Registry key="hosts/project" value="creo.su"></Registry>
-		<Registry key="html/static_root" value="http://creo.su/static/"></Registry>
-
-
-
-
-
-	</If>
 	
 	<If mode="production">
 		<Registry key="db/default/engine" value="mysql"></Registry>
