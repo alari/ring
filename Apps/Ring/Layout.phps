@@ -214,9 +214,11 @@ class R_Layout extends O_Html_Layout {
 		if (O_Registry::get( "app/mode" ) != "production")
 			return;
 		?>
+<?=(R_Mdl_Session::isLogged()?"":$this->linkfeed()->return_links())?>
 <!--LiveInternet counter-->
 <script type="text/javascript">document.write("<a href='http://www.liveinternet.ru/click;ring' target=_blank><img src='http://counter.yadro.ru/hit;ring?t26.1;r" + escape(document.referrer) + ((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth)) + ";u" + escape(document.URL) +";i" + escape("Жж"+document.title.substring(0,80)) + ";" + Math.random() + "' border=0 width=88 height=15 alt='' title='LiveInternet: показано число посетителей за сегодня'><\/a>")</script>
 <!--/LiveInternet-->
+<?=(R_Mdl_Session::isLogged()?"":$this->sape()->return_links())?>
 <?
 	}
 
