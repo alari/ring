@@ -47,7 +47,7 @@ textarea.oo-renderer-field-area{width:90%;height:160px;}
 .openid-focus,.openid-blur{width:130px;}
 .openid-focus {color: black}
 .openid-blur {color: silver;font-style: italic}
-#openid {padding-top:15px;padding-left:19px;padding-right:12px;background: url(./../im/openid.gif) 0 16px no-repeat;height: 40px;white-space:nowrap;text-align:center;}
+#openid {padding-top:15px;padding-left:19px;padding-right:12px;background: url(./im/openid.gif) 0 16px no-repeat;height: 40px;white-space:nowrap;text-align:center;}
 #openid span {display: block;color: gray;font-size:8pt;white-space:nowrap;}
 #openid form {margin: 0}
 
