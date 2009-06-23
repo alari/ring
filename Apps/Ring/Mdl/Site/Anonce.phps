@@ -145,7 +145,6 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 						AND EXISTS (SELECT r1.author FROM $r_tbl r1 WHERE r1.flags & 1 AND r1.user=$tbl.owner AND r1.author=?)
 						) OR (
 						$tbl.owner!=$r_tbl.author
-						---system and site checking
 						)
 					)
 			)", $user, $user );
