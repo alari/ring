@@ -126,44 +126,41 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 *
 	 * @param O_Dao_Query $q
 	 */
-	static public function setQueryAccesses( O_Dao_Query $q )
+	static public function setQueryAccesses( O_Dao_Query $q, R_Mdl_User $user = null )
 	{
-		if (!R_Mdl_Session::isLogged()) {
+		if (!$user && !R_Mdl_Session::isLogged()) {
 			$q->test( "access", "public" );
 			return;
 		}
-		$anoncesTable = O_Dao_TableInfo::get( __CLASS__ )->getTableName();
-		/* @var $rel O_Dao_Relation_ManyToMany */
-		$rel = R_Mdl_Session::getUser()->friends;
-		$rel_table = $rel->getRelationTableName();
-		$rel_target = $rel->getTargetFieldName();
-		$rel_base = $rel->getBaseFieldName();
-		$userid = R_Mdl_Session::getUser()->id;
-
+		$tbl = O_Dao_TableInfo::get(__CLASS__)->getTableName();
+		$r_tbl = O_Dao_TableInfo::get("R_Mdl_User_Relation")->getTableName();
+		if(!$user) $user = R_Mdl_Session::getUser();
 		$q->where( "access='public'
 			OR owner=?
 			OR (
 				(access='protected' OR access='private')
-					AND EXISTS (SELECT r1.$rel_target FROM $rel_table r1 WHERE r1.$rel_base=$anoncesTable.owner AND r1.$rel_target=?)
-			) OR (
-				access = 'private'
-					AND EXISTS (SELECT r2.$rel_target
-						FROM $rel_table r1
-						LEFT JOIN $rel_table r2
-							ON r2.$rel_base=r1.$rel_target
-						WHERE
-							r1.$rel_base=$anoncesTable.owner
-							AND r2.$rel_target=?)
-			)", $userid, $userid, $userid );
+					AND (
+						(
+						$tbl.owner=$r_tbl.author
+						AND EXISTS (SELECT r1.author FROM $r_tbl r1 WHERE r1.flags & 1 AND r1.user=$tbl.owner AND r1.author=?)
+						) OR (
+						$tbl.owner!=$r_tbl.author
+						---system and site checking
+						)
+					)
+			)", $user, $user );
 	}
 
-	static public function getByUserRelations($user, $flags) {
+	static public function getByUserRelations($user) {
 		$q = O_Dao_Query::get(__CLASS__);
 		$tbl = O_Dao_TableInfo::get(__CLASS__)->getTableName();
 		$r_tbl = O_Dao_TableInfo::get("R_Mdl_User_Relation")->getTableName();
+		// Connected by site or system
 		$q->join($r_tbl, "$r_tbl.site=$tbl.site OR $r_tbl.system=$tbl.system");
-		$q->test($r_tbl.".user", $user)->where($r_tbl.".flags & $flags");
-		$q->where("$tbl.flags = 0 OR ".$r_tbl.".flags & $tbl.flags OR $tbl.owner=".$user->id);
+		// Friendship relations
+		$q->test($r_tbl.".user", $user)->where($r_tbl.".flags & ".R_Mdl_User_Relation::FLAG_FRIEND);
+		// Accesses
+		self::setQueryAccesses($q, $user);
 		return $q;
 	}
 
