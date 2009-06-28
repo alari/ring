@@ -24,6 +24,7 @@
  * @index host -unique
  */
 class R_Mdl_Site extends O_Dao_ActiveRecord {
+
 	private $available_systems;
 
 	/**

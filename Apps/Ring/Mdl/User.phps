@@ -122,7 +122,7 @@ class R_Mdl_User extends O_Acl_User {
 
 	public function avatar( $full = false )
 	{
-		return "<img src=\"" . ($full ? $this->ava_full : $this->ava_tiny) . "\" alt=\"" . htmlspecialchars( $this->nickname ) . "\"/>";
+		return "<img class=\"avatar\" src=\"" . ($full ? $this->ava_full : $this->ava_tiny) . "\" alt=\"" . htmlspecialchars( $this->nickname ) . "\"/>";
 	}
 
 	public function staticUrl( $filename )
