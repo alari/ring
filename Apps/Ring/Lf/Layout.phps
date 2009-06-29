@@ -66,7 +66,7 @@ class R_Lf_Layout extends R_Layout {
 			<span>Сайт входит в <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольцо
 Mirari.Name</a></span>
 
-<div style="float:right">
+<div id="bot_cnt">
 <?$this->showCounter();?>
 </div>
 		</div>
