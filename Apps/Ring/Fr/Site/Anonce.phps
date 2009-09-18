@@ -91,12 +91,12 @@ class R_Fr_Site_Anonce {
   <pubDate><?=gmdate("D, d M Y H:i:s", $record->time)?> GMT</pubDate>
   <title><?=htmlspecialchars($record->title)?></title>
   <link><?=$record->url()?></link>
-  <description><?=htmlspecialchars($descr)?></description>
+  <description>!?<?=htmlspecialchars($descr)?></description>
   <comments><?=$record->url()?></comments>
 </item>
 <?
 	}
-	
+
 	/**
 	 * Shows Atom anonce
 	 *
