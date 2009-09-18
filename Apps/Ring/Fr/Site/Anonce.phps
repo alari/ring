@@ -83,7 +83,7 @@ class R_Fr_Site_Anonce {
 		$record = $params->record();
 		if(!$record->isVisible()) return;
 		ob_start();
-		$record->creative->show(null, "rsscont");
+		$record->creative->show(null, "rss-cont");
 		$descr = ob_get_clean();
 ?>
 <item>
@@ -106,7 +106,7 @@ class R_Fr_Site_Anonce {
 		$record = $params->record();
 		if(!$record->isVisible()) return;
 		ob_start();
-		$record->creative->show(null, "rsscont");
+		$record->creative->show(null, "rss-cont");
 		$descr = ob_get_clean();
 		$date = date("Y-m-d", $record->time)."T".date("H:i:s", $record->time);
 ?>

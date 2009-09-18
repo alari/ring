@@ -93,7 +93,7 @@ $was_tag=0;
 	 *
 	 * @param O_Dao_Renderer_Show_Params $params
 	 */
-	static public function showRssCont(O_Dao_Renderer_Show_Params $params ) {
+	static public function showRssContCallback(O_Dao_Renderer_Show_Params $params ) {
 		$post = $params->record();
 		?>
 		<div class="img"><a href="<?=$post->link()?>"><img src="<?=$post->img_preview?>" alt="<?=htmlspecialchars($post->anonce->title." - ".$post->anonce->description)?>"/></a></div>
