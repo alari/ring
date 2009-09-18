@@ -50,7 +50,6 @@
 			<Registry key="paginator/page" pocket="2"></Registry>
 			<Command name="Tag"></Command>
 			</Url>
-		<Url pattern="rss\.xml" command="Rss"></Url>
 		<Host pattern="(www\.|openid\.)?(.+)">
 			<Registry key="current/site" pocket="2" class="R_Mdl_Site"
 				method="getByHost"></Registry>
