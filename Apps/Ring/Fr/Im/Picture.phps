@@ -1,6 +1,6 @@
 <?php
 
-class R_Fr_Im_Picture {
+class R_Fr_Im_Picture extends R_Fr_Site_Creative {
 	static public function editGallery(O_Dao_Renderer_Edit_Params $params) {
 		O_Dao_Renderer_Edit_Callbacks::selectRelation($params);
 		echo "<br/>";
@@ -87,6 +87,19 @@ $was_tag=0;
 </div>
 </div>
 <?
+	}
+
+	/**
+	 * Shows rss contents
+	 *
+	 * @param O_Dao_Renderer_Show_Params $params
+	 */
+	static public function showRssCont(O_Dao_Renderer_Show_Params $params ) {
+		$post = $params->record();
+		?>
+		<div class="img"><a href="<?=$post->link()?>"><img src="<?=$post->img_preview?>" alt="<?=htmlspecialchars($post->anonce->title." - ".$post->anonce->description)?>"/></a></div>
+		<?
+		echo $params->record()->content;
 	}
 
 }
