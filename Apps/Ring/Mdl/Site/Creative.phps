@@ -1,6 +1,5 @@
 <?php
 /**
- * @table - -show-rss-cont:callback R_Fr_Site_Creative::showRssCont
  * @field anonce -owns one R_Mdl_Site_Anonce -preload
  *
  * @field time INT

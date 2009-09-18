@@ -83,7 +83,7 @@ class R_Fr_Site_Anonce {
 		$record = $params->record();
 		if(!$record->isVisible()) return;
 		ob_start();
-		$record->creative->show(null, "rss-cont");
+		$record->creative->show(null, "rssCont");
 		$descr = ob_get_clean();
 ?>
 <item>
@@ -91,7 +91,7 @@ class R_Fr_Site_Anonce {
   <pubDate><?=gmdate("D, d M Y H:i:s", $record->time)?> GMT</pubDate>
   <title><?=htmlspecialchars($record->title)?></title>
   <link><?=$record->url()?></link>
-  <description>!?<?=htmlspecialchars($descr)?></description>
+  <description><?=htmlspecialchars($descr)?></description>
   <comments><?=$record->url()?></comments>
 </item>
 <?
@@ -106,7 +106,7 @@ class R_Fr_Site_Anonce {
 		$record = $params->record();
 		if(!$record->isVisible()) return;
 		ob_start();
-		$record->creative->show(null, "rss-cont");
+		$record->creative->show(null, "rssCont");
 		$descr = ob_get_clean();
 		$date = date("Y-m-d", $record->time)."T".date("H:i:s", $record->time);
 ?>
