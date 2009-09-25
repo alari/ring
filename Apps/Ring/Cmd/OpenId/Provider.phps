@@ -3,6 +3,7 @@ class R_Cmd_OpenId_Provider extends R_Command {
 
 	public function process()
 	{
+		throw new O_Ex_Error("Not Implemented");
 		$identity = O_Registry::get( "app/env/http_host" );
 		if (strpos( $identity, "openid." ) === 0 || strpos( $identity, "www." ) === 0)
 			list (, $identity) = explode( ".", $identity, 2 );

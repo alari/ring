@@ -46,7 +46,7 @@ class R_Tpl_OpenId_Login extends R_Template {
 	 <input type="hidden" name="openid_action" value="login" /> <input
 	type="hidden" name="redirect"
 	value="<?=
-				$_SESSION[ "redirect" ]?>" /></form>
+				@$_SESSION[ "redirect" ]?>" /></form>
 <?
 			break;
 		}

@@ -59,8 +59,8 @@ class R_Mdl_User extends O_Acl_User {
 	 */
 	public function setPwd( $pwd )
 	{
-		$provider = new O_OpenId_Provider( );
-		return $provider->register( $this->identity, $pwd );
+		$this->pwd_hash = md5($this->identity.$pwd);
+		return $this->save();
 	}
 
 	/**
@@ -96,14 +96,15 @@ class R_Mdl_User extends O_Acl_User {
 	 * Logs in (sets user to session)
 	 *
 	 * @param string $pwd
-	 * @param O_OpenId_Provider $provider
 	 * @return bool
 	 */
-	public function login( $pwd, O_OpenId_Provider $provider = null )
+	public function login( $pwd )
 	{
-		if (!$provider)
-			$provider = new O_OpenId_Provider( );
-		return $provider->login( $this->identity, $pwd );
+		if(md5($this->identity.$pwd) == $this->pwd_hash) {
+			R_Mdl_Session::setUser($this);
+			return true;
+		}
+		return false;
 	}
 
 	/**
