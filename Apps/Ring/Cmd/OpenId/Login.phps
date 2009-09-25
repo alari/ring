@@ -48,7 +48,7 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 		if (!$user) {
 			$user = new R_Mdl_User( $identity, O_Acl_Role::getByName( "Openid User" ) );
 		}
-		$sreg = Auth_OpenID_SRegResponse::fromSuccessResponse( $response );
+		$sreg = $this->handleAuthExtensions($response);
 		if (!$user->email && isset( $sreg[ 'email' ] ) && $sreg[ 'email' ]) {
 			$user->email = $sreg[ 'email' ];
 		}
