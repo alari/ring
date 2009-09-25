@@ -32,6 +32,10 @@ class R_Ctr_Layout extends R_Layout {
 			<div class="info-box">
 <p>Привет, <?=R_Mdl_Session::getUser()->link()?>!</p>
 <p><a href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a></p>
+<p><a
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends">Друзья</a>
+	&nbsp; <small><a
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends/list">Кто</a></small></p>
 			</div>
 <?
 		} else {

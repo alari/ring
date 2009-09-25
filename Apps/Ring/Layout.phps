@@ -164,10 +164,7 @@ class R_Layout extends O_Html_Layout {
 	<li><a
 		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/edit-profile">Редактировать
 	профиль</a></li>
-	<li><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends">Друзья</a>
-	&nbsp; <small><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends/list">Кто</a></small></li>
+
 	<li><a
 		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/favorites">Избранное</a></li>
 <?
@@ -234,6 +231,10 @@ class R_Layout extends O_Html_Layout {
 <?=R_Mdl_Session::getUser()->link()?>! <a
 	href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a></p>
 <p><a href="javascript:void(0)" onclick="R.UserMenu.toggle()">Возможности</a></p>
+<p><a
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends">Друзья</a>
+	&nbsp; <small><a
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends/list">Кто</a></small></p>
 <div id="user-menu"><?
 			$this->userMenu()?></div>
 <?
