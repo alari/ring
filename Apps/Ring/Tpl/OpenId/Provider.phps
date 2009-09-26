@@ -5,16 +5,6 @@ class R_Tpl_OpenId_Provider extends R_Template {
 	public $error;
 	public $site;
 
-	public function prepareMeta() {
-		;
-	}
-
-	public function displayNav() {
-		;
-	}
-
-
-
 	public function displayContents()
 	{
 		if ($this->error)

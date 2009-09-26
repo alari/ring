@@ -68,6 +68,9 @@ class R_Cmd_Comment extends R_Command {
 				$parent->injectBottom( $comment );
 			}
 			$comment->save();
+			// XXX
+			$comment->notifySubscribers();
+
 			$form->getActiveRecord()->reload();
 			return $form->responseAjax();
 		}
