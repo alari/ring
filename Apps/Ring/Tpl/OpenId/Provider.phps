@@ -41,7 +41,7 @@ class R_Tpl_OpenId_Provider extends R_Lf_Template {
 	for="forever">Навсегда</label><br />
 <input type="hidden" name="openid_action" value="trust"> <input
 	type="submit" name="allow" value="Разрешить"> <input type="submit"
-	name="deny" value="Запретить"></form>
+	name="deny" value="Запретить"><?foreach($_POST as $k=>$v) echo "<input type='hidden' name='$k' value='".htmlspecialchars($v)."'/></form>
 <?
 			break;
 		}
