@@ -14,7 +14,7 @@ class R_Tpl_Error extends O_Tpl_Error {
 <h1>Error #<?=$err?></h1>
 <strong><?=$msg?></strong>
 <?
-		if (!$isProduction) {
+		if (!$isProduction||1) {
 			?>
 <p>
 <pre>
