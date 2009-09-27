@@ -92,7 +92,9 @@
 		<Registry key="layout_class" value="R_Mr_Layout"></Registry></If>
 	
 	
-	<Url pattern="openid/provider">
+	<Url pattern="openid/provider(/(.+))?">
+		
+		<Registry key="current/action" pocket="2"></Registry>
 		<Command name="OpenId_Provider" plugin="-"></Command>
 	</Url>
 	
