@@ -1,5 +1,5 @@
 <?php
-class R_Tpl_OpenId_Login extends R_Lf_Template {
+class R_Tpl_OpenId_Login extends R_Template {
 
 	public $mode;
 	public $error;
