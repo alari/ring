@@ -1,5 +1,5 @@
 <?php
-class R_Cmd_Cronjob extends R_Command {
+class R_Ctr_Cmd_Cronjob extends R_Command {
 
 	public function process()
 	{
