@@ -21,8 +21,6 @@ class R_Mdl_Site_Comment extends O_Dao_NestedSet_Node {
 
 	public function notifySubscribers()
 	{
-		$this->reload();
-
 		$owners = Array ();
 		foreach ($this->getPath() as $c) {
 			$owner = $c->owner;
