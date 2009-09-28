@@ -28,7 +28,7 @@ class R_Mdl_Site_Comment extends O_Dao_NestedSet_Node {
 				continue;
 			if (isset( $owners[ $owner->email ] ))
 				continue;
-			$owners[ $owner ]->email = $owner;
+			$owners[ $owner->email ] = $owner;
 		}
 		$auth = null;
 		if (!array_key_exists( $this->root->owner->email, $owners ))
