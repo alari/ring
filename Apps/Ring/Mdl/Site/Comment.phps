@@ -21,9 +21,10 @@ class R_Mdl_Site_Comment extends O_Dao_NestedSet_Node {
 
 	public function notifySubscribers()
 	{
-		$f = fopen("php://stderr", "w");
+		$this->reload();
+
 		$owners = Array ();
-		foreach ($this->getPath() as $c) {fwrite($f, print_r($owner, true));
+		foreach ($this->getPath() as $c) {
 			$owner = $c->owner;
 			if (!$owner->email || $owner->email == $this->owner->email)
 				continue;
@@ -34,12 +35,12 @@ class R_Mdl_Site_Comment extends O_Dao_NestedSet_Node {
 		$auth = null;
 		if (!array_key_exists( $this->root->owner->email, $owners ))
 			$auth = $this->root->owner;
-fwrite($f, print_r($owners,1));
+
 		$pg_title = $this->root->title;
 		$pg_url = $this->root->url();
 		$cmtr_nick = $this->owner->nickname;
 		$cmtr_openid = $this->owner->identity;
-		$comment_body = str_replace( "<br/>", "\n", $this->content );
+		$comment_body = str_replace( "<br />", "\n", $this->content );
 		$center_host = O_Registry::get( "app/hosts/center" );
 		$msg_title = "Новый комментарий в Кольце творческих сайтов";
 
