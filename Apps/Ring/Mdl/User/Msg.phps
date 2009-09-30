@@ -18,7 +18,7 @@
  * @index owner,box,readen
  * @index time
  */
-class R_Mdl_Msg extends O_Dao_ActiveRecord {
+class R_Mdl_User_Msg extends O_Dao_ActiveRecord {
 
 	public function __construct()
 	{

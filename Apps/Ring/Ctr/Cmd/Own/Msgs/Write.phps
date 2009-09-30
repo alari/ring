@@ -4,7 +4,7 @@ class R_Ctr_Cmd_Own_Msgs_Write extends R_Command {
 	public function process()
 	{
 		$formProcessor = new O_Dao_Renderer_FormProcessor( );
-		$formProcessor->setClass( "R_Mdl_Msg" );
+		$formProcessor->setClass( "R_Mdl_User_Msg" );
 		$formProcessor->setCreateMode();
 		$formProcessor->setAjaxMode();
 		if ($formProcessor->isFormRequest()) {
