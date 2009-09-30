@@ -37,7 +37,7 @@ class R_Fr_Sys_Instance {
 		$system = $params->record();
 
 		switch (get_class( $system->instance )) {
-			case "R_Mdl_Libro_System" :
+			case "R_Mdl_Sys_Libro_System" :
 				$cycles = $system->collections;
 				echo "<div id='coll-sort'>";
 				foreach ($cycles as $cycle) {
@@ -67,7 +67,7 @@ R.Collection.setSortable("#coll-sort", '.cycle.libro', '<?=$system->site->host?>
 				echo "</div>";
 			break;
 
-			case "R_Mdl_Sound_System" :
+			case "R_Mdl_Sys_Sound_System" :
 				$albums = $system->collections;
 				echo "<div id='coll-sort'>";
 				foreach ($albums as $album) {
