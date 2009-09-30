@@ -1,6 +1,6 @@
 <?php
 /**
- * @table im_picture
+ * @table afisha_bill
  *
  * @field:config anonce -inverse afisha_bill
  * @field:config title -required Введите название события
