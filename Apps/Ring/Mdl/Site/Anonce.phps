@@ -6,11 +6,11 @@
  * @field owner -has one R_Mdl_User -inverse anonces -preload -show
  *
  * @field creative -one-of blog_post; im_picture; libro_text; sound_track; afisha_bill
- * @field blog_post -owns one R_Mdl_Blog_Post -inverse anonce
- * @field im_picture -owns one R_Mdl_Im_Picture -inverse anonce
- * @field libro_text -owns one R_Mdl_Libro_Text -inverse anonce
- * @field sound_track -owns one R_Mdl_Sound_Track -inverse anonce
- * @field afisha_bill -owns one R_Mdl_Afisha_Bill -inverse anonce
+ * @field blog_post -owns one R_Mdl_Sys_Blog_Post -inverse anonce
+ * @field im_picture -owns one R_Mdl_Sys_Im_Picture -inverse anonce
+ * @field libro_text -owns one R_Mdl_Sys_Libro_Text -inverse anonce
+ * @field sound_track -owns one R_Mdl_Sys_Sound_Track -inverse anonce
+ * @field afisha_bill -owns one R_Mdl_Sys_Afisha_Bill -inverse anonce
  *
  * @field collection -has one R_Mdl_Site_Collection -inverse anonces
  * @field position INT DEFAULT 0

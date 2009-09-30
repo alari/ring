@@ -1,11 +1,11 @@
 <?php
 /**
- * @table afisha
+ * @table sys_forum
  *
- * @field:config system -inverse afisha
+ * @field:config system -inverse forum
  */
-class R_Mdl_Sys_Afisha_System extends R_Mdl_Site_SysInstance {
-	const CREATIVE_CLASS = "R_Mdl_Sys_Afisha_Bill";
+class R_Mdl_Sys_Forum_System extends R_Mdl_Site_SysInstance {
+	const CREATIVE_CLASS = "R_Mdl_Sys_Forum_Thread";
 
 	public function addFormTitle() {
 		return "Новое событие, ".$this->title;

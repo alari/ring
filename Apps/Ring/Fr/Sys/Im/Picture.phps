@@ -1,6 +1,6 @@
 <?php
 
-class R_Fr_Im_Picture extends R_Fr_Site_Creative {
+class R_Fr_Sys_Im_Picture extends R_Fr_Site_Creative {
 	static public function editGallery(O_Dao_Renderer_Edit_Params $params) {
 		O_Dao_Renderer_Edit_Callbacks::selectRelation($params);
 		echo "<br/>";

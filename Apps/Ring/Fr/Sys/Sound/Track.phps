@@ -1,6 +1,6 @@
 <?php
 
-class R_Fr_Sound_Track extends R_Fr_Site_Creative {
+class R_Fr_Sys_Sound_Track extends R_Fr_Site_Creative {
 	static public function editAlbum(O_Dao_Renderer_Edit_Params $params) {
 		O_Dao_Renderer_Edit_Callbacks::selectRelation($params);
 		?>

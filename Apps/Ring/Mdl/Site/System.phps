@@ -10,11 +10,11 @@
  * @field usr_related -owns many R_Mdl_User_Relation -inverse system
  *
  * @field instance -one-of blog; im; libro; sound; afisha
- * @field blog -owns one R_Mdl_Blog_System -inverse system
- * @field im -owns one R_Mdl_Im_System -inverse system
- * @field libro -owns one R_Mdl_Libro_System -inverse system
- * @field sound -owns one R_Mdl_Sound_System -inverse system
- * @field afisha -owns one R_Mdl_Afisha_System -inverse system
+ * @field blog -owns one R_Mdl_Sys_Blog_System -inverse system
+ * @field im -owns one R_Mdl_Sys_Im_System -inverse system
+ * @field libro -owns one R_Mdl_Sys_Libro_System -inverse system
+ * @field sound -owns one R_Mdl_Sys_Sound_System -inverse system
+ * @field afisha -owns one R_Mdl_Sys_Afisha_System -inverse system
  *
  * @field title varchar(128) NOT NULL
  * @field position tinyint NOT NULL
@@ -25,7 +25,7 @@
  * @index site,urlbase -unique
  */
 class R_Mdl_Site_System extends O_Dao_ActiveRecord {
-	private static $classes = Array ("blog" => "R_Mdl_Blog_System", "im"=>"R_Mdl_Im_System", "sound"=>"R_Mdl_Sound_System", "libro"=>"R_Mdl_Libro_System", "afisha"=>"R_Mdl_Afisha_System");
+	private static $classes = Array ("blog" => "R_Mdl_Sys_Blog_System", "im"=>"R_Mdl_Sys_Im_System", "sound"=>"R_Mdl_Sys_Sound_System", "libro"=>"R_Mdl_Sys_Libro_System", "afisha"=>"R_Mdl_Sys_Afisha_System");
 	private static $titles = Array ("blog" => "Блог", "im"=>"Изображения", "sound"=>"Музыка", "libro"=>"Литература", "afisha"=>"Афиша");
 	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям и друзьям друзей", "private" => "Друзьям",
 									"disable" => "Только себе");

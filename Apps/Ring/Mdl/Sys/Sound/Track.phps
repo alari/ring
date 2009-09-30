@@ -3,7 +3,7 @@
  * @table sound_track
  *
  * @field:config anonce -inverse sound_track
- * @field collection -relative anonce->collection -edit R_Fr_Sound_Track::editAlbum -title Альбом -check R_Mdl_Site_Collection::checkCreate (без альбома)
+ * @field collection -relative anonce->collection -edit R_Fr_Sys_Sound_Track::editAlbum -title Альбом -check R_Mdl_Site_Collection::checkCreate (без альбома)
  *
  * @field file -file ext_allow:mp3; src:fileSrc; filepath:filePath -edit -title Файл mp3 -required Укажите файл композиции
  * @field duration INT
@@ -11,7 +11,7 @@
  *
  * @field:replace anonce,file
  */
-class R_Mdl_Sound_Track extends R_Mdl_Site_Creative {
+class R_Mdl_Sys_Sound_Track extends R_Mdl_Site_Creative {
 	public function save()
 	{
 		parent::save();

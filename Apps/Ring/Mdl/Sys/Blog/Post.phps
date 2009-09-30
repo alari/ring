@@ -6,7 +6,7 @@
  *
  * @field:config content -required Текст записи необходим -edit wysiwyg Libro 550
  */
-class R_Mdl_Blog_Post extends R_Mdl_Site_Creative {
+class R_Mdl_Sys_Blog_Post extends R_Mdl_Site_Creative {
 
 	public function save()
 	{

@@ -1,6 +1,6 @@
 <?php
 
-class R_Fr_Afisha_Bill extends R_Fr_Site_Creative {
+class R_Fr_Sys_Afisha_Bill extends R_Fr_Site_Creative {
 
 	/**
 	 * Shows picture on its own page

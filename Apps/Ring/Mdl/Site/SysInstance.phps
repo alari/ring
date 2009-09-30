@@ -87,7 +87,11 @@ abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {
 	 * @param int $id
 	 * @return R_Mdl_Site_Creative
 	 */
-	abstract public function getCreative( $id );
+	public function getCreative( $id ){
+		$class = constant(get_class($this)."::CREATIVE_CLASS");
+		if(!$class) throw new O_Ex_Critical("::CREATIVE_CLASS not defined");
+		return $this->getCreativeById($id, $class);
+	}
 
 	/**
 	 * Returns creative by id and class
@@ -107,6 +111,14 @@ abstract class R_Mdl_Site_SysInstance extends O_Dao_ActiveRecord {
 			return false;
 		return $item;
 	}
+
+
+
+	public function url( $page = 1 )
+	{
+		return $this->system->url( $page > 1 ? "page-$page" : "" );
+	}
+
 
 	public function addFormTitle() {
 		return "Новая запись";

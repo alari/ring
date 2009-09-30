@@ -5,7 +5,7 @@
  * @field:config anonce -inverse im_picture
  *
  * @field description -relative anonce->description -edit -title Кр. опис.
- * @field collection -relative anonce->collection -edit R_Fr_Im_Picture::editGallery -title Галерея -check R_Mdl_Site_Collection::checkCreate
+ * @field collection -relative anonce->collection -edit R_Fr_Sys_Im_Picture::editGallery -title Галерея -check R_Mdl_Site_Collection::checkCreate
  *
  * @field img_full ENUM('png','gif','jpeg','-') -image src: imgSrc full; filepath: imgPath full; width: 1600; height: 1600; cascade: img_preview, img_loop, img_tiny -edit -title Картинка -required-new Укажите файл картинки
  * @field img_preview -image src: imgSrc preview; filepath: imgPath preview; width: 700; height: 700
@@ -14,7 +14,7 @@
  *
  * @field:replace anonce,img_tiny
  */
-class R_Mdl_Im_Picture extends R_Mdl_Site_Creative {
+class R_Mdl_Sys_Im_Picture extends R_Mdl_Site_Creative {
 	public function save()
 	{
 		parent::save();

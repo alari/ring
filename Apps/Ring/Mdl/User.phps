@@ -13,8 +13,8 @@
  * @field friend_of -alias usr_related.user -where flags & 1
  * @field friends_friends -alias relations.author -where flags & 2 AND author>0
  *
- * @field msgs_own -owns many R_Mdl_Msg -inverse owner -order-by time DESC
- * @field msgs_target -owns many R_Mdl_Msg -inverse target
+ * @field msgs_own -owns many R_Mdl_User_Msg -inverse owner -order-by time DESC
+ * @field msgs_target -owns many R_Mdl_User_Msg -inverse target
  *
  * @field anonces -owns many R_Mdl_Site_Anonce -inverse owner
  *

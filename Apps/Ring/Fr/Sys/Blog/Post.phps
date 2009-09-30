@@ -1,6 +1,6 @@
 <?php
 
-class R_Fr_Blog_Post  extends R_Fr_Site_Creative{
+class R_Fr_Sys_Blog_Post  extends R_Fr_Site_Creative{
 	/**
 	 * Shows blog post on its own page
 	 *
