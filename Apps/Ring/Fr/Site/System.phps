@@ -13,7 +13,7 @@ class R_Fr_Site_System {
 		/* @var $q O_Dao_Query */
 		$q = $system->anonces;
 		// FIXME: HARDCODE!!!
-		if($system->instance instanceof R_Mdl_Afisha_System ){
+		if($system->instance instanceof R_Mdl_Sys_Afisha_System ){
 			$q->test("time", time(), ">")->clearOrders()->orderBy("time");
 		}
 

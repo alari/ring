@@ -38,7 +38,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 
 	private $_updateCollectionPosition = 0;
 
-	public function __construct( R_Mdl_Site_Creative $creative, R_Mdl_Sys_Instance $instance )
+	public function __construct( R_Mdl_Site_Creative $creative, R_Mdl_Sys_Implementation $instance )
 	{
 		parent::__construct();
 		$this->system = $instance->system;
