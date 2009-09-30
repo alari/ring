@@ -54,19 +54,19 @@ class R_Fr_Site_Anonce {
 		$record = $params->record();
 		switch (O_Dao_TableInfo::get( $record )->getFieldInfo( "creative" )->getRealField( $record )) {
 			case "blog_post" :
-				R_Fr_Blog_Post::showAnonce($params);
+				R_Fr_Sys_Blog_Post::showAnonce($params);
 			break;
 			case "im_picture" :
-				R_Fr_Im_Picture::showAnonce($params);
+				R_Fr_Sys_Im_Picture::showAnonce($params);
 			break;
 			case "libro_text" :
-				R_Fr_Libro_Text::showAnonce($params);
+				R_Fr_Sys_Libro_Text::showAnonce($params);
 			break;
 			case "sound_track" :
-				R_Fr_Sound_Track::showAnonce($params);
+				R_Fr_Sys_Sound_Track::showAnonce($params);
 			break;
 			case "afisha_bill" :
-				R_Fr_Afisha_Bill::showAnonce($params);
+				R_Fr_Sys_Afisha_Bill::showAnonce($params);
 			break;
 			default :
 				echo "<a href=\"" . $params->record()->url() . "\">" . $params->record()->title . "</a><br/>";
