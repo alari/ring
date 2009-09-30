@@ -29,11 +29,11 @@ class R_Fr_Libro_Text extends R_Fr_Site_Creative {
 <?if($post->write_time || $post->write_place) {?>
 <div class="time-place">
 <?
-	if($post->write_time) echo $post->write_time.($post->write_place?"<br/>":"");
+	if($post->write_time) echo 'Написано: '.$post->write_time.($post->write_place?", ":"");
 	echo $post->write_place;?>
 </div>
 <?}?>
-<div class="time-place">Добавлено: <?=date("d.m.Y H:i:s", $post->time)?></div>
+<div class="time-place">Добавлено: <?=date("Y.m.d", $post->time)?></div>
 
 <?
 	}
