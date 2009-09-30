@@ -33,6 +33,7 @@ class R_Fr_Libro_Text extends R_Fr_Site_Creative {
 	echo $post->write_place;?>
 </div>
 <?}?>
+<div class="time-place">Добавлено: <?=date("d.m.Y H:i:s", $post->time)?></div>
 
 <?
 	}
