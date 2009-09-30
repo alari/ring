@@ -4,7 +4,7 @@
  *
  * @field:config system -inverse libro
  */
-class R_Mdl_Sys_Libro_System extends R_Mdl_Site_SysInstance {
+class R_Mdl_Sys_Libro_System extends R_Mdl_Sys_Instance {
 	const CREATIVE_CLASS = "R_Mdl_Sys_Libro_Text";
 
 

@@ -5,7 +5,7 @@
  * @field:config system -inverse im
  *
  */
-class R_Mdl_Sys_Im_System extends R_Mdl_Site_SysInstance {
+class R_Mdl_Sys_Im_System extends R_Mdl_Sys_Instance {
 	const CREATIVE_CLASS = "R_Mdl_Sys_Im_Picture";
 
 	public function addFormTitle() {

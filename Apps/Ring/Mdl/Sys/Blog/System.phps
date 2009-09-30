@@ -4,7 +4,7 @@
  *
  * @field:config system -inverse blog
  */
-class R_Mdl_Sys_Blog_System extends R_Mdl_Site_SysInstance {
+class R_Mdl_Sys_Blog_System extends R_Mdl_Sys_Instance {
 	const CREATIVE_CLASS = "R_Mdl_Sys_Blog_Post";
 
 	public function addFormTitle() {
