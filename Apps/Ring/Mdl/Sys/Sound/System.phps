@@ -1,6 +1,6 @@
 <?php
 /**
- * @table sound
+ * @table sys_sound
  *
  * @field:config system -inverse sound
  */

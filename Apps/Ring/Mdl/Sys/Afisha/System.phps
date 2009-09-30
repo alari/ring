@@ -1,6 +1,6 @@
 <?php
 /**
- * @table afisha
+ * @table sys_afisha
  *
  * @field:config system -inverse afisha
  */

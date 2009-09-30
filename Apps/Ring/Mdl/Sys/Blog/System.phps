@@ -1,6 +1,6 @@
 <?php
 /**
- * @table blog
+ * @table sys_blog
  *
  * @field:config system -inverse blog
  */

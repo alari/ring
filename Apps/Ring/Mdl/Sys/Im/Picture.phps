@@ -1,6 +1,6 @@
 <?php
 /**
- * @table im_picture
+ * @table sys_im_picture
  *
  * @field:config anonce -inverse im_picture
  *

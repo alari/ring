@@ -1,6 +1,6 @@
 <?php
 /**
- * @table sound_track
+ * @table sys_sound_track
  *
  * @field:config anonce -inverse sound_track
  * @field collection -relative anonce->collection -edit R_Fr_Sys_Sound_Track::editAlbum -title Альбом -check R_Mdl_Site_Collection::checkCreate (без альбома)

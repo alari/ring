@@ -1,6 +1,6 @@
 <?php
 /**
- * @table libro_text
+ * @table sys_libro_text
  *
  * @field:config anonce -inverse libro_text
  *

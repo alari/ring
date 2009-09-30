@@ -1,6 +1,6 @@
 <?php
 /**
- * @table libro
+ * @table sys_libro
  *
  * @field:config system -inverse libro
  */

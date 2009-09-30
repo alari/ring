@@ -1,6 +1,6 @@
 <?php
 /**
- * @table im_system
+ * @table sys_im
  *
  * @field:config system -inverse im
  *
