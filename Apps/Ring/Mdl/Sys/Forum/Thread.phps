@@ -7,7 +7,7 @@
  *
  * @field description -relative anonce->description -edit -title Кр. опис.
  */
-class R_Mdl_Sys_Forum_Thread extends R_Mdl_Site_Creative {
+class R_Mdl_Sys_Forum_Thread extends R_Mdl_Sys_Creative {
 	public function save()
 	{
 		parent::save();

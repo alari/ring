@@ -34,7 +34,7 @@ class R_Mdl_Session extends O_Acl_Session {
 	static public function setQueryAccesses( O_Dao_Query $query, R_Mdl_Site $site )
 	{
 		$accesses = Array ();
-		foreach (array_keys( R_Mdl_Site_System::getAccesses() ) as $acc) {
+		foreach (array_keys( R_Mdl_Sys_Instance::getAccesses() ) as $acc) {
 			if (self::can( "read " . $acc, $site ))
 				$accesses[] = $acc;
 		}

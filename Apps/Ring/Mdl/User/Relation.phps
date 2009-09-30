@@ -4,7 +4,7 @@
  *
  * @field site -has one R_Mdl_Site -inverse usr_related
  * @field author -has one R_Mdl_User -inverse usr_related
- * @field system -has one R_Mdl_Site_System -inverse usr_related
+ * @field system -has one R_Mdl_Sys_Instance -inverse usr_related
  *
  * @field flags INT(64) NOT NULL DEFAULT 0
  * @field status TINYTEXT
@@ -25,7 +25,7 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	public function __construct( R_Mdl_User $user, O_Dao_ActiveRecord $object, $flags )
 	{
 		$this->user = $user;
-		if ($object instanceof R_Mdl_Site_System) {
+		if ($object instanceof R_Mdl_Sys_Instance) {
 			$this->system = $object;
 			if ($object->site->owner)
 				$this->author = $object->site->owner;

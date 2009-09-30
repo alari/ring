@@ -24,7 +24,7 @@
  * @index site,position,access
  * @index site,urlbase -unique
  */
-class R_Mdl_Site_System extends O_Dao_ActiveRecord {
+class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 	private static $classes = Array ("blog" => "R_Mdl_Sys_Blog_System", "im"=>"R_Mdl_Sys_Im_System", "sound"=>"R_Mdl_Sys_Sound_System", "libro"=>"R_Mdl_Sys_Libro_System", "afisha"=>"R_Mdl_Sys_Afisha_System");
 	private static $titles = Array ("blog" => "Блог", "im"=>"Изображения", "sound"=>"Музыка", "libro"=>"Литература", "afisha"=>"Афиша");
 	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям и друзьям друзей", "private" => "Друзьям",

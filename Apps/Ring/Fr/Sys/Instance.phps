@@ -1,6 +1,6 @@
 <?php
 
-class R_Fr_Site_System {
+class R_Fr_Sys_Instance {
 
 	/**
 	 * Shows system with several anonces on frontpage

@@ -1,6 +1,6 @@
 <?php
 /**
- * @field system -owns one R_Mdl_Site_System
+ * @field system -owns one R_Mdl_Sys_Instance
  *
  * @field title -relative system->title
  * @field perpage TINYINT NOT NULL DEFAULT 15 -title Количество записей на страницу -edit -required Какое-то количество должно быть обязательно
@@ -85,7 +85,7 @@ abstract class R_Mdl_Sys_Implementation extends O_Dao_ActiveRecord {
 	 * Returns one creative by its id, if it's in this system instance and can be viewed
 	 *
 	 * @param int $id
-	 * @return R_Mdl_Site_Creative
+	 * @return R_Mdl_Sys_Creative
 	 */
 	public function getCreative( $id ){
 		$class = constant(get_class($this)."::CREATIVE_CLASS");
@@ -98,12 +98,12 @@ abstract class R_Mdl_Sys_Implementation extends O_Dao_ActiveRecord {
 	 *
 	 * @param int $id
 	 * @param string $class
-	 * @return R_Mdl_Site_Creative
+	 * @return R_Mdl_Sys_Creative
 	 */
 	protected function getCreativeById( $id, $class )
 	{
 		$item = O_Dao_ActiveRecord::getById( $id, $class );
-		if (!$item instanceof R_Mdl_Site_Creative)
+		if (!$item instanceof R_Mdl_Sys_Creative)
 			return false;
 		if ($item->anonce->system->instance != $this)
 			return false;

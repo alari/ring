@@ -93,7 +93,7 @@ class R_Cmd_Comment extends R_Command {
 
 	public function isAuthenticated()
 	{
-		$this->system = O_Dao_ActiveRecord::getById( $this->getParam( "sys" ), "R_Mdl_Site_System" );
+		$this->system = O_Dao_ActiveRecord::getById( $this->getParam( "sys" ), "R_Mdl_Sys_Instance" );
 		if (!$this->system)
 			throw new O_Ex_PageNotFound( "System not found.", 404 );
 		$this->root = $this->system->site->anonces->test( "id", $this->getParam( "root" ) )->getOne();

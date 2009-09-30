@@ -45,10 +45,10 @@ class R_Mdl_Site_Tag extends O_Dao_ActiveRecord {
 	/**
 	 * Returns link for a tag
 	 *
-	 * @param R_Mdl_Site_System $sys
+	 * @param R_Mdl_Sys_Instance $sys
 	 * @return string
 	 */
-	public function link( R_Mdl_Site_System $sys = null )
+	public function link( R_Mdl_Sys_Instance $sys = null )
 	{
 		return "<a href=\"" . $this->url( $sys ? $sys->urlbase : "" ) . "\"" . ($this->description ? ' title="' . htmlspecialchars(
 				$this->description ) . '"' : '') . ">" . $this->title . "</a>";

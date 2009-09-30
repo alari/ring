@@ -11,7 +11,7 @@
  *
  * @field:replace anonce,file
  */
-class R_Mdl_Sys_Sound_Track extends R_Mdl_Site_Creative {
+class R_Mdl_Sys_Sound_Track extends R_Mdl_Sys_Creative {
 	public function save()
 	{
 		parent::save();

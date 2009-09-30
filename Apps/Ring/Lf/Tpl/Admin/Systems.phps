@@ -7,12 +7,12 @@ class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
 
 	public function __construct()
 	{
-		$this->accesses = R_Mdl_Site_System::getAccesses();
+		$this->accesses = R_Mdl_Sys_Instance::getAccesses();
 	}
 
-	public function systemEditFragment( R_Mdl_Site_System $sys )
+	public function systemEditFragment( R_Mdl_Sys_Instance $sys )
 	{
-		if (!$sys instanceof R_Mdl_Site_System) {
+		if (!$sys instanceof R_Mdl_Sys_Instance) {
 			?>
 <strong>Система не найдена. Проверьте авторизацию.</strong>
 <?

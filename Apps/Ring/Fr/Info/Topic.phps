@@ -1,6 +1,6 @@
 <?php
 
-class R_Fr_Info_Topic  extends R_Fr_Site_Creative{
+class R_Fr_Info_Topic  extends R_Fr_Sys_Creative{
 	/**
 	 * Prints "add tag" block
 	 *

@@ -1,7 +1,7 @@
 <?php
 /**
  * @table collections
- * @field system -has one R_Mdl_Site_System -inverse collections
+ * @field system -has one R_Mdl_Sys_Instance -inverse collections
  *
  * @field title VARCHAR(64) -edit -required -title Название -show-loop linkInContainer h2 -show-def container h1
  * @field description VARCHAR(255) -edit -title Описание или расшифровка -show-loop container h3 -show-def container h2
@@ -19,7 +19,7 @@
  * @index system,position
  */
 class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
-	public function __construct(R_Mdl_Site_System $system) {
+	public function __construct(R_Mdl_Sys_Instance $system) {
 		parent::__construct();
 		$this->time = time();
 		$this->info = new R_Mdl_Site_CollectionInfo();

@@ -15,7 +15,7 @@
  * @field collection -has one R_Mdl_Site_Collection -inverse anonces
  * @field position INT DEFAULT 0
  *
- * @field system -has one R_Mdl_Site_System -inverse anonces -preload
+ * @field system -has one R_Mdl_Sys_Instance -inverse anonces -preload
  * @field tags -has many R_Mdl_Site_Tag -inverse anonces
  *
  * @field linked -has many R_Mdl_Site_Anonce -inverse linked
@@ -38,7 +38,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 
 	private $_updateCollectionPosition = 0;
 
-	public function __construct( R_Mdl_Site_Creative $creative, R_Mdl_Sys_Implementation $instance )
+	public function __construct( R_Mdl_Sys_Creative $creative, R_Mdl_Sys_Implementation $instance )
 	{
 		parent::__construct();
 		$this->system = $instance->system;

@@ -7,10 +7,10 @@ class R_Fr_Site_Tag {
 	 * Shows tag cloud for all given tags
 	 *
 	 * @param O_Dao_Query $q
-	 * @param R_Mdl_Site_System $system
+	 * @param R_Mdl_Sys_Instance $system
 	 * @param string $weightField
 	 */
-	static public function showCloud( O_Dao_Query $q, R_Mdl_Site_System $system=null, $weightField = "weight" )
+	static public function showCloud( O_Dao_Query $q, R_Mdl_Sys_Instance $system=null, $weightField = "weight" )
 	{
 		$max_w = 0;
 		$min_w = -1;

@@ -1,6 +1,6 @@
 <?php
 
-class R_Fr_Sys_Libro_Text extends R_Fr_Site_Creative {
+class R_Fr_Sys_Libro_Text extends R_Fr_Sys_Creative {
 	static public function editCycle(O_Dao_Renderer_Edit_Params $params) {
 		O_Dao_Renderer_Edit_Callbacks::selectRelation($params);
 		?>

@@ -15,11 +15,11 @@ class R_Lf_Cmd_Admin_Systems extends R_Lf_Command {
 							"Префикс адреса системы должен состоять только из латинских символов, подчерка и дефиса и быть уникальным на сайте." );
 					return $this->redirect();
 				}
-				$classes = R_Mdl_Site_System::getClasses();
+				$classes = R_Mdl_Sys_Instance::getClasses();
 				if ($title && isset( $classes[ $type ] )) {
 					$class = $classes[ $type ];
 					$s = new $class( );
-					$sys = new R_Mdl_Site_System( $title, $urlbase, $this->getSite() );
+					$sys = new R_Mdl_Sys_Instance( $title, $urlbase, $this->getSite() );
 					$sys->access = $this->getParam( "access", "public" );
 					$sys->instance = $s;
 				} else {
@@ -28,7 +28,7 @@ class R_Lf_Cmd_Admin_Systems extends R_Lf_Command {
 				return $this->redirect();
 			} elseif ($this->getParam( "action" ) == "system-fragment") {
 				$tpl = $this->getTemplate();
-				$tpl->types = R_Mdl_Site_System::getTitles();
+				$tpl->types = R_Mdl_Sys_Instance::getTitles();
 				$tpl->systemEditFragment(
 						isset( $systems[ $this->getParam( "sys" ) ] ) ? $systems[ $this->getParam( "sys" ) ] : null );
 				return;
@@ -51,7 +51,7 @@ class R_Lf_Cmd_Admin_Systems extends R_Lf_Command {
 
 		$tpl = $this->getTemplate();
 		$tpl->systems = $systems;
-		$tpl->types = R_Mdl_Site_System::getTitles();
+		$tpl->types = R_Mdl_Sys_Instance::getTitles();
 		return $tpl;
 	}
 

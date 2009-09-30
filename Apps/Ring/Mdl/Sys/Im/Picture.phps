@@ -14,7 +14,7 @@
  *
  * @field:replace anonce,img_tiny
  */
-class R_Mdl_Sys_Im_Picture extends R_Mdl_Site_Creative {
+class R_Mdl_Sys_Im_Picture extends R_Mdl_Sys_Creative {
 	public function save()
 	{
 		parent::save();
