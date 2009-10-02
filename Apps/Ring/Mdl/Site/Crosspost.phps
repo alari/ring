@@ -30,7 +30,7 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 			return false;
 		ob_start();
 		$this->anonce->creative->show( null, "atom-post" );
-		$descr = ob_get_clean();
+		$descr = str_replace( array ("\r", "\n"), array ("", ""), ob_get_clean() );
 		$date = date( "Y-m-d", $this->anonce->time ) . "T" . date( "H:i:s", $this->anonce->time );
 		$updated = $this->last_update ? $this->last_update : $this->anonce->time;
 		$updated = date( "Y-m-d", $updated ) . "T" . date( "H:i:s", $updated );
@@ -53,7 +53,7 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 <uri><?=$this->anonce->owner->url()?></uri>
 </author>
 <content type="html">
-<?=htmlspecialchars( str_replace(array("\r","\n"), array("",""), $descr) )?>
+<?=htmlspecialchars( $descr )?>
 </content>
 </entry>
 <?
@@ -62,13 +62,15 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 
 	public function post()
 	{
-		$ret = O_Feed_AtomPub::post($this->service->atomapi, $this->prepareData(), $this->service->userpwd);
+		$ret = O_Feed_AtomPub::post( $this->service->atomapi, $this->prepareData(),
+				$this->service->userpwd );
 
-		if(!is_array($ret)) return $this->error(O_Feed_AtomPub::getError());
+		if (!is_array( $ret ))
+			return $this->error( O_Feed_AtomPub::getError() );
 
-		$this->postid = $ret["id"];
-		$this->url = $ret["post_id"];
-				$this->edit_url = $ret["edit_url"];
+		$this->postid = $ret[ "id" ];
+		$this->url = $ret[ "post_id" ];
+		$this->edit_url = $ret[ "edit_url" ];
 		$this->crossposted = time();
 
 		return $this->save();
@@ -86,7 +88,6 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		curl_setopt( $curl, CURLOPT_INFILE, $f );
 		curl_setopt( $curl, CURLOPT_INFILESIZE, strlen( $data ) );
 
-		curl_setopt( $curl, CURLOPT_FOLLOWLOCATION, true );
 		curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST );
 		curl_setopt( $curl, CURLOPT_USERPWD, $this->service->userpwd );
 
