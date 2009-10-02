@@ -44,7 +44,7 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 
 	public function post()
 	{
-		$ret = O_Feed_AtomPub::post( $this->service->atomapi, $this->prepareData(),
+		$ret = O_Feed_AtomPub::post( $this->service->atomapi, $this->prepareEntity(),
 				$this->service->userpwd );
 
 		if (!is_array( $ret ))
@@ -60,7 +60,7 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 
 	public function update()
 	{
-		$ret = O_Feed_AtomPub::update( $this->edit_url, $this->prepareData( 1 ),
+		$ret = O_Feed_AtomPub::update( $this->edit_url, $this->prepareEntity( 1 ),
 				$this->service->userpwd );
 
 		if (!$ret) {
