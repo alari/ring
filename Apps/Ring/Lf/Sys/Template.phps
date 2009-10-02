@@ -78,9 +78,9 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 					?>
 		<li><a href="?action=delete"
 		onclick="return confirm('Вы уверены? Восстановление будет невозможно!')">Удалить</a></li>
-<?if(count($this->creative->anonce->crossposts)){?>
+<?if(count($this->getSite()->crosspost_services)){?>
 		<li><a
-		href="<?=$this->instance->system->url( "cross/" . $this->creative->id )?>">Кросспосты</a></li><?}?>
+		href="<?=$this->instance->system->url( "cross/" . $this->creative->id )?>">Кросспостинг</a></li><?}?>
 <?
 				}
 				?>

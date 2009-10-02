@@ -24,40 +24,22 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		parent::__construct();
 	}
 
-	private function prepareData( $showId = false )
+	private function prepareEntity( $showId = false )
 	{
 		if (!$this->anonce->isVisible())
 			return false;
-		ob_start();
-		$this->anonce->creative->show( null, "atom-post" );
-		$descr = str_replace( array ("\r", "\n"), array ("", ""), ob_get_clean() );
-		$date = date( "Y-m-d", $this->anonce->time ) . "T" . date( "H:i:s", $this->anonce->time );
-		$updated = $this->last_update ? $this->last_update : $this->anonce->time;
-		$updated = date( "Y-m-d", $updated ) . "T" . date( "H:i:s", $updated );
 
 		ob_start();
-		echo "<?xml version='1.0' encoding='utf-8'?>";
-		?>
-<entry xmlns='http://www.w3.org/2005/Atom'>
-<title><?=htmlspecialchars( $this->anonce->title )?></title>
-<?
-		if ($showId) {
-			?><id><?=$this->postid?></id><?
-		}
-		?>
-<link rel="alternate" type="text/html" href="<?=$this->anonce->url()?>" />
-<published><?=$date?></published>
-<updated><?=$updated?></updated>
-<author>
-<name><?=$this->anonce->owner->nickname?></name>
-<uri><?=$this->anonce->owner->url()?></uri>
-</author>
-<content type="html">
-<?=htmlspecialchars( $descr )?>
-</content>
-</entry>
-<?
-		return ob_get_clean();
+		$this->anonce->creative->show( null, "atom-post" );
+		$data = ob_get_clean();
+		$title = $this->anonce->title;
+		$url = $this->anonce->url();
+		$published = $this->anonce->time;
+		$updated = $this->last_update ? $this->last_update : $this->anonce->time;
+		$id = $showId ? $this->postid : null;
+
+		return O_Feed_AtomPub::prepareEntry( $title, $url, $published, $data, $updated, $id );
+
 	}
 
 	public function post()
@@ -78,31 +60,15 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 
 	public function update()
 	{
-		$data = $this->prepareData( true );
-		$f = tmpfile();
-		fwrite( $f, $data );
-		fseek( $f, 0 );
+		$ret = O_Feed_AtomPub::update( $this->edit_url, $this->prepareData( 1 ),
+				$this->service->userpwd );
 
-		$curl = curl_init( $this->edit_url );
-		curl_setopt( $curl, CURLOPT_PUT, true );
-		curl_setopt( $curl, CURLOPT_INFILE, $f );
-		curl_setopt( $curl, CURLOPT_INFILESIZE, strlen( $data ) );
-
-		curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST );
-		curl_setopt( $curl, CURLOPT_USERPWD, $this->service->userpwd );
-
-		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
-		$ret = curl_exec( $curl );
-
-		if (!$ret)
-			return $this->error( curl_error( $curl ) );
-
-		if ($ret) {
-			$this->crossposted = time();
-			echo $ret;
-			return $this->save();
+		if (!$ret) {
+			return $this->error( O_Feed_AtomPub::getError() );
 		}
-		return false;
+
+		$this->crossposted = time();
+		return $this->save();
 	}
 
 	private function error( $msg )
@@ -111,6 +77,13 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		$this->error_time = time();
 		$this->save();
 		return false;
+	}
+
+	public function delete()
+	{
+		if ($this->edit_url)
+			O_Feed_AtomPub::delete( $this->edit_url, $this->service->userpwd );
+		parent::delete();
 	}
 
 	static public function handleQueue()
