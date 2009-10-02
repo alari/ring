@@ -11,11 +11,15 @@
  */
 class R_Mdl_Site_CrosspostService extends O_Dao_ActiveRecord {
 	public function __construct(R_Mdl_Site $site, $blog_url, $user, $pwd) {
+		if(!$site || !$blog_url || !$user || !$pwd) return false;
+
+		if(strpos($blog_url, "http://") !== 0) $blog_url = "http://".$blog_url;
+
 		$this->blog_url = $blog_url;
 		$this->site = $site;
 
 		$dom = new DOMDocument();
-		if(!@$dom->loadHTML($blog_url)) return;
+		if(!@$dom->loadHTML($blog_url)) return false;
 		$atomapi = "";
 		foreach($dom->getElementsByTagName("link") as $link) {
 			if($link->getAttribute("rel") == "service.post" && $link->getAttribute("type") == "application/atom+xml") {
@@ -23,7 +27,7 @@ class R_Mdl_Site_CrosspostService extends O_Dao_ActiveRecord {
 				break;
 			}
 		}
-		if(!$atomapi) return;
+		if(!$atomapi) return false;
 		$this->atomapi = $atomapi;
 		$this->userpwd = "$user:$pwd";
 
