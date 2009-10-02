@@ -15,6 +15,7 @@ class R_Lf_Sys_Tpl_Form extends R_Lf_Sys_Template {
 			$params = new O_Dao_Renderer_Edit_Params( "crosspost", null,
 					array ("displayField" => "blog_url", "multiply" => true,
 								"query" => $this->getSite()->crosspost_services) );
+			$params->setTitle( "Кросспостинг" );
 			ob_start();
 			O_Dao_Renderer_Edit_Callbacks::selectRelationBox( $params );
 			$this->form->injectHtmlAfter( "tags", ob_get_clean() );

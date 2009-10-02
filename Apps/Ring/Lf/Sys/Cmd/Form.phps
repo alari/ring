@@ -50,6 +50,8 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 						new R_Mdl_Site_Crosspost( $creative->anonce, $serv );
 					}
 				}
+			} else {
+				$creative->anonce->crossposts->field("last_update", time())->update();
 			}
 			return $this->redirect( $creative->url() );
 		}
