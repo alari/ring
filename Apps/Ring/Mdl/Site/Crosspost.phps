@@ -24,7 +24,8 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		parent::__construct();
 	}
 
-	private function prepareData($showId = false) {
+	private function prepareData( $showId = false )
+	{
 		if (!$this->anonce->isVisible())
 			return false;
 		ob_start();
@@ -39,7 +40,11 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		?>
 <entry xmlns='http://www.w3.org/2005/Atom'>
 <title><?=htmlspecialchars( $this->anonce->title )?></title>
-<?if($showId){?><id><?=$this->postid?></id><?}?>
+<?
+		if ($showId) {
+			?><id><?=$this->postid?></id><?
+		}
+		?>
 <link rel="alternate" type="text/html" href="<?=$this->anonce->url()?>" />
 <published><?=$date?></published>
 <updated><?=$updated?></updated>
@@ -55,13 +60,13 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		return ob_get_clean();
 	}
 
-
 	public function post()
 	{
 		$data = $this->prepareData();
-		if(!$data) return;
+		if (!$data)
+			return;
 
-	$curl = curl_init( $this->service->atomapi );
+		$curl = curl_init( $this->service->atomapi );
 		curl_setopt( $curl, CURLOPT_POST, true );
 		curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
 		curl_setopt( $curl, CURLOPT_USERPWD, $this->service->userpwd );
@@ -89,35 +94,35 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		return $this->save();
 	}
 
-
-
-	public function update() {
-		$data = $this->prepareData(true);
+	public function update()
+	{
+		$data = $this->prepareData( true );
 		$f = tmpfile();
-		fwrite($f, $data);
-		fseek($f, 0);
+		fwrite( $f, $data );
+		fseek( $f, 0 );
 
 		$curl = curl_init( $this->service->atomapi );
 		curl_setopt( $curl, CURLOPT_PUT, true );
-		//curl_setopt($curl, CURLOPT_READDATA, $f);
+		curl_setopt( $curl, CURLOPT_INFILE, $f );
+		curl_setopt( $curl, CURLOPT_INFILESIZE, strlen( $data ) );
 
-		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt( $curl, CURLOPT_FOLLOWLOCATION, true );
 		curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
 		curl_setopt( $curl, CURLOPT_USERPWD, $this->service->userpwd );
 
 		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
 		$ret = curl_exec( $curl );
 
-		if(!$ret) return $this->error(curl_error($curl));
+		if (!$ret)
+			return $this->error( curl_error( $curl ) );
 
-		if($ret) {
+		if ($ret) {
 			$this->crossposted = time();
 			echo $ret;
 			return $this->save();
 		}
 		return false;
 	}
-
 
 	private function error( $msg )
 	{
@@ -132,7 +137,7 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		foreach (O_Dao_Query::get( __CLASS__ )->test( "crossposted", 0 ) as $crp) {
 			$crp->post();
 		}
-		foreach(O_Dao_Query::get(__CLASS__)->where("last_update>crossposted") as $crp) {
+		foreach (O_Dao_Query::get( __CLASS__ )->where( "last_update>crossposted" ) as $crp) {
 			$crp->update();
 		}
 	}
