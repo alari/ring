@@ -12,7 +12,6 @@
 class R_Mdl_Site_CrosspostService extends O_Dao_ActiveRecord {
 	public function __construct(R_Mdl_Site $site, $blog_url, $user, $pwd) {
 		if(!$site || !$blog_url || !$user || !$pwd) {
-			$_SESSION["notice"] = "need more fields";
 			return false;
 		}
 
@@ -23,7 +22,6 @@ class R_Mdl_Site_CrosspostService extends O_Dao_ActiveRecord {
 
 		$dom = new DOMDocument();
 		if(!@$dom->loadHTMLFile($blog_url)) {
-			$_SESSION["notice"] = "Can't load $blog_url html";
 			return false;
 		}
 		$atomapi = "";
@@ -34,7 +32,6 @@ class R_Mdl_Site_CrosspostService extends O_Dao_ActiveRecord {
 			}
 		}
 		if(!$atomapi) {
-			$_SESSION["notice"] .= "AtomApi not found";
 			return false;
 		}
 		$this->atomapi = $atomapi;

@@ -14,6 +14,7 @@ class R_Lf_Tpl_Admin_Crossposting extends R_Lf_Template {
 <tr>
 		<th><a href="<?=$serv->blog_url?>"><?=$serv->blog_url?></a></th>
 		<td><small><?=$serv->atomapi?></small></td>
+		<td><a href="?d=<?=$serv->id?>" onclick="return confirm('Удалить сервис кросспостинга? При этом информация о всех выполненных кросспостах будет удалена.')">x</a></td>
 	</tr>
 	<?
 		}

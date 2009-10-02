@@ -15,16 +15,16 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 
 		$form->setRelationQuery( "tags", $this->getSite()->tags, "title", true );
 
-		$form->setRelationQuery("collection", $this->instance->system->collections, "title");
+		$form->setRelationQuery( "collection", $this->instance->system->collections, "title" );
 
-		O_Registry::set("app/current/system", $this->instance->system);
+		O_Registry::set( "app/current/system", $this->instance->system );
 
 		if ($this->creative_id) {
 			$form->setActiveRecord( $creative );
-			$form->setType("up");
+			$form->setType( "up" );
 		} else {
 			$form->setCreateMode( $this->instance );
-			$form->setType("new");
+			$form->setType( "new" );
 		}
 		if ($form->handle()) {
 			$creative = $form->getActiveRecord();
@@ -41,6 +41,16 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 				if ($new_tag)
 					$creative->tags[] = $new_tag;
 			}
+			if (!$this->creative_id) {
+				$crosspost = $this->getParam( "crosspost" );
+				if (count( $crosspost )) {
+					foreach ($this->getSite()->crosspost_services as $serv) {
+						if (!in_array( $serv->id, $crosspost ))
+							continue;
+						new R_Mdl_Site_Crosspost( $creative->anonce, $serv );
+					}
+				}
+			}
 			return $this->redirect( $creative->url() );
 		}
 
@@ -52,8 +62,8 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 
 	public function isAuthenticated()
 	{
-		return $this->instance && $this->can( "read " . $this->instance->system[ "access" ], $this->getSite() ) && $this->can(
-				"write", $this->getSite() );
+		return $this->instance && $this->can( "read " . $this->instance->system[ "access" ],
+				$this->getSite() ) && $this->can( "write", $this->getSite() );
 	}
 
 }
