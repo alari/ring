@@ -61,8 +61,16 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		$data = $this->prepareData();
 		if(!$data) return;
 
-		$ret = $this->curlPost($this->service->atomapi, $data);
-		if(!$ret) return false;
+	$curl = curl_init( $this->service->atomapi );
+		curl_setopt( $curl, CURLOPT_POST, true );
+		curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
+		curl_setopt( $curl, CURLOPT_USERPWD, $this->service->userpwd );
+		curl_setopt( $curl, CURLOPT_POSTFIELDS, $data );
+		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
+		$ret = curl_exec( $curl );
+		if (!$ret) {
+			return $this->error( curl_error( $curl ) );
+		}
 
 		$d = new DOMDocument( );
 		if (!$d->loadXml( $ret )) {
@@ -81,23 +89,25 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		return $this->save();
 	}
 
-	private function curlPost($url, $data, $method=CURLOPT_POST) {
-	$curl = curl_init( $url );
-		curl_setopt( $curl, $method, true );
-		curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
-		curl_setopt( $curl, CURLOPT_USERPWD, $this->service->userpwd );
-		curl_setopt( $curl, CURLOPT_POSTFIELDS, $data );
-		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
-		$ret = curl_exec( $curl );
-		if (!$ret) {
-			return $this->error( curl_error( $curl ) );
-		}
-		return $ret;
-	}
 
 
 	public function update() {
-		$ret = $this->curlPost($this->edit_url, $this->prepareData(true));
+		$data = $this->prepareData(true);
+		$f = tmpfile();
+		fwrite($f, $data);
+		fseek($f, 0);
+
+		$curl = curl_init( $this->service->atomapi );
+		curl_setopt( $curl, CURLOPT_PUT, true );
+		curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
+		curl_setopt( $curl, CURLOPT_USERPWD, $this->service->userpwd );
+
+		curl_setopt( $curl, CURLOPT_INFILE, $f );
+		curl_setopt($curl, CURLOPT_INFILESIZE, strlen($data));
+
+		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
+		$ret = curl_exec( $curl );
+
 		if($ret) {
 			$this->crossposted = time();
 			echo $ret;
