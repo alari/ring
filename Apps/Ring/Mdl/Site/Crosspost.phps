@@ -95,15 +95,15 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		$data = $this->prepareData(true);
 		$f = tmpfile();
 		fwrite($f, $data);
-		rewind($f);
+		fseek($f, 0);
 
 		$curl = curl_init( $this->service->atomapi );
 		curl_setopt( $curl, CURLOPT_PUT, true );
-		curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
-		curl_setopt( $curl, CURLOPT_USERPWD, $this->service->userpwd );
-
 		curl_setopt( $curl, CURLOPT_INFILE, $f );
 		curl_setopt($curl, CURLOPT_INFILESIZE, strlen($data));
+
+		curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
+		curl_setopt( $curl, CURLOPT_USERPWD, $this->service->userpwd );
 
 		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
 		$ret = curl_exec( $curl );
