@@ -13,6 +13,8 @@
  * @field tags -owns many R_Mdl_Site_Tag -inverse site
  * @field anonces -owns many R_Mdl_Site_Anonce -inverse site -order-by time DESC
  *
+ * @field crosspost_services -owns many R_Mdl_Site_CrosspostService -inverse site
+ *
  * @field about varchar(255) NOT NULL DEFAULT 'О сайте' -edit -required Введите название -title Название страницы "о сайте"
  * @field about_page -owns one R_Mdl_Site_About -inverse site
  *

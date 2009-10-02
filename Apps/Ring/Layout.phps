@@ -134,6 +134,7 @@ class R_Layout extends O_Html_Layout {
 						?>
 	<li><a href="<?=$site->url( "admin/site-view" )?>">Редактировать
 	оформление</a></li>
+	<li><a href="<?=$site->url( "admin/crossposting" )?>">Atom-кросспостинг</a></li>
 	<?
 					}
 					?>

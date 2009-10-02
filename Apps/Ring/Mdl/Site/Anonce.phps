@@ -5,6 +5,8 @@
  * @field site -has one R_Mdl_Site -inverse anonces -preload
  * @field owner -has one R_Mdl_User -inverse anonces -preload -show
  *
+ * @field crossposts -owns many R_Mdl_Site_Crosspost -inverse anonce
+ *
  * @field creative -one-of blog_post; im_picture; libro_text; sound_track; afisha_bill
  * @field blog_post -owns one R_Mdl_Sys_Blog_Post -inverse anonce
  * @field im_picture -owns one R_Mdl_Sys_Im_Picture -inverse anonce
