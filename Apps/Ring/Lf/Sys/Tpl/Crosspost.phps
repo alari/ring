@@ -46,7 +46,7 @@ class R_Lf_Sys_Tpl_Crosspost extends R_Lf_Sys_Template {
 				?>
 
 <div>
-<p>Блог: <b><a href="<?=$s->blog_url?>"><?=$c->service->blog_url?></a></b>
+<p>Блог: <b><a href="<?=$s->blog_url?>"><?=$s->blog_url?></a></b>
 &ndash; <a href="?a=<?=$s->id?>"
 	onclick="return confirm('Кросспостить в этот блог?')">Совершить кросспост</a></p>
 </div>
@@ -54,8 +54,6 @@ class R_Lf_Sys_Tpl_Crosspost extends R_Lf_Sys_Template {
 			}
 		}
 		echo "<hr/>";
-		foreach ($this->available_services as $s)
-			echo $s->blog_url;
 		?>
 <p><b>Кросспостинг</b> – это возможность создания идентичных записей в
 разных местах одновременно. Иными словами, добавляя запись в Кольце, вы
