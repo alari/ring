@@ -51,7 +51,7 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 			return $this->error( O_Feed_AtomPub::getError() );
 
 		$this->postid = $ret[ "id" ];
-		$this->url = $ret[ "post_id" ];
+		$this->url = $ret[ "post_url" ];
 		$this->edit_url = $ret[ "edit_url" ];
 		$this->crossposted = time();
 
