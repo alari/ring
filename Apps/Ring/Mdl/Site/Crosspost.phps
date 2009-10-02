@@ -62,33 +62,13 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 
 	public function post()
 	{
-		$data = $this->prepareData();
-		if (!$data)
-			return;
+		$ret = O_Feed_AtomPub::post($this->service->atomapi, $this->prepareData(), $this->service->userpwd);
 
-		$curl = curl_init( $this->service->atomapi );
-		curl_setopt( $curl, CURLOPT_POST, true );
-		curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
-		curl_setopt( $curl, CURLOPT_USERPWD, $this->service->userpwd );
-		curl_setopt( $curl, CURLOPT_POSTFIELDS, $data );
-		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
-		$ret = curl_exec( $curl );
-		if (!$ret) {
-			return $this->error( curl_error( $curl ) );
-		}
+		if(!is_array($ret)) return $this->error(O_Feed_AtomPub::getError());
 
-		$d = new DOMDocument( );
-		if (!$d->loadXml( $ret )) {
-			return $this->error( "Cannot load xml data $ret" );
-		}
-		$this->postid = $d->getElementsByTagName( "id" )->item( 0 )->textContent;
-		foreach ($d->getElementsByTagName( "link" ) as $link) {
-			if ($link->getAttribute( "rel" ) == "alternate" && $link->getAttribute( "type" ) == "text/html")
-				$this->url = $link->getAttribute( "href" );
-			if ($link->getAttribute( "rel" ) == "service.edit" && strpos(
-					$link->getAttribute( "type" ), "atom+xml" ))
-				$this->edit_url = $link->getAttribute( "href" );
-		}
+		$this->postid = $ret["id"];
+		$this->url = $ret["post_id"];
+				$this->edit_url = $ret["edit_url"];
 		$this->crossposted = time();
 
 		return $this->save();
@@ -107,7 +87,7 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		curl_setopt( $curl, CURLOPT_INFILESIZE, strlen( $data ) );
 
 		curl_setopt( $curl, CURLOPT_FOLLOWLOCATION, true );
-		curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
+		curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST );
 		curl_setopt( $curl, CURLOPT_USERPWD, $this->service->userpwd );
 
 		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
