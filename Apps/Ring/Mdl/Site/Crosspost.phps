@@ -108,6 +108,8 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
 		$ret = curl_exec( $curl );
 
+		if(!$ret) return $this->error(curl_error($curl));
+
 		if($ret) {
 			$this->crossposted = time();
 			echo $ret;
