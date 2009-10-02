@@ -11,8 +11,8 @@ class R_Lf_Cmd_Admin_Crossposting extends R_Lf_Command {
 				$service = new R_Mdl_Site_CrosspostService($this->getSite(), $blog_url, $user, $pwd);
 				if(!$service) {
 					$this->setNotice("Не удалось создать новый сервис. Возможно, блог не поддерживает Atom API.");
-				}
-				return $this->redirect();
+				}print_r($service);
+				//return $this->redirect();
 			}
 		}
 
