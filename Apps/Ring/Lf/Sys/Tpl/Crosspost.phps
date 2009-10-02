@@ -5,7 +5,7 @@ class R_Lf_Sys_Tpl_Crosspost extends R_Lf_Sys_Template {
 
 	public function displayContents()
 	{
-		foreach ($this->crossposts as $c) echo $c->post_url;
+		foreach ($this->crossposts as $c) echo $c->url;
 		echo "<hr/>";
 		foreach($this->available_services as $s) echo $s->blog_url;
 	}
