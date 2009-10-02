@@ -17,7 +17,7 @@ class R_Lf_Cmd_Admin_Crossposting extends R_Lf_Command {
 		}
 
 		$tpl = $this->getTemplate();
-		$tpl->services = $this->getSite()->services;
+		$tpl->services = $this->getSite()->crosspost_services;
 		return $tpl;
 	}
 
