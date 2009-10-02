@@ -33,8 +33,8 @@ class R_Lf_Sys_Tpl_Crosspost extends R_Lf_Sys_Template {
 				}
 				?>
 	<p align="right"><small><a href="?d=<?=$c->id?>"
-	onclick="return confirm('Удалить кросспост из удалённого блога?')">Удалить</a></small></p>
-"</div>
+	onclick="return confirm('Удалить кросспост из блога?')">Удалить</a></small></p>
+</div>
 <?
 			}
 		}
@@ -48,7 +48,7 @@ class R_Lf_Sys_Tpl_Crosspost extends R_Lf_Sys_Template {
 <div>
 <p>Блог: <b><a href="<?=$s->blog_url?>"><?=$c->service->blog_url?></a></b>
 &ndash; <a href="?a=<?=$s->id?>"
-	onclick="return confirm('Кросспостить в этот блог?')">Кросспост</a></p>
+	onclick="return confirm('Кросспостить в этот блог?')">Совершить кросспост</a></p>
 </div>
 <?
 			}
