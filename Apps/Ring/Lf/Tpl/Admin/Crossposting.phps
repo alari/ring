@@ -55,7 +55,11 @@ class R_Lf_Tpl_Admin_Crossposting extends R_Lf_Template {
 	</tr>
 </table>
 <input type="hidden" name="action" value="add-service" /></fieldset>
-</form>
+</form><hr/>
+<p><b>Кросспостинг</b> – это возможность создания идентичных записей в
+разных местах одновременно. Иными словами, добавляя запись в Кольце, вы
+можете автоматически создать ее на других сайтах. Подробнее смотрите <a
+	href="http://mirari.name/Кросспостинг" target="_blank">здесь</a>.</p>
 <?
 	}
 
