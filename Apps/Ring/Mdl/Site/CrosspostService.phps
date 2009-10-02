@@ -22,7 +22,7 @@ class R_Mdl_Site_CrosspostService extends O_Dao_ActiveRecord {
 		$this->site = $site;
 
 		$dom = new DOMDocument();
-		if(!@$dom->loadHTML($blog_url)) {
+		if(!@$dom->loadHTMLFile($blog_url)) {
 			$_SESSION["notice"] = "Can't load $blog_url html";
 			return false;
 		}
@@ -31,7 +31,7 @@ class R_Mdl_Site_CrosspostService extends O_Dao_ActiveRecord {
 			if($link->getAttribute("rel") == "service.post" && $link->getAttribute("type") == "application/atom+xml") {
 				$atomapi = $link->getAttribute("href");
 				break;
-			} else $_SESSION["notice"] .= print_r($link,1);
+			}
 		}
 		if(!$atomapi) {
 			$_SESSION["notice"] .= "AtomApi not found";
