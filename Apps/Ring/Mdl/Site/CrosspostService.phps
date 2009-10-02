@@ -31,10 +31,10 @@ class R_Mdl_Site_CrosspostService extends O_Dao_ActiveRecord {
 			if($link->getAttribute("rel") == "service.post" && $link->getAttribute("type") == "application/atom+xml") {
 				$atomapi = $link->getAttribute("href");
 				break;
-			} else print_r($link);
+			} else $_SESSION["notice"] .= print_r($link,1);
 		}
 		if(!$atomapi) {
-			$_SESSION["notice"] = "AtomApi not found";
+			$_SESSION["notice"] .= "AtomApi not found";
 			return false;
 		}
 		$this->atomapi = $atomapi;
