@@ -53,7 +53,7 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 <uri><?=$this->anonce->owner->url()?></uri>
 </author>
 <content type="html">
-<?=htmlspecialchars( $descr )?>
+<?=htmlspecialchars( str_replace(array("\r","\n"), array("",""), $descr) )?>
 </content>
 </entry>
 <?
