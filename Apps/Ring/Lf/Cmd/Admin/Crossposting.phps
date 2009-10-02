@@ -9,7 +9,8 @@ class R_Lf_Cmd_Admin_Crossposting extends R_Lf_Command {
 				$user = $this->getParam( "user" );
 				$pwd = $this->getParam( "pwd" );
 				$no_comments = $this->getParam("no_comments");
-				$service = new R_Mdl_Site_CrosspostService($this->getSite(), $blog_url, $user, $pwd, $no_comments);
+				$allow_advs = $this->getParam("allow_advs");
+				$service = new R_Mdl_Site_CrosspostService($this->getSite(), $blog_url, $user, $pwd, $no_comments, $allow_advs);
 				if(!$service || !$service->id) {
 					$this->setNotice("Не удалось создать новый сервис. Возможно, блог не поддерживает Atom API или его адрес введён неправильно.");
 				}

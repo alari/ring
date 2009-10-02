@@ -38,7 +38,10 @@ class R_Lf_Tpl_Admin_Crossposting extends R_Lf_Template {
 		<td><input type="password" name="pwd" /></td>
 	</tr>
 	<tr>
-		<td><input type="hidden" name="no_comments" value="0"/><input type="checkbox" name="no_comments" value="1" checked="checked"/> &ndash; Запретить комментарии на кросспосты</td>
+		<td colspan="2"><input type="hidden" name="no_comments" value="0"/><input type="checkbox" name="no_comments" value="1" checked="checked"/> &ndash; Запретить комментарии на кросспосты</td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="hidden" name="allow_advs" value="0"/><input type="checkbox" name="allow_advs" value="1" checked="checked"/> &ndash; Запретить комментарии на кросспосты</td>
 	</tr>
 	</tr>
 

@@ -9,7 +9,7 @@ class R_Fr_Sys_Creative {
 		echo $params->record()->content;
 		echo "<hr/>";
 		$url = $params->record()->url();
-		echo "<a href=\"$url\">[ ".$params->record()->title." ]</a>";
+		echo "[ <a href=\"$url\">".$params->record()->title."</a> ]";
 	}
 
 }
