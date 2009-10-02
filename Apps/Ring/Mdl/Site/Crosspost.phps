@@ -38,7 +38,7 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		$updated = $this->last_update ? $this->last_update : $this->anonce->time;
 		$id = $showId ? $this->postid : null;
 
-		return O_Feed_AtomPub::prepareEntry( $title, $url, $published, $data, $updated, $id );
+		return O_Feed_AtomPub::prepareEntry( $title, $url, $published, $data, $updated, $id, $this->service->no_comments );
 
 	}
 

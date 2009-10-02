@@ -5,12 +5,13 @@
  * @field crossposts -owns many R_Mdl_Site_Crosspost -inverse service
  * @field site -has one R_Mdl_Site -inverse crosspost_services
  *
+ * @field no_comments TINYINT DEFAULT 1
  * @field userpwd VARCHAR(1023) DEFAULT ''
  * @field atomapi VARCHAR(1023) DEFAULT ''
  * @field blog_url VARCHAR(1023) DEFAULT ''
  */
 class R_Mdl_Site_CrosspostService extends O_Dao_ActiveRecord {
-	public function __construct(R_Mdl_Site $site, $blog_url, $user, $pwd) {
+	public function __construct(R_Mdl_Site $site, $blog_url, $user, $pwd, $no_comments=1) {
 		if(!$site || !$blog_url || !$user || !$pwd) {
 			return false;
 		}
@@ -36,6 +37,7 @@ class R_Mdl_Site_CrosspostService extends O_Dao_ActiveRecord {
 		}
 		$this->atomapi = $atomapi;
 		$this->userpwd = "$user:$pwd";
+		$this->no_comments = 1;
 
 		parent::__construct();
 	}
