@@ -14,7 +14,8 @@ class R_Lf_Tpl_Admin_Crossposting extends R_Lf_Template {
 <tr>
 		<th><a href="<?=$serv->blog_url?>"><?=$serv->blog_url?></a></th>
 		<td><small><?=$serv->atomapi?></small></td>
-		<td><a href="?d=<?=$serv->id?>" onclick="return confirm('Удалить сервис кросспостинга? При этом информация о всех выполненных кросспостах будет удалена.')">x</a></td>
+		<td><a href="?d=<?=$serv->id?>"
+			onclick="return confirm('Удалить сервис кросспостинга? При этом информация о всех выполненных кросспостах будет удалена.')">x</a></td>
 	</tr>
 	<?
 		}
@@ -38,16 +39,19 @@ class R_Lf_Tpl_Admin_Crossposting extends R_Lf_Template {
 		<td><input type="password" name="pwd" /></td>
 	</tr>
 	<tr>
-		<td colspan="2"><input type="hidden" name="no_comments" value="0"/><input type="checkbox" name="no_comments" value="1" checked="checked"/> &ndash; Запретить комментарии на кросспосты</td>
+		<td colspan="2"><input type="hidden" name="no_comments" value="0" /><input
+			type="checkbox" name="no_comments" value="1" checked="checked" />
+		&ndash; Запретить комментарии на кросспосты</td>
 	</tr>
 	<tr>
-		<td colspan="2"><input type="hidden" name="allow_advs" value="0"/><input type="checkbox" name="allow_advs" value="1" checked="checked"/> &ndash; Запретить комментарии на кросспосты</td>
+		<td colspan="2"><input type="hidden" name="allow_advs" value="0" /><input
+			type="checkbox" name="allow_advs" value="1" checked="checked" />
+		&ndash; Запретить комментарии на кросспосты</td>
 	</tr>
 	</tr>
 
 	<tr>
-		<td colspan="2" align="right" /><input type="submit"
-			value="Создать" /></td>
+		<td colspan="2" align="right" /><input type="submit" value="Создать" /></td>
 	</tr>
 </table>
 <input type="hidden" name="action" value="add-service" /></fieldset>
