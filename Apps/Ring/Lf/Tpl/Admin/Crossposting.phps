@@ -12,7 +12,7 @@ class R_Lf_Tpl_Admin_Crossposting extends R_Lf_Template {
 		foreach ($this->services as $serv) {
 			?>
 <tr>
-		<th><a href="<?=$serv->blog_url?>"><?=$serv->blog_url?></a></th>
+		<th><a href="<?=$serv->blog_url?>" target="_blank"><?=$serv->blog_url?></a></th>
 		<td><small><?=$serv->atomapi?></small></td>
 		<td><a href="?d=<?=$serv->id?>"
 			onclick="return confirm('Удалить сервис кросспостинга? При этом информация о всех выполненных кросспостах будет удалена.')">x</a></td>
@@ -46,7 +46,7 @@ class R_Lf_Tpl_Admin_Crossposting extends R_Lf_Template {
 	<tr>
 		<td colspan="2"><input type="hidden" name="allow_advs" value="0" /><input
 			type="checkbox" name="allow_advs" value="1" checked="checked" />
-		&ndash; Запретить комментарии на кросспосты</td>
+		&ndash; Разрешить рекламу Кольца в кросспостах</td>
 	</tr>
 	</tr>
 

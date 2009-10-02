@@ -15,10 +15,10 @@ class R_Lf_Sys_Tpl_Crosspost extends R_Lf_Sys_Template {
 				?>
 
 <div>
-<p>Блог: <b><a href="<?=$c->service->blog_url?>"><?=$c->service->blog_url?></a></b></p>
+<p>Блог: <b><a href="<?=$c->service->blog_url?>" target="_blank"><?=$c->service->blog_url?></a></b></p>
 	<?
 				if ($c->url) {
-					?><p>Страница кросспоста: <i><a href="<?=$c->url?>"><?=$c->url?></a></i></p><?
+					?><p>Страница кросспоста: <i><a href="<?=$c->url?>" target="_blank"><?=$c->url?></a></i></p><?
 				}
 				?>
 	<?
@@ -46,7 +46,7 @@ class R_Lf_Sys_Tpl_Crosspost extends R_Lf_Sys_Template {
 				?>
 
 <div>
-<p>Блог: <b><a href="<?=$s->blog_url?>"><?=$s->blog_url?></a></b>
+<p>Блог: <b><a href="<?=$s->blog_url?>" target="_blank"><?=$s->blog_url?></a></b>
 &ndash; <a href="?a=<?=$s->id?>"
 	onclick="return confirm('Кросспостить в этот блог?')">Совершить кросспост</a></p>
 </div>
