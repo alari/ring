@@ -6,6 +6,9 @@ class R_Lf_Cmd_Admin_Site extends R_Lf_Command {
 		$formProcessor = new O_Dao_Renderer_FormProcessor( );
 		$formProcessor->setActiveRecord( $this->getSite() );
 		$formProcessor->setAjaxMode();
+		if ($this->can( "manage tech" )) {
+			$formProcessor->setType( "adm" );
+		}
 		$formProcessor->addHiddenField( "action", "main-process" );
 		if ($this->isMethodPost() && $this->getParam( "action" ) == "main-process") {
 			$formProcessor->responseAjax( 1 );
