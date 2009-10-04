@@ -100,7 +100,7 @@ class R_Layout extends O_Html_Layout {
 <ul><?
 				foreach ($systems as $sys) {
 					?>
-<li><?=$sys->link() . (R_Mdl_Session::can("write ".$sys["access"], $site) ? " &nbsp; <small><a href=\"" . $sys->url( "form" ) . "\">Добавить</a></small>" : "")?></li>
+<li><?=$sys->link() . (R_Mdl_Session::can( "write " . $sys[ "access" ], $site ) ? " &nbsp; <small><a href=\"" . $sys->url( "form" ) . "\">Добавить</a></small>" : "")?></li>
 <?
 				}
 				?>
@@ -132,14 +132,20 @@ class R_Layout extends O_Html_Layout {
 					if (R_Mdl_Session::can( "manage styles", $site )) {
 						?>
 	<li><a href="<?=$site->url( "admin/site-view" )?>">Редактировать
-	оформление</a></li>
-	<li><a href="<?=$site->url( "admin/crossposting" )?>">Atom-кросспостинг</a></li>
-	<?
+	оформление</a></li><?
 					}
 					?>
+
+	<?
+				}
+				if (R_Mdl_Session::can( "crosspost", $site )) {
+					?><li><a
+		href="<?=$site->url( "admin/crossposting" )?>">Atom-кросспостинг</a></li><?
+				}
+				?>
 </ul>
 <?
-				}
+
 			}
 
 			$new_msgs = R_Mdl_Session::getUser()->msgs_own->test( "readen", 0 )->getFunc();
@@ -211,11 +217,13 @@ class R_Layout extends O_Html_Layout {
 		if (O_Registry::get( "app/mode" ) != "production")
 			return;
 		?>
-<?=(R_Mdl_Session::isLogged()?"":$this->linkfeed()->return_links())?>
-<div id="site_cnt"><!--LiveInternet counter-->
-<script type="text/javascript">document.write("<a href='http://www.liveinternet.ru/click;ring' target=_blank><img src='http://counter.yadro.ru/hit;ring?t26.1;r" + escape(document.referrer) + ((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth)) + ";u" + escape(document.URL) +";i" + escape("Жж"+document.title.substring(0,80)) + ";" + Math.random() + "' border=0 width=88 height=15 alt='' align='absmiddle' title='LiveInternet: показано число посетителей за сегодня. <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?>'><\/a>")</script>
+<?=
+
+		(R_Mdl_Session::isLogged() ? "" : $this->linkfeed()->return_links())?>
+<div id="site_cnt"><!--LiveInternet counter--> <script
+	type="text/javascript">document.write("<a href='http://www.liveinternet.ru/click;ring' target=_blank><img src='http://counter.yadro.ru/hit;ring?t26.1;r" + escape(document.referrer) + ((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth)) + ";u" + escape(document.URL) +";i" + escape("Жж"+document.title.substring(0,80)) + ";" + Math.random() + "' border=0 width=88 height=15 alt='' align='absmiddle' title='LiveInternet: показано число посетителей за сегодня. <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?>'><\/a>")</script>
 <!--/LiveInternet--></div>
-<div id="site_sp"><?=(R_Mdl_Session::isLogged()?"":$this->sape()->return_links())?></div>
+<div id="site_sp"><?=(R_Mdl_Session::isLogged() ? "" : $this->sape()->return_links())?></div>
 <?
 	}
 
@@ -232,9 +240,9 @@ class R_Layout extends O_Html_Layout {
 	href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a></p>
 <p><a href="javascript:void(0)" onclick="R.UserMenu.toggle()">Возможности</a></p>
 <p><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends">Друзья</a>
-	&nbsp; <small><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends/list">Кто</a></small></p>
+	href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends">Друзья</a>
+&nbsp; <small><a
+	href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends/list">Кто</a></small></p>
 <div id="user-menu"><?
 			$this->userMenu()?></div>
 <?
