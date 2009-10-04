@@ -259,7 +259,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		if ($this->collection) {
 			$coll = $this->collection->anonces->test( "position", $this->position, $op_test )->clearOrders()->orderBy(
 					"position" . $op_ord_pos );
-			self::setQueryAccesses( $coll );
+			//self::setQueryAccesses( $coll );
 			$anonce = $coll->getOne();
 			if ($anonce)
 				return $anonce;
@@ -267,7 +267,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 					$op_test )->clearOrders()->orderBy( "position" . $op_ord_pos )->getOne();
 			if ($coll) {
 				$coll = $coll->anonces->clearOrders()->orderBy( "position" . $op_ord_pos );
-				self::setQueryAccesses( $coll );
+				//self::setQueryAccesses( $coll );
 				$anonce = $coll->getOne();
 				if ($anonce)
 					return $anonce;
@@ -276,7 +276,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		}
 		$q = $this->system->anonces->test( "time", $this->time, $op_test )->orderBy(
 				"time" . $op_ord_pos );
-		self::setQueryAccesses( $q );
+		//self::setQueryAccesses( $q );
 		return $q->getOne();
 	}
 
