@@ -251,17 +251,14 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		if ($prev) {
 			$op_test = "<";
 			$op_ord_pos = " DESC";
-			$op_time = ">";
-			$op_ord_time = "";
 		} else {
 			$op_test = ">";
 			$op_ord_pos = "";
-			$op_time = "<";
-			$op_ord_time = " DESC";
 		}
 		$anonce = null;
 		if ($this->collection) {
-			$coll = $this->collection->anonces->test( "position", $this->position, $op_test );
+			$coll = $this->collection->anonces->test( "position", $this->position, $op_test )->orderBy(
+					"position" . $op_ord_pos );
 			self::setQueryAccesses( $coll );
 			$anonce = $coll->getOne();
 			if ($anonce)
