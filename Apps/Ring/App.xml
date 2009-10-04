@@ -114,9 +114,6 @@
 		<User-In field="owner_friends">
 			<Role name="Site Owner's Friend"></Role>
 		</User-In>
-		<User-In field="owner_friends_friends">
-			<Role name="Site Owner's Friends Friend"></Role>
-		</User-In>
 	</Registry>
 	<Registry key="class/R_Mdl_Site_Comment/acl">
 		<User-In field="owner">
