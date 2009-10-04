@@ -3,8 +3,7 @@
  * @table site -show-loop:callback R_Fr_Site::showInLoop
  * @field host varchar(255) NOT NULL
  * @field owner -has one R_Mdl_User -inverse site
- * @field owner_friends -alias owner.relations.author -where flags & 1 AND author>0
- * @field owner_friends_friends -alias owner.relations.author -where flags & 2 AND author>0
+ * @field owner_friends -alias usr_related.user -where flags & 2
  *
  * @field usr_related -owns many R_Mdl_User_Relation -inverse site
  * @-field members -alias usr_related.user -where flags & 4
