@@ -61,7 +61,8 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 */
 	public function url()
 	{
-		$field = O_Dao_TableInfo::get( __CLASS__ )->getFieldInfo( "creative" )->getRealField( $this );
+		$field = O_Dao_TableInfo::get( __CLASS__ )->getFieldInfo( "creative" )->getRealField(
+				$this );
 		return $this->system->creativeUrl( $this[ $field ] );
 	}
 
@@ -82,7 +83,8 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 */
 	public function isVisible()
 	{
-		return R_Mdl_Session::can( "read " . $this->system[ "access" ], $this->site ) && R_Mdl_Session::can( "read " . $this[ "access" ], $this->site );
+		return R_Mdl_Session::can( "read " . $this->system[ "access" ], $this->site ) && R_Mdl_Session::can(
+				"read " . $this[ "access" ], $this->site );
 	}
 
 	/**
@@ -134,10 +136,12 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			$q->test( "access", "public" );
 			return;
 		}
-		$tbl = O_Dao_TableInfo::get(__CLASS__)->getTableName();
-		$r_tbl = O_Dao_TableInfo::get("R_Mdl_User_Relation")->getTableName();
-		if(!$user) $user = R_Mdl_Session::getUser();
-		$q->where( "access='public'
+		$tbl = O_Dao_TableInfo::get( __CLASS__ )->getTableName();
+		$r_tbl = O_Dao_TableInfo::get( "R_Mdl_User_Relation" )->getTableName();
+		if (!$user)
+			$user = R_Mdl_Session::getUser();
+		$q->where(
+				"access='public'
 			OR owner=?
 			OR (
 				(access='protected' OR access='private')
@@ -152,19 +156,20 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			)", $user, $user );
 	}
 
-	static public function getByUserRelations($user) {
-		$q = O_Dao_Query::get(__CLASS__);
-		$tbl = O_Dao_TableInfo::get(__CLASS__)->getTableName();
-		$r_tbl = O_Dao_TableInfo::get("R_Mdl_User_Relation")->getTableName();
+	static public function getByUserRelations( $user )
+	{
+		$q = O_Dao_Query::get( __CLASS__ );
+		$tbl = O_Dao_TableInfo::get( __CLASS__ )->getTableName();
+		$r_tbl = O_Dao_TableInfo::get( "R_Mdl_User_Relation" )->getTableName();
 		// Connected by site or system
-		$q->join($r_tbl, "$r_tbl.site=$tbl.site OR $r_tbl.system=$tbl.system");
+		$q->join( $r_tbl, "$r_tbl.site=$tbl.site OR $r_tbl.system=$tbl.system" );
 		// Friendship relations
-		$q->test($r_tbl.".user", $user)->where($r_tbl.".flags & ".R_Mdl_User_Relation::FLAG_FRIEND);
+		$q->test( $r_tbl . ".user", $user )->where(
+				$r_tbl . ".flags & " . R_Mdl_User_Relation::FLAG_FRIEND );
 		// Accesses
-		self::setQueryAccesses($q, $user);
+		self::setQueryAccesses( $q, $user );
 		return $q;
 	}
-
 
 	/**
 	 * Deletes anonce
@@ -173,7 +178,8 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	public function delete()
 	{
 		if ($this->collection) {
-			$this->collection->anonces->test( "position", $this->position, ">" )->field( "position", "position-1", 1 )->update();
+			$this->collection->anonces->test( "position", $this->position, ">" )->field(
+					"position", "position-1", 1 )->update();
 		}
 		parent::delete();
 	}
@@ -182,16 +188,18 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	{
 		parent::save();
 		// Check validity of position in the cycle
-		if(!$this->_updateCollectionPosition && $this->collection) {
+		if (!$this->_updateCollectionPosition && $this->collection) {
 			// If there's more then one anonce with current position
-			if($this->collection->anonces->test("position", $this->position)->test("id", $this->id, "!=")->getOne()) {
+			if ($this->collection->anonces->test( "position", $this->position )->test(
+					"id", $this->id, "!=" )->getOne()) {
 				// Set for number of anonces -- making this last anonce
-				$this->position = count($this->collection->anonces)+1;
+				$this->position = count( $this->collection->anonces ) + 1;
 				parent::save();
 				// There is still error in position -- update all positions in collection
-				if($this->collection->anonces->test("position", $this->position)->test("id", $this->id, "!=")->getOne()) {
+				if ($this->collection->anonces->test( "position",
+						$this->position )->test( "id", $this->id, "!=" )->getOne()) {
 					$i = 0;
-					foreach($this->collection->anonces as $a) {
+					foreach ($this->collection->anonces as $a) {
 						$a->_updateCollectionPosition = 1;
 						$a->position = ++$i;
 						$a->save();
@@ -207,20 +215,71 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 *
 	 * @param int $newPosition
 	 */
-	public function setPosition($newPosition) {
-		if($newPosition == $this->position) return;
-		if($newPosition <= 0 || $newPosition > count($this->collection->anonces)+1) return;
-		/* @var $anonces O_Dao_Query */
+	public function setPosition( $newPosition )
+	{
+		if ($newPosition == $this->position)
+			return;
+		if ($newPosition <= 0 || $newPosition > count( $this->collection->anonces ) + 1)
+			return;
+			/* @var $anonces O_Dao_Query */
 		$anonces = $this->collection->anonces;
 
-		if($newPosition > $this->position) {
-			$anonces->test("position", $this->position, ">")->test("position", $newPosition, "<=")->field("position", "position-1", 1)->update();
+		if ($newPosition > $this->position) {
+			$anonces->test( "position", $this->position, ">" )->test( "position", $newPosition,
+					"<=" )->field( "position", "position-1", 1 )->update();
 		} else {
-			$anonces->test("position", $this->position, "<")->test("position", $newPosition, ">=")->field("position", "position+1", 1)->update();
+			$anonces->test( "position", $this->position, "<" )->test( "position", $newPosition,
+					">=" )->field( "position", "position+1", 1 )->update();
 		}
 
 		$this->position = $newPosition;
 		parent::save();
+	}
+
+	public function getNext()
+	{
+		return $this->getNextOrPrev( 0 );
+	}
+
+	public function getPrevious()
+	{
+		return $this->getNextOrPrev( 1 );
+	}
+
+	private function getNextOrPrev( $prev )
+	{
+		if ($prev) {
+			$op_test = "<";
+			$op_ord_pos = " DESC";
+			$op_time = ">";
+			$op_ord_time = "";
+		} else {
+			$op_test = ">";
+			$op_ord_pos = "";
+			$op_time = "<";
+			$op_ord_time = " DESC";
+		}
+		$anonce = null;
+		if ($this->collection) {
+			$coll = $this->collection->anonces->test( "position", $this->position, $op_test );
+			self::setQueryAccesses( $coll );
+			$anonce = $coll->getOne();
+			if ($anonce)
+				return $anonce;
+			$coll = $this->system->collections->test( "position", $this->collection->position,
+					$op_test )->getOne();
+			if ($coll) {
+				$coll = $coll->anonces->orderBy( "position" . $op_ord_pos );
+				self::setQueryAccesses( $coll );
+				$anonce = $coll->getOne();
+				if ($anonce)
+					return $anonce;
+			}
+		}
+		$q = $this->system->anonces->test( "time", $this->time, $op_time )->orderBy(
+				"time" . $op_ord_time );
+		self::setQueryAccesses( $q );
+		return $q->getOne();
 	}
 
 }
