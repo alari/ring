@@ -49,13 +49,13 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	static public function addFriend( $user, $object )
 	{
 		// Add a watch relation for target site
-		if($object instanceof R_Mdl_Site || $object->site instanceof R_Mdl_Site){
+		if ($object instanceof R_Mdl_Site || $object->site instanceof R_Mdl_Site) {
 			self::getRelation( $user, $object, self::FLAG_WATCH );
 		}
 		// Add "my_friend" relation
-		if($object instanceof R_Mdl_User || $object->owner instanceof R_Mdl_User) {
+		if ($object instanceof R_Mdl_User || $object->owner instanceof R_Mdl_User) {
 			$author = $object instanceof R_Mdl_User ? $object : $object->owner;
-			self::getRelation($author, $user, self::FLAG_IS_FRIEND);
+			self::getRelation( $author, $user, self::FLAG_IS_FRIEND );
 		}
 	}
 
@@ -70,23 +70,31 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 		// Remove watch flag from direct relation
 		$rel = self::getRelation( $user, $object );
 
-		// Relation with community, or no flags in relation
-		if(!$rel["flags"] || !$rel["author"]) {
-			$rel->delete();
-			return;
+		if ($rel) {
+			// Relation with community, or no flags in relation
+			if (!$rel[ "flags" ] || !$rel[ "author" ] || $rel[ "flags" ] == self::FLAG_WATCH) {
+				$rel->delete();
+				// There are other flags, save them
+			} elseif (($rel[ "flags" ] & self::FLAG_WATCH) != 0) {
+				$rel->flags = $rel->flags - self::FLAG_WATCH;
+				$rel->save();
+			}
 		}
 
-		// Flag is already removed
-		if (!$rel || $rel["flags"] & self::FLAG_WATCH == 0) {
-			return;
+		// Look for vice versa
+		if ($rel->author) {
+			$inv_rel = self::getRelation( $rel->author, $user );
+			if (!$inv_rel)
+				return;
+				// Relation with community, or no flags in relation
+			if (!$inv_rel[ "flags" ] || $inv_rel[ "flags" ] == self::FLAG_IS_FRIEND) {
+				$inv_rel->delete();
+				// There are other flags, save them
+			} elseif (($inv_rel[ "flags" ] & self::FLAG_IS_FRIEND) != 0) {
+				$inv_rel->flags = $inv_rel->flags - self::FLAG_IS_FRIEND;
+				$inv_rel->save();
+			}
 		}
-
-		// There are other flags, save them
-		if ($rel["flags"] & ~self::FLAG_WATCH > 0) {
-			$rel->flags = $rel->flags & ~self::FLAG_WATCH;
-			$rel->save();
-		}
-
 	}
 
 	/**
@@ -101,10 +109,10 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	{
 		$q = $object->usr_related->test( "user", $user );
 		$rel = $q->getOne();
-		if(!$rel && $createWithFlag !== null) {
-			$rel = new self($user, $object, $createWithFlag);
+		if (!$rel && $createWithFlag !== null) {
+			$rel = new self( $user, $object, $createWithFlag );
 		}
-		if($createWithFlag !== null && ($rel["flags"] & $createWithFlag) == 0){
+		if ($createWithFlag !== null && ($rel[ "flags" ] & $createWithFlag) == 0) {
 			$rel->flags = $rel->flags + $createWithFlag;
 			$rel->save();
 		}
