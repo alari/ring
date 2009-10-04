@@ -15,6 +15,7 @@
  */
 class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	const FLAG_WATCH = 1;
+
 	const FLAG_IS_FRIEND = 2;
 	const FLAG_IS_BANNED = 4;
 	const FLAG_IS_ADMIN = 8;
