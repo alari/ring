@@ -31,13 +31,13 @@ class R_Fr_Sys_Creative {
 			<?
 			if ($prev) {
 				?><p>Назад: <?
-				$this->nextOrPrev( $prev )?></p><?
+				self::showNextPrevAnonce( $prev, $a )?></p><?
 			}
 			?>
 			<?
 			if ($next) {
 				?><p>Вперёд: <?
-				$this->nextOrPrev( $next )?></p><?
+				self::showNextPrevAnonce( $next, $a )?></p><?
 			}
 			?>
 			</div>
@@ -45,10 +45,10 @@ class R_Fr_Sys_Creative {
 		}
 	}
 
-	static protected function showNextPrevAnonce( R_Mdl_Site_Anonce $a )
+	static protected function showNextPrevAnonce( R_Mdl_Site_Anonce $a, R_Mdl_Site_Anonce $curr )
 	{
 		echo "<a href=\"" . $a->url() . "\">" . $a->title . "</a>";
-		if ($a[ "collection" ] && $a[ "collection" ] != $this->creative->anonce[ "collection" ]) {
+		if ($a[ "collection" ] && $a[ "collection" ] != $curr[ "collection" ]) {
 			echo " &ndash; <i><a href=\"" . $a->collection->url() . "\">" . $a->collection->title .
 				 "</a></i>";
 			}
