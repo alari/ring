@@ -4,32 +4,30 @@
  *
  * @field site -has one R_Mdl_Site -inverse usr_related
  * @field author -has one R_Mdl_User -inverse usr_related
- * @field system -has one R_Mdl_Sys_Instance -inverse usr_related
  *
  * @field flags INT(64) NOT NULL DEFAULT 0
  * @field status TINYTEXT
  *
  * @field user -has one R_Mdl_User -inverse relations
  *
- * @index site,author,system,user -unique
+ * @index site,author,user -unique
  * @index flags
  */
 class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
-	const FLAG_FRIEND = 1;
+	const FLAG_WATCH = 1;
+	const FLAG_IS_FRIEND = 2;
+	const FLAG_IS_BANNED = 4;
+	const FLAG_IS_ADMIN = 8;
+	const FLAG_IS_MEMBER = 16;
+	const FLAG_IS_LEADER = 32;
 
-	const FLAG_BANNED = 4;
-	const FLAG_ADMIN = 8;
-	const FLAG_MEMBER = 16;
-	const FLAG_OWNER = 32;
+	const FLAGS_PRIVATE = 58;
+	const FLAGS_DISABLE = 40;
 
 	public function __construct( R_Mdl_User $user, O_Dao_ActiveRecord $object, $flags )
 	{
 		$this->user = $user;
-		if ($object instanceof R_Mdl_Sys_Instance) {
-			$this->system = $object;
-			if ($object->site->owner)
-				$this->author = $object->site->owner;
-		} elseif ($object instanceof R_Mdl_Site) {
+		if ($object instanceof R_Mdl_Site) {
 			$this->site = $object;
 			if ($object->owner)
 				$this->author = $object->owner;
@@ -50,13 +48,14 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	 */
 	static public function addFriend( $user, $object )
 	{
-		// Add a relation
-		$rel = self::getRelation( $user, $object );
-		if (!$rel) {
-			$rel = new self( $user, $object, self::FLAG_FRIEND );
-		} elseif ($rel[ "flags" ] & self::FLAG_FRIEND == 0) {
-			$rel[ "flags" ] = $rel[ "flags" ] ^ self::FLAG_FRIEND;
-			$rel->save();
+		// Add a watch relation for target site
+		if($object instanceof R_Mdl_Site || $object->site instanceof R_Mdl_Site){
+			self::getRelation( $user, $object, self::FLAG_WATCH );
+		}
+		// Add "my_friend" relation
+		if($object instanceof R_Mdl_User || $object->owner instanceof R_Mdl_User) {
+			$author = $object instanceof R_Mdl_User ? $object : $object->owner;
+			self::getRelation($author, $user, self::FLAG_IS_FRIEND);
 		}
 	}
 
@@ -68,32 +67,45 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	 */
 	static public function removeFriend( $user, $object )
 	{
+		// Remove watch flag from direct relation
 		$rel = self::getRelation( $user, $object );
 
-		if (!$rel || $rel->flags & self::FLAG_FRIEND == 0)
-			return;
-		if ($rel->flags & ~self::FLAG_FRIEND > 0) {
-			// Remove friend flag
-			$rel->flags = $rel->flags & ~self::FLAG_FRIEND;
-			$rel->save();
-		} else {
-			// Delete relation
+		// Relation with community, or no flags in relation
+		if(!$rel["flags"] || !$rel["author"]) {
 			$rel->delete();
 		}
+
+		// Flag is already removed
+		if (!$rel || $rel["flags"] & self::FLAG_WATCH == 0) {
+			return;
+		}
+
+		// There are other flags, save them
+		if ($rel["flags"] & ~self::FLAG_WATCH > 0) {
+			$rel->flags = $rel->flags & ~self::FLAG_WATCH;
+			$rel->save();
+		}
+
 	}
 
 	/**
 	 * Returns relation by its holders -- user and object
 	 *
 	 * @param R_Mdl_User $user
-	 * @param O_Dao_ActiveRecord $object
+	 * @param O_Dao_ActiveRecord $object -- user or site
+	 * @param int $createWithFlag if set, relation with this flags will be returned
 	 * @return R_Mdl_User_Relation
 	 */
-	static public function getRelation( $user, $object )
+	static public function getRelation( $user, $object, $createWithFlag = null )
 	{
 		$q = $object->usr_related->test( "user", $user );
-		if($object instanceof R_Mdl_Site) $q->test("system", 0);
-		if($object instanceof R_Mdl_User) $q->test("system", 0);
-		return $q->getOne();
+		$rel = $q->getOne();
+		if(!$rel && $createWithFlag !== null) {
+			$rel = new self($user, $object, $createWithFlag);
+		}
+		if($createWithFlag !== null && $rel["flags"] & $createWithFlag == 0){
+			$rel["flags"] = $rel["flags"] ^ $createWithFlag;
+		}
+		return $rel;
 	}
 }

@@ -23,12 +23,10 @@
  * @field linked -has many R_Mdl_Site_Anonce -inverse linked
  * @field in_favorites -has many R_Mdl_User -inverse favorites
  *
- * @field access ENUM('public','protected','private','disable') NOT NULL DEFAULT 'disable' -enum public: Всем; protected: Друзьям и друзьям друзей; private: Друзьям; disable: Только себе
+ * @field access ENUM('public','protected','private','disable') NOT NULL DEFAULT 'disable' -enum public: Всем; protected: Авторизованным; private: Друзьям; disable: Только себе
  * @field time INT -show date
  * @field title VARCHAR(255) -show linkInContainer
  * @field description TEXT -show
- *
- * @field flags INT(64) NOT NULL DEFAULT 0 -enum 0: Всем; 3: Друзьям и друзьям друзей; 1: Друзьям; 32: Только себе -edit
  *
  * @index time
  * @index system,time
@@ -158,16 +156,13 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 
 	static public function getByUserRelations( $user )
 	{
-		$q = O_Dao_Query::get( __CLASS__ );
-		$tbl = O_Dao_TableInfo::get( __CLASS__ )->getTableName();
 		$r_tbl = O_Dao_TableInfo::get( "R_Mdl_User_Relation" )->getTableName();
-		// Connected by site or system
-		$q->join( $r_tbl, "$r_tbl.site=$tbl.site OR $r_tbl.system=$tbl.system" );
-		// Friendship relations
-		$q->test( $r_tbl . ".user", $user )->where(
-				$r_tbl . ".flags & " . R_Mdl_User_Relation::FLAG_FRIEND );
-		// Accesses
-		self::setQueryAccesses( $q, $user );
+		$q = $user->{"relations.site.anonces"}->where("$r_tbl.flags & ".R_Mdl_User_Relation::FLAG_WATCH);
+		$q->where("access='public' OR access='protected'
+			OR owner=?
+			OR (access='private' AND $r_tbl.flags & ?)
+			OR (access='disable' AND $r_tbl.flags & ?)",
+			$user, R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE);
 		return $q;
 	}
 
