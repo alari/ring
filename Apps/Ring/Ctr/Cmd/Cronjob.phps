@@ -13,11 +13,7 @@ class R_Ctr_Cmd_Cronjob extends R_Command {
 			$q = O_Db_Query::get("user_relation_backup")->select();
 			foreach($q as $a) {
 				$user = O_Dao_Query::get("R_Mdl_User")->test("id", $a["user"])->getOne();
-				if($a["author"]) {
-					$target = O_Dao_Query::get("R_Mdl_User")->test("id", $a["author"])->getOne();
-				} else {
-					$target = O_Dao_Query::get("R_Mdl_Site")->test("id", $a["site"])->getOne();
-				}
+				$target = O_Dao_Query::get("R_Mdl_User")->test("id", $a["author"])->getOne();
 				R_Mdl_User_Relation::addFriend($user, $target);
 			}
 		}
