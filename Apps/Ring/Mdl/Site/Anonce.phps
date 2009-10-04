@@ -156,13 +156,12 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 
 	static public function getByUserRelations( $user )
 	{
-		$r_tbl = O_Dao_TableInfo::get( "R_Mdl_User_Relation" )->getTableName();
-		$q = $user->{"relations.site.anonces"}->where("$r_tbl.flags & ".R_Mdl_User_Relation::FLAG_WATCH);
+		$q = $user->{"relations.site.anonces"}->where("__rel1.flags & ".R_Mdl_User_Relation::FLAG_WATCH);
 		$q->where("access='public' OR access='protected'
 			OR owner=?
-			OR (access='private' AND $r_tbl.flags & ?)
-			OR (access='disable' AND $r_tbl.flags & ?)",
-			$user, R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE);echo $q->prepareSelect();
+			OR (access='private' AND __rel1.flags & ?)
+			OR (access='disable' AND __rel1.flags & ?)",
+			$user, R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE);
 		return $q;
 	}
 
