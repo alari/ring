@@ -57,12 +57,12 @@ class R_Fr_Sys_Creative {
 		static protected function showLinkedAnonces( R_Mdl_Site_Anonce $a )
 		{
 			$linked = $a->linked;
-			R_Mdl_Site_Anonce::setQueryAccesses($linked);
+			//R_Mdl_Site_Anonce::setQueryAccesses($linked);
 			if (count( $linked )) {
 				echo "<br clear=\"right\"/>";
 				echo "<br/><i>Связанные:</i>";
 				echo "<ul>";
-				foreach ($linked as $l) {
+				foreach ($linked as $l) if($l->isVisible()) {
 					?><li><?=$l->link() . ($l[ "owner" ] == $a[ "owner" ] ? "" : " &ndash; <i>" . $l->owner->link() . ", <small>".$l->system->link()."</small></i>")?></li><?
 				}
 				echo "</ul>";
