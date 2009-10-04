@@ -35,7 +35,7 @@ class R_Lf_Sys_Cmd_Crosspost extends R_Lf_Sys_Command {
 		if (!$this->creative)
 			throw new O_Ex_PageNotFound( "creative not found", 404 );
 		return $this->instance && $this->can( "read " . $this->instance->system[ "access" ],
-				$this->getSite() ) && $this->can( "write", $this->getSite() );
+				$this->creative->anonce ) && $this->can( "crosspost", $this->getSite() );
 	}
 
 }

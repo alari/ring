@@ -1,57 +1,59 @@
 <?php
 abstract class R_Lf_Sys_Template extends R_Lf_Template {
-	public $can_write;
-	public $can_delete;
 	public $tags;
 	public $instance;
 	public $creative;
 	public $tag;
 	public $collection;
 
-	public function prepareMeta(){
-		$description = Array();
-		$keywords = Array();
+	public function prepareMeta()
+	{
+		$description = Array ();
+		$keywords = Array ();
 
-		if($this->tags) foreach($this->tags as $tag) $keywords[] = $tag->title;
+		if ($this->tags)
+			foreach ($this->tags as $tag)
+				$keywords[] = $tag->title;
 
-		if($this->creative) {
+		if ($this->creative) {
 			$description[] = $this->creative->anonce->title;
 			$description[] = $this->instance->title;
-			if($this->creative->anonce->description) {
+			if ($this->creative->anonce->description) {
 				$description[] = $this->creative->anonce->description;
 			}
-			if($this->creative->anonce->owner) {
-				$description[] = "Автор: ".$this->creative->anonce->owner->nickname;
+			if ($this->creative->anonce->owner) {
+				$description[] = "Автор: " . $this->creative->anonce->owner->nickname;
 				$keywords[] = "автор";
 				$keywords[] = $this->creative->anonce->owner->nickname;
 			}
 		}
 
-		if($this->instance) {
+		if ($this->instance) {
 			$description[] = $this->instance->title;
 			$keywords[] = $this->instance->title;
-			$this->layout()->setBodyClass("sys-".$this->instance->system->urlbase."-body");
+			$this->layout()->setBodyClass( "sys-" . $this->instance->system->urlbase . "-body" );
 		}
 
-		if(!$this->creative && $this->getSite()->owner) {
-			$description[] = "Автор: ".$this->site->owner->nickname;
+		if (!$this->creative && $this->getSite()->owner) {
+			$description[] = "Автор: " . $this->site->owner->nickname;
 			$keywords[] = "автор";
 			$keywords[] = $this->site->owner->nickname;
 		}
 
-		$description[] = "Сайт &laquo;".$this->getSite()->title."&raquo;";
+		$description[] = "Сайт &laquo;" . $this->getSite()->title . "&raquo;";
 
 		$description[] = "Входит в кольцо творческих сайтов Mirari.Name";
 
-		$this->layout()->setMetaDescription($description);
-		$this->layout()->setMetaKeywords($keywords);
+		$this->layout()->setMetaDescription( $description );
+		$this->layout()->setMetaKeywords( $keywords );
 	}
 
 	public function displayNav()
 	{
-		$this->layout()->setBodyClass("sys-".$this->instance->system->urlbase."-body");
+		$this->layout()->setBodyClass( "sys-" . $this->instance->system->urlbase . "-body" );
 		?>
-<p><b><?=$this->instance->system->link()?></b> <small><a href="<?=$this->instance->system->url("comments")?>">Комментарии</a></small></p>
+<p><b><?=$this->instance->system->link()?></b> <small><a
+	href="<?=$this->instance->system->url( "comments" )?>">Комментарии</a></small></p>
 <?
 		if ($this->creative) {
 			?>
@@ -63,7 +65,7 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 <?
 			}
 		}
-		if ($this->can_write) {
+		if (R_Mdl_Session::can( "write " . $this->instance->system[ "access" ], $this->getSite() )) {
 			?>
 <ul>
 	<li><a href="<?=$this->instance->system->url( "form" )?>">Добавить</a></li>
@@ -74,13 +76,18 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 	<li><a
 		href="<?=$this->instance->system->url( "form/" . $this->creative->id )?>">Править</a></li>
 		<?
-				if ($this->can_delete) {
+				if (R_Mdl_Session::can( "delete", $this->creative->anonce )) {
 					?>
-		<li><a href="?action=delete"
+		<li><a href="<?=$this->creative->url()?>?action=delete"
 		onclick="return confirm('Вы уверены? Восстановление будет невозможно!')">Удалить</a></li>
-<?if(count($this->getSite()->crosspost_services)){?>
+<?
+					if (R_Mdl_Session::can( "crosspost", $this->getSite() ) && count(
+							$this->getSite()->crosspost_services )) {
+						?>
 		<li><a
-		href="<?=$this->instance->system->url( "cross/" . $this->creative->id )?>">Кросспостинг</a></li><?}?>
+		href="<?=$this->instance->system->url( "cross/" . $this->creative->id )?>">Кросспостинг</a></li><?
+					}
+					?>
 <?
 				}
 				?>
@@ -98,13 +105,17 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 			?>
 
 <p><i>Внутренний ID для связей: <b><?=$this->creative[ "anonce" ]?></b></i></p>
-<?if(R_Mdl_Session::getUser() != $this->creative->anonce->owner){
-	$has_fovarites = R_Mdl_Session::getUser()->favorites->has($this->creative->anonce);
-	?>
-<p>
-<i><a href="javascript:void(0)" onclick="new Request.HTML({url:'<?=$this->creative->url()?>?action=fav',update:$(this).getParent()}).send();"><?=($has_fovarites?"Убрать из избранного":"Добавить в избранное")?></a></i>
+<?
+			if (R_Mdl_Session::getUser() != $this->creative->anonce->owner) {
+				$has_fovarites = R_Mdl_Session::getUser()->favorites->has(
+						$this->creative->anonce );
+				?>
+<p><i><a href="javascript:void(0)"
+	onclick="new Request.HTML({url:'<?=$this->creative->url()?>?action=fav',update:$(this).getParent()}).send();"><?=($has_fovarites ? "Убрать из избранного" : "Добавить в избранное")?></a></i>
 </p>
-<?}?>
+<?
+			}
+			?>
 
 <?
 		}
@@ -114,18 +125,26 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 <ul>
 <?
 			foreach ($this->tags as $tag) {
-				echo "<li>", $this->tag == $tag ? "<b>" : "", $tag->link( $this->instance->system ), $this->tag == $tag ? "</b>" : "", "</li>";
+				echo "<li>", $this->tag == $tag ? "<b>" : "", $tag->link(
+						$this->instance->system ), $this->tag == $tag ? "</b>" : "", "</li>";
 			}
 			echo "</ul>";
 		}
 
-		if(count($this->instance->system->collections)) {
+		if (count( $this->instance->system->collections )) {
 			?>
-	<br/><br/><small>Сложены вместе</small><ul>
-	<?foreach($this->instance->system->collections as $coll) {
-		$is_current = ($this->creative && $this->creative->anonce->collection == $coll) || $this->collection == $coll ? 1 : 0;
-		echo "<li><i>".($is_current?"<b>":"").$coll->link().($is_current?"</b>":"")."</i></li>";
-	}?>
+	<br />
+	<br />
+	<small>Сложены вместе</small>
+	<ul>
+	<?
+			foreach ($this->instance->system->collections as $coll) {
+				$is_current = ($this->creative && $this->creative->anonce->collection == $coll) ||
+								 $this->collection == $coll ? 1 : 0;
+				echo "<li><i>" . ($is_current ? "<b>" : "") . $coll->link() . ($is_current ? "</b>" : "") .
+						 "</i></li>";
+				}
+				?>
 	</ul>
 			<?
 		}

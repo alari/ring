@@ -64,8 +64,16 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 
 	public function isAuthenticated()
 	{
-		return $this->instance && $this->can( "read " . $this->instance->system[ "access" ],
-				$this->getSite() ) && $this->can( "write", $this->getSite() );
+		if(!$this->instance) return false;
+		if ($this->creative_id) {
+			$creative = $this->instance->getCreative( $this->creative_id );
+			if (!$creative){
+				throw new O_Ex_Redirect("/");
+			}
+			return $this->can("read ".$this->instance->system["access"], $this->creative->anonce) && $this->can("write ".$this->instance->system["access"], $this->creative->anonce);
+		}
+		return $this->can( "read " . $this->instance->system[ "access" ],
+				$this->getSite() ) && $this->can( "write " . $this->instance->system[ "access" ], $this->getSite() );
 	}
 
 }
