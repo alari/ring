@@ -158,7 +158,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	{
 		$q = $user->{"relations.site.anonces"}->where("__rel1.flags & ".R_Mdl_User_Relation::FLAG_WATCH);
 		$q->where("access='public' OR access='protected'
-			OR owner=?
+			OR anonce.owner=?
 			OR (access='private' AND __rel1.flags & ?)
 			OR (access='disable' AND __rel1.flags & ?)",
 			$user, R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE);
