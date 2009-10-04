@@ -73,6 +73,7 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 		// Relation with community, or no flags in relation
 		if(!$rel["flags"] || !$rel["author"]) {
 			$rel->delete();
+			return;
 		}
 
 		// Flag is already removed
@@ -103,8 +104,8 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 		if(!$rel && $createWithFlag !== null) {
 			$rel = new self($user, $object, $createWithFlag);
 		}
-		if($createWithFlag !== null && $rel["flags"] & $createWithFlag == 0){
-			$rel["flags"] += $createWithFlag;
+		if($createWithFlag !== null && ($rel["flags"] & $createWithFlag) == 0){
+			$rel->flags = $rel->flags + $createWithFlag;
 			$rel->save();
 		}
 		return $rel;
