@@ -20,14 +20,25 @@
  * @field about varchar(255) NOT NULL DEFAULT 'О сайте' -edit -required Введите название -title Название страницы "о сайте"
  * @field about_page -owns one R_Mdl_Site_About -inverse site
  *
+ * @field type TINYINT DEFAULT 1 -enum 1: Авторский; 2: Сообщество -edit-adm -title Тип сообщества
+ * @field status TINYINT DEFAULT 0 -enum 0: Неотмодерирован; 1: Прошёл модерацию; 2: Технический сайт -edit-adm -title Статус сообщества
+ *
  * @field static_urlbase varchar(255) NOT NULL
  * @field static_folder varchar(255) NOT NULL
  * @field copyright varchar(255) NOT NULL DEFAULT 'Copyright holders' -edit -required Введите копирайт автора или авторов сайта -title Копирайты
  * @field title varchar(255) NOT NULL DEFAULT 'Сайт' -edit -required Введите название сайта -title Название сайта
  *
  * @index host -unique
+ * @index status
+ * @index type
  */
 class R_Mdl_Site extends O_Dao_ActiveRecord {
+
+	const TYPE_AUTH = 1;
+	const TYPE_COMM = 2;
+	const ST_MODERATED = 1;
+	const ST_AWAITING = 0;
+	const ST_TECH = 2;
 
 	private $available_systems;
 
