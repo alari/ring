@@ -20,8 +20,8 @@
  * @field about varchar(255) NOT NULL DEFAULT 'О сайте' -edit -required Введите название -title Название страницы "о сайте"
  * @field about_page -owns one R_Mdl_Site_About -inverse site
  *
- * @field type TINYINT DEFAULT 1 -enum 1: Авторский; 2: Сообщество -edit-adm -title Тип сообщества
- * @field status TINYINT DEFAULT 0 -enum 0: Неотмодерирован; 1: Прошёл модерацию; 2: Технический сайт -edit-adm -title Статус сообщества
+ * @field type TINYINT DEFAULT 1 -enum 1: Авторский; 2: Сообщество -edit-adm enum -title Тип сайта
+ * @field status TINYINT DEFAULT 0 -enum 0: Неотмодерирован; 1: Прошёл модерацию; 2: Технический сайт -edit-adm enum -title Статус сайта
  *
  * @field static_urlbase varchar(255) NOT NULL
  * @field static_folder varchar(255) NOT NULL
