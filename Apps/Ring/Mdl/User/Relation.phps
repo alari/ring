@@ -105,6 +105,7 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 		}
 		if($createWithFlag !== null && $rel["flags"] & $createWithFlag == 0){
 			$rel["flags"] = $rel["flags"] ^ $createWithFlag;
+			$rel->save();
 		}
 		return $rel;
 	}
