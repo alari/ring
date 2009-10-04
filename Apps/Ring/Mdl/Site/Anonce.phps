@@ -275,9 +275,10 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 				if ($anonce)
 					return $anonce;
 			}
+			return null;
 		}
-		$q = $this->system->anonces->test( "time", $this->time, $op_time )->orderBy(
-				"time" . $op_ord_time );
+		$q = $this->system->anonces->test( "time", $this->time, $op_test )->orderBy(
+				"time" . $op_ord_pos );
 		self::setQueryAccesses( $q );
 		return $q->getOne();
 	}
