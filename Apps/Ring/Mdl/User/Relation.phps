@@ -18,12 +18,12 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 
 	const FLAG_IS_FRIEND = 2;
 	const FLAG_IS_BANNED = 4;
-	const FLAG_IS_ADMIN = 8;
-	const FLAG_IS_MEMBER = 16;
+	const FLAG_IS_MEMBER = 8;
+	const FLAG_IS_ADMIN = 16;
 	const FLAG_IS_LEADER = 32;
 
 	const FLAGS_PRIVATE = 58;
-	const FLAGS_DISABLE = 40;
+	const FLAGS_DISABLE = 48;
 
 	public function __construct( R_Mdl_User $user, O_Dao_ActiveRecord $object, $flags )
 	{

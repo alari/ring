@@ -81,12 +81,6 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 */
 	public function isVisible()
 	{
-		if($this["access"]=="public")return true;
-		if(!R_Mdl_Session::isLogged()) return false;
-		if(R_Mdl_Session::getUser()->id == $this["owner"]) return true;
-		if($this["access"]=="disable") return false;
-		return count($this->owner->friends->test("user", R_Mdl_Session::getUser()));
-
 		return R_Mdl_Session::can( "read " . $this->system[ "access" ], $this->site ) && R_Mdl_Session::can(
 				"read " . $this[ "access" ], $this->site );
 	}

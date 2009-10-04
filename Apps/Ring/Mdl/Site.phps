@@ -6,7 +6,10 @@
  * @field owner_friends -alias usr_related.user -where flags & 2
  *
  * @field usr_related -owns many R_Mdl_User_Relation -inverse site
- * @-field members -alias usr_related.user -where flags & 4
+ *
+ * @field members -alias usr_related.user -where flags & 8
+ * @field admins -alias usr_related.user -where flags & 16
+ * @field leader -alias usr_related.user -where flags & 32
  *
  * @field systems -owns many R_Mdl_Sys_Instance -inverse site -order-by position
  * @field tags -owns many R_Mdl_Site_Tag -inverse site
