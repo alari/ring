@@ -264,9 +264,9 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			if ($anonce)
 				return $anonce;
 			$coll = $this->system->collections->test( "position", $this->collection->position,
-					$op_test )->clearOrders()->orderBy("position" . $op_ord_pos)->getOne();
+					$op_test )->clearOrders()->orderBy( "position" . $op_ord_pos )->getOne();
 			if ($coll) {
-				$coll = $coll->anonces->orderBy( "position" . $op_ord_pos );
+				$coll = $coll->anonces->clearOrders()->orderBy( "position" . $op_ord_pos );
 				self::setQueryAccesses( $coll );
 				$anonce = $coll->getOne();
 				if ($anonce)
