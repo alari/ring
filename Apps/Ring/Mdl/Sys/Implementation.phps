@@ -114,7 +114,7 @@ abstract class R_Mdl_Sys_Implementation extends O_Dao_ActiveRecord {
 			return false;
 		if ($item->anonce->system->instance != $this)
 			return false;
-		if (!R_Mdl_Session::can( "read " . $item->anonce[ "access" ], $this->system->site ))
+		if (!$item->anonce->isVisible())
 			return false;
 		return $item;
 	}
