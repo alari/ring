@@ -162,7 +162,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			OR owner=?
 			OR (access='private' AND $r_tbl.flags & ?)
 			OR (access='disable' AND $r_tbl.flags & ?)",
-			$user, R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE);
+			$user, R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE);echo $q->prepareSelect();
 		return $q;
 	}
 
