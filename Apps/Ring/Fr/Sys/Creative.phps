@@ -58,7 +58,12 @@ class R_Fr_Sys_Creative {
 		{
 			if (count( $a->linked )) {
 				echo "<br clear=\"right\"/>";
-				echo "<br/>";
+				echo "<br/><i>Связанные:</i>";
+				echo "<ul>";
+				foreach ($a->linked as $l) {
+					?><li><?=$l->link() . ($l[ "owner" ] == $a[ "owner" ] ? "" : " &ndash; <i>" . $l->owner->link() . "</i>")?></li><?
+				}
+				echo "</ul>";
 				$a->linked->show( $layout );
 			}
 		}
