@@ -138,30 +138,27 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$r_tbl = O_Dao_TableInfo::get( "R_Mdl_User_Relation" )->getTableName();
 		if (!$user)
 			$user = R_Mdl_Session::getUser();
+
+		$q->joinOnce( $r_tbl, "$tbl.site=$r_tbl.site AND $r_tbl.user=" . $user->id );
 		$q->where(
-				"access='public'
+				"access='public' OR access='protected'
 			OR owner=?
-			OR (
-				(access='protected' OR access='private')
-					AND (
-						(
-						$tbl.owner=$r_tbl.author
-						AND EXISTS (SELECT r1.author FROM $r_tbl r1 WHERE r1.flags & 1 AND r1.user=$tbl.owner AND r1.author=?)
-						) OR (
-						$tbl.owner!=$r_tbl.author
-						)
-					)
-			)", $user, $user );
+			OR (access='private' AND $r_tbl.flags & ?)
+			OR (access='disable' AND $r_tbl.flags & ?)
+				", $user,
+				R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE );
 	}
 
 	static public function getByUserRelations( $user )
 	{
-		$q = $user->{"relations.site.anonces"}->where("__rel1.flags & ".R_Mdl_User_Relation::FLAG_WATCH);
-		$q->where("access='public' OR access='protected'
+		$q = $user->{"relations.site.anonces"}->where(
+				"__rel1.flags & " . R_Mdl_User_Relation::FLAG_WATCH );
+		$q->where(
+				"access='public' OR access='protected'
 			OR anonces.owner=?
 			OR (access='private' AND __rel1.flags & ?)
-			OR (access='disable' AND __rel1.flags & ?)",
-			$user, R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE);
+			OR (access='disable' AND __rel1.flags & ?)", $user, R_Mdl_User_Relation::FLAGS_PRIVATE,
+				R_Mdl_User_Relation::FLAGS_DISABLE );
 		return $q;
 	}
 

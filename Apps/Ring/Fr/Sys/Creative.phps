@@ -57,7 +57,6 @@ class R_Fr_Sys_Creative {
 		static protected function showLinkedAnonces( R_Mdl_Site_Anonce $a )
 		{
 			$linked = $a->linked;
-			//R_Mdl_Site_Anonce::setQueryAccesses($linked);
 			if (count( $linked )) {
 				echo "<br clear=\"right\"/>";
 				echo "<br/><i>Связанные:</i>";
