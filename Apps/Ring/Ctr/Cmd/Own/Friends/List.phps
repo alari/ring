@@ -14,6 +14,7 @@ class R_Ctr_Cmd_Own_Friends_List extends R_Command {
 		if($this->getParam("remove")) {
 			$friend = O_Dao_ActiveRecord::getById($this->getParam("remove"), "R_Mdl_User");
 			if($friend) $user->removeFriend($friend);
+			return $this->redirect();
 		}
 
 		$tpl = $this->getTemplate();
