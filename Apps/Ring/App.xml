@@ -108,13 +108,23 @@
 	<Registry key="sites/static_urlbase" value="/static/s/"></Registry><Registry key="sites/static_folder" value="./static/s/"></Registry><Registry key="users/static_folder" value="./static/u/"></Registry><Registry key="users/static_urlbase" value="/static/u/"></Registry><Registry key="class/R_Mdl_User/plugins" type="add"
 		value="O_OpenId_Provider_UserPlugin"></Registry>
 	<Registry key="class/R_Mdl_Site/acl">
+		
+		
+		<Resourse field="type" value="1">
 		<User-In field="owner">
 			<Role name="Site Owner"></Role>
 		</User-In>
 		<User-In field="owner_friends">
 			<Role name="Site Owner's Friend"></Role>
 		</User-In>
-	</Registry>
+		</Resourse>
+		<Resourse field="type" value="1">
+			<User-In field="leader">
+				<Role name="Site Leader"></Role></User-In>
+			<User-In field="admins">
+				<Role name="Site Admin"></Role></User-In>
+			<User-In field="members">
+				<Role name="Site Member"></Role></User-In></Resourse></Registry>
 	<Registry key="class/R_Mdl_Site_Comment/acl">
 		<User-In field="owner">
 			<Role name="Content Owner"></Role></User-In>
