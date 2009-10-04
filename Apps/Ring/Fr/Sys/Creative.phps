@@ -54,17 +54,17 @@ class R_Fr_Sys_Creative {
 			}
 		}
 
-		static protected function showLinkedAnonces( R_Mdl_Site_Anonce $a, O_Html_Layout $layout )
+		static protected function showLinkedAnonces( R_Mdl_Site_Anonce $a )
 		{
-			if (count( $a->linked )) {
+			$linked = R_Mdl_Site_Anonce::setQueryAccesses($a->linked);
+			if (count( $linked )) {
 				echo "<br clear=\"right\"/>";
 				echo "<br/><i>Связанные:</i>";
 				echo "<ul>";
-				foreach ($a->linked as $l) {
-					?><li><?=$l->link() . ($l[ "owner" ] == $a[ "owner" ] ? "" : " &ndash; <i>" . $l->owner->link() . "</i>")?></li><?
+				foreach ($linked as $l) {
+					?><li><?=$l->link() . ($l[ "owner" ] == $a[ "owner" ] ? "" : " &ndash; <i>" . $l->owner->link() . ", <small>".$l->system->link()."</small></i>")?></li><?
 				}
 				echo "</ul>";
-				$a->linked->show( $layout );
 			}
 		}
 
