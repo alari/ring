@@ -94,14 +94,13 @@ class R_Layout extends O_Html_Layout {
 			if (!$site)
 				$site = R_Mdl_Session::getUser()->site;
 			if ($site instanceof R_Mdl_Site) {
-				$can_write = R_Mdl_Session::can( "write", $site );
 				$systems = $site->getSystems();
 				?>
 <p><b><a href="<?=$site->url()?>"><?=$site->title?></a></b></p>
 <ul><?
 				foreach ($systems as $sys) {
 					?>
-<li><?=$sys->link() . ($can_write ? " &nbsp; <small><a href=\"" . $sys->url( "form" ) . "\">Добавить</a></small>" : "")?></li>
+<li><?=$sys->link() . (R_Mdl_Session::can("write ".$sys["access"], $site) ? " &nbsp; <small><a href=\"" . $sys->url( "form" ) . "\">Добавить</a></small>" : "")?></li>
 <?
 				}
 				?>
