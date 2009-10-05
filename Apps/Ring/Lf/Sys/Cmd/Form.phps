@@ -1,15 +1,10 @@
 <?php
 class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 	public $creative_id;
+	public $creative;
 
 	public function process()
 	{
-		if ($this->creative_id) {
-			$creative = $this->instance->getCreative( $this->creative_id );
-			if (!$creative)
-				return $this->redirect( "/" );
-		}
-
 		$form = new O_Dao_Renderer_FormProcessor( );
 		$form->setClass( constant( get_class( $this->instance ) . "::CREATIVE_CLASS" ) );
 
@@ -20,16 +15,16 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 		O_Registry::set( "app/current/system", $this->instance->system );
 
 		if ($this->creative_id) {
-			$form->setActiveRecord( $creative );
+			$form->setActiveRecord( $this->creative );
 			$form->setType( "up" );
 		} else {
 			$form->setCreateMode( $this->instance );
 			$form->setType( "new" );
 		}
 		if ($form->handle()) {
-			$creative = $form->getActiveRecord();
-			$creative->owner = R_Mdl_Session::getUser();
-			$creative->save();
+			$this->creative = $form->getActiveRecord();
+			$this->creative->owner = R_Mdl_Session::getUser();
+			$this->creative->save();
 			if ($this->getParam( "tag_new" )) {
 				$new_tag = $this->getSite()->tags->test( "title", $this->getParam( "tag_new" ) )->getOne();
 				if (!$new_tag) {
@@ -39,7 +34,7 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 				}
 
 				if ($new_tag)
-					$creative->tags[] = $new_tag;
+					$this->creative->tags[] = $new_tag;
 			}
 			if (!$this->creative_id) {
 				$crosspost = $this->getParam( "crosspost" );
@@ -47,13 +42,13 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 					foreach ($this->getSite()->crosspost_services as $serv) {
 						if (!in_array( $serv->id, $crosspost ))
 							continue;
-						new R_Mdl_Site_Crosspost( $creative->anonce, $serv );
+						new R_Mdl_Site_Crosspost( $this->creative->anonce, $serv );
 					}
 				}
 			} else {
-				$creative->anonce->crossposts->field("last_update", time())->update();
+				$this->creative->anonce->crossposts->field("last_update", time())->update();
 			}
-			return $this->redirect( $creative->url() );
+			return $this->redirect( $this->creative->url() );
 		}
 
 		$tpl = $this->getTemplate();
@@ -68,8 +63,8 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 			return false;
 		}
 		if ($this->creative_id) {
-			$creative = $this->instance->getCreative( $this->creative_id );
-			if (!$creative){
+			$this->creative = $this->instance->getCreative( $this->creative_id );
+			if (!$this->creative){
 				throw new O_Ex_Redirect("/");
 			}
 			if(!$this->can("read ".$this->instance->system["access"], $this->creative->anonce)) {
