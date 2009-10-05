@@ -74,7 +74,7 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 			if ($this->creative) {
 				if (R_MDl_Session::can( "write " . $this->creative->anonce[ "access" ],
 						$this->creative->anonce ) && R_MDl_Session::can(
-						"write " . $this->instance->system->anonce[ "access" ],
+						"write " . $this->instance->system[ "access" ],
 						$this->creative->anonce )) {
 					?>
 	<li><a
@@ -85,8 +85,8 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 				if(R_MDl_Session::can( "write " . $this->creative->anonce[ "access" ],
 						$this->creative->anonce )) echo "w".$this->creative->anonce[ "access" ]."a+";
 			if (R_MDl_Session::can(
-						"write " . $this->instance->system->anonce[ "access" ],
-						$this->creative->anonce )) echo "w".$this->instance->system->anonce[ "access" ]."i+";
+						"write " . $this->instance->system[ "access" ],
+						$this->creative->anonce )) echo "w".$this->instance->system[ "access" ]."i+";
 				}
 				if (R_Mdl_Session::can( "delete", $this->creative->anonce )) {
 					?>
