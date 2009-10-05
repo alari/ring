@@ -103,13 +103,4 @@ class R_Fr_Sys_Blog_Post extends R_Fr_Sys_Creative {
 </div>
 <?
 	}
-
-	static public function showAtomPostCallback( O_Dao_Renderer_Show_Params $params )
-	{
-		self::showRssContCallback( $params );
-		echo "<hr/>";
-		$url = $params->record()->url();
-		echo "[ <a href=\"$url\">" . $params->record()->title . "</a> ]";
-	}
-
 }

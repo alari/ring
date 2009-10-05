@@ -15,7 +15,7 @@ class R_Fr_Sys_Creative {
 		$title = htmlspecialchars( $params->record()->description );
 		echo "<p align=\"center\">[ <strong><a href=\"$url\" title=\"$title\">" . $params->record()->title .
 			 "</a></strong> ]</p>";
-		}
+	}
 
 		static public function showCreativeBottom( R_Mdl_Site_Anonce $a, O_Html_Layout $layout )
 		{
@@ -70,5 +70,5 @@ class R_Fr_Sys_Creative {
 					echo "</ul>";
 				}
 			}
-		
+
 		}
