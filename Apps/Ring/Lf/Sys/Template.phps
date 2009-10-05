@@ -80,13 +80,6 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 	<li><a
 		href="<?=$this->instance->system->url( "form/" . $this->creative->id )?>">Править</a></li>
 		<?
-				} else {
-
-				if(R_MDl_Session::can( "write " . $this->creative->anonce[ "access" ],
-						$this->creative->anonce )) echo "w".$this->creative->anonce[ "access" ]."a+";
-			if (R_MDl_Session::can(
-						"write " . $this->instance->system[ "access" ],
-						$this->creative->anonce )) echo "w".$this->instance->system[ "access" ]."i+";
 				}
 				if (R_Mdl_Session::can( "delete", $this->creative->anonce )) {
 					?>
