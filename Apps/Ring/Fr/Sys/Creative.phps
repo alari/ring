@@ -12,7 +12,7 @@ class R_Fr_Sys_Creative {
 		$params->record()->show( $params->layout(), "rss-cont" );
 		echo "<hr/>";
 		$url = $params->record()->url();
-		$title = htmlspecialchars( $params->record()->description );
+		$title = htmlspecialchars( $params->record()->anonce->description );
 		echo "<p align=\"center\">[ <strong><a href=\"$url\" title=\"$title\">" . $params->record()->title .
 			 "</a></strong> ]</p>";
 	}
