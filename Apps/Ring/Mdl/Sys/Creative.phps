@@ -14,6 +14,7 @@
  * @field nodes -relative anonce->nodes
  */
 abstract class R_Mdl_Sys_Creative extends O_Dao_ActiveRecord {
+
 	public function __construct( R_Mdl_Sys_Implementation $instance )
 	{
 		$this[ "time" ] = time();

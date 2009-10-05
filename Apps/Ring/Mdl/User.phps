@@ -58,7 +58,7 @@ class R_Mdl_User extends O_Acl_User {
 	 */
 	public function setPwd( $pwd )
 	{
-		$this->pwd_hash = md5($this->identity.$pwd);
+		$this->pwd_hash = md5( $this->identity . $pwd );
 		return $this->save();
 	}
 
@@ -69,17 +69,18 @@ class R_Mdl_User extends O_Acl_User {
 	 * @param string $pwd
 	 * @return bool
 	 */
-	public function setIdentity($identity, $pwd) {
+	public function setIdentity( $identity, $pwd )
+	{
 		O_OpenId_Provider_UserPlugin::normalize( $identity );
 		$this->identity = $identity;
 		try {
 			$this->save();
-		} catch(PDOException $e) {
+		}
+		catch (PDOException $e) {
 			return false;
 		}
-		return $this->setPwd($pwd);
+		return $this->setPwd( $pwd );
 	}
-
 
 	/**
 	 * Returns true if user was registered on our site, false -- if it's other openid user
@@ -99,8 +100,8 @@ class R_Mdl_User extends O_Acl_User {
 	 */
 	public function login( $pwd )
 	{
-		if(md5($this->identity.$pwd) == $this->pwd_hash) {
-			R_Mdl_Session::setUser($this);
+		if (md5( $this->identity . $pwd ) == $this->pwd_hash) {
+			R_Mdl_Session::setUser( $this );
 			return true;
 		}
 		return false;
@@ -122,7 +123,8 @@ class R_Mdl_User extends O_Acl_User {
 
 	public function avatar( $full = false )
 	{
-		return "<img class=\"avatar\" src=\"" . ($full ? $this->ava_full : $this->ava_tiny) . "\" alt=\"" . htmlspecialchars( $this->nickname ) . "\"/>";
+		return "<img class=\"avatar\" src=\"" . ($full ? $this->ava_full : $this->ava_tiny) . "\" alt=\"" .
+				 htmlspecialchars( $this->nickname ) . "\"/>";
 	}
 
 	public function staticUrl( $filename )
@@ -144,17 +146,19 @@ class R_Mdl_User extends O_Acl_User {
 
 	public function link()
 	{
-		return "<a href=\"" . $this->url() . "\">" . ($this->nickname ? $this->nickname : $this->identity) . "</a>";
+		return "<a href=\"" . $this->url() . "\">" . ($this->nickname ? $this->nickname : $this->identity) .
+				 "</a>";
 	}
 
-	public function addFriend(O_Dao_ActiveRecord $object) {
-		R_Mdl_User_Relation::addFriend($this, $object);
+	public function addFriend( O_Dao_ActiveRecord $object )
+	{
+		R_Mdl_User_Relation::addFriend( $this, $object );
 	}
 
-	public function removeFriend(O_Dao_ActiveRecord $object) {
-		R_Mdl_User_Relation::removeFriend($this, $object);
+	public function removeFriend( O_Dao_ActiveRecord $object )
+	{
+		R_Mdl_User_Relation::removeFriend( $this, $object );
 	}
-
 
 	/**
 	 * Returns user by identity

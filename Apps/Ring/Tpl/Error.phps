@@ -1,5 +1,6 @@
 <?php
 class R_Tpl_Error extends O_Tpl_Error {
+
 	public function displayContents()
 	{
 		$isProduction = O_Registry::get( "app/mode" ) == "production";
@@ -14,7 +15,7 @@ class R_Tpl_Error extends O_Tpl_Error {
 <h1>Error #<?=$err?></h1>
 <strong><?=$msg?></strong>
 <?
-		if (!$isProduction||1) {
+		if (!$isProduction || 1) {
 			?>
 <p>
 <pre>

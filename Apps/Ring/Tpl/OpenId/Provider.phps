@@ -1,6 +1,6 @@
 <?php
 class R_Tpl_OpenId_Provider extends R_Lf_Template {
-
+	
 	public $mode;
 	public $error;
 	public $site;
@@ -9,7 +9,7 @@ class R_Tpl_OpenId_Provider extends R_Lf_Template {
 	{
 		if ($this->error)
 			echo "<h1>", $this->error, "</h1>";
-
+		
 		switch ($this->mode) {
 			case "auth" :
 				?>
@@ -41,11 +41,14 @@ class R_Tpl_OpenId_Provider extends R_Lf_Template {
 	for="forever">Навсегда</label><br />
 <input type="hidden" name="openid_action" value="trust"> <input
 	type="submit" name="allow" value="Разрешить"> <input type="submit"
-	name="deny" value="Запретить"><?foreach($_POST as $k=>$v) echo "<input type='hidden' name='$k' value='".htmlspecialchars($v)."'/>";?></form>
+	name="deny" value="Запретить"><?
+				foreach ($_POST as $k => $v)
+					echo "<input type='hidden' name='$k' value='" . htmlspecialchars( $v ) . "'/>";
+				?></form>
 <?
 			break;
 		}
-
+	
 	}
 }
 

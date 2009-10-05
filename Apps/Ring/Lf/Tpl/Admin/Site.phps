@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Tpl_Admin_Site extends R_Lf_Template {
-
+	
 	/**
 	 * Form processor for site
 	 *

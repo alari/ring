@@ -10,10 +10,10 @@ class R_Lf_Cmd_Admin_Crossposting extends R_Lf_Command {
 				$pwd = $this->getParam( "pwd" );
 				$no_comments = $this->getParam( "no_comments" );
 				$allow_advs = $this->getParam( "allow_advs" );
-				$service = new R_Mdl_Site_CrosspostService( $this->getSite(), $blog_url, $user,
+				$service = new R_Mdl_Site_CrosspostService( $this->getSite(), $blog_url, $user, 
 						$pwd, $no_comments, $allow_advs );
 				if (!$service || !$service->id) {
-					$this->setNotice(
+					$this->setNotice( 
 							"Не удалось создать новый сервис. Возможно, блог не поддерживает Atom API или его адрес введён неправильно." );
 				}
 				return $this->redirect();
@@ -24,7 +24,7 @@ class R_Lf_Cmd_Admin_Crossposting extends R_Lf_Command {
 			if ($o && $o->delete())
 				$this->setNotice( "Сервис удалён" );
 		}
-
+		
 		$tpl = $this->getTemplate();
 		$tpl->services = $this->getSite()->crosspost_services;
 		return $tpl;
@@ -32,7 +32,7 @@ class R_Lf_Cmd_Admin_Crossposting extends R_Lf_Command {
 
 	public function isAuthenticated()
 	{
-		return $this->can( "manage site", $this->getSite() ) && $this->can( "crosspost",
+		return $this->can( "manage site", $this->getSite() ) && $this->can( "crosspost", 
 				$this->getSite() );
 	}
 

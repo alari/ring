@@ -12,8 +12,8 @@ class R_Lf_Sys_Tpl_Form extends R_Lf_Sys_Template {
 	{
 		if ($this->isCreateMode) {
 			$title = $this->instance->addFormTitle();
-			$params = new O_Dao_Renderer_Edit_Params( "crosspost", null,
-					array ("displayField" => "blog_url", "multiply" => true,
+			$params = new O_Dao_Renderer_Edit_Params( "crosspost", null, 
+					array ("displayField" => "blog_url", "multiply" => true, 
 								"query" => $this->getSite()->crosspost_services) );
 			$params->setTitle( "Кросспостинг" );
 			ob_start();
@@ -22,7 +22,7 @@ class R_Lf_Sys_Tpl_Form extends R_Lf_Sys_Template {
 		} else {
 			$title = $this->instance->editFormTitle();
 		}
-		$this->form->setFormTitle(
+		$this->form->setFormTitle( 
 				"<a href=\"" . $this->instance->system->url() . "\">" . $title . "</a>" );
 		$this->layout()->setTitle( $title );
 		$this->form->show( $this->layout() );

@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
-
+	
 	public $css_source;
 	public $files = array ();
 
@@ -13,8 +13,9 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 <center><textarea style="width: 100%; height: 250px" name="css"><?=htmlspecialchars( $this->css_source )?></textarea>
 <input type="hidden" name="action" value="css" /> <input type="submit"
 	value="Сохранить файл" /></center>
-	<i><a href="?action=revert" onclick="return confirm('Вы уверены? Все ваши изменения будут утеряны.')">Вернуть стиль по умолчанию</a></i>
-</fieldset>
+<i><a href="?action=revert"
+	onclick="return confirm('Вы уверены? Все ваши изменения будут утеряны.')">Вернуть
+стиль по умолчанию</a></i></fieldset>
 </form>
 <form method="post" enctype="multipart/form-data">
 <fieldset><legend>Файлы оформления для сайта</legend>
@@ -48,11 +49,12 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 
 <form method="post" enctype="multipart/form-data">
 <fieldset><legend>Иконка сайта</legend>
-<p>Иконка отображается в заголовке браузера, индексируется поисковыми системами, существует для красоты. Должна быть в формате .ico</p>
-<center><input type="file" name="f" /> <input
-			type="submit" value="Обновить иконку" /></center>
-</fieldset><input type="hidden" name="action" value="favicon" />
-</form>
+<p>Иконка отображается в заголовке браузера, индексируется поисковыми
+системами, существует для красоты. Должна быть в формате .ico</p>
+<center><input type="file" name="f" /> <input type="submit"
+	value="Обновить иконку" /></center>
+</fieldset>
+<input type="hidden" name="action" value="favicon" /></form>
 <?
 	}
 

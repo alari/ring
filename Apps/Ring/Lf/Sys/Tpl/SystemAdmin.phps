@@ -23,7 +23,7 @@ class R_Lf_Sys_Tpl_SystemAdmin extends R_Lf_Sys_Template {
 </fieldset>
 <input type="hidden" name="action" value="delete" /></form>
 
-		<?
+<?
 	}
 
 }

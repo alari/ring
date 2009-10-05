@@ -10,21 +10,26 @@
  */
 class R_Mdl_Info_Topic extends O_Dao_ActiveRecord {
 
-	public function __construct($title) {
-		$this["title"] = $title;
+	public function __construct( $title )
+	{
+		$this[ "title" ] = $title;
 		parent::__construct();
 	}
-	
-	public function url() {
-		return O_UrlBuilder::get("topic:".urlencode(strtr($this->title, " ", "_")));
+
+	public function url()
+	{
+		return O_UrlBuilder::get( "topic:" . urlencode( strtr( $this->title, " ", "_" ) ) );
 	}
-	
-	static public function getByUrlName($name) {
-		return self::getByTitle(str_replace("_", " ", urldecode($name)));
+
+	static public function getByUrlName( $name )
+	{
+		return self::getByTitle( str_replace( "_", " ", urldecode( $name ) ) );
 	}
-	
-	static public function getByTitle($title) {
-		return O_Dao_Query::get(__CLASS__)->test("title", $title)->getOne();;
+
+	static public function getByTitle( $title )
+	{
+		return O_Dao_Query::get( __CLASS__ )->test( "title", $title )->getOne();
+		;
 	}
-	
+
 }

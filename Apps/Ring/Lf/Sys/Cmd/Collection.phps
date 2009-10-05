@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Sys_Cmd_Collection extends R_Lf_Sys_Command {
-
+	
 	public $collection;
 	public $coll_id;
 
@@ -15,7 +15,7 @@ class R_Lf_Sys_Cmd_Collection extends R_Lf_Sys_Command {
 	{
 		if (!$this->instance)
 			throw new O_Ex_PageNotFound( "Instance not found.", 404 );
-		$this->collection = $this->instance->system->collections->test("id", $this->coll_id)->getOne();
+		$this->collection = $this->instance->system->collections->test( "id", $this->coll_id )->getOne();
 		if (!$this->collection)
 			throw new O_Ex_PageNotFound( "Collection not found.", 404 );
 		return $this->can( "read " . $this->instance->system[ "access" ], $this->getSite() );

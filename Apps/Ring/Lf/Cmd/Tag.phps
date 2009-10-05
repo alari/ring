@@ -4,10 +4,11 @@ class R_Lf_Cmd_Tag extends R_Lf_Command {
 
 	public function process()
 	{
-		$this->tag = $this->getSite()->tags->test( "title", urldecode( O_Registry::get( "app/current/tag" ) ) )->getOne();
+		$this->tag = $this->getSite()->tags->test( "title", 
+				urldecode( O_Registry::get( "app/current/tag" ) ) )->getOne();
 		if (!$this->tag)
 			throw new O_Ex_PageNotFound( "Tag not found.", 404 );
-
+		
 		$tpl = $this->getTemplate();
 		$tpl->tag = $this->tag;
 		$tpl->tags = $this->getSite()->tags->test( "weight", 0, ">" )->limit( 100 );

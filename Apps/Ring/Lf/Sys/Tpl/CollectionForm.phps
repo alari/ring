@@ -9,8 +9,10 @@ class R_Lf_Sys_Tpl_CollectionForm extends R_Lf_Sys_Template {
 
 	public function displayContents()
 	{
-		$this->form->setFormTitle( "Настройки коллекции: <a href=\"" . $this->collection->url() . "\">" . $this->collection->title . "</a>" );
-		$this->layout()->setTitle( "Настройки коллекции: ".$this->collection->title );
+		$this->form->setFormTitle( 
+				"Настройки коллекции: <a href=\"" . $this->collection->url() . "\">" . $this->collection->title .
+					 "</a>" );
+		$this->layout()->setTitle( "Настройки коллекции: " . $this->collection->title );
 		$this->form->show( $this->layout() );
 	}
 

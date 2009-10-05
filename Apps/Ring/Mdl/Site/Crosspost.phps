@@ -28,7 +28,7 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 	{
 		if (!$this->anonce->isVisible())
 			return false;
-
+		
 		ob_start();
 		$this->anonce->creative->show( null, "atom-post" );
 		$data = ob_get_clean();
@@ -37,36 +37,37 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		$published = $this->anonce->time;
 		$updated = $this->last_update ? $this->last_update : $this->anonce->time;
 		$id = $showId ? $this->postid : null;
-
-		return O_Feed_AtomPub::prepareEntry( $title, $url, $published, $data, $updated, $id, $this->service->no_comments );
-
+		
+		return O_Feed_AtomPub::prepareEntry( $title, $url, $published, $data, $updated, $id, 
+				$this->service->no_comments );
+	
 	}
 
 	public function post()
 	{
-		$ret = O_Feed_AtomPub::post( $this->service->atomapi, $this->prepareEntity(),
+		$ret = O_Feed_AtomPub::post( $this->service->atomapi, $this->prepareEntity(), 
 				$this->service->userpwd );
-
+		
 		if (!is_array( $ret ))
 			return $this->error( O_Feed_AtomPub::getError() );
-
+		
 		$this->postid = $ret[ "id" ];
 		$this->url = $ret[ "post_url" ];
 		$this->edit_url = $ret[ "edit_url" ];
 		$this->crossposted = time();
-
+		
 		return $this->save();
 	}
 
 	public function update()
 	{
-		$ret = O_Feed_AtomPub::update( $this->edit_url, $this->prepareEntity( 1 ),
+		$ret = O_Feed_AtomPub::update( $this->edit_url, $this->prepareEntity( 1 ), 
 				$this->service->userpwd );
-
+		
 		if (!$ret) {
 			return $this->error( O_Feed_AtomPub::getError() );
 		}
-
+		
 		$this->crossposted = time();
 		return $this->save();
 	}

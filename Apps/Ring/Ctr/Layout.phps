@@ -9,23 +9,23 @@ class R_Ctr_Layout extends R_Layout {
 		?>
 <div id="wrap">
 
-	<div id="cont">
-		<div class="cont">
+<div id="cont">
+<div class="cont">
 
 		<?
 		$this->showNotice();
 		?>
 
 		<?$this->tpl->displayContents();?></div>
-	</div>
+</div>
 
-	<div id="rcol">
-		<div class="cont"><?parent::userMenu();?></div>
-	</div>
+<div id="rcol">
+<div class="cont"><?parent::userMenu();?></div>
+</div>
 
-	<div id="head">
-		<div id="logo">&nbsp;</div>
-		<div id="user-box">
+<div id="head">
+<div id="logo">&nbsp;</div>
+<div id="user-box">
 	<?
 		if (R_Mdl_Session::isLogged()) {
 			?>
@@ -33,10 +33,10 @@ class R_Ctr_Layout extends R_Layout {
 <p>Привет, <?=R_Mdl_Session::getUser()->link()?>!</p>
 <p><a href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a></p>
 <p><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends">Друзья</a>
-	&nbsp; <small><a
-		href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends/list">Кто</a></small></p>
-			</div>
+	href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends">Друзья</a>
+&nbsp; <small><a
+	href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends/list">Кто</a></small></p>
+</div>
 <?
 		} else {
 			?>
@@ -48,15 +48,14 @@ class R_Ctr_Layout extends R_Layout {
 
 		?>
 		</div>
-	</div>
-		<div id="foot">
-		<div class="cont">
-			<span><?=$this->_("lo.bottom", "http://".O_Registry::get( "app/hosts/project" )."/")?></span>
-		</div>
-<div style="float:right">
+</div>
+<div id="foot">
+<div class="cont"><span><?=$this->_("lo.bottom", "http://".O_Registry::get( "app/hosts/project" )."/")?></span>
+</div>
+<div style="float: right">
 <?$this->showCounter();?>
 </div>
-	</div>
+</div>
 
 </div>
 <?

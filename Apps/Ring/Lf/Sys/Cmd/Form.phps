@@ -7,13 +7,13 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 	{
 		$form = new O_Dao_Renderer_FormProcessor( );
 		$form->setClass( constant( get_class( $this->instance ) . "::CREATIVE_CLASS" ) );
-
+		
 		$form->setRelationQuery( "tags", $this->getSite()->tags, "title", true );
-
+		
 		$form->setRelationQuery( "collection", $this->instance->system->collections, "title" );
-
+		
 		O_Registry::set( "app/current/system", $this->instance->system );
-
+		
 		if ($this->creative_id) {
 			$form->setActiveRecord( $this->creative );
 			$form->setType( "up" );
@@ -32,7 +32,7 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 					$new_tag->title = $this->getParam( "tag_new" );
 					$new_tag->save();
 				}
-
+				
 				if ($new_tag)
 					$this->creative->tags[] = $new_tag;
 			}
@@ -50,7 +50,7 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 			}
 			return $this->redirect( $this->creative->url() );
 		}
-
+		
 		$tpl = $this->getTemplate();
 		$tpl->form = $form;
 		$tpl->isCreateMode = !$this->creative_id;
@@ -67,11 +67,11 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 			if (!$this->creative) {
 				throw new O_Ex_Redirect( "/" );
 			}
-			return $this->can( "read " . $this->instance->system[ "access" ],
-					$this->creative->anonce ) && $this->can(
+			return $this->can( "read " . $this->instance->system[ "access" ], 
+					$this->creative->anonce ) && $this->can( 
 					"write " . $this->instance->system[ "access" ], $this->creative->anonce );
 		}
-		return $this->can( "read " . $this->instance->system[ "access" ], $this->getSite() ) && $this->can(
+		return $this->can( "read " . $this->instance->system[ "access" ], $this->getSite() ) && $this->can( 
 				"write " . $this->instance->system[ "access" ], $this->getSite() );
 	}
 

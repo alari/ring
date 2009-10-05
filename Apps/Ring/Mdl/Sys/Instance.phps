@@ -23,15 +23,20 @@
  * @index site,urlbase -unique
  */
 class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
-	private static $classes = Array ("blog" => "R_Mdl_Sys_Blog_System", "im"=>"R_Mdl_Sys_Im_System", "sound"=>"R_Mdl_Sys_Sound_System", "libro"=>"R_Mdl_Sys_Libro_System", "afisha"=>"R_Mdl_Sys_Afisha_System");
-	private static $titles = Array ("blog" => "Блог", "im"=>"Изображения", "sound"=>"Музыка", "libro"=>"Литература", "afisha"=>"Афиша");
-	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям и друзьям друзей", "private" => "Друзьям",
-									"disable" => "Только себе");
+	private static $classes = Array ("blog" => "R_Mdl_Sys_Blog_System", "im" => "R_Mdl_Sys_Im_System", 
+									"sound" => "R_Mdl_Sys_Sound_System", 
+									"libro" => "R_Mdl_Sys_Libro_System", 
+									"afisha" => "R_Mdl_Sys_Afisha_System");
+	private static $titles = Array ("blog" => "Блог", "im" => "Изображения", "sound" => "Музыка", 
+									"libro" => "Литература", "afisha" => "Афиша");
+	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям и друзьям друзей", 
+									"private" => "Друзьям", "disable" => "Только себе");
 
-	public function getType() {
-		return self::$titles[O_Dao_TableInfo::get($this)->getFieldInfo("instance")->getRealField($this)];
+	public function getType()
+	{
+		return self::$titles[ O_Dao_TableInfo::get( $this )->getFieldInfo( "instance" )->getRealField( 
+				$this ) ];
 	}
-
 
 	/**
 	 * Returns url for creative instance
@@ -84,7 +89,7 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 	{
 		$this->title = $title;
 		$this->urlbase = $urlbase;
-		$this->position = count( $site->systems )+1;
+		$this->position = count( $site->systems ) + 1;
 		parent::__construct();
 		$this->site = $site;
 	}
@@ -110,8 +115,10 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 		return "<a href=\"" . $this->url() . "\">$this->title</a>";
 	}
 
-	public function delete() {
-		$this->site->systems->test("position", $this->position, ">")->field("position", "position-1", true)->update();
+	public function delete()
+	{
+		$this->site->systems->test( "position", $this->position, ">" )->field( "position", 
+				"position-1", true )->update();
 		parent::delete();
 	}
 
@@ -120,21 +127,25 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 	 *
 	 * @param int $newPosition
 	 */
-	public function setPosition($newPosition) {
-		if($newPosition == $this->position) return;
-		if($newPosition <= 0 || $newPosition > count($this->site->systems)+1) return;
-
+	public function setPosition( $newPosition )
+	{
+		if ($newPosition == $this->position)
+			return;
+		if ($newPosition <= 0 || $newPosition > count( $this->site->systems ) + 1)
+			return;
+		
 		$systems = $this->site->systems;
-
-		if($newPosition > $this->position) {
-			$systems->test("position", $this->position, ">")->test("position", $newPosition, "<=")->field("position", "position-1", 1)->update();
+		
+		if ($newPosition > $this->position) {
+			$systems->test( "position", $this->position, ">" )->test( "position", $newPosition, 
+					"<=" )->field( "position", "position-1", 1 )->update();
 		} else {
-			$systems->test("position", $this->position, "<")->test("position", $newPosition, ">=")->field("position", "position+1", 1)->update();
+			$systems->test( "position", $this->position, "<" )->test( "position", $newPosition, 
+					">=" )->field( "position", "position+1", 1 )->update();
 		}
-
+		
 		$this->position = $newPosition;
 		parent::save();
 	}
-
 
 }

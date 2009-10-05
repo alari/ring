@@ -35,7 +35,7 @@
  */
 class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	const NODES_CLASS = "R_Mdl_Site_Comment";
-
+	
 	private $_updateCollectionPosition = 0;
 
 	public function __construct( R_Mdl_Sys_Creative $creative, R_Mdl_Sys_Implementation $instance )
@@ -59,7 +59,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 */
 	public function url()
 	{
-		$field = O_Dao_TableInfo::get( __CLASS__ )->getFieldInfo( "creative" )->getRealField(
+		$field = O_Dao_TableInfo::get( __CLASS__ )->getFieldInfo( "creative" )->getRealField( 
 				$this );
 		return $this->system->creativeUrl( $this[ $field ] );
 	}
@@ -81,7 +81,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 */
 	public function isVisible()
 	{
-		return R_Mdl_Session::can( "read " . $this->system[ "access" ], $this->site ) && R_Mdl_Session::can(
+		return R_Mdl_Session::can( "read " . $this->system[ "access" ], $this->site ) && R_Mdl_Session::can( 
 				"read " . $this[ "access" ], $this->site );
 	}
 
@@ -138,27 +138,26 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$r_tbl = O_Dao_TableInfo::get( "R_Mdl_User_Relation" )->getTableName();
 		if (!$user)
 			$user = R_Mdl_Session::getUser();
-
+		
 		$q->joinOnce( $r_tbl, "$tbl.site=$r_tbl.site AND $r_tbl.user=" . $user->id );
-		$q->where(
+		$q->where( 
 				"access='public' OR access='protected'
 			OR owner=?
 			OR (access='private' AND $r_tbl.flags & ?)
 			OR (access='disable' AND $r_tbl.flags & ?)
-				", $user,
-				R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE );
+				", $user, R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE );
 	}
 
 	static public function getByUserRelations( $user )
 	{
-		$q = $user->{"relations.site.anonces"}->where(
+		$q = $user->{"relations.site.anonces"}->where( 
 				"__rel1.flags & " . R_Mdl_User_Relation::FLAG_WATCH );
-		$q->where(
+		$q->where( 
 				"access='public' OR access='protected'
 			OR anonces.owner=?
 			OR (access='private' AND __rel1.flags & ?)
-			OR (access='disable' AND __rel1.flags & ?)", $user, R_Mdl_User_Relation::FLAGS_PRIVATE,
-				R_Mdl_User_Relation::FLAGS_DISABLE );
+			OR (access='disable' AND __rel1.flags & ?)", $user, 
+				R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE );
 		return $q;
 	}
 
@@ -169,7 +168,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	public function delete()
 	{
 		if ($this->collection) {
-			$this->collection->anonces->test( "position", $this->position, ">" )->field(
+			$this->collection->anonces->test( "position", $this->position, ">" )->field( 
 					"position", "position-1", 1 )->update();
 		}
 		parent::delete();
@@ -181,13 +180,13 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		// Check validity of position in the cycle
 		if (!$this->_updateCollectionPosition && $this->collection) {
 			// If there's more then one anonce with current position
-			if ($this->collection->anonces->test( "position", $this->position )->test(
+			if ($this->collection->anonces->test( "position", $this->position )->test( 
 					"id", $this->id, "!=" )->getOne()) {
 				// Set for number of anonces -- making this last anonce
 				$this->position = count( $this->collection->anonces ) + 1;
 				parent::save();
 				// There is still error in position -- update all positions in collection
-				if ($this->collection->anonces->test( "position",
+				if ($this->collection->anonces->test( "position", 
 						$this->position )->test( "id", $this->id, "!=" )->getOne()) {
 					$i = 0;
 					foreach ($this->collection->anonces as $a) {
@@ -214,15 +213,15 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			return;
 			/* @var $anonces O_Dao_Query */
 		$anonces = $this->collection->anonces;
-
+		
 		if ($newPosition > $this->position) {
-			$anonces->test( "position", $this->position, ">" )->test( "position", $newPosition,
+			$anonces->test( "position", $this->position, ">" )->test( "position", $newPosition, 
 					"<=" )->field( "position", "position-1", 1 )->update();
 		} else {
-			$anonces->test( "position", $this->position, "<" )->test( "position", $newPosition,
+			$anonces->test( "position", $this->position, "<" )->test( "position", $newPosition, 
 					">=" )->field( "position", "position+1", 1 )->update();
 		}
-
+		
 		$this->position = $newPosition;
 		parent::save();
 	}
@@ -248,13 +247,13 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		}
 		$anonce = null;
 		if ($this->collection) {
-			$coll = $this->collection->anonces->test( "position", $this->position, $op_test )->clearOrders()->orderBy(
+			$coll = $this->collection->anonces->test( "position", $this->position, $op_test )->clearOrders()->orderBy( 
 					"position" . $op_ord_pos );
 			//self::setQueryAccesses( $coll );
 			$anonce = $coll->getOne();
 			if ($anonce)
 				return $anonce;
-			$coll = $this->system->collections->test( "position", $this->collection->position,
+			$coll = $this->system->collections->test( "position", $this->collection->position, 
 					$op_test )->clearOrders()->orderBy( "position" . $op_ord_pos )->getOne();
 			if ($coll) {
 				$coll = $coll->anonces->clearOrders()->orderBy( "position" . $op_ord_pos );
@@ -265,7 +264,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			}
 			return null;
 		}
-		$q = $this->system->anonces->test( "time", $this->time, $op_test )->orderBy(
+		$q = $this->system->anonces->test( "time", $this->time, $op_test )->orderBy( 
 				"time" . $op_ord_pos );
 		//self::setQueryAccesses( $q );
 		return $q->getOne();

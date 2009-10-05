@@ -1,6 +1,6 @@
 <?php
 class R_Tpl_OpenId_Login extends R_Template {
-
+	
 	public $mode;
 	public $error;
 	public $identity;
@@ -9,15 +9,16 @@ class R_Tpl_OpenId_Login extends R_Template {
 	{
 		if ($this->error)
 			echo "<h1>", $this->error, "</h1>";
-
+		
 		switch ($this->mode) {
 			case "auth" :
 			case "our" :
 				?>
 <form method="POST" id="openid-login-form"
 	action="<?=
-				O_Registry::get( "app/env/request_url" )?>"><label><span>OpenId:</span> <input
-	type="text" name="openid_identifier" value="<?=
+				O_Registry::get( "app/env/request_url" )?>"><label><span>OpenId:</span>
+<input type="text" name="openid_identifier"
+	value="<?=
 				$this->identity?>" /></label>
 
 	<?
@@ -41,6 +42,6 @@ class R_Tpl_OpenId_Login extends R_Template {
 <?
 			break;
 		}
-
+	
 	}
 }

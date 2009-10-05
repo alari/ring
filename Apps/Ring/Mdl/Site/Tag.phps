@@ -37,9 +37,11 @@ class R_Mdl_Site_Tag extends O_Dao_ActiveRecord {
 	 * @param string $urlbase
 	 * @return string
 	 */
-	public function url( $urlbase = "", $page=1 )
+	public function url( $urlbase = "", $page = 1 )
 	{
-		return $this->site->url( ($urlbase ? $urlbase . "/" : "") . "tag/".($page>1?$page."/":"") . urlencode( $this->title ) );
+		return $this->site->url( 
+				($urlbase ? $urlbase . "/" : "") . "tag/" . ($page > 1 ? $page . "/" : "") . urlencode( 
+						$this->title ) );
 	}
 
 	/**
@@ -50,8 +52,8 @@ class R_Mdl_Site_Tag extends O_Dao_ActiveRecord {
 	 */
 	public function link( R_Mdl_Sys_Instance $sys = null )
 	{
-		return "<a href=\"" . $this->url( $sys ? $sys->urlbase : "" ) . "\"" . ($this->description ? ' title="' . htmlspecialchars(
-				$this->description ) . '"' : '') . ">" . $this->title . "</a>";
+		return "<a href=\"" . $this->url( $sys ? $sys->urlbase : "" ) . "\"" . ($this->description ? ' title="' .
+				 htmlspecialchars( $this->description ) . '"' : '') . ">" . $this->title . "</a>";
 	}
 
 	/**
@@ -64,8 +66,11 @@ class R_Mdl_Site_Tag extends O_Dao_ActiveRecord {
 	public function signalHandler( $fieldValue, O_Dao_ActiveRecord $object, $event )
 	{
 		try {
-		$object->weight = count( $object->anonces );
-		$object->save();} catch(PDOException $e){}
+			$object->weight = count( $object->anonces );
+			$object->save();
+		}
+		catch (PDOException $e) {
+		}
 	}
 
 }

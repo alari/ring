@@ -33,13 +33,13 @@
  * @index type
  */
 class R_Mdl_Site extends O_Dao_ActiveRecord {
-
+	
 	const TYPE_AUTH = 1;
 	const TYPE_COMM = 2;
 	const ST_MODERATED = 1;
 	const ST_AWAITING = 0;
 	const ST_TECH = 2;
-
+	
 	private $available_systems;
 
 	/**
@@ -55,12 +55,12 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 			$host = substr( $host, 0, strpos( $host, "/" ) );
 		if ($host)
 			$this->host = $host;
-
+		
 		$this->static_urlbase = O_Registry::get( "app/sites/static_urlbase" ) . "$host/";
 		$this->static_folder = O_Registry::get( "app/sites/static_folder" ) . "$host/";
-
+		
 		parent::__construct();
-
+		
 		if (!is_dir( substr( $this->static_folder, 0, -1 ) ))
 			mkdir( substr( $this->static_folder, 0, -1 ), 0777 );
 		$style = file_get_contents( O_Registry::get( "app/sites/static_folder" ) . "style.css" );
@@ -119,10 +119,10 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 	 * @param string $file
 	 * @return string
 	 */
-	public function staticPath($file) {
-		return $this->static_folder.$file;
+	public function staticPath( $file )
+	{
+		return $this->static_folder . $file;
 	}
-
 
 	/**
 	 * Deletes the entire site
@@ -179,36 +179,39 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 	 * @param string $pwd
 	 * @return bool
 	 */
-	public function setHost($host, $pwd="12345") {
+	public function setHost( $host, $pwd = "12345" )
+	{
 		if (substr( $host, 0, 7 ) == "http://")
 			$host = substr( $host, 7 );
 		if (strpos( $host, "/" ))
 			$host = substr( $host, 0, strpos( $host, "/" ) );
-		if (!$host || $host == $this->host) return;
-
+		if (!$host || $host == $this->host)
+			return;
+		
 		$old_host = $this->host;
 		$this->host = $host;
 		try {
 			$this->save();
-		} catch (PDOException $e) {
+		}
+		catch (PDOException $e) {
 			return false;
 		}
-
-		if(!rename(substr($this->static_folder, 0, -1), O_Registry::get( "app/sites/static_folder" ) . $host)) {
+		
+		if (!rename( substr( $this->static_folder, 0, -1 ), 
+				O_Registry::get( "app/sites/static_folder" ) . $host )) {
 			$this->host = $old_host;
 			$this->save();
 			return false;
 		}
-
-		if(R_Mdl_User::getByIdentity($old_host) == $this->owner) {
-			$this->owner->setIdentity($this->host, $pwd);
+		
+		if (R_Mdl_User::getByIdentity( $old_host ) == $this->owner) {
+			$this->owner->setIdentity( $this->host, $pwd );
 		}
-
+		
 		$this->static_urlbase = O_Registry::get( "app/sites/static_urlbase" ) . "$host/";
 		$this->static_folder = O_Registry::get( "app/sites/static_folder" ) . "$host/";
 		$this->save();
 		return true;
 	}
-
 
 }

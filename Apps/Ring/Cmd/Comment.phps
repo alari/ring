@@ -6,22 +6,23 @@ class R_Cmd_Comment extends R_Command {
 	public function process()
 	{
 		Header( "Content-type: text/html; charset=utf-8" );
-
+		
 		if ($this->getParam( "action" ) == "comment-new" || $this->getParam( "action" ) == "comment-for") {
 			if (!$this->can( "comment " . $this->system[ "access" ], $this->system->site )) {
-				return "Вы не можете оставлять отзывы. Вероятно, Вам просто нужно авторизоваться. (<a href='http://".O_Registry::get("app/hosts/project")."/OpenId' target='_blank'>Как?</a>)";
+				return "Вы не можете оставлять отзывы. Вероятно, Вам просто нужно авторизоваться. (<a href='http://" .
+					 O_Registry::get( "app/hosts/project" ) . "/OpenId' target='_blank'>Как?</a>)";
 			}
 			$this->handleForm();
 			return;
 		}
-
+		
 		if ($this->getParam( "action" ) == "delete") {
 			$comment = $this->root->nodes->test( "id", $this->getParam( "comm" ) )->getOne();
 			if (!$comment)
-				return json_encode(
+				return json_encode( 
 						array ("status" => "FAILED", "message" => "Комментарий не найден.") );
 			if (!$this->can( "delete", $comment ))
-				return json_encode(
+				return json_encode( 
 						array ("status" => "FAILED", "message" => "Недостаточно прав.") );
 			$ids = Array ();
 			/* @var $comment R_Mdl_Site_Comment */
@@ -32,9 +33,9 @@ class R_Cmd_Comment extends R_Command {
 			$comment->delete( true );
 			return json_encode( array ("status" => "SUCCEED", "comments" => $ids) );
 		}
-
+		
 		return "Неизвестное действие.";
-
+	
 	}
 
 	private function handleForm()
@@ -46,9 +47,9 @@ class R_Cmd_Comment extends R_Command {
 		$form->addHiddenField( "ajax-driven", "yes" );
 		$form->addHiddenField( "action", $this->getParam( "action" ) );
 		$form->setAjaxMode();
-
+		
 		$form->setSubmitButtonValue( "Сохранить" );
-
+		
 		if ($this->getParam( "action" ) == "comment-for") {
 			$form->setCreateMode( $this->root );
 			$form->setFormTitle( "Отозваться" );
@@ -61,7 +62,7 @@ class R_Cmd_Comment extends R_Command {
 			$form->setCreateMode( $this->root );
 			$form->setFormTitle( "Оставить отзыв" );
 		}
-
+		
 		if ($this->getParam( "ajax-driven" ) == "yes" && $form->handle()) {
 			$comment = $form->getActiveRecord();
 			if (isset( $parent )) {
@@ -70,7 +71,7 @@ class R_Cmd_Comment extends R_Command {
 			$comment->save();
 			// XXX
 			$comment->notifySubscribers();
-
+			
 			$form->getActiveRecord()->reload();
 			return $form->responseAjax();
 		}
@@ -81,8 +82,8 @@ class R_Cmd_Comment extends R_Command {
 	{
 		if ($this->getParam( "ajax-driven" ) == "yes") {
 			if ($notFound)
-				echo json_encode(
-						array ("status" => "FAILED",
+				echo json_encode( 
+						array ("status" => "FAILED", 
 									"errors" => array (
 																"_" => "Error: parent node not found.")) );
 			$form->responseAjax();
@@ -93,7 +94,8 @@ class R_Cmd_Comment extends R_Command {
 
 	public function isAuthenticated()
 	{
-		$this->system = O_Dao_ActiveRecord::getById( $this->getParam( "sys" ), "R_Mdl_Sys_Instance" );
+		$this->system = O_Dao_ActiveRecord::getById( $this->getParam( "sys" ), 
+				"R_Mdl_Sys_Instance" );
 		if (!$this->system)
 			throw new O_Ex_PageNotFound( "System not found.", 404 );
 		$this->root = $this->system->site->anonces->test( "id", $this->getParam( "root" ) )->getOne();

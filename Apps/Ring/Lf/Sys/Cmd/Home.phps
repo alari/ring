@@ -12,7 +12,8 @@ class R_Lf_Sys_Cmd_Home extends R_Lf_Sys_Command {
 
 	public function isAuthenticated()
 	{
-		return $this->instance && $this->can( "read " . $this->instance->system[ "access" ], $this->getSite() );
+		return $this->instance && $this->can( "read " . $this->instance->system[ "access" ], 
+				$this->getSite() );
 	}
 
 }

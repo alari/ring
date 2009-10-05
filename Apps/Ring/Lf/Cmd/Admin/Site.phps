@@ -13,12 +13,12 @@ class R_Lf_Cmd_Admin_Site extends R_Lf_Command {
 		if ($this->isMethodPost() && $this->getParam( "action" ) == "main-process") {
 			$formProcessor->responseAjax( 1 );
 			return null;
-		} elseif ($this->isMethodPost() && $this->getParam( "action" ) == "tech:host" && $this->can(
+		} elseif ($this->isMethodPost() && $this->getParam( "action" ) == "tech:host" && $this->can( 
 				"manage tech" )) {
 			$host = $this->getParam( "host" );
 			$pwd = $this->getParam( "pwd", "12345" );
 			if ($this->getSite()->setHost( $host, $pwd )) {
-				$this->setNotice(
+				$this->setNotice( 
 						"Сайт был успешно переименован. Отредактируйте стили и уведомьте владельца о новом пароле!" );
 				return $this->redirect( $this->getSite()->url() );
 			} else {

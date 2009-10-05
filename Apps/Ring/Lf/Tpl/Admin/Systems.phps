@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
-
+	
 	public $systems;
 	public $types;
 	public $accesses;
@@ -19,13 +19,12 @@ class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
 			return;
 		}
 		?>
-<form method="post" action="<?=$_SERVER["REQUEST_URI"]?>">
+<form method="post" action="<?=$_SERVER[ "REQUEST_URI" ]?>">
 <center>Название ссылки: <input type="text" name="title"
 	value="<?=htmlspecialchars( $sys->title )?>" /> &nbsp;&nbsp; Уровень
 доступа: <select name="access"><?
 		foreach ($this->accesses as $k => $v) {
-			?><option
-		<?=($sys->access == $v ? ' selected="yes"' : '')?>><?=$v?></option><?
+			?><option <?=($sys->access == $v ? ' selected="yes"' : '')?>><?=$v?></option><?
 		}
 		?></select> &nbsp;&nbsp; <input type="submit" value="Сохранить"
 	id="sys-sbm-<?=$sys->id?>" /> <input type="hidden" name="action"
@@ -43,7 +42,7 @@ class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
 	 e.stop();
  	$(this).disabled = true;
 
- 	new Request.JSON({url:'<?=$_SERVER["REQUEST_URI"]?>',onSuccess:function(response){
+ 	new Request.JSON({url:'<?=$_SERVER[ "REQUEST_URI" ]?>',onSuccess:function(response){
 		if(response.status == 'SUCCEED') {
 			if(response.refresh == 1) {
 				window.location.reload(true);
@@ -74,7 +73,7 @@ class R_Lf_Tpl_Admin_Systems extends R_Lf_Template {
 		<th><a href="<?=$sys->url()?>"><?=$sys->title?></a></th>
 		<td><?=$sys->getType()?></td>
 		<td><small><a href="javascript:void(0)"
-			onclick="R.AjaxFragment.toggle('sys-ed-<?=$sys->id?>', {url:'<?=$_SERVER['REQUEST_URI']?>',data:{sys:<?=$sys->id?>,action:'system-fragment'},evalScripts:true}, 'height', 40)">Доступ
+			onclick="R.AjaxFragment.toggle('sys-ed-<?=$sys->id?>', {url:'<?=$_SERVER[ 'REQUEST_URI' ]?>',data:{sys:<?=$sys->id?>,action:'system-fragment'},evalScripts:true}, 'height', 40)">Доступ
 		и имя ссылки</a></small></td>
 		<td><small><a href="<?=$sys->url( "SystemAdmin" )?>">Остальные
 		настройки</a></small></td>

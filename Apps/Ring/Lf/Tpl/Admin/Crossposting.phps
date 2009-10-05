@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Tpl_Admin_Crossposting extends R_Lf_Template {
-
+	
 	public $services;
 
 	public function displayContents()
@@ -55,7 +55,8 @@ class R_Lf_Tpl_Admin_Crossposting extends R_Lf_Template {
 	</tr>
 </table>
 <input type="hidden" name="action" value="add-service" /></fieldset>
-</form><hr/>
+</form>
+<hr />
 <p><b>Кросспостинг</b> – это возможность создания идентичных записей в
 разных местах одновременно. Иными словами, добавляя запись в Кольце, вы
 можете автоматически создать ее на других сайтах. Подробнее смотрите <a

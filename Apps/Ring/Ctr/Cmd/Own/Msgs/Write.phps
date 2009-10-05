@@ -12,10 +12,11 @@ class R_Ctr_Cmd_Own_Msgs_Write extends R_Command {
 			if ($adresate) {
 				$adresate = R_Mdl_User::getByIdentity( $adresate );
 				if (!$adresate)
-					$adresate = new R_Mdl_User( $adresate, O_Acl_Role::getByName( "OpenId User" ) );
+					$adresate = new R_Mdl_User( $adresate, 
+							O_Acl_Role::getByName( "OpenId User" ) );
 				O_Registry::set( "app/env/params/target", $adresate->id );
 			}
-
+			
 			if ($formProcessor->handle()) {
 				$sent = $formProcessor->getActiveRecord();
 				$sent[ "box" ] = "sent";
@@ -24,7 +25,7 @@ class R_Ctr_Cmd_Own_Msgs_Write extends R_Command {
 					$sent[ "title" ] = "New Private Message";
 				$sent->owner = R_Mdl_Session::getUser();
 				$sent->save();
-
+				
 				$sent->createInboxCopy();
 			}
 			$formProcessor->responseAjax( null, "Ваше сообщение доставлено адресату." );
@@ -34,7 +35,7 @@ class R_Ctr_Cmd_Own_Msgs_Write extends R_Command {
 			$tpl->form = $formProcessor;
 			return $tpl;
 		}
-
+	
 	}
 
 	public function isAuthenticated()

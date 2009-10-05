@@ -12,46 +12,48 @@
  * @field:replace anonce,file
  */
 class R_Mdl_Sys_Sound_Track extends R_Mdl_Sys_Creative {
+
 	public function save()
 	{
 		parent::save();
 		if (!$this->anonce) {
 			return true;
 		}
-		if(!$this->title) {
+		if (!$this->title) {
 			$this->title = "Композиция без названия";
 			parent::save();
 		}
 		$split_content = strip_tags( $this->content );
-
+		
 		$title = $this->title;
-
+		
 		$this->anonce->description = substr( $split_content, 0, 255 );
 		$this->anonce->title = $title;
 		$this->anonce->save();
-
-		if(is_file($this->filePath()) && class_exists("ffmpeg_movie", false)) {
-			$movie = new ffmpeg_movie($this->filePath(), false);
-			$this["duration"] = round($movie->getDuration());
-			$this["bitrate"] = $movie->getBitRate();
+		
+		if (is_file( $this->filePath() ) && class_exists( "ffmpeg_movie", false )) {
+			$movie = new ffmpeg_movie( $this->filePath(), false );
+			$this[ "duration" ] = round( $movie->getDuration() );
+			$this[ "bitrate" ] = $movie->getBitRate();
 			parent::save();
 		}
-
+		
 		return true;
 	}
 
-
-	public function fileSrc() {
-		return $this->anonce->getFilesUrl().$this->id.".mp3";
+	public function fileSrc()
+	{
+		return $this->anonce->getFilesUrl() . $this->id . ".mp3";
 	}
 
-	public function filePath() {
-		return $this->anonce->getFilesDir().$this->id.".mp3";
+	public function filePath()
+	{
+		return $this->anonce->getFilesDir() . $this->id . ".mp3";
 	}
 
-	public function getDuration() {
-		return floor($this->duration/60).":".sprintf("%02d", $this->duration%60);
+	public function getDuration()
+	{
+		return floor( $this->duration / 60 ) . ":" . sprintf( "%02d", $this->duration % 60 );
 	}
-
 
 }

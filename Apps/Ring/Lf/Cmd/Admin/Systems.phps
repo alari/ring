@@ -4,14 +4,15 @@ class R_Lf_Cmd_Admin_Systems extends R_Lf_Command {
 	public function process()
 	{
 		$systems = $this->getSite()->systems;
-
+		
 		if ($this->isMethodPost()) {
 			if ($this->getParam( "action" ) == "create-system") {
 				$type = $this->getParam( "type" );
 				$title = $this->getParam( "title" );
 				$urlbase = $this->getParam( "urlbase" );
-				if (!preg_match( "#^[-_[:alnum:]]+$#", $urlbase ) || $systems->test( "urlbase", $urlbase )->getOne()) {
-					$this->setNotice(
+				if (!preg_match( "#^[-_[:alnum:]]+$#", $urlbase ) || $systems->test( "urlbase", 
+						$urlbase )->getOne()) {
+					$this->setNotice( 
 							"Префикс адреса системы должен состоять только из латинских символов, подчерка и дефиса и быть уникальным на сайте." );
 					return $this->redirect();
 				}
@@ -23,14 +24,16 @@ class R_Lf_Cmd_Admin_Systems extends R_Lf_Command {
 					$sys->access = $this->getParam( "access", "public" );
 					$sys->instance = $s;
 				} else {
-					$this->setNotice( "Введите заголовок системы, иначе нечего отображать в главном меню!" );
+					$this->setNotice( 
+							"Введите заголовок системы, иначе нечего отображать в главном меню!" );
 				}
 				return $this->redirect();
 			} elseif ($this->getParam( "action" ) == "system-fragment") {
 				$tpl = $this->getTemplate();
 				$tpl->types = R_Mdl_Sys_Instance::getTitles();
-				$tpl->systemEditFragment(
-						isset( $systems[ $this->getParam( "sys" ) ] ) ? $systems[ $this->getParam( "sys" ) ] : null );
+				$tpl->systemEditFragment( 
+						isset( $systems[ $this->getParam( "sys" ) ] ) ? $systems[ $this->getParam( 
+								"sys" ) ] : null );
 				return;
 			} elseif ($this->getParam( "action" ) == "edit-system") {
 				$response = Array ("status" => "");
@@ -48,7 +51,7 @@ class R_Lf_Cmd_Admin_Systems extends R_Lf_Command {
 				return json_encode( $response );
 			}
 		}
-
+		
 		$tpl = $this->getTemplate();
 		$tpl->systems = $systems;
 		$tpl->types = R_Mdl_Sys_Instance::getTitles();

@@ -15,11 +15,12 @@ class R_Ctr_Cmd_JsLogin extends R_Command {
 		if (!$ref) {
 			return "//no url";
 		}
-		if (!R_Mdl_Site::getByHost( $ref ) && $ref != O_Registry::get("app/hosts/project")) {
+		if (!R_Mdl_Site::getByHost( $ref ) && $ref != O_Registry::get( "app/hosts/project" )) {
 			return "//no site";
 		}
 		$_SESSION[ "redirect" ] = $this->getParam( "ref" );
-		return "window.location.href='http://" . $ref . "/openid/redirect?" . session_name() . "=" . session_id() . "';";
+		return "window.location.href='http://" . $ref . "/openid/redirect?" . session_name() . "=" .
+				 session_id() . "';";
 	}
 
 }

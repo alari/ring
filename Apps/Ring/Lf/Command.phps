@@ -13,7 +13,8 @@ abstract class R_Lf_Command extends R_Command {
 		if ($this->site === false) {
 			$this->site = O_Registry::get( "app/current/site" );
 			if (!$this->site)
-				throw new O_Ex_Redirect( "http://" . O_Registry::get( "app/hosts/project" ) . "/" );
+				throw new O_Ex_Redirect( 
+						"http://" . O_Registry::get( "app/hosts/project" ) . "/" );
 		}
 		return $this->site;
 	}

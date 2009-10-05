@@ -13,10 +13,10 @@ class R_Fr_Sys_Instance {
 		/* @var $q O_Dao_Query */
 		$q = $system->anonces;
 		// FIXME: HARDCODE!!!
-		if($system->instance instanceof R_Mdl_Sys_Afisha_System ){
-			$q->test("time", time(), ">")->clearOrders()->orderBy("time");
+		if ($system->instance instanceof R_Mdl_Sys_Afisha_System) {
+			$q->test( "time", time(), ">" )->clearOrders()->orderBy( "time" );
 		}
-
+		
 		R_Mdl_Session::setQueryAccesses( $q, $system->site );
 		?>
 <div class="system" id="sysid-<?=$system->urlbase?>">
@@ -35,7 +35,7 @@ class R_Fr_Sys_Instance {
 	static public function showOwnCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		$system = $params->record();
-
+		
 		switch (get_class( $system->instance )) {
 			case "R_Mdl_Sys_Libro_System" :
 				$cycles = $system->collections;
@@ -66,7 +66,7 @@ R.Collection.setSortable("#coll-sort", '.cycle.libro', '<?=$system->site->host?>
 				}
 				echo "</div>";
 			break;
-
+			
 			case "R_Mdl_Sys_Sound_System" :
 				$albums = $system->collections;
 				echo "<div id='coll-sort'>";
@@ -96,12 +96,13 @@ R.Collection.setSortable("#coll-sort", '.cycle', '<?=$system->site->host?>');
 				}
 				echo "</div>";
 			break;
-
+			
 			default :
 				$query = $system->anonces;
 				R_Mdl_Session::setQueryAccesses( $query, $system->site );
 				/* @var $query O_Dao_Query */
-				$query->getPaginator( array ($system->instance, "url") )->show( $params->layout(), "full" );
+				$query->getPaginator( array ($system->instance, "url") )->show( 
+						$params->layout(), "full" );
 		}
 	}
 

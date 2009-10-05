@@ -16,7 +16,7 @@ class R_Ctr_Tpl_Own_Friends extends R_Ctr_Template {
 		}
 		if ($this->paginator) {
 			$this->paginator->show( $this->layout(), "full" );
-
+		
 		}
 	}
 

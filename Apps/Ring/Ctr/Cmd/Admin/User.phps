@@ -51,7 +51,8 @@ class R_Ctr_Cmd_Admin_User extends R_Command {
 			$form = new O_Dao_Renderer_FormProcessor( );
 			$form->setActiveRecord( $user );
 			if ($this->getParam( "action" ) == "process" && $form->handle()) {
-				return $this->redirect( O_UrlBuilder::get( "Admin/User", array ("id" => $user->id) ) );
+				return $this->redirect( 
+						O_UrlBuilder::get( "Admin/User", array ("id" => $user->id) ) );
 			}
 			$form->addHiddenField( "action", "process" );
 		} else {

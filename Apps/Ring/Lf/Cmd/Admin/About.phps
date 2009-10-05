@@ -9,8 +9,9 @@ class R_Lf_Cmd_Admin_About extends R_Lf_Command {
 		$formProcessor->setActiveRecord( $this->getSite()->about_page );
 		$formProcessor->setAjaxMode();
 		$formProcessor->addHiddenField( "action", "main-process" );
-		if (O_Registry::get( "app/env/request_method" ) == "POST" && $this->getParam( "action" ) == "main-process") {
-			$formProcessor->responseAjax( 1 );
+		if (O_Registry::get( "app/env/request_method" ) == "POST" && $this->getParam( "action" ) ==
+			 "main-process") {
+				$formProcessor->responseAjax( 1 );
 			return null;
 		} else {
 			$tpl = $this->getTemplate();

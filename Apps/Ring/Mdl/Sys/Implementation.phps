@@ -78,7 +78,7 @@ abstract class R_Mdl_Sys_Implementation extends O_Dao_ActiveRecord {
 			$class = $prefix . "RssFeed";
 			$cmd = new $class( );
 		}
-
+		
 		if (isset( $cmd ) && $cmd instanceof R_Lf_Command) {
 			$cmd->instance = $this;
 			return $cmd;

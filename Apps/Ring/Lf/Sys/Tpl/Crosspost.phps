@@ -28,8 +28,7 @@ class R_Lf_Sys_Tpl_Crosspost extends R_Lf_Sys_Template {
 				?>
 	<?
 				if (!$c->crossposted || $c->last_update > $c->crossposted) {
-					?><p><i>В
-очереди на изменение</i></p><?
+					?><p><i>В очереди на изменение</i></p><?
 				}
 				?>
 	<p align="right"><small><a href="?d=<?=$c->id?>"
@@ -48,13 +47,14 @@ class R_Lf_Sys_Tpl_Crosspost extends R_Lf_Sys_Template {
 <div>
 <p>Блог: <b><a href="<?=$s->blog_url?>" target="_blank"><?=$s->blog_url?></a></b>
 &ndash; <a href="?a=<?=$s->id?>"
-	onclick="return confirm('Кросспостить в этот блог?')">Совершить кросспост</a></p>
+	onclick="return confirm('Кросспостить в этот блог?')">Совершить
+кросспост</a></p>
 </div>
 <?
 			}
 		}
 		?>
-		<hr/>
+<hr />
 <p><b>Кросспостинг</b> – это возможность создания идентичных записей в
 разных местах одновременно. Иными словами, добавляя запись в Кольце, вы
 можете автоматически создать ее на других сайтах. Подробнее смотрите <a
