@@ -46,7 +46,7 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 					}
 				}
 			} else {
-				$this->creative->anonce->crossposts->field("last_update", time())->update();
+				$this->creative->anonce->crossposts->field( "last_update", time() )->update();
 			}
 			return $this->redirect( $this->creative->url() );
 		}
@@ -59,25 +59,20 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 
 	public function isAuthenticated()
 	{
-		if(!$this->instance) {
+		if (!$this->instance) {
 			return false;
 		}
 		if ($this->creative_id) {
 			$this->creative = $this->instance->getCreative( $this->creative_id );
-			if (!$this->creative){
-				throw new O_Ex_Redirect("/");
+			if (!$this->creative) {
+				throw new O_Ex_Redirect( "/" );
 			}
-			if(!$this->can("read ".$this->instance->system["access"], $this->creative->anonce)) {
-				$this->setNotice("cannot read ".$this->instance->system["access"]);
-				throw new O_Ex_Redirect("/");
-			}
-			if(!$this->can("write ".$this->instance->system["access"], $this->creative->anonce)){
-				$this->setNotice("cannot write ".$this->instance->system["access"]);
-				throw new O_Ex_Redirect("/");
-			}
+			return $this->can( "read " . $this->instance->system[ "access" ],
+					$this->creative->anonce ) && $this->can(
+					"write " . $this->instance->system[ "access" ], $this->creative->anonce );
 		}
-		return $this->can( "read " . $this->instance->system[ "access" ],
-				$this->getSite() ) && $this->can( "write " . $this->instance->system[ "access" ], $this->getSite() );
+		return $this->can( "read " . $this->instance->system[ "access" ], $this->getSite() ) && $this->can(
+				"write " . $this->instance->system[ "access" ], $this->getSite() );
 	}
 
 }
