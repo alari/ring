@@ -73,7 +73,7 @@ class R_Lf_Layout extends R_Layout {
 <!--[if IE]><br/><br/><![endif]-->
 <div id="foot">
 <div class="cont"><span>&copy; <?=$this->site->copyright?></span> <span>Сайт
-входит в <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">кольцо
+входит в <a href="http://<?=O_Registry::get( "app/hosts/project" )?>/">Кольцо
 Mirari.Name</a></span>
 
 <div id="bot_cnt">
