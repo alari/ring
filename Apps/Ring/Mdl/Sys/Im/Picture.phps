@@ -10,7 +10,7 @@
  * @field img_full ENUM('png','gif','jpeg','-') -image src: imgSrc full; filepath: imgPath full; width: 1600; height: 1600; cascade: img_preview, img_loop, img_tiny -edit -title Картинка -required-new Укажите файл картинки
  * @field img_preview -image src: imgSrc preview; filepath: imgPath preview; width: 700; height: 700
  * @field img_loop -image src: imgSrc loop; filepath: imgPath loop; width: 400; height: 400
- * @field img_tiny -image src: imgSrc tiny; filepath: imgPath tiny; width: 100; height: 90
+ * @field img_tiny -image src: imgSrc tiny; filepath: imgPath tiny; width: 150; height: 150
  *
  * @field:replace anonce,img_tiny
  */
@@ -26,7 +26,7 @@ class R_Mdl_Sys_Im_Picture extends R_Mdl_Sys_Creative {
 		if (!$this->anonce) {
 			return true;
 		}
-		
+
 		$this->anonce->title = $this->title;
 		$this->anonce->save();
 		return true;
