@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Layout extends R_Layout {
-	
+
 	protected $bodyClass;
 
 	public function setBodyClass( $class )
@@ -16,32 +16,33 @@ class R_Lf_Layout extends R_Layout {
 	{
 		if (!$this->site)
 			$this->site = O_Registry::get( "app/current/site" );
-		
+
 		O_Js_Middleware::getFramework()->addSrc( $this );
-		
+
 		$this->addCssSrc( 'bases.css' );
 		$this->addCssSrc( $this->site->staticUrl( "style.css" ) );
-		
+		if(isset($_SESSION["c"])&&is_array($_SESSION["c"]))$this->addCssSrc("/tmp-css");
+
 		// Openid provider
 		if (!O_Registry::get( "app/env/process_url" ) && $this->site->owner) {
-			$this->addHeadLink( "openid2.provider openid.server", 
+			$this->addHeadLink( "openid2.provider openid.server",
 					"http://" . O_Registry::get( "app/env/http_host" ) . "/openid/provider" );
-			Header( 
+			Header(
 					"X-XRDS-Location: http://" . O_Registry::get( "app/env/http_host" ) . "/openid/provider/user-xrds" );
 		}
-		
+
 		$this->addJavaScriptSrc( "ring.js" );
-		
+
 		// Authentication
 		if (!R_Mdl_Session::isLogged())
-			$this->addJavaScriptSrc( 
+			$this->addJavaScriptSrc(
 					"http://" . O_Registry::get( "app/hosts/center" ) . "/JsLogin?ref=http://" .
 						 $this->site->host . $_SERVER[ 'REQUEST_URI' ] );
-		
+
 		if (is_file( $this->site->staticPath( "favicon.ico" ) )) {
 			$this->addHeadLink( "SHORTCUT ICON", $this->site->staticUrl( "favicon.ico" ) );
 		}
-		
+
 		$this->tpl->prepareMeta();
 		?>
 <div id="wrap"

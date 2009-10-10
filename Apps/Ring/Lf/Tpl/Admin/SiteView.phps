@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
-	
+
 	public $css_source;
 	public $files = array ();
 
@@ -55,6 +55,22 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 	value="Обновить иконку" /></center>
 </fieldset>
 <input type="hidden" name="action" value="favicon" /></form>
+
+<br/>
+<hr/>
+<form method="post">
+<fieldset><legend>(beta) попробовать базовые цвета</legend></fieldset>
+<?
+$c = array();
+if(isset($_SESSION["c"])&&is_array($_SESSION["c"]))$c=$_SESSION["c"];
+?><ul>
+<?for($i=1;$i<10;$i++){?>
+<li>Цвет №<?=$i?>: <input type="text" name="c[<?=$i?>]" value="<?=(isset($c[$i])?$c[$i]:"")?>"/></li>
+<?}?>
+</ul>
+<br/>
+<input type="submit" value="Попробовать"/><input type="hidden" name="action" value="tmp-css"/>"
+</form>
 <?
 	}
 
