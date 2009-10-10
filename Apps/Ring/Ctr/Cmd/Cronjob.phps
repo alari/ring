@@ -12,7 +12,7 @@ class R_Ctr_Cmd_Cronjob extends R_Command {
 		foreach($ims as $im) {
 			$path = $im->imgPath("full").".".$im["img_full"];
 			if(!is_file($path)) {
-				echo "<h4>".$im->imgPath("full", $im["img_full"])." // #$im->id</h4>";
+				echo "<h4>".$path." // #$im->id</h4>";
 				continue;
 			}
 			$r = new O_Image_Resizer($path);
