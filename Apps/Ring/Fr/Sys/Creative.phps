@@ -29,17 +29,19 @@ class R_Fr_Sys_Creative {
 			$prev = $a->getPrevious();
 			if ($next || $prev) {
 				?>
-<div align="right">
+<div class="next-prev">
 			<?
 				if ($prev) {
-					?><p>Назад: <?
-					self::showNextPrevAnonce( $prev, $a )?></p><?
+					echo '&lt; ';
+					self::showNextPrevAnonce( $prev, $a );
 				}
-				?>
-			<?
+				if( $prev && $next )
+				{
+					echo ' | ';
+				}
 				if ($next) {
-					?><p>Вперёд: <?
-					self::showNextPrevAnonce( $next, $a )?></p><?
+					self::showNextPrevAnonce( $next, $a );
+					echo ' &gt;';
 				}
 				?>
 			</div>

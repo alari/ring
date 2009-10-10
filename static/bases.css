@@ -70,6 +70,7 @@ div.anonce.im div.cnt{padding-top:5px}
 div.anonce.libro div.cnt{font-style:italic;}
 div.anonce.sound div.cnt{font-style:italic;}
 div.associations{}
+div.next-prev{text-align:right;font-size:80%;}
 
 /*fragments - audioalbum*/
 div.audioalbum{}
@@ -121,7 +122,7 @@ span.tag-8{font-size:160%;}
 
 /*text formatting*/
 p.prose{text-indent:2em;margin:0 1px;}
-p.poetry{white-space:pre;margin:0;}
+p.poetry{margin:0;}
 
 /*forms*/
 div.oo-renderer-field,div.oo-renderer-buttons{clear:both;margin:0px 0px 12px 0px;padding:3px 5px 3px 5px;background-color:#fbfbff;}
