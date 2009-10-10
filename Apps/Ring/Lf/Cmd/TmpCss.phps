@@ -11,7 +11,7 @@ class R_Lf_Cmd_TmpCss extends R_Lf_Command {
 #head{color:<?=$c[1]?>}
 #head a:hover{color:<?=$c[1]?>}
 #main-menu{border-bottom-color:<?=$c[1]?>}
-#foot{background-color:<?=$c[1]?> !important;}
+#foot{background-color:<?=$c[1]?>}
 .system h2 a:hover{color:<?=$c[1]?>}
 .anonce .cnt{background-color:<?=$c[1]?>}
 h1{color:<?=$c[1]?>}
@@ -39,6 +39,8 @@ h2,h3,h4,body a,#rcol li a,#head a{color:<?=$c[7]?>}
 #openid span{color:<?=$c[8]?>}
 
 #main-menu a,#rcol a,#foot a{color:<?=$c[9]?>}
+
+#wrap{background-color:<?=$c[10]?>}
 
 <?
 	}
