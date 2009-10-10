@@ -56,21 +56,27 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 </fieldset>
 <input type="hidden" name="action" value="favicon" /></form>
 
-<br/>
-<hr/>
+<br />
+<hr />
 <form method="post">
-<fieldset><legend>(beta) попробовать базовые цвета</legend></fieldset>
+<fieldset><legend>(beta) попробовать базовые цвета</legend>
 <?
-$c = array();
-if(isset($_SESSION["c"])&&is_array($_SESSION["c"]))$c=$_SESSION["c"];
-?><ul>
-<?for($i=1;$i<=10;$i++){?>
-<li>Цвет №<?=$i?>: <input type="text" name="c[<?=$i?>]" value="<?=(isset($c[$i])?$c[$i]:"")?>"/></li>
-<?}?>
+		$c = array ();
+		if (isset( $_SESSION[ "c" ] ) && is_array( $_SESSION[ "c" ] ))
+			$c = $_SESSION[ "c" ];
+		?><ul>
+<?
+		for ($i = 1; $i <= 10; $i++) {
+			?>
+<li>Цвет №<?=$i?>: <input type="text" name="c[<?=$i?>]"
+		value="<?=(isset( $c[ $i ] ) ? $c[ $i ] : "")?>" /></li>
+<?
+		}
+		?>
 </ul>
-<br/>
-<input type="submit" value="Попробовать"/><input type="hidden" name="action" value="tmp-css"/>"
-</form>
+<br />
+<input type="submit" value="Попробовать" /><input type="hidden"
+	name="action" value="tmp-css" /></fieldset></form>
 <?
 	}
 
