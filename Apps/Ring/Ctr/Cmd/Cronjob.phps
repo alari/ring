@@ -16,7 +16,7 @@ class R_Ctr_Cmd_Cronjob extends R_Command {
 				continue;
 			}
 			$r = new O_Image_Resizer($path);
-			$r->resize(150,150,tempnam(".","imr"));
+			$r->resize(150,150,"./imr.tmp");
 			$im->img_tiny = $r;
 			unset($r);
 		}
