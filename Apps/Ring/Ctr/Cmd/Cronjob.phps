@@ -10,7 +10,7 @@ class R_Ctr_Cmd_Cronjob extends R_Command {
 
 		$ims = O_Dao_Query::get("R_Mdl_Sys_Im_Picture");
 		foreach($ims as $im) {
-			$path = $im->imgPath("full").".".$im["img_full"];
+			$path = $im->imgPath("full");
 			if(!is_file($path)) {
 				echo "<h4>".$path." // #$im->id</h4>";
 				continue;
