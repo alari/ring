@@ -5,12 +5,13 @@ class R_Lf_Cmd_TmpCss extends R_Lf_Command {
 	{
 		if(!isset($_SESSION["c"]) || !is_array($_SESSION["c"])) return;
 		$c = $_SESSION["c"];
+		header("Content-type: text/css");
 ?>
 
 #head{color:<?=$c[1]?>}
 #head a:hover{color:<?=$c[1]?>}
 #main-menu{border-bottom-color:<?=$c[1]?>}
-#foot{background-color:<?=$c[1]?>}
+#foot{background-color:<?=$c[1]?> !important;}
 .system h2 a:hover{color:<?=$c[1]?>}
 .anonce .cnt{background-color:<?=$c[1]?>}
 h1{color:<?=$c[1]?>}
