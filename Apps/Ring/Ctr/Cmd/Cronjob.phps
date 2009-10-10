@@ -8,15 +8,17 @@ class R_Ctr_Cmd_Cronjob extends R_Command {
 		R_Mdl_Site_Crosspost::handleQueue();
 		echo "<h4>" . round( microtime( true ) - O_Registry::get( "start-time" ), 4 ) . "</h4>";
 
-		$ims = O_Dao_Query::get("R_Mdl_Sys_Im_Picture");
-		foreach($ims as $im) {
-			$path = $im->imgPath("full");
-			if(!is_file($path)) {
-				echo "<h4>".$path." // #$im->id</h4>";
-				continue;
-			}
+		if (isset( $_GET[ "up_im" ] )) {
+			$ims = O_Dao_Query::get( "R_Mdl_Sys_Im_Picture" );
+			foreach ($ims as $im) {
+				$path = $im->imgPath( "full" );
+				if (!is_file( $path )) {
+					echo "<h4>" . $path . " // #$im->id</h4>";
+					continue;
+				}
 
-			$im->img_tiny = new O_Image_Resizer($path);
+				$im->img_tiny = new O_Image_Resizer( $path );
+			}
 		}
 	}
 }
