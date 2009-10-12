@@ -63,13 +63,12 @@ div.system{clear:both;padding-bottom:2px;}
 div.system h2{padding:5px;margin-bottom:3px;font-size:12pt;}
 div.anonce{}
 div.anonce div.cvr{}
-div.anonce div strong{float:left;}
-div.anonce div.cnt{clear:both;}
-
+div.anonce div strong{display:block;}
+div.anonce div.cnt{margin:0px 0px 0px 0px;}
 div.anonce.im{width:20%;_width:expression((this.parentNode.offsetWidth / 5)+'px');height:126px;margin:5px 0px 5px 0px;padding-top:1px;float:left;}
 div.anonce.im div.cvr{_width:100%;height:122px;*+height:114px;_height:122px;margin:1px 2px 2px 2px;_margin-top:2px;overflow:hidden;padding:5px;}
 div.anonce.im div strong{display:block;overflow:hidden;padding:2px 0px 3px 0px;text-align:center;}
-div.anonce.im div.cnt{clear:none;margin:0px 0px 0px 0px;text-align:center;padding-top:5px;}
+div.anonce.im div.cnt{margin:0px 0px 0px 0px;text-align:center;padding-top:5px;}
 div.anonce.blog div.cnt{text-align:left;}
 div.anonce.libro div.cnt{font-style:italic;}
 div.anonce.sound div.cnt{font-style:italic;}
