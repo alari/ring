@@ -115,4 +115,4 @@ p, ul, li
 /*text formatting*/
 p{margin:6px 0px 0px 0px;}
 .prose{text-indent:2em;margin:0 1px;}
-.poetry{white-space:pre;margin:0;}
+.poetry{margin:0;}
