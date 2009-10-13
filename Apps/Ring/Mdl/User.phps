@@ -167,6 +167,7 @@ class R_Mdl_User extends O_Acl_User {
 
 	public function setCommFlags(R_Mdl_Site $site, $flags, $status="") {
 		$rel = R_Mdl_User_Relation::getRelation($this, $site);
+		print_r($rel);
 		$rel->flags = ($rel->flags & (~ R_Mdl_User_Relation::FLAGS_COMM)) | $flags;
 		$rel->status = $status;
 		$rel->save();
