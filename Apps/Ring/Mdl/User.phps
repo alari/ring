@@ -150,6 +150,11 @@ class R_Mdl_User extends O_Acl_User {
 				 "</a>";
 	}
 
+	/**
+	 * Adds friendship relation
+	 *
+	 * @param O_Dao_ActiveRecord $object
+	 */
 	public function addFriend( O_Dao_ActiveRecord $object )
 	{
 		R_Mdl_User_Relation::addFriend( $this, $object );
@@ -159,6 +164,14 @@ class R_Mdl_User extends O_Acl_User {
 	{
 		R_Mdl_User_Relation::removeFriend( $this, $object );
 	}
+
+	public function setCommFlags(R_Mdl_Site $site, $flags, $status="") {
+		$rel = R_Mdl_User_Relation::getRelation($this, $site);
+		$rel["flags"] = ($rel->flags & (~ R_Mdl_User_Relation::FLAGS_COMM)) | $flags;
+		$rel["status"] = $status;
+		$rel->save();
+	}
+
 
 	/**
 	 * Returns user by identity

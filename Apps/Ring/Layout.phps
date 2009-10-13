@@ -6,7 +6,7 @@ class R_Layout extends O_Html_Layout {
 	 * @var R_Mdl_Site
 	 */
 	protected $site;
-	
+
 	private $sape;
 	private $linkfeed;
 
@@ -17,8 +17,8 @@ class R_Layout extends O_Html_Layout {
 
 	public function setMetaKeywords( $args )
 	{
-		$args = array_merge( $args, 
-				array ("творчество", "проза", "стихи", "музыка", "песни", "авторы", "публикации", 
+		$args = array_merge( $args,
+				array ("творчество", "проза", "стихи", "музыка", "песни", "авторы", "публикации",
 						"читать", "слушать", "интересно") );
 		parent::addMeta( "keywords", join( ", ", $args ) );
 	}
@@ -52,9 +52,9 @@ class R_Layout extends O_Html_Layout {
 			return $this->linkfeed;
 		}
 		define( 'LINKFEED_USER', '22b3dae89af246203ae6df09b8b0200f1540c101' );
-		
+
 		require_once './' . LINKFEED_USER . '/linkfeed.php';
-		
+
 		$this->linkfeed = new LinkfeedClient( array ("charset" => "UTF-8", "multi_site" => true) );
 		return $this->linkfeed;
 	}
@@ -87,7 +87,7 @@ class R_Layout extends O_Html_Layout {
 	protected function userMenu()
 	{
 		if (R_Mdl_Session::isLogged()) {
-			
+
 			$site = $this->site;
 			if (!$site)
 				$site = O_Registry::get( "app/current/site" );
@@ -106,7 +106,7 @@ class R_Layout extends O_Html_Layout {
 				?>
 				<li><i><a href="<?=$site->url( "comments" )?>">Комментарии на сайте</a></i></li>
 				<?
-				if (!R_Mdl_Session::can( "manage site", $site ) && R_Mdl_Session::can( 
+				if (!R_Mdl_Session::can( "manage site", $site ) && R_Mdl_Session::can(
 						"manage styles", $site )) {
 					?>
 <li><a href="<?=$site->url( "admin/site-view" )?>">Редактировать
@@ -144,11 +144,11 @@ class R_Layout extends O_Html_Layout {
 				?>
 </ul>
 <?
-			
+
 			}
-			
+
 			$new_msgs = R_Mdl_Session::getUser()->msgs_own->test( "readen", 0 )->getFunc();
-			
+
 			?>
 <p><b><a
 	href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/msgs/">Внутренняя
@@ -182,8 +182,8 @@ class R_Layout extends O_Html_Layout {
 </ul>
 <?
 		}
-		
-		if (R_Mdl_Session::can( "manage roles" ) || R_Mdl_Session::can( "manage users" )) {
+
+		if (R_Mdl_Session::can( "manage roles" ) || R_Mdl_Session::can( "manage users" ) || R_Mdl_Session::can("create community")) {
 			?>
 <p><b>Управление</b></p>
 <ul>
@@ -195,14 +195,17 @@ class R_Layout extends O_Html_Layout {
 	ролей</a></li>
 <?
 			}
-			?>
-<?
-
 			if (R_Mdl_Session::can( "manage users" )) {
 				?>
 <li><a
 		href="http://<?=O_Registry::get( "app/hosts/center" )?>/admin/user">Новый
 	пользователь</a></li>
+<?
+			}
+		if (R_Mdl_Session::can( "create community" )) {
+				?>
+<li><a
+		href="http://<?=O_Registry::get( "app/hosts/center" )?>/admin/comm">Новое сообщество</a></li>
 <?
 			}
 			?>

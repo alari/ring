@@ -33,13 +33,13 @@
  * @index type
  */
 class R_Mdl_Site extends O_Dao_ActiveRecord {
-	
+
 	const TYPE_AUTH = 1;
 	const TYPE_COMM = 2;
 	const ST_MODERATED = 1;
 	const ST_AWAITING = 0;
 	const ST_TECH = 2;
-	
+
 	private $available_systems;
 
 	/**
@@ -47,7 +47,7 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 	 *
 	 * @param string $host
 	 */
-	public function __construct( $host )
+	public function __construct( $host, $type=self::TYPE_AUTH )
 	{
 		if (substr( $host, 0, 7 ) == "http://")
 			$host = substr( $host, 7 );
@@ -55,12 +55,14 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 			$host = substr( $host, 0, strpos( $host, "/" ) );
 		if ($host)
 			$this->host = $host;
-		
+
+		$this["type"] = $type;
+
 		$this->static_urlbase = O_Registry::get( "app/sites/static_urlbase" ) . "$host/";
 		$this->static_folder = O_Registry::get( "app/sites/static_folder" ) . "$host/";
-		
+
 		parent::__construct();
-		
+
 		if (!is_dir( substr( $this->static_folder, 0, -1 ) ))
 			mkdir( substr( $this->static_folder, 0, -1 ), 0777 );
 		$style = file_get_contents( O_Registry::get( "app/sites/static_folder" ) . "style.css" );
@@ -187,7 +189,7 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 			$host = substr( $host, 0, strpos( $host, "/" ) );
 		if (!$host || $host == $this->host)
 			return;
-		
+
 		$old_host = $this->host;
 		$this->host = $host;
 		try {
@@ -196,18 +198,18 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 		catch (PDOException $e) {
 			return false;
 		}
-		
-		if (!rename( substr( $this->static_folder, 0, -1 ), 
+
+		if (!rename( substr( $this->static_folder, 0, -1 ),
 				O_Registry::get( "app/sites/static_folder" ) . $host )) {
 			$this->host = $old_host;
 			$this->save();
 			return false;
 		}
-		
+
 		if (R_Mdl_User::getByIdentity( $old_host ) == $this->owner) {
 			$this->owner->setIdentity( $this->host, $pwd );
 		}
-		
+
 		$this->static_urlbase = O_Registry::get( "app/sites/static_urlbase" ) . "$host/";
 		$this->static_folder = O_Registry::get( "app/sites/static_folder" ) . "$host/";
 		$this->save();

@@ -15,15 +15,16 @@
  */
 class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	const FLAG_WATCH = 1;
-	
+
 	const FLAG_IS_FRIEND = 2;
 	const FLAG_IS_BANNED = 4;
 	const FLAG_IS_MEMBER = 8;
 	const FLAG_IS_ADMIN = 16;
 	const FLAG_IS_LEADER = 32;
-	
+
 	const FLAGS_PRIVATE = 58;
 	const FLAGS_DISABLE = 48;
+	const FLAGS_COMM = 60;
 
 	public function __construct( R_Mdl_User $user, O_Dao_ActiveRecord $object, $flags )
 	{
@@ -70,7 +71,7 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	{
 		// Remove watch flag from direct relation
 		$rel = self::getRelation( $user, $object );
-		
+
 		if ($rel) {
 			// Relation with community, or no flags in relation
 			if (!$rel[ "flags" ] || !$rel[ "author" ] || $rel[ "flags" ] == self::FLAG_WATCH) {
@@ -81,7 +82,7 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 				$rel->save();
 			}
 		}
-		
+
 		// Look for vice versa
 		if ($rel->author) {
 			$inv_rel = self::getRelation( $rel->author, $user );
@@ -114,7 +115,7 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 			$rel = new self( $user, $object, $createWithFlag );
 		}
 		if ($createWithFlag !== null && ($rel[ "flags" ] & $createWithFlag) == 0) {
-			$rel->flags = $rel->flags + $createWithFlag;
+			$rel->flags = $rel->flags | $createWithFlag;
 			$rel->save();
 		}
 		return $rel;
