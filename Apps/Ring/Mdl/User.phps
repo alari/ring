@@ -165,16 +165,25 @@ class R_Mdl_User extends O_Acl_User {
 		R_Mdl_User_Relation::removeFriend( $this, $object );
 	}
 
-	public function setCommFlags(R_Mdl_Site $site, $flags, $status="") {
-		$rel = R_Mdl_User_Relation::getRelation($this, $site);
-		if(!$rel) {print_r($this);print_r($site);$site->delete();die("err");}
-		print_r($rel);
-		var_export($rel);var_dump($rel);
-		$rel->flags = ($rel->flags & (~ R_Mdl_User_Relation::FLAGS_COMM)) | $flags;
+	public function setCommFlags( R_Mdl_Site $site, $flags, $status = "" )
+	{
+		$rel = R_Mdl_User_Relation::getRelation( $this, $site );
+		if (!$rel) {
+			print_r( $this );
+			print_r( $site );
+			print_r($site->usr_related->test("user", $this)->getOne());
+			$rel = new R_Mdl_User_Relation($this, $site, R_Mdl_User_Relation::FLAG_WATCH);
+			print_r($rel);
+			$site->delete();
+			die( "err" );
+		}
+		print_r( $rel );
+		var_export( $rel );
+		var_dump( $rel );
+		$rel->flags = ($rel->flags & (~R_Mdl_User_Relation::FLAGS_COMM)) | $flags;
 		$rel->status = $status;
 		$rel->save();
 	}
-
 
 	/**
 	 * Returns user by identity
