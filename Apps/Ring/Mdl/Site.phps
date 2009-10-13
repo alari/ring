@@ -56,7 +56,7 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 		if ($host)
 			$this->host = $host;
 
-		$this["type"] = $type;
+		$this->type = $type;
 
 		$this->static_urlbase = O_Registry::get( "app/sites/static_urlbase" ) . "$host/";
 		$this->static_folder = O_Registry::get( "app/sites/static_folder" ) . "$host/";
