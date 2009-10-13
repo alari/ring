@@ -11,7 +11,7 @@ class R_Ctr_Cmd_Admin_Comm extends R_Command {
 				$site = new R_Mdl_Site( $host, R_Mdl_Site::TYPE_COMM );
 				$user = R_Mdl_User::getByIdentity($this->getParam("leader"));
 				if(!$user) $user = R_Mdl_Session::getUser();
-				$user->setCommFlags($site, R_Mdl_User_Relation::FLAG_IS_LEADER, "Руководитель");
+				$user->setCommFlags($site, R_Mdl_User_Relation::FLAG_IS_LEADER | R_Mdl_User_Relation::FLAG_WATCH, "Руководитель");
 
 			}
 			catch (Exception $e) {
