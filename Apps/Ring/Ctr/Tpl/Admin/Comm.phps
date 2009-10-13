@@ -16,7 +16,7 @@ class R_Ctr_Tpl_Admin_Comm extends R_Ctr_Template {
 		<td><input type="text" name="leader" value="<?=R_Mdl_Session::getIdentity()?>" /></td>
 	</tr>
 	<tr>
-		<th colspan="2"><input type="submit" value="Сохранить" /></th>
+		<th colspan="2"><input type="submit" value="Создать" /><input type="hidden" name="action" value="create"/></th>
 	</tr>
 </table>
 </fieldset>
