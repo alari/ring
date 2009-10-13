@@ -34,7 +34,7 @@ class R_Ctr_Cmd_Admin_Comm extends R_Command {
 			} elseif(!$site) {
 				$this->setNotice("Site not found");
 			} elseif($site->type != R_Mdl_Site::TYPE_COMM) {
-				$this->setNotice("It is not a community. ".print_r($site, 1));
+				$this->setNotice("It is not a community. ".$site->type."!=".R_Mdl_Site::TYPE_COMM);
 			}
 			return $this->redirect();
 		}
