@@ -107,7 +107,7 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	 * @param int $createWithFlag if set, relation with this flags will be returned
 	 * @return R_Mdl_User_Relation
 	 */
-	static public function getRelation( $user, $object, $createWithFlag = null )
+	static public function getRelation( R_Mdl_User $user, O_Dao_ActiveRecord $object, $createWithFlag = null )
 	{
 		$q = $object->usr_related->test( "user", $user );
 		$rel = $q->getOne();

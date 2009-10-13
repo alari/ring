@@ -15,11 +15,9 @@ class R_Ctr_Cmd_Admin_Comm extends R_Command {
 
 			}
 			catch (Exception $e) {
-				O_Db_Manager::getConnection()->rollBack();
 				$this->setNotice("Error. Unable to create new site.");
 				return $this->redirect( );
 			}
-			O_Db_Manager::getConnection()->commit();
 			return $this->redirect( $site->url() );
 		} elseif($this->getParam("action") == "delete" && $this->can("delete community")) {
 			$host = $this->getParam( "host" );
