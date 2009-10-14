@@ -105,6 +105,17 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 		return $this->staticPath( "ava-" . $type . ($ext ? $ext : "." . $this[ "ava_full" ]) );
 	}
 
+	public function avatar( $full = false )
+	{
+		return "<img class=\"avatar\" src=\"" . ($full ? $this->ava_full : $this->ava_tiny) . "\" alt=\"" .
+				 htmlspecialchars( $this->title ) . "\"/>";
+	}
+
+	public function link() {
+		return "<a href=\"".$this->url()."\">".$this->title."</a>";
+	}
+
+
 	/**
 	 * Returns url inside the site
 	 *

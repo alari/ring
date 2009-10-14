@@ -12,21 +12,19 @@ class R_Fr_Site {
 		$site = $params->record();
 		?>
 <div class="comm" style="padding: 20px; text-align: center">
-<?
-		if ($site->owner) {
-			?>
 <div class="comm-ava">
-	<?=$site->owner->avatar()?></div><?
-		}
-		?>
-<h2><a href="<?=$site->url()?>"><?=$site->title?></a></h2>
+<?=$site->avatar()?>
+</div>
+<h2><?=$site->link()?>"></h2>
 <?
-		if ($site->owner) {
+		if ($site->type == R_Mdl_Site::TYPE_AUTH) {
 			?>
 	Автор: <b><?=$site->owner->link()?></b>
 <?
-		}
+		} elseif($site->type == R_Mdl_Site::TYPE_COMM) {
 		?>
+		<i>Сообщество</i>
+		<?}?>
 </div>
 <?
 	}

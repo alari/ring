@@ -11,7 +11,7 @@ class R_Lf_Tpl_Home extends R_Lf_Template {
 			$system->show( $this->layout(), "home" );
 		}
 		echo "</div>";
-		
+
 		if (R_Mdl_Session::can( "manage site", $this->getSite() )) {
 			?>
 <script type="text/javascript">
@@ -19,10 +19,10 @@ R.System.setSortable("#sys-sort", '.system', '<?=$this->getSite()->host?>');
 </script>
 		<?
 		}
-		
-		$this->layout()->addHeadLink( "alternate", $this->getSite()->url( "rss" ), 
+
+		$this->layout()->addHeadLink( "alternate", $this->getSite()->url( "rss" ),
 				"application/rss+xml", "RSS: новое на сайте" );
-		$this->layout()->addHeadLink( "alternate", $this->getSite()->url( "atom" ), 
+		$this->layout()->addHeadLink( "alternate", $this->getSite()->url( "atom" ),
 				"application/atom+xml", "Atom: новое на сайте" );
 	}
 
@@ -31,7 +31,7 @@ R.System.setSortable("#sys-sort", '.system', '<?=$this->getSite()->host?>');
 		if ($this->getSite()->owner) {
 			?>
 <center>
-<?=$this->getSite()->owner->link() . "<br/>" . $this->getSite()->owner->avatar( 1 )?>
+<?=($this->getSite()->owner ? $this->getSite()->owner->link() : $this->getSite()->link()) . "<br/>" . $this->getSite()->avatar( 1 )?>
 </center>
 <?
 		}
