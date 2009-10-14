@@ -17,11 +17,11 @@ class R_Fr_Site {
 </div>
 <h2><?=$site->link()?></h2>
 <?
-		if ($site->type == R_Mdl_Site::TYPE_AUTH) {
+		if ($site["type"] == R_Mdl_Site::TYPE_AUTH) {
 			?>
 	Автор: <b><?=$site->owner->link()?></b>
 <?
-		} elseif($site->type == R_Mdl_Site::TYPE_COMM) {
+		} elseif($site["type"] == R_Mdl_Site::TYPE_COMM) {
 		?>
 		<i>Сообщество</i>
 		<?}?>
