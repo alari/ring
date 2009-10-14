@@ -25,12 +25,12 @@ class R_Lf_Tpl_Collective extends R_Lf_Template {
 		}
 		if (count( $this->members )) {
 			echo "<h3>Участники</h3>";
-			$this->members->show();
+			foreach($this->members as $u) echo $u->link()," ";
 			echo "<hr/>";
 		}
 		if (count( $this->readers )) {
 			echo "<h3>Читатели</h3>";
-			$this->readers->show();
+			foreach($this->readers as $u) echo $u->link()," ";
 		}
 
 		$this->layout()->setTitle( "Коллектив сообщества" );
