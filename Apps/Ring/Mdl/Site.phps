@@ -28,6 +28,9 @@
  * @field copyright varchar(255) NOT NULL DEFAULT 'Copyright holders' -edit -required Введите копирайт автора или авторов сайта -title Копирайты
  * @field title varchar(255) NOT NULL DEFAULT 'Сайт' -edit -required Введите название сайта -title Название сайта
  *
+ * @field ava_full ENUM('-','gif','jpeg','png') DEFAULT '-' -image filepath: avaPath full; src: avaSrc full; width:190; height:500; cascade: ava_tiny; clear:1 -edit -title Картинка-знак сайта
+ * @field ava_tiny -image filepath: avaPath tiny; src: avaSrc tiny; width:80; height:200
+ *
  * @index host -unique
  * @index status
  * @index type
@@ -86,6 +89,20 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 		if (!$host)
 			return null;
 		return O_Dao_Query::get( __CLASS__ )->test( "host", $host )->getOne();
+	}
+
+	public function avaSrc( $type )
+	{
+		if ($this[ "ava_full" ] == "-") {
+			if($this->owner) return $this->owner->avaSrc($type);
+			return O_Registry::get( "app/sites/static_urlbase" ) . "comm-" . $type . ".gif";
+		}
+		return $this->staticUrl( "ava-" . $type . "." . $this[ "ava_full" ] );
+	}
+
+	public function avaPath( $type, $ext = null )
+	{
+		return $this->staticPath( "ava-" . $type . ($ext ? $ext : "." . $this[ "ava_full" ]) );
 	}
 
 	/**
@@ -206,7 +223,7 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 			return false;
 		}
 
-		if (R_Mdl_User::getByIdentity( $old_host ) == $this->owner) {
+		if ($this->owner && R_Mdl_User::getByIdentity( $old_host ) == $this->owner) {
 			$this->owner->setIdentity( $this->host, $pwd );
 		}
 
