@@ -28,13 +28,11 @@ R.System.setSortable("#sys-sort", '.system', '<?=$this->getSite()->host?>');
 
 	public function displayNav()
 	{
-		if ($this->getSite()->owner) {
 			?>
 <center>
 <?=($this->getSite()->owner ? $this->getSite()->owner->link() : $this->getSite()->link()) . "<br/>" . $this->getSite()->avatar( 1 )?>
 </center>
 <?
-		}
 		$tags = $this->getSite()->tags->limit( 100 );
 		R_Fr_Site_Tag::showCloud( $tags );
 		?>

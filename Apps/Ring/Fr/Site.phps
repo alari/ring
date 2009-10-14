@@ -15,7 +15,7 @@ class R_Fr_Site {
 <div class="comm-ava">
 <?=$site->avatar()?>
 </div>
-<h2><?=$site->link()?>"></h2>
+<h2><?=$site->link()?></h2>
 <?
 		if ($site->type == R_Mdl_Site::TYPE_AUTH) {
 			?>
