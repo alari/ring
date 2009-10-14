@@ -10,7 +10,7 @@ class R_Lf_Cmd_Admin_Site extends R_Lf_Command {
 		}
 		$formProcessor->addHiddenField( "action", "main-process" );
 		if ($this->isMethodPost() && $this->getParam( "action" ) == "main-process") {
-			$formProcessor->process();
+			$formProcessor->handle();
 			$this->setNotice("Изменения сохранены");
 			return $this->redirect();
 		} elseif ($this->isMethodPost() && $this->getParam( "action" ) == "tech:host" && $this->can(
