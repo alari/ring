@@ -129,7 +129,7 @@ p.poetry{margin:0;}
 
 /*forms*/
 div.oo-renderer-field,div.oo-renderer-buttons{clear:both;margin:0px 0px 12px 0px;padding:3px 5px 3px 5px;background-color:#fbfbff;}
-div.oo-renderer-title{float:left;width:150px;text-align:right;padding:2px 10px 0px 0px;}
+div.oo-renderer-title{float:left;width:150px;text-align:right;padding:2px 10px 0px 0px;font-weight:bold;}
 div.oo-renderer-field select,div.oo-renderer-field input.file,div.oo-renderer-field input.text{width:250px;}
 div.oo-renderer-field div.oo-renderer-error{clear:both;padding:3px 0px 3px 0px;color:#ff5555;font-weight:bold;}
 
