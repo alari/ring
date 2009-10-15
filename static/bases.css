@@ -139,7 +139,7 @@ div.form-row.form-row-h{text-align:left;}
 div.form-row div.form-row-title{font-weight:bold;}
 div.form-row.form-row-h div.form-row-title{float:left;width:150px;text-align:right;padding:2px 10px 0px 0px;}
 div.form-row div.form-row-content{}
-div.form-row div.form-row-error{}
+div.form-row div.form-row-error{clear:both;padding:3px 0px 3px 0px;color:#ff5555;font-weight:bold;}
 div.form-row div.form-row-remark{}
 div.form-row div.form-row-buttons{text-align:center;}
 div.form-row input.form-button{}
