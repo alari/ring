@@ -133,11 +133,11 @@ div.oo-renderer-title{float:left;width:150px;text-align:right;padding:2px 10px 0
 div.oo-renderer-field select,div.oo-renderer-field input.file,div.oo-renderer-field input.text{width:250px;}
 div.oo-renderer-field div.oo-renderer-error{clear:both;padding:3px 0px 3px 0px;color:#ff5555;font-weight:bold;}
 
-div.form-row{clear:both;width:100%;}
+div.form-row{clear:both;margin:0px 0px 5px 0px;padding:3px 5px 3px 5px;background-color:#fbfbff;}
 div.form-row.form-row-v{text-align:left;}
 div.form-row.form-row-h{text-align:left;}
 div.form-row div.form-row-title{}
-div.form-row.form-row-h div.form-row-title{float:left;width:200px;text-align:right;}
+div.form-row.form-row-h div.form-row-title{float:left;width:150px;text-align:right;padding:2px 10px 0px 0px;}
 div.form-row div.form-row-content{}
 div.form-row div.form-row-error{}
 div.form-row div.form-row-remark{}
