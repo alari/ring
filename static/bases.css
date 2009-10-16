@@ -148,5 +148,5 @@ div.form-row input.form-file{width:250px;}
 div.form-row select.form-select{width:250px;}
 div.form-row select.form-select option{}
 div.form-row input.form-string{width:250px;}
-div.form-row textarea.form-text{}
+div.form-row textarea.form-text{width:80%;}
 div.form-row textarea.fckeditor{}
