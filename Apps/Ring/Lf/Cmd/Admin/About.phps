@@ -7,7 +7,7 @@ class R_Lf_Cmd_Admin_About extends R_Lf_Command {
 		if (!$this->getSite()->about_page)
 			$this->getSite()->about_page = new R_Mdl_Site_About( );
 		$handler->setClassOrRecord($this->getSite()->about_page);
-		$handler->addHidden( "action", "main-process" );
+		$handler->getForm()->addHidden( "action", "main-process" );
 		if (O_Registry::get( "app/env/request_method" ) == "POST" && $this->getParam( "action" ) ==
 			 "main-process") {
 				$handler->responseAjax( 1 );
