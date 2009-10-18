@@ -16,6 +16,7 @@ class R_Lf_Sys_Tpl_Form extends R_Lf_Sys_Template {
 			$crosspostRow->setOptions($this->getSite()->crosspost_services, "blog_url");
 			$crosspostRow->setMultiple();
 
+			$this->form->generate();
 			$this->form->addRowAfter($crosspostRow, "tags" );
 		} else {
 			$title = $this->instance->editFormTitle();
