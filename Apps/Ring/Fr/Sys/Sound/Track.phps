@@ -2,7 +2,7 @@
 
 class R_Fr_Sys_Sound_Track extends R_Fr_Sys_Creative {
 
-	static public function editAlbum( O_Dao_Renderer_Edit_Params $params )
+	static public function editAlbum( $params )
 	{
 		if($params instanceof O_Dao_Renderer_Edit_Params){
 			O_Dao_Renderer_Edit_Callbacks::selectRelation( $params );
