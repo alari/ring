@@ -15,10 +15,9 @@ class R_Lf_Sys_Tpl_Form extends R_Lf_Sys_Template {
 			$crosspostRow = new O_Form_Row_BoxList("crosspost", "Кросспостинг");
 			$crosspostRow->setOptions($this->getSite()->crosspost_services, "blog_url");
 			$crosspostRow->setMultiple();
-print_r($this->form);
+
 			$this->form->generate();
-			$this->form->addRowAfter($crosspostRow, "tags" );
-			print_r($this->form);
+			$this->form->addRowBefore($crosspostRow, "access" );
 		} else {
 			$title = $this->instance->editFormTitle();
 		}
