@@ -2,9 +2,15 @@
 
 class R_Fr_Sys_Im_Picture extends R_Fr_Sys_Creative {
 
-	static public function editGallery( O_Dao_Renderer_Edit_Params $params )
+	static public function editGallery( $params )
 	{
-		O_Dao_Renderer_Edit_Callbacks::selectRelation( $params );
+		if($params instanceof O_Dao_Renderer_Edit_Params){
+			O_Dao_Renderer_Edit_Callbacks::selectRelation( $params );
+		} else {
+			$bl = new O_Form_Row_Select($params->getFieldName());
+			$bl->autoProduce($params);
+			$bl->render();
+		}
 		echo "<br/>";
 		?>
 <div class="oo-renderer-field">

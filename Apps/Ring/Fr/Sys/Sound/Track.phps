@@ -4,7 +4,13 @@ class R_Fr_Sys_Sound_Track extends R_Fr_Sys_Creative {
 
 	static public function editAlbum( O_Dao_Renderer_Edit_Params $params )
 	{
-		O_Dao_Renderer_Edit_Callbacks::selectRelation( $params );
+		if($params instanceof O_Dao_Renderer_Edit_Params){
+			O_Dao_Renderer_Edit_Callbacks::selectRelation( $params );
+		} else {
+			$bl = new O_Form_Row_Select($params->getFieldName());
+			$bl->autoProduce($params);
+			$bl->render();
+		}
 		?>
 <div class="oo-renderer-field">
 <div class="oo-renderer-title">Новый альбом:</div>
