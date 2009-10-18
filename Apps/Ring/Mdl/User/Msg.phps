@@ -1,6 +1,6 @@
 <?php
 /**
- * @table user_msgs -loop:envelop container ul -show-loop:envelop container li
+ * @table user_msgs -loop:envelop container ul -show-loop:envelop container li -edit:submit Сохранить изменения
  *
  * @field owner -has one R_Mdl_User -inverse msgs_own
  * @field target -has one R_Mdl_User -inverse msgs_target -show -edit simple -title OpenId адресата -required Напишите, кому!

@@ -1,6 +1,6 @@
 <?php
 /**
- * @table tags
+ * @table tags -edit:submit Сохранить
  * @field site -has one R_Mdl_Site -inverse tags
  *
  * @field title VARCHAR(64) NOT NULL -edit -required -title Название метки
@@ -39,8 +39,8 @@ class R_Mdl_Site_Tag extends O_Dao_ActiveRecord {
 	 */
 	public function url( $urlbase = "", $page = 1 )
 	{
-		return $this->site->url( 
-				($urlbase ? $urlbase . "/" : "") . "tag/" . ($page > 1 ? $page . "/" : "") . urlencode( 
+		return $this->site->url(
+				($urlbase ? $urlbase . "/" : "") . "tag/" . ($page > 1 ? $page . "/" : "") . urlencode(
 						$this->title ) );
 	}
 

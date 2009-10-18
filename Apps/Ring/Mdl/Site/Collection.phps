@@ -1,6 +1,6 @@
 <?php
 /**
- * @table collections
+ * @table collections -edit:submit Сохранить изменения
  * @field system -has one R_Mdl_Sys_Instance -inverse collections
  *
  * @field title VARCHAR(64) -edit -required -title Название -show-loop linkInContainer h2 -show-def container h1
@@ -41,12 +41,12 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 	{
 		$new_value = $params->newValue();
 		$new_title = O_Registry::get( "app/env/params/collection_new" );
-		
+
 		if (!$new_title && $new_value instanceof self)
 			return true;
-		
+
 		$system = O_Registry::get( "app/current/system" );
-		
+
 		if (!$new_title)
 			$new_title = $params->params();
 		if ($new_title) {
@@ -82,17 +82,17 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 			return;
 		if ($newPosition <= 0 || $newPosition > count( $this->system->collections ) + 1)
 			return;
-		
+
 		$colls = $this->system->collections;
-		
+
 		if ($newPosition > $this->position) {
-			$colls->test( "position", $this->position, ">" )->test( "position", $newPosition, 
+			$colls->test( "position", $this->position, ">" )->test( "position", $newPosition,
 					"<=" )->field( "position", "position-1", 1 )->update();
 		} else {
-			$colls->test( "position", $this->position, "<" )->test( "position", $newPosition, 
+			$colls->test( "position", $this->position, "<" )->test( "position", $newPosition,
 					">=" )->field( "position", "position+1", 1 )->update();
 		}
-		
+
 		$this->position = $newPosition;
 		parent::save();
 	}

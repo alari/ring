@@ -1,6 +1,6 @@
 <?php
 /**
- * @table user
+ * @table user -edit:submit Сохранить изменения
  * @field site -owns one R_Mdl_Site -inverse owner
  *
  * @field email VARCHAR(255) -edit -title Адрес электронной почты

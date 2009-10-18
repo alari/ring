@@ -1,6 +1,6 @@
 <?php
 /**
- * @field system -owns one R_Mdl_Sys_Instance
+ * @field system -owns one R_Mdl_Sys_Instance -edit:submit Сохранить изменения
  *
  * @field title -relative system->title
  * @field perpage TINYINT NOT NULL DEFAULT 15 -title Количество записей на страницу -edit -required Какое-то количество должно быть обязательно
@@ -78,7 +78,7 @@ abstract class R_Mdl_Sys_Implementation extends O_Dao_ActiveRecord {
 			$class = $prefix . "RssFeed";
 			$cmd = new $class( );
 		}
-		
+
 		if (isset( $cmd ) && $cmd instanceof R_Lf_Command) {
 			$cmd->instance = $this;
 			return $cmd;

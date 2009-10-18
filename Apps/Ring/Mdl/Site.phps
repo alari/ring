@@ -1,6 +1,6 @@
 <?php
 /**
- * @table site -show-loop:callback R_Fr_Site::showInLoop
+ * @table site -show-loop:callback R_Fr_Site::showInLoop -edit:submit Сохранить изменения
  * @field host varchar(255) NOT NULL
  * @field owner -has one R_Mdl_User -inverse site
  * @field owner_friends -alias usr_related.user -where flags & 2

@@ -1,11 +1,11 @@
 <?php
 /**
- * @table info_topic -loop:envelop container ul
+ * @table info_topic -loop:envelop container ul -edit:submit Сохранить изменения
  *
  * @field title VARCHAR(255) -edit -show-def сontainer h1 -show-loop linkInContainer li -required Введите! -title Название рубрики
- * 
+ *
  * @field pages -has many R_Mdl_Info_Page -inverse topics -show-def
- * 
+ *
  * @index title -unique
  */
 class R_Mdl_Info_Topic extends O_Dao_ActiveRecord {

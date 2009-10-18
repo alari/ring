@@ -1,12 +1,12 @@
 <?php
 /**
- * @table info_page -loop:envelop container ul
+ * @table info_page -loop:envelop container ul -edit:submit Сохранить изменения
  *
  * @field title VARCHAR(255) -edit -show-def container h1 -show-loop linkInContainer li -title Название и заголовок странички
  * @field content MEDIUMTEXT -edit wysiwyg Libro 650 -check htmlPurify -show-def -title
- * 
+ *
  * @field topics -has many R_Mdl_Info_Topic -inverse pages -edit R_Fr_Info_Topic::editList -title Рубрики
- * 
+ *
  * @index title -unique
  */
 class R_Mdl_Info_Page extends O_Dao_ActiveRecord {
@@ -19,7 +19,7 @@ class R_Mdl_Info_Page extends O_Dao_ActiveRecord {
 
 	public function url( $mode = "" )
 	{
-		return O_UrlBuilder::get( ($mode ? $mode . ":" : "") . urlencode( 
+		return O_UrlBuilder::get( ($mode ? $mode . ":" : "") . urlencode(
 				strtr( $this->title, " ", "_" ) ) );
 	}
 
