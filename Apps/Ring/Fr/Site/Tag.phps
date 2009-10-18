@@ -48,7 +48,7 @@ class R_Fr_Site_Tag {
 		} else {
 			$bl = new O_Form_Row_BoxList($params->getFieldName());
 			$bl->autoProduce($params);
-			$bl->renderInner();
+			$bl->render();
 		}
 		?>
 <div class="oo-renderer-field">
