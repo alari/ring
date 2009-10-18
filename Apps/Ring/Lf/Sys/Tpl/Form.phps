@@ -3,7 +3,7 @@ class R_Lf_Sys_Tpl_Form extends R_Lf_Sys_Template {
 	/**
 	 * Form processor
 	 *
-	 * @var O_Dao_Renderer_FormProcessor
+	 * @var O_Form_Handler
 	 */
 	public $form;
 	public $isCreateMode;
@@ -12,17 +12,15 @@ class R_Lf_Sys_Tpl_Form extends R_Lf_Sys_Template {
 	{
 		if ($this->isCreateMode) {
 			$title = $this->instance->addFormTitle();
-			$params = new O_Dao_Renderer_Edit_Params( "crosspost", null, 
-					array ("displayField" => "blog_url", "multiply" => true, 
-								"query" => $this->getSite()->crosspost_services) );
-			$params->setTitle( "Кросспостинг" );
-			ob_start();
-			O_Dao_Renderer_Edit_Callbacks::selectRelationBox( $params );
-			$this->form->injectHtmlAfter( "tags", ob_get_clean() );
+			$crosspostRow = new O_Form_Row_BoxList("crosspost", "Кросспостинг");
+			$crosspostRow->setOptions($this->getSite()->crosspost_services, "blog_url");
+			$crosspostRow->setMultiple();
+
+			$this->form->addRowAfter($crosspostRow, "tags" );
 		} else {
 			$title = $this->instance->editFormTitle();
 		}
-		$this->form->setFormTitle( 
+		$this->form->getFieldset()->setLegend(
 				"<a href=\"" . $this->instance->system->url() . "\">" . $title . "</a>" );
 		$this->layout()->setTitle( $title );
 		$this->form->show( $this->layout() );
