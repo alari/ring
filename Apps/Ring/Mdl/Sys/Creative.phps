@@ -12,6 +12,7 @@
  * @field tags -relative anonce->tags -edit R_Fr_Site_Tag::editList -title Метки (тэги)
  * @field system -relative anonce->system
  * @field access -relative anonce->access -edit enum -enum public: Всем; protected: Авторизованным; private: Друзьям; disable: Только себе -title Доступ
+ * @field access_comment -relative anonce->access_comment -edit enum -enum protected: Авторизованным; private: Друзьям; disable: Только себе -title Разрешить комментировать
  *
  * @field nodes -relative anonce->nodes
  */
