@@ -23,7 +23,7 @@ class R_Lf_Sys_Tpl_Form extends R_Lf_Sys_Template {
 		$this->form->getFieldset()->setLegend(
 				"<a href=\"" . $this->instance->system->url() . "\">" . $title . "</a>" );
 		$this->layout()->setTitle( $title );
-		$this->form->show( $this->layout() );
+		$this->form->render( $this->layout() );
 	}
 
 }
