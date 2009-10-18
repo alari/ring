@@ -41,9 +41,15 @@ class R_Fr_Site_Tag {
 	 *
 	 * @param O_Dao_Renderer_Edit_Params $params
 	 */
-	static public function editList( O_Dao_Renderer_Edit_Params $params )
+	static public function editList( $params )
 	{
+		if($params instanceof O_Dao_Renderer_Edit_Params ){
 		O_Dao_Renderer_Edit_Callbacks::selectRelationBox( $params );
+		} else {
+			$bl = new O_Form_Row_BoxList($params->getFieldName());
+			$bl->autoProduce($params);
+			$bl->renderInner();
+		}
 		?>
 <div class="oo-renderer-field">
 <div class="oo-renderer-title">Добавить тег:</div>
