@@ -1,5 +1,7 @@
 <?php
 /**
+ * @table - edit:submit Сохранить изменения
+ *
  * @field anonce -owns one R_Mdl_Site_Anonce -preload
  *
  * @field time INT
