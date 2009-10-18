@@ -12,6 +12,9 @@ class R_Cmd_Comment extends R_Command {
 				return "Вы не можете оставлять отзывы. Вероятно, Вам просто нужно авторизоваться. (<a href='http://" .
 					 O_Registry::get( "app/hosts/project" ) . "/OpenId' target='_blank'>Как?</a>)";
 			}
+			if(!$this->can("comment ".$this->root["access_comment"], $this->system->site)){
+				return "Отзывы на страничке отключены.";
+			}
 			$this->handleForm();
 			return;
 		}
@@ -103,7 +106,7 @@ class R_Cmd_Comment extends R_Command {
 			throw new O_Ex_PageNotFound( "Parent not found.", 404 );
 		if ($this->root->system != $this->system)
 			return false;
-		if (!R_Mdl_Session::can( "read " . $this->root[ "access" ], $this->system->site ) || !R_Mdl_Session::can("comment ".$this->root["access_comment"], $this->system->site))
+		if (!R_Mdl_Session::can( "read " . $this->root[ "access" ], $this->system->site ) )
 			return false;
 		return true;
 	}
