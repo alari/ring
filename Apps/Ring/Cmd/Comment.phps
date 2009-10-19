@@ -43,31 +43,30 @@ class R_Cmd_Comment extends R_Command {
 
 	private function handleForm()
 	{
-		$form = new O_Dao_Renderer_FormProcessor( );
-		$form->setClass( "R_Mdl_Site_Comment" );
-		$form->addHiddenField( "root", $this->root->id );
-		$form->addHiddenField( "sys", $this->system->id );
-		$form->addHiddenField( "ajax-driven", "yes" );
-		$form->addHiddenField( "action", $this->getParam( "action" ) );
-		$form->setAjaxMode();
+		$form = new O_Form_Handler( "R_Mdl_Site_Comment" );
+		$form->addHidden( "root", $this->root->id );
+		$form->addHidden( "sys", $this->system->id );
+		$form->addHidden( "ajax-driven", "yes" );
+		$form->addHidden( "action", $this->getParam( "action" ) );
+		$form->setAjax();
 
-		$form->setSubmitButtonValue( "Сохранить" );
+		$form->addSubmitButton( "Сохранить" );
 
 		if ($this->getParam( "action" ) == "comment-for") {
 			$form->setCreateMode( $this->root );
-			$form->setFormTitle( "Отозваться" );
-			$form->addHiddenField( "parent-node", $this->getParam( "parent-node" ) );
+			$form->getFieldset()->setLegend( "Отозваться" );
+			$form->addHidden( "parent-node", $this->getParam( "parent-node" ) );
 			$parent = $this->root->nodes->test( "id", $this->getParam( "parent-node" ) )->getOne();
 			if (!$parent) {
 				return $this->returnForm( $form, 1 );
 			}
 		} elseif ($this->getParam( "action" ) == "comment-new") {
 			$form->setCreateMode( $this->root );
-			$form->setFormTitle( "Оставить отзыв" );
+			$form->getFieldset()->setLegend( "Оставить отзыв" );
 		}
 
 		if ($this->getParam( "ajax-driven" ) == "yes" && $form->handle()) {
-			$comment = $form->getActiveRecord();
+			$comment = $form->getRecord();
 			if (isset( $parent )) {
 				$parent->injectBottom( $comment );
 			}
@@ -75,7 +74,7 @@ class R_Cmd_Comment extends R_Command {
 			// XXX
 			$comment->notifySubscribers();
 
-			$form->getActiveRecord()->reload();
+			$form->getRecord()->reload();
 			return $form->responseAjax();
 		}
 		return $this->returnForm( $form );
@@ -92,7 +91,7 @@ class R_Cmd_Comment extends R_Command {
 			$form->responseAjax();
 			return null;
 		}
-		return $form->show();
+		return $form->render();
 	}
 
 	public function isAuthenticated()
