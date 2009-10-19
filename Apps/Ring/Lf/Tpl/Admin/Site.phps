@@ -12,7 +12,6 @@ class R_Lf_Tpl_Admin_Site extends R_Lf_Template {
 	{
 		if ($this->form) {
 			$this->form->getFieldset()->setLegend( "Настройки сайта как целого" );
-			$this->form->addSubmitButton( "Сохранить изменения" );
 			$this->form->render( $this->layout() );
 		}
 		if (R_Mdl_Session::can( "manage tech" )) {
