@@ -3,16 +3,17 @@ class R_Lf_Cmd_Admin_Tags extends R_Lf_Command {
 
 	public function process()
 	{
-		
+
 		if ($this->getParam( "action" ) == "tag-fragment") {
+			/*@var $tag R_Mdl_Site_Tag */
 			$tag = $this->getSite()->tags->test( "id", $this->getParam( "tag" ) )->getOne();
 			if (!$tag)
 				return "Метка не найдена.";
 			$form = $tag->form();
-			$form->setAjaxMode();
-			$form->addHiddenField( "tag-submitted", "yes" );
-			$form->addHiddenField( "action", "tag-fragment" );
-			$form->addHiddenField( "tag", $tag->id );
+			$form->setAjax();
+			$form->addHidden( "tag-submitted", "yes" );
+			$form->addHidden( "action", "tag-fragment" );
+			$form->addHidden( "tag", $tag->id );
 			if ($this->getParam( "tag-submitted" ) == "yes") {
 				$form->responseAjax( null, "Изменения успешно сохранены" );
 				return null;
@@ -28,13 +29,12 @@ class R_Lf_Cmd_Admin_Tags extends R_Lf_Command {
 			$tag->delete();
 			return "Метка удалена.";
 		}
-		
-		$form = new O_Dao_Renderer_FormProcessor( );
-		$form->setClass( "R_Mdl_Site_Tag" );
+
+		$form = new O_Form_Handler("R_Mdl_Site_Tag" );
 		$form->setCreateMode( $this->getSite() );
 		if ($form->handle())
 			return $this->redirect();
-		
+
 		$tpl = $this->getTemplate();
 		$tpl->tags = $this->getSite()->tags;
 		$tpl->form = $form;

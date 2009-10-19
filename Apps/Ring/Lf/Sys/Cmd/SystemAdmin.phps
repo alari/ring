@@ -8,11 +8,10 @@ class R_Lf_Sys_Cmd_SystemAdmin extends R_Lf_Sys_Command {
 			$this->instance->system->delete();
 			return $this->redirect( "/" );
 		}
-		
-		$form_processor = new O_Dao_Renderer_FormProcessor( );
-		$form_processor->setActiveRecord( $this->instance );
-		$form_processor->setAjaxMode();
-		$form_processor->addHiddenField( "action", "process" );
+
+		$form_processor = $this->instance->form();
+		$form_processor->setAjax();
+		$form_processor->addHidden( "action", "process" );
 		if (O_Registry::get( "app/env/request_method" ) == "POST" && $this->getParam( "action" ) ==
 			 "process") {
 				$form_processor->responseAjax( null, "Изменения успешно сохранены." );

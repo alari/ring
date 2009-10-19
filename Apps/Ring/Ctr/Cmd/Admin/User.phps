@@ -20,7 +20,7 @@ class R_Ctr_Cmd_Admin_User extends R_Command {
 			// Create user
 		} elseif ($this->getParam( "action" ) == "create") {
 			try {
-				
+
 				$identity = $this->getParam( "identity" );
 				$role = O_Dao_ActiveRecord::getById( $this->getParam( "role" ), "O_Acl_Role" );
 				$pwd = $this->getParam( "pwd" );
@@ -46,19 +46,18 @@ class R_Ctr_Cmd_Admin_User extends R_Command {
 			$user->delete();
 			return $this->redirect( O_UrlBuilder::get( "Admin/User" ) );
 		}
-		
+
 		if ($user) {
-			$form = new O_Dao_Renderer_FormProcessor( );
-			$form->setActiveRecord( $user );
+			$form = $user->form();
 			if ($this->getParam( "action" ) == "process" && $form->handle()) {
-				return $this->redirect( 
+				return $this->redirect(
 						O_UrlBuilder::get( "Admin/User", array ("id" => $user->id) ) );
 			}
-			$form->addHiddenField( "action", "process" );
+			$form->addHidden( "action", "process" );
 		} else {
 			$form = null;
 		}
-		
+
 		$tpl = $this->getTemplate();
 		$tpl->form = $form;
 		$tpl->user = $user;

@@ -3,16 +3,16 @@ class R_Lf_Sys_Tpl_SystemAdmin extends R_Lf_Sys_Template {
 	/**
 	 * Form processor
 	 *
-	 * @var O_Dao_Renderer_FormProcessor
+	 * @var O_Form_Handler
 	 */
 	public $form;
 
 	public function displayContents()
 	{
 		$title = "Настройки: " . ($this->instance->title ? " &laquo;" . $this->instance->title . "&raquo;" : "");
-		$this->form->setFormTitle( $title );
+		$this->form->getFieldset()->setLegend( $title );
 		$this->layout()->setTitle( $title );
-		$this->form->show( $this->layout() );
+		$this->form->render( $this->layout() );
 		?>
 <br />
 <br />

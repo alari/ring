@@ -3,12 +3,11 @@ class R_Lf_Cmd_Admin_Site extends R_Lf_Command {
 
 	public function process()
 	{
-		$formProcessor = new O_Dao_Renderer_FormProcessor( );
-		$formProcessor->setActiveRecord( $this->getSite() );
+		$formProcessor = $this->getSite()->form();
 		if ($this->can( "manage tech" )) {
 			$formProcessor->setType( "adm" );
 		}
-		$formProcessor->addHiddenField( "action", "main-process" );
+		$formProcessor->addHidden( "action", "main-process" );
 		if ($this->isMethodPost() && $this->getParam( "action" ) == "main-process") {
 			$formProcessor->handle();
 			$this->setNotice("Изменения сохранены");

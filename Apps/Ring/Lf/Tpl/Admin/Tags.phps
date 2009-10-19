@@ -1,6 +1,6 @@
 <?php
 class R_Lf_Tpl_Admin_Tags extends R_Lf_Template {
-	
+
 	public $tags;
 	public $form;
 
@@ -12,8 +12,8 @@ class R_Lf_Tpl_Admin_Tags extends R_Lf_Template {
 <?
 			return;
 		}
-		
-		$this->form->show();
+
+		$this->form->render();
 	}
 
 	public function displayContents()
@@ -46,7 +46,7 @@ class R_Lf_Tpl_Admin_Tags extends R_Lf_Template {
 
 <?
 		if ($this->form)
-			$this->form->show( $this->layout() );
+			$this->form->render( $this->layout() );
 	}
 
 }

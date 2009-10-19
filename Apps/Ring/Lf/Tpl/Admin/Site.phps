@@ -1,19 +1,19 @@
 <?php
 class R_Lf_Tpl_Admin_Site extends R_Lf_Template {
-	
+
 	/**
 	 * Form processor for site
 	 *
-	 * @var O_Dao_Renderer_FormProcessor
+	 * @var O_Form_Handler
 	 */
 	public $form;
 
 	public function displayContents()
 	{
 		if ($this->form) {
-			$this->form->setFormTitle( "Настройки сайта как целого" );
-			$this->form->setSubmitButtonValue( "Сохранить изменения" );
-			$this->form->show( $this->layout() );
+			$this->form->getFieldset()->setLegend( "Настройки сайта как целого" );
+			$this->form->addSubmitButton( "Сохранить изменения" );
+			$this->form->render( $this->layout() );
 		}
 		if (R_Mdl_Session::can( "manage tech" )) {
 			?>

@@ -1,20 +1,20 @@
 <?php
 class R_Ctr_Tpl_Admin_User extends R_Ctr_Template {
-	
+
 	/**
 	 * Form with editable user fields
 	 *
-	 * @var O_Dao_Renderer_FormProcessor
+	 * @var O_Form_Handler
 	 */
 	public $form;
-	
+
 	/**
 	 * Current user
 	 *
 	 * @var R_Mdl_User
 	 */
 	public $user;
-	
+
 	/**
 	 * Query with available user roles
 	 *
@@ -107,11 +107,11 @@ class R_Ctr_Tpl_Admin_User extends R_Ctr_Template {
 </fieldset>
 </form>
 <?
-		
+
 		if ($this->form) {
-			$this->form->show( $this->layout() );
+			$this->form->render( $this->layout() );
 		}
-		
+
 		if ($this->user) {
 			?>
 <form method="post"
