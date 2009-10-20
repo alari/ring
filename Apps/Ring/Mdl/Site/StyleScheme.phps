@@ -24,12 +24,16 @@ class R_Mdl_Site_StyleScheme extends O_Dao_ActiveRecord {
 		if(!is_array($c) || count($c)!=10) {
 			return "";
 		}
+return self::tmpCssFromArray($c);
+	}
+
+	static public function tmpCssFromArray(Array $c) {
 		ob_start();
 ?>
 
-#head,#head a:hover,.system h2 a:hover,h1{color:<?=$c[1]?>}
+#head,#head a:hover,.system h2 a:hover,h1,.anonce{color:<?=$c[1]?>}
 #main-menu{border-bottom-color:<?=$c[1]?>}
-#foot,.anonce .cnt{background-color:<?=$c[1]?>}
+#foot{background-color:<?=$c[1]?>}
 
 .system h2 a{color:<?=$c[2]?>}
 .system h2{border-bottom-color:<?=$c[2]?>}
@@ -41,11 +45,11 @@ class R_Mdl_Site_StyleScheme extends O_Dao_ActiveRecord {
 body{color:<?=$c[4]?>}
 
 #head,.system h2{background-color:<?=$c[5]?>}
-#main-menu a{color:<?=$c[5]?>}
+#main-menu a,.anonce strong a{color:<?=$c[5]?>}
 #rcol{border-color:<?=$c[5]?>}
 
 #foot{border-top-color:<?=$c[6]?>}
-.anonce strong a,#foot,.anonce,hr{color:<?=$c[6]?>}
+#foot,hr{color:<?=$c[6]?>}
 
 h2,h3,h4,body a,#rcol li a,#head a{color:<?=$c[7]?>}
 #main-menu{border-bottom-color:<?=$c[7]?>}
@@ -54,10 +58,11 @@ h2,h3,h4,body a,#rcol li a,#head a{color:<?=$c[7]?>}
 
 #main-menu a,#rcol a,#foot a{color:<?=$c[9]?>}
 
-#wrap{background-color:<?=$c[10]?>}
+#wrap,.anonce .cnt{background-color:<?=$c[10]?>}
 
 <?
 		return ob_get_clean();
 	}
+
 
 }
