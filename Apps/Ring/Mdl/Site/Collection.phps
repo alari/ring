@@ -37,9 +37,9 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 			$this->info->save();
 	}
 
-	static public function checkCreate( O_Dao_Renderer_Check_Params $params )
+	static public function checkCreate( O_Form_Check_AutoProducer $producer )
 	{
-		$new_value = $params->newValue();
+		$new_value = $producer->getValue();
 		$new_title = O_Registry::get( "app/env/params/collection_new" );
 
 		if (!$new_title && $new_value instanceof self)
@@ -48,17 +48,17 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 		$system = O_Registry::get( "app/current/system" );
 
 		if (!$new_title)
-			$new_title = $params->params();
+			$new_title = $producer->getParams();
 		if ($new_title) {
 			$new_value = $system->collections->test( "title", $new_title )->getOne();
 			if (!$new_value)
 				$new_value = new self( $system );
 			$new_value->title = $new_title;
 			$new_value->save();
-			$params->setNewValue( $new_value );
+			$producer->setValue( $new_value );
 			return true;
 		}
-		throw new O_Dao_Renderer_Check_Exception( "Collection is required." );
+		throw new O_Form_Check_Error( "Collection is required." );
 	}
 
 	public function link()
