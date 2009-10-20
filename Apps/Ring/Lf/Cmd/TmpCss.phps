@@ -3,7 +3,11 @@ class R_Lf_Cmd_TmpCss extends R_Lf_Command {
 
 	public function process()
 	{
-		if(!isset($_SESSION["c"]) || !is_array($_SESSION["c"])) return;
+		if(!isset($_SESSION["c"]) || !is_array($_SESSION["c"])) {
+			$styleScheme = $this->getSite()->style_scheme;
+			if($styleScheme) echo $styleScheme->getCssText();
+			return;
+		}
 		$c = $_SESSION["c"];
 		header("Content-type: text/css");
 ?>

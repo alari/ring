@@ -4,11 +4,13 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 	public function process()
 	{
 		if (O_Registry::get( "app/env/request_method" ) == "POST") {
+			// Editing css text
 			if ($this->getParam( "action" ) == "css") {
 				$css = $this->getParam( "css" );
 				if ($css)
 					file_put_contents( $this->getSite()->static_folder . "style.css", $css );
 				return $this->redirect();
+								// Uploading style-used file
 			} elseif ($this->getParam( "action" ) == "file") {
 				if (!isset( $_FILES[ "f" ] ) || !$_FILES[ "f" ][ "size" ])
 					return $this->redirect();
@@ -27,6 +29,7 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 				move_uploaded_file( $file[ "tmp_name" ],
 						$this->getSite()->static_folder . $file[ "name" ] );
 				return $this->redirect();
+				// Uploading css
 			} elseif ($this->getParam( "action" ) == "favicon") {
 
 				if (file_exists( $this->getSite()->staticPath( "favicon.ico" ) ))
@@ -43,8 +46,21 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 				move_uploaded_file( $file[ "tmp_name" ],
 						$this->getSite()->staticPath( "favicon.ico" ) );
 				return $this->redirect();
-			} elseif($this->getParam("action") == "tmp-css") {
-				$_SESSION["c"] = $this->getParam("c");
+				// Managing style scheme
+			} elseif($this->getParam("action") == "style-scheme") {
+				if(isset($_SESSION["c"])) unset($_SESSION["c"]);
+				if($this->getParam("scheme-title") && $this->getParam("save-scheme")) {
+					$styleScheme = new R_Mdl_Site_StyleScheme();
+					$styleScheme->setData($this->getParam($this->getParam("c")));
+					$styleScheme->title = $this->getParam("scheme-title");
+					$styleScheme->save();
+					$this->getSite()->style_scheme = $styleScheme;
+				} else {
+					$_SESSION["c"] = $this->getParam("c");
+				}
+				return $this->redirect();
+			} elseif($this->getParam("action") == "set-scheme") {
+				$this->getSite()->style_scheme = O_Dao_ActiveRecord::getById($this->getParam("set-scheme"), "R_Mdl_Site_StyleScheme");
 				return $this->redirect();
 			}
 		} else {

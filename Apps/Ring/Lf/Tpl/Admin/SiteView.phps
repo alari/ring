@@ -58,6 +58,13 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 
 <br />
 <hr />
+<ul>
+<?foreach(O_Dao_Query::get("R_Mdl_Site_StyleScheme") as $s){?>
+<li style="background-color:<?=$s->color_back?>;color:<?=$s->color_text?>"><?=$s->title?></li>
+<?}?>
+</ul>
+<br/>
+<hr/>
 <form method="post">
 <fieldset><legend>(beta) попробовать базовые цвета</legend>
 <?
@@ -75,8 +82,11 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 		?>
 </ul>
 <br />
-<input type="submit" value="Попробовать" /><input type="hidden"
-	name="action" value="tmp-css" /></fieldset></form>
+<input type="submit" value="Попробовать" />
+<br/><br/>
+Название: <input type="text" name="scheme-title"/> <input type="submit" name="save-scheme" value="Сохранить схему"/>"
+<input type="hidden"
+	name="action" value="style-scheme" /></fieldset></form>
 <?
 	}
 

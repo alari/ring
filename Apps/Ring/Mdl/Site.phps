@@ -28,6 +28,8 @@
  * @field copyright varchar(255) NOT NULL DEFAULT 'Copyright holders' -edit -required Введите копирайт автора или авторов сайта -title Копирайты
  * @field title varchar(255) NOT NULL DEFAULT 'Сайт' -edit -required Введите название сайта -title Название сайта
  *
+ * @field style_scheme -has one R_Mdl_Site_StyleScheme -inverse sites
+ *
  * @field ava_full ENUM('-','gif','jpeg','png') DEFAULT '-' -image filepath: avaPath full; src: avaSrc full; width:190; height:500; cascade: ava_tiny; clear:1 -edit -title Картинка-знак сайта
  * @field ava_tiny -image filepath: avaPath tiny; src: avaSrc tiny; width:80; height:200
  *
