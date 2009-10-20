@@ -51,7 +51,7 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 				if(isset($_SESSION["c"])) unset($_SESSION["c"]);
 				if($this->getParam("scheme-title") && $this->getParam("save-scheme")) {
 					$styleScheme = new R_Mdl_Site_StyleScheme();
-					$styleScheme->setData($this->getParam($this->getParam("c")));
+					$styleScheme->setData($this->getParam("c"));
 					$styleScheme->title = $this->getParam("scheme-title");
 					$styleScheme->save();
 					$this->getSite()->style_scheme = $styleScheme;
