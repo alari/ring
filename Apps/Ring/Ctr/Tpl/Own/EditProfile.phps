@@ -6,9 +6,9 @@ class R_Ctr_Tpl_Own_EditProfile extends R_Ctr_Template {
 	{
 		$this->layout()->setTitle( "Ваш профиль - настройки" );
 		?><h1>Ваш профиль - настройки</h1><?
-		
-		$this->form->show( $this->layout() );
-		
+
+		$this->form->render( $this->layout() );
+
 		?>
 <form method="post" enctype="multipart/form-data">
 <fieldset><legend>Фотография</legend>
