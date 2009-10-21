@@ -62,7 +62,7 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 <?
 		foreach (O_Dao_Query::get( "R_Mdl_Site_StyleScheme" ) as $s) {
 			?>
-<li style="background-color:<?=$s->color_back?>;color:<?=$s->color_text?>"><a href="?set-scheme=<?=$s->id?>"><?=$s->title?></a></li>
+<li style="background-color:<?=$s->color_back?>;color:<?=$s->color_text?>"><a href="?set-scheme=<?=$s->id?>" style="<?=$s->color_text?>"><?=$s->title?></a></li>
 <?
 		}
 		?>
@@ -81,7 +81,7 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 		for ($i = 1; $i <= 10; $i++) {
 			?>
 <li>Цвет №<?=$i?>: <input type="text" name="c[<?=$i?>]"
-		value="<?=(isset( $c[ $i ] ) ? $c[ $i ] : "")?>" /></li>
+		value="<?=(isset( $c[ $i ] ) ? $c[ $i ] : "")?>" onchange="$('span-color-<?=$i?>').setStyle('background', this.value)" /> <span id="span-color-<?=$i?>" style="background:<?=(isset( $c[ $i ] ) ? $c[ $i ] : "")?>">&nbsp;&nbsp;</span></li>
 <?
 		}
 		?>

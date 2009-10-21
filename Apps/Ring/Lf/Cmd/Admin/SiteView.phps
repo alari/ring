@@ -10,7 +10,7 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 				if ($css)
 					file_put_contents( $this->getSite()->static_folder . "style.css", $css );
 				return $this->redirect();
-								// Uploading style-used file
+				// Uploading style-used file
 			} elseif ($this->getParam( "action" ) == "file") {
 				if (!isset( $_FILES[ "f" ] ) || !$_FILES[ "f" ][ "size" ])
 					return $this->redirect();
@@ -47,27 +47,29 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 						$this->getSite()->staticPath( "favicon.ico" ) );
 				return $this->redirect();
 				// Managing style scheme
-			} elseif($this->getParam("action") == "style-scheme") {
-				if(isset($_SESSION["c"])) unset($_SESSION["c"]);
-				if($this->getParam("scheme-title") && $this->getParam("save-scheme")) {
-					$styleScheme = new R_Mdl_Site_StyleScheme();
-					$styleScheme->setData($this->getParam("c"));
-					$styleScheme->title = $this->getParam("scheme-title");
+			} elseif ($this->getParam( "action" ) == "style-scheme") {
+				if (isset( $_SESSION[ "c" ] ))
+					unset( $_SESSION[ "c" ] );
+				if ($this->getParam( "scheme-title" ) && $this->getParam( "save-scheme" )) {
+					$styleScheme = new R_Mdl_Site_StyleScheme( );
+					$styleScheme->setData( $this->getParam( "c" ) );
+					$styleScheme->title = $this->getParam( "scheme-title" );
 					$styleScheme->save();
 					$this->getSite()->style_scheme = $styleScheme;
 				} else {
-					$_SESSION["c"] = $this->getParam("c");
+					$_SESSION[ "c" ] = $this->getParam( "c" );
 				}
-				return $this->redirect();
-			} elseif($this->getParam("action") == "set-scheme") {
-				$this->getSite()->style_scheme = O_Dao_ActiveRecord::getById($this->getParam("set-scheme"), "R_Mdl_Site_StyleScheme");
-					$this->setNotice("Обновите страницу, чтобы применить стилевую схему.");
 				return $this->redirect();
 			}
 		} else {
 			if ($this->getParam( "action" ) == "revert") {
 				file_put_contents( $this->getSite()->static_folder . "style.css",
 						file_get_contents( $this->getSite()->static_folder . "../style.css" ) );
+				return $this->redirect();
+			} elseif ($this->getParam( "action" ) == "set-scheme") {
+				$this->getSite()->style_scheme = O_Dao_ActiveRecord::getById(
+						$this->getParam( "set-scheme" ), "R_Mdl_Site_StyleScheme" );
+				$this->setNotice( "Обновите страницу, чтобы применить стилевую схему." );
 				return $this->redirect();
 			}
 
