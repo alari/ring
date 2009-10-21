@@ -61,6 +61,7 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 				return $this->redirect();
 			} elseif($this->getParam("action") == "set-scheme") {
 				$this->getSite()->style_scheme = O_Dao_ActiveRecord::getById($this->getParam("set-scheme"), "R_Mdl_Site_StyleScheme");
+					$this->setNotice("Обновите страницу, чтобы применить стилевую схему.");
 				return $this->redirect();
 			}
 		} else {

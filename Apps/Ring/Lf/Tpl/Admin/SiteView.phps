@@ -62,10 +62,11 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 <?
 		foreach (O_Dao_Query::get( "R_Mdl_Site_StyleScheme" ) as $s) {
 			?>
-<li style="background-color:<?=$s->color_back?>;color:<?=$s->color_text?>"><?=$s->title?></li>
+<li style="background-color:<?=$s->color_back?>;color:<?=$s->color_text?>"><a href="?set-scheme=<?=$s->id?>"><?=$s->title?></a></li>
 <?
 		}
 		?>
+		<li><a href="?set-scheme=null">Очистить схему</a></li>
 </ul>
 <br />
 <hr />
