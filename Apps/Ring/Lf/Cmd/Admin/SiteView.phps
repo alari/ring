@@ -71,6 +71,7 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 					unset( $_SESSION[ "c" ] );
 				$this->getSite()->style_scheme = O_Dao_ActiveRecord::getById(
 						$this->getParam( "set-scheme" ), "R_Mdl_Site_StyleScheme" );
+				$this->getSite()->save();
 				$this->setNotice( "Обновите страницу, чтобы применить стилевую схему." );
 				return $this->redirect();
 			}
