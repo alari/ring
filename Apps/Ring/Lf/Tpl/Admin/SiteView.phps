@@ -81,7 +81,7 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 		for ($i = 1; $i <= 10; $i++) {
 			?>
 <li>Цвет №<?=$i?>: <input type="text" name="c[<?=$i?>]"
-		value="<?=(isset( $c[ $i ] ) ? $c[ $i ] : "")?>" onkeyup="$('span-color-<?=$i?>').setStyle('background', this.value)" /> <span id="span-color-<?=$i?>" style="background:<?=(isset( $c[ $i ] ) ? $c[ $i ] : "")?>">&nbsp;&nbsp;</span></li>
+		value="<?=(isset( $c[ $i ] ) ? $c[ $i ] : "")?>" onkeyup="$('span-color-<?=$i?>').setStyle('background', this.value)" /> <span id="span-color-<?=$i?>" style="width:10px;height:20px;background:<?=(isset( $c[ $i ] ) ? $c[ $i ] : "")?>">&nbsp;</span></li>
 <?
 		}
 		?>

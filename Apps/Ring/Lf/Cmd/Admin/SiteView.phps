@@ -66,7 +66,7 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 				file_put_contents( $this->getSite()->static_folder . "style.css",
 						file_get_contents( $this->getSite()->static_folder . "../style.css" ) );
 				return $this->redirect();
-			} elseif ($this->getParam( "action" ) == "set-scheme") {
+			} elseif ($this->getParam( "set-scheme" )) {
 				if (isset( $_SESSION[ "c" ] ))
 					unset( $_SESSION[ "c" ] );
 				$this->getSite()->style_scheme = O_Dao_ActiveRecord::getById(
