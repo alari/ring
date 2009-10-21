@@ -10,7 +10,7 @@ class R_Lf_Cmd_TmpCss extends R_Lf_Command {
 			return;
 		}
 		$c = $_SESSION["c"];
-R_Mdl_Site_StyleScheme::tmpCssFromArray($c);
+echo R_Mdl_Site_StyleScheme::tmpCssFromArray($c);
 	}
 
 }
