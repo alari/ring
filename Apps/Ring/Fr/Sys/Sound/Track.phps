@@ -143,10 +143,10 @@ class R_Fr_Sys_Sound_Track extends R_Fr_Sys_Creative {
 	{
 		$post = $params->record();
 		?><div class="track-listen"><object type="application/x-shockwave-flash"
-	data="<?=$params->layout()->staticUrl( "swf/player_mp3_maxi.swf" )?>"
+	data="<?=O_UrlBuilder::getStatic( "swf/player_mp3_maxi.swf" )?>"
 	width="400" height="20">
 	<param name="movie"
-		value="<?=$params->layout()->staticUrl( "swf/player_mp3_maxi.swf" )?>" />
+		value="<?=O_UrlBuilder::getStatic( "swf/player_mp3_maxi.swf" )?>" />
 	<param name="bgcolor" value="#ffffff" />
 	<param name="FlashVars"
 		value="mp3=<?=htmlspecialchars( $post->file )?>&amp;loop=0&amp;showvolume=1&amp;volumewidth=40&amp;width=400" />
