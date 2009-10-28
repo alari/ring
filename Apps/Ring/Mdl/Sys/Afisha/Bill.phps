@@ -5,7 +5,7 @@
  * @field:config anonce -inverse afisha_bill
  * @field:config title -required Введите название события
  *
- * @field event_time -relative anonce->time -edit timestamp -check timestamp -title Время события
+ * @field event_time -relative anonce->time -edit DateTime -check DateTime -title Время события
  *
  * @field description -relative anonce->description -edit -title Кр. опис.
  *
