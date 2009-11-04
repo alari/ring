@@ -97,7 +97,7 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 	{
 		if ($this[ "ava_full" ] == "-") {
 			if($this->owner) return $this->owner->avaSrc($type);
-			return O_Registry::get( "app/sites/static_urlbase" ) . "comm-" . $type . ".gif";
+			return O_UrlBuilder::getStatic ( "im/comm-" . $type . ".png" );
 		}
 		return $this->staticUrl( "ava-" . $type . "." . $this[ "ava_full" ] );
 	}
@@ -114,7 +114,8 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 	}
 
 	public function link() {
-		return "<a href=\"".$this->url()."\">".$this->title."</a>";
+		$img = O_UrlBuilder::getStatic ( "im/comm.gif" );
+		return "<img src=\"$img\" width=\"17\" height=\"17\" alt=\"\"/>&nbsp;<a href=\"".$this->url()."\">".$this->title."</a>";
 	}
 
 
