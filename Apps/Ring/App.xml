@@ -27,8 +27,8 @@
 		<Registry key="db/default/engine" value="mysql"></Registry>
 		<Registry key="db/default/host" value="localhost"></Registry>
 		<Registry key="db/default/dbname" value="ring"></Registry>
-		<Registry key="db/default/user" value="ring"></Registry>
-		<Registry key="db/default/password" value="XKSLzapa"></Registry>
+		<Registry key="db/default/user" value="root"></Registry>
+		<Registry key="db/default/password" value="0c3a5643"></Registry>
 		<Host pattern="(www\.)?mirari\.name">
 			<Plugin name="Mr"></Plugin>
 		</Host>
