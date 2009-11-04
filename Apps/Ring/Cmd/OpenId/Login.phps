@@ -2,7 +2,7 @@
 class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 
 	public function process()
-	{
+	{die("Авторизация временно отключена.");
 		if (isset( $_POST[ "redirect" ] )) {
 			$_SESSION[ "redirect" ] = $_POST[ "redirect" ];
 		} else {
