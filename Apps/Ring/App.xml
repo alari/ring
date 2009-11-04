@@ -26,8 +26,8 @@
 	<If mode="production">
 		<Registry key="db/default/engine" value="mysql"></Registry>
 		<Registry key="db/default/host" value="localhost"></Registry>
-		<Registry key="db/default/dbname" value="mirari"></Registry>
-		<Registry key="db/default/user" value="mirari"></Registry>
+		<Registry key="db/default/dbname" value="ring"></Registry>
+		<Registry key="db/default/user" value="ring"></Registry>
 		<Registry key="db/default/password" value="XKSLzapa"></Registry>
 		<Host pattern="(www\.)?mirari\.name">
 			<Plugin name="Mr"></Plugin>
