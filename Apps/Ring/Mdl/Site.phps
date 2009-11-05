@@ -115,8 +115,8 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 
 	public function link() {
 		$img = O_UrlBuilder::getStatic ( "im/".($this["type"]==self::TYPE_COMM?"comm":"auth").".gif" );
-		$img = "<img src=\"$img\" width=\"8\" height=\"8\" alt=\"\"/>&nbsp;";
-		return $img."<a href=\"".$this->url()."\">".$this->title."</a>";
+		$img = "<img src=\"$img\" width=\"11\" height=\"11\" alt=\"\"/>&nbsp;";
+		return $img."<a href=\"".$this->url()."\">".trim($this->title)."</a>";
 	}
 
 
