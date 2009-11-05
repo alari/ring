@@ -6,3 +6,4 @@ RewriteRule .* /entry.php [L]
 
 php_value upload_max_filesize 12M
 php_value session.gc_maxlifetime 864000
+php_value magic_quotes_gpc Off
