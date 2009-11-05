@@ -10,7 +10,7 @@
  * @field title VARCHAR(255) -edit -show-loop linkInContainer -show-def container h1 -title Тема сообщения
  *
  * @field msg_body -owns one R_Mdl_User_MsgBody -inverse msg
- * @field content -relative msg_body->content -show-def -edit wysiwyg -check htmlPurify -title -required Что-то в письме должно быть.
+ * @field content -relative msg_body->content -show-def -edit wysiwyg -check HtmlPurifier -title -required Что-то в письме должно быть.
  *
  * @field time INT
  * @field readen tinyint NOT NULL DEFAULT 0

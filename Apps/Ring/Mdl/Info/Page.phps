@@ -3,7 +3,7 @@
  * @table info_page -loop:envelop container ul -edit:submit Сохранить изменения
  *
  * @field title VARCHAR(255) -edit -show-def container h1 -show-loop linkInContainer li -title Название и заголовок странички
- * @field content MEDIUMTEXT -edit wysiwyg Libro 650 -check htmlPurify -show-def -title
+ * @field content MEDIUMTEXT -edit wysiwyg Libro 650 -check HtmlPurifier -show-def -title
  *
  * @field topics -has many R_Mdl_Info_Topic -inverse pages -edit R_Fr_Info_Topic::editList -title Рубрики
  *

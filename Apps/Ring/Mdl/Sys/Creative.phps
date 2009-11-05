@@ -6,7 +6,7 @@
  *
  * @field time INT
  * @field title VARCHAR(255) -edit -show linkInContainer h1 -title Название
- * @field content MEDIUMTEXT -show -edit wysiwyg -check htmlPurify -title
+ * @field content MEDIUMTEXT -show -edit wysiwyg -check HtmlPurifier -title
  *
  * @field owner -relative anonce->owner
  * @field tags -relative anonce->tags -edit R_Fr_Site_Tag::editList -title Метки (тэги)
