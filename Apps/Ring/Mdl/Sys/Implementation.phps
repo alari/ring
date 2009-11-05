@@ -4,6 +4,7 @@
  *
  * @field title -relative system->title
  * @field perpage TINYINT NOT NULL DEFAULT 15 -title Количество записей на страницу -edit -required Какое-то количество должно быть обязательно
+ * @field anonces_on_homepage TINYINT NOT NULL DEFAULT 4 -title Количество анонсов на главной странице -edit -required Введите, сколько
  */
 abstract class R_Mdl_Sys_Implementation extends O_Dao_ActiveRecord {
 
