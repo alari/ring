@@ -1,6 +1,7 @@
 <?php
 /**
- * @field system -owns one R_Mdl_Sys_Instance -edit:submit Сохранить изменения
+ * @table - -edit:submit Сохранить изменения
+ * @field system -owns one R_Mdl_Sys_Instance
  *
  * @field title -relative system->title
  * @field perpage TINYINT NOT NULL DEFAULT 15 -title Количество записей на страницу -edit -required Какое-то количество должно быть обязательно

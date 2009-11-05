@@ -17,7 +17,7 @@ class R_Ctr_Cmd_Own_Friends extends R_Command {
 
 	public function url( $page )
 	{
-		return O_UrlBuilder::get( "Own/Friends" . ($page > 1 ? "-" . $page : "") );
+		return O_UrlBuilder::get( "own/friends" . ($page > 1 ? "-" . $page : "") );
 	}
 
 	public function isAuthenticated()
