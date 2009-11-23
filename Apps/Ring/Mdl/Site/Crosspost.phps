@@ -55,7 +55,7 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		} elseif ($this->service ["type"] == "twitter") {
 			list ( $usr, $pwd ) = explode ( ":", $this->service->userpwd, 2 );
 			$status = substr ( $this->anonce->title, 0, 140 - strlen ( $this->anonce->url () ) - 1 ) . " " . $this->anonce->url ();
-			$twitter = new Twitter ( $usr, $pwd );
+			$twitter = new Twitter ( $usr, $pwd, "<a href=\"http://mirari.name/\">Mirari.Name</a>" );
 			$r = json_decode($twitter->updateStatus ( $status, null, "json" ));
 			if (! is_object ( $r ) || !$r->id)
 				return $this->error ( "Wrong json response: " . print_r ( $r, 1 ) );
