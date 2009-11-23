@@ -28,7 +28,7 @@ class R_Lf_Sys_Tpl_Crosspost extends R_Lf_Sys_Template {
 				?>
 	<?
 				if (!$c->crossposted || $c->last_update > $c->crossposted) {
-					?><p><i>В очереди на изменение</i><br/><?=$c->error_msg?></p><?
+					?><p><i>В очереди на изменение</i></p><?
 				}
 				?>
 	<p align="right"><small><a href="?d=<?=$c->id?>"
