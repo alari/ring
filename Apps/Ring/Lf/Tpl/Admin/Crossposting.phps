@@ -6,7 +6,7 @@ class R_Lf_Tpl_Admin_Crossposting extends R_Lf_Template {
 	public function displayContents()
 	{
 		?>
-<fieldset><legend>Кросспостинг &ndash; настройки AtomAPI сервисов</legend>
+<fieldset><legend>Кросспостинг &ndash; настройки сервисов</legend>
 <table width="100%">
 	<?
 		foreach ($this->services as $serv) {
@@ -37,6 +37,15 @@ class R_Lf_Tpl_Admin_Crossposting extends R_Lf_Template {
 	<tr>
 		<td>Пароль:</td>
 		<td><input type="password" name="pwd" /></td>
+	</tr>
+	<tr>
+		<td>Тип сервиса:</td>
+		<td>
+			<select name="type">
+				<option value="lj">LiveJournal.com / другой Atom</option>
+				<option value="twitter">Twitter</option>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<td colspan="2"><input type="hidden" name="no_comments" value="0" /><input
