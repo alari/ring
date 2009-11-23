@@ -57,9 +57,9 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 			$status = substr ( $this->anonce->title, 0, 140 - strlen ( $this->anonce->url () ) - 1 ) . " " . $this->anonce->url ();
 			$twitter = new Twitter ( $usr, $pwd );
 			$r = json_decode($twitter->updateStatus ( $status, null, "json" ));
-			if (! is_object ( $r ) || !$r["id"])
-				return $this->error ( "Wrong xml response: " . print_r ( $r, 1 ) );
-			$this->postid = $id = ( string ) ($r ["id"]);
+			if (! is_object ( $r ) || !$r->id)
+				return $this->error ( "Wrong json response: " . print_r ( $r, 1 ) );
+			$this->postid = $id = $r->id;
 			$this->url = $this->service->blog_url . "/status/" . $id;
 			$this->crossposted = time ();
 		}
