@@ -54,9 +54,11 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 		
 		} elseif ($this->service ["type"] == "twitter") {
 			list ( $usr, $pwd ) = explode ( ":", $this->service->userpwd, 2 );
-			$status = $this->anonce->title . " " . $this->anonce->description;
-			if(iconv_strlen($status, "UTF-8")>139-iconv_strlen($this->anonce->url(), "UTF-8")) {
-				$status = iconv_substr($status, 0, 139-strlen($this->anonce->url()), "UTF-8")."...";
+			$status = $this->anonce->title . " // " . $this->anonce->description;
+			$len = 139-strlen($this->anonce->url());
+			$len = $len - ($len%2);
+			if(strlen($status)>$len) {
+				$status = substr($status, 0, $len-4)."...";
 			}
 			$status .= " ".$this->anonce->url();
 			$twitter = new Twitter ( $usr, $pwd, "<a href=\"http://mirari.name\">Mirari.Name</a>" );
