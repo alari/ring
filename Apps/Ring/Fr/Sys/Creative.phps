@@ -48,6 +48,17 @@ class R_Fr_Sys_Creative {
 <?
 			}
 		}
+		
+		static protected function showAvatarBlock(R_Mdl_Site_Anonce $a) {
+			if($a->system->instance["show_avatar"] == "no") return;
+			?>
+<div class="prop-ava">
+<?=$a->owner->link()?>
+<?=$a->owner->avatar()?>
+</div>
+			<?
+		}
+		
 
 		static protected function showNextPrevAnonce( R_Mdl_Site_Anonce $a, R_Mdl_Site_Anonce $curr )
 		{

@@ -10,13 +10,7 @@ class R_Fr_Sys_Blog_Post extends R_Fr_Sys_Creative {
 	static public function showDefCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		$post = $params->record();
-		?>
-<div class="prop-ava">
-<?=$post->owner->link()?><br />
-<?=$post->owner->avatar()?>
-</div>
-
-<?
+	self::showAvatarBlock($post->anonce);
 		if ($post->title) {
 			?><h1><?=$post->title?></h1><?
 		}

@@ -10,11 +10,8 @@ class R_Fr_Sys_Afisha_Bill extends R_Fr_Sys_Creative {
 	static public function showDefCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		$post = $params->record();
+		self::showAvatarBlock($post->anonce);
 		?>
-<div class="prop-ava">
-<?=$post->owner->link()?>
-<?=$post->owner->avatar()?>
-</div>
 <div class="date"><?=($post->event_time > time() ? "Случится" : "Случилось")?>: <?=date( "d.m.Y H:i", $post->event_time )?></div>
 
 <h1><?=$post->anonce->title?></h1>

@@ -26,11 +26,8 @@ class R_Fr_Sys_Libro_Text extends R_Fr_Sys_Creative {
 	static public function showDefCallback( O_Dao_Renderer_Show_Params $params )
 	{
 		$post = $params->record();
+		self::showAvatarBlock($post->anonce);
 		?>
-<div class="prop-ava">
-<?=$post->owner->link()?>
-<?=$post->owner->avatar()?>
-</div>
 
 <h1><?=$post->title?></h1>
 
