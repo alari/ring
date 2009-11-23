@@ -56,10 +56,10 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 			list ( $usr, $pwd ) = explode ( ":", $this->service->userpwd, 2 );
 			$status = substr ( $this->anonce->title, 0, 140 - strlen ( $this->anonce->url () ) - 1 ) . " " . $this->anonce->url ();
 			$twitter = new Twitter ( $usr, $pwd );
-			$r = $twitter->updateStatus ( $status, null, "json" );
-			if (! is_array ( $r ))
-				return $this->error ( "Wrong json response: " . print_r ( $r ) );
-			$this->postid = $id = $r ["status"] ["id"];
+			$r = @simplexml_load_string ( $twitter->updateStatus ( $status ) );
+			if (! is_object ( $r ))
+				return $this->error ( "Wrong xml response: " . print_r ( $r ) );
+			$this->postid = $id = ( string ) ($r ["id"]);
 			$this->url = $this->service->blog_url . "/status/" . $id;
 			$this->crossposted = time ();
 		}
