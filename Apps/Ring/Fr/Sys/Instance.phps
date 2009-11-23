@@ -22,7 +22,7 @@ class R_Fr_Sys_Instance {
 <div class="system" id="sysid-<?=$system->urlbase?>">
 <h2><?=$system->link()?></h2>
 <?
-		$q->limit( $system->instance->anonces_on_homepage )->show( $params->layout() )?>
+		$q->limit( $system->instance->anonces_on_homepage )->show( $params->layout(), $system->instance["display_on_homepage"] == "full" ? "full" : "loop" )?>
 </div>
 <?
 	}
