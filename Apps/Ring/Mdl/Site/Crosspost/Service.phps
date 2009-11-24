@@ -14,7 +14,7 @@
  * @field atomapi VARCHAR(1023) DEFAULT ''
  * @field blog_url VARCHAR(1023) DEFAULT ''
  */
-class R_Mdl_Site_CrosspostService extends O_Dao_ActiveRecord {
+class R_Mdl_Site_Crosspost_Service extends O_Dao_ActiveRecord {
 	
 	const TYPE_LJ = "lj";
 	const TYPE_TWITTER = "twitter";

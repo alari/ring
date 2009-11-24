@@ -2,10 +2,10 @@
 /**
  * @table site -show-loop:callback R_Fr_Site::showInLoop -edit:submit Сохранить изменения
  * @field host varchar(255) NOT NULL
- * @field owner -has one R_Mdl_User -inverse site
+ * @field owner -has one _User -inverse site
  * @field owner_friends -alias usr_related.user -where flags & 2
  *
- * @field usr_related -owns many R_Mdl_User_Relation -inverse site
+ * @field usr_related -owns many _User_Relation -inverse site
  *
  * @field members -alias usr_related.user -where flags & 8
  * @field admins -alias usr_related.user -where flags & 16
@@ -15,7 +15,7 @@
  * @field tags -owns many R_Mdl_Site_Tag -inverse site
  * @field anonces -owns many R_Mdl_Site_Anonce -inverse site -order-by time DESC
  *
- * @field crosspost_services -owns many R_Mdl_Site_CrosspostService -inverse site
+ * @field crosspost_services -owns many R_Mdl_Site_Crosspost_Service -inverse site
  *
  * @field about varchar(255) NOT NULL DEFAULT 'О сайте' -edit -required Введите название -title Название страницы "о сайте"
  * @field about_page -owns one R_Mdl_Site_About -inverse site
