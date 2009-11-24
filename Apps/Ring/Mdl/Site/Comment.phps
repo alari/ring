@@ -52,7 +52,7 @@ $comment_body
 Вы участвовали в этой дискуссии выше и указали свой email в настройках профиля, поэтому получаете это сообщение. При авторизации Вы использовали OpenId $rec_openid.
 Если Вы не хотите получать такие уведомления (с этого и других сайтов Кольца творческих сайтов) в будущем, отредактируйте Ваш профиль после авторизации по адресу: http://$center_host/
 A;
-			O_Mail_Service::addToQueue ( $email, "noreply@mirari.ru", $msg_title, $msg );
+			O_Mail_Service::addToQueue ( $email, "noreply@mirari.name", $msg_title, $msg );
 		}
 		
 		if ($auth) {
@@ -64,7 +64,7 @@ $comment_body
 
 Если Вы не хотите получать такие уведомления (с этого и других сайтов Кольца творческих сайтов) в будущем, отредактируйте Ваш профиль после авторизации по адресу: http://$center_host/
 A;
-			O_Mail_Service::addToQueue ( $auth->email, "noreply@mirari.ru", "Новый отзыв на Вашей страничке", $msg );
+			O_Mail_Service::addToQueue ( $auth->email, "noreply@mirari.name", "Новый отзыв на Вашей страничке", $msg );
 		}
 	}
 	

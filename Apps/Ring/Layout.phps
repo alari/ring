@@ -139,7 +139,7 @@ class R_Layout extends O_Html_Layout {
 	<?
 				}
 				if (R_Mdl_Session::can( "crosspost", $site )) {
-					?><li><a href="<?=$site->url( "admin/crossposting" )?>">Atom-кросспостинг</a></li><?
+					?><li><a href="<?=$site->url( "admin/crossposting" )?>">Кросспостинг</a></li><?
 				}
 				?>
 </ul>
