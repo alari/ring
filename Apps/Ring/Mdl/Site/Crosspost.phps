@@ -19,7 +19,7 @@ class R_Mdl_Site_Crosspost extends O_Dao_ActiveRecord {
 	
 	private $logicObject;
 	
-	public function __construct(R_Mdl_Site_Anonce $anonce, R_Mdl_Site_CrosspostService $serv) {
+	public function __construct(R_Mdl_Site_Anonce $anonce, R_Mdl_Site_Crosspost_Service $serv) {
 		$this->anonce = $anonce;
 		$this->service = $serv;
 		parent::__construct ();
