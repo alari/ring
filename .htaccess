@@ -6,8 +6,6 @@ php_value magic_quotes_gpc Off
 
 RewriteEngine On
 
-RewriteRule ^/static/c/(.+)$ /static/s/%{HTTP_HOST}/$1
-
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-l
 RewriteRule .* /entry.php [L]
