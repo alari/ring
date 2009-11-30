@@ -223,7 +223,7 @@ class R_Layout extends O_Html_Layout {
 
 		(R_Mdl_Session::isLogged() ? "" : $this->linkfeed()->return_links())?>
 <div id="site_cnt"><!--LiveInternet counter--> <script
-	type="text/javascript">document.write("<a href='http://www.liveinternet.ru/click;ring' target=_blank><img src='http://counter.yadro.ru/hit;ring?t26.1;r" + escape(document.referrer) + ((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth)) + ";u" + escape(document.URL) +";i" + escape("Жж"+document.title.substring(0,80)) + ";" + Math.random() + "' border=0 width=88 height=15 alt='' align='absmiddle' title='LiveInternet: показано число посетителей за сегодня. <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?> | <?=round(O_Registry::get("db-time"), 4)?>'><\/a>")</script>
+	type="text/javascript">document.write("<a href='http://www.liveinternet.ru/click;ring' target=_blank><img src='http://counter.yadro.ru/hit;ring?t26.1;r" + escape(document.referrer) + ((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth)) + ";u" + escape(document.URL) +";i" + escape("Жж"+document.title.substring(0,80)) + ";" + Math.random() + "' border=0 width=88 height=15 alt='' align='absmiddle' title='LiveInternet: показано число посетителей за сегодня. <?=round( microtime( true ) - O_Registry::get( "start-time" ), 4 )?> | <?=round(O_Registry::get("db-time"), 4)?> | <?=round(O_Registry::get("reg-time"), 4)?>'><\/a>")</script>
 <!--/LiveInternet--></div>
 <div id="site_sp"><?=(R_Mdl_Session::isLogged() ? "" : $this->sape()->return_links())?></div>
 <?
