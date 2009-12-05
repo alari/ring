@@ -10,7 +10,7 @@
 class R_Mdl_Site_Comment extends O_Dao_NestedSet_Node {
 	const ROOT_CLASS = "R_Mdl_Site_Anonce";
 	
-	public function __construct(O_Dao_ActiveRecord $root) {
+	public function __construct(O_Dao_NestedSet_iRoot $root) {
 		if (! R_Mdl_Session::isLogged ())
 			throw new O_Ex_Logic ( "Cannot create comment for not logged user." );
 		$this->time = time ();
