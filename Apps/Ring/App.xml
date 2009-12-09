@@ -92,13 +92,7 @@
 	<Url pattern="">
 		<Command name="Home"></Command>
 	</Url>
-	<Registry key="err_tpl" value="R_Tpl_Error"></Registry>
-	<Registry key="sites/static_urlbase" value="/static/s/"></Registry>
-	<Registry key="sites/static_folder" value="./static/s/"></Registry>
-	<Registry key="users/static_folder" value="./static/u/"></Registry>
-	<Registry key="users/static_urlbase" value="/static/u/"></Registry>
-	<Registry key="class/R_Mdl_User/plugins" type="add"
-		value="O_OpenId_Provider_UserPlugin"></Registry>
+
 	<Registry key="class/R_Mdl_Site/acl">
 
 
@@ -134,18 +128,4 @@
 		</User-In>
 		<Delegate target="site"></Delegate>
 	</Registry>
-	<Registry key="uses" type="add" value="R_Mdl_Session"></Registry>
-	<Registry key="classnames/session" value="R_Mdl_Session"></Registry>
-	<Registry key="classnames/user" value="R_Mdl_User"></Registry>
-	<Registry key="classnames/visitor" value="O_Acl_Visitor"></Registry>
-	<Registry key="paginator/title" value="Страницы"></Registry>
-	<Registry key="paginator/last" value="&gt;&gt;"></Registry>
-	<Registry key="paginator/first" value="&lt;&lt;"></Registry>
-	<Registry key="paginator/prev" value="&lt;"></Registry>
-	<Registry key="paginator/next" value="&gt;"></Registry>
-	<Registry key="paginator/order_title" value="Сортировка"></Registry>
-	<Registry key="paginator/css_envelop" value="o-paginator"></Registry>
-	<Registry key="dao-params/default_tail"
-		value="ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci"></Registry>
-	<Registry key="js/fckeditor/config_path" value="/static/fckconfig.js"></Registry>
 </Application>
