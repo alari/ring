@@ -92,40 +92,4 @@
 	<Url pattern="">
 		<Command name="Home"></Command>
 	</Url>
-
-	<Registry key="class/R_Mdl_Site/acl">
-
-
-		<Resourse field="type" value="1">
-			<User-In field="owner">
-				<Role name="Site Owner"></Role>
-			</User-In>
-			<User-In field="owner_friends">
-				<Role name="Site Owner's Friend"></Role>
-			</User-In>
-		</Resourse>
-		<Resourse field="type" value="2">
-			<User-In field="leader">
-				<Role name="Site Leader"></Role>
-			</User-In>
-			<User-In field="admins">
-				<Role name="Site Admin"></Role>
-			</User-In>
-			<User-In field="members">
-				<Role name="Site Member"></Role>
-			</User-In>
-		</Resourse>
-	</Registry>
-	<Registry key="class/R_Mdl_Site_Comment/acl">
-		<User-In field="owner">
-			<Role name="Content Owner"></Role>
-		</User-In>
-		<Delegate target="root-&gt;site"></Delegate>
-	</Registry>
-	<Registry key="class/R_Mdl_Site_Anonce/acl">
-		<User-In field="owner">
-			<Role name="Content Owner"></Role>
-		</User-In>
-		<Delegate target="site"></Delegate>
-	</Registry>
 </Application>
