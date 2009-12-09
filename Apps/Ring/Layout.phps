@@ -227,6 +227,7 @@ class R_Layout extends O_Html_Layout {
 <!--/LiveInternet--></div>
 <div id="site_sp"><?=(R_Mdl_Session::isLogged() ? "" : $this->sape()->return_links())?></div>
 <?
+echo "<!--", print_r(O_Registry::get("test-log"), 1), "-->";
 	}
 
 	/**
