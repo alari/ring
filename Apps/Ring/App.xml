@@ -1,43 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Application prefix="R" ext="phps">
-	<Condition mode="development">
-		<Host pattern="([^.]*)"></Host>
-	</Condition>
-	<Condition mode="testing">
-		<Host pattern=".*creo\.su"></Host>
-	</Condition>
-	<Condition mode="production" pattern="any"></Condition>
+<Application>
 	<Plugin name="Lf"></Plugin>
 	<If mode="development">
-		<Registry key="db/default/engine" value="mysql"></Registry>
-		<Registry key="db/default/host" value="localhost"></Registry>
-		<Registry key="db/default/dbname" value="ring"></Registry>
 		<Host pattern="mirari">
 			<Plugin name="Mr"></Plugin>
 		</Host>
 		<Host pattern="centralis">
 			<Plugin name="Ctr"></Plugin>
 		</Host>
-		<Registry key="hosts/center" value="centralis"></Registry>
-		<Registry key="hosts/project" value="mirari"></Registry>
-		<Registry key="html/static_root" value="/static/"></Registry>
 	</If>
 
 	<If mode="production">
-		<Registry key="db/default/engine" value="mysql"></Registry>
-		<Registry key="db/default/host" value="localhost"></Registry>
-		<Registry key="db/default/dbname" value="ring"></Registry>
-		<Registry key="db/default/user" value="ring"></Registry>
-		<Registry key="db/default/password" value="XKSLzapa"></Registry>
 		<Host pattern="(www\.)?mirari\.name">
 			<Plugin name="Mr"></Plugin>
 		</Host>
 		<Host pattern="(www\.)?centralis\.name">
 			<Plugin name="Ctr"></Plugin>
 		</Host>
-		<Registry key="hosts/center" value="centralis.name"></Registry>
-		<Registry key="hosts/project" value="mirari.name"></Registry>
-		<Registry key="html/static_root" value="http://centralis.name/static/"></Registry>
 	</If>
 	<If plugin="Lf">
 		<Url pattern="comments(-([0-9]+))?" command="Comments">
