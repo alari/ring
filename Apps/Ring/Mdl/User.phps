@@ -9,8 +9,8 @@
  * @field usr_related -owns many R_Mdl_User_Relation -inverse author
  * @field relations -owns many R_Mdl_User_Relation -inverse user
  *
- * @field friends -alias usr_related.user -where flags & 2
- * @field friend_of -alias relations.author -where flags & 2
+ * @field friends -alias usr_related.user -where flags& 2
+ * @field friend_of -alias relations.author -where flags &2
  *
  * @field msgs_own -owns many R_Mdl_User_Msg -inverse owner -order-by time DESC
  * @field msgs_target -owns many R_Mdl_User_Msg -inverse target
