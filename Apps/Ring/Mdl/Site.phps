@@ -90,7 +90,7 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 			$host = substr( $host, 0, strpos( $host, "/" ) );
 		if (!$host)
 			return null;
-		return O_Dao_Query::get( __CLASS__ )->test( "host", $host )->getOne();
+		return O_Dao_Query::get( __CLASS__ )->test( "host", $host )->limit(1)->getOne();
 	}
 
 	public function avaSrc( $type )
