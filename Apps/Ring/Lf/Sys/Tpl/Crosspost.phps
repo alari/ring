@@ -10,7 +10,7 @@ class R_Lf_Sys_Tpl_Crosspost extends R_Lf_Sys_Template {
 		if (count( $this->crossposts )) {
 			?>
 <h2>Текущие</h2>
-<?print_r($this->crossposts);
+<?
 			foreach ($this->crossposts as $c) {
 				?>
 
