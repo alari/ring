@@ -9,7 +9,8 @@ class R_Lf_Sys_Cmd_Crosspost extends R_Lf_Sys_Command {
 				$cp->delete();
 			return $this->redirect();
 		}
-		$ids = $this->creative->anonce->crossposts->field( "service" );
+		$ids = clone $this->creative->anonce->crossposts->query();
+		$ids->field( "service" );
 		$available_services = $this->getSite()->crosspost_services->test( "id", $ids, 
 				O_Db_Query::NOT_IN );
 		if ($this->getParam( "a" )) {
