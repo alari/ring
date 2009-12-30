@@ -48,6 +48,8 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 				$this->creative->anonce->crossposts->field( "last_update", time() )->update();
 			}
 			return $this->redirect( $this->creative->url() );
+		} else {
+			O_Registry::add("profiler/test", "form is not handled, ".print_r($form,1));
 		}
 
 		$tpl = $this->getTemplate();
