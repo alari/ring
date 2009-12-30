@@ -49,7 +49,7 @@ class R_Lf_Sys_Cmd_Form extends R_Lf_Sys_Command {
 			}
 			return $this->redirect( $this->creative->url() );
 		} else {
-			O_Registry::add("profiler/test", "form is not handled, ".print_r($form,1));
+			O_Registry::set("profiler/form", $form->getError("_"));
 		}
 
 		$tpl = $this->getTemplate();
