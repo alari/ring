@@ -91,7 +91,7 @@ Mirari.Name</a></span>
 <?
 		$this->setTitle( $this->title . ($this->title ? " - " : "") . $this->site->title );
 		
-		echo "<!--", print_r($this->site->leader, 1), print_r($this->site->members,1), print_r($this->site->admins,1), "-->";
+		echo "<!--", print_r($this->site->leader->getAll(), 1), print_r($this->site->members->getAll(),1), print_r($this->site->admins->getAll(),1), "-->";
 	}
 
 	/**
