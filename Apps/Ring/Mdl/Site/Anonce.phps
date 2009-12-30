@@ -47,7 +47,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$this->save ();
 		$this->creative = $creative;
 		$this->time = $creative->time;
-		$this->access = $instance->system->access;
+		$this->access = $instance->system["access"];
 		$this->owner = R_Mdl_Session::getUser ();
 		$this->save ();
 		$this->creative->save ();
