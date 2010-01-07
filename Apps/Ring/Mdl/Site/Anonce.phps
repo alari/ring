@@ -224,14 +224,14 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		}
 		$anonce = null;
 		if ($this->collection) {
-			$coll = $this->collection->anonces->test ( "position", $this->position, $op_test )->clearOrders ()->orderBy ( "position" . $op_ord_pos );
+			$coll = $this->collection->anonces->query()->test ( "position", $this->position, $op_test )->clearOrders ()->orderBy ( "position" . $op_ord_pos );
 			//self::setQueryAccesses( $coll );
 			$anonce = $coll->getOne ();
 			if ($anonce)
 				return $anonce;
-			$coll = $this->system->collections->test ( "position", $this->collection->position, $op_test )->clearOrders ()->orderBy ( "position" . $op_ord_pos )->getOne ();
+			$coll = $this->system->collections->query()->test ( "position", $this->collection->position, $op_test )->clearOrders ()->orderBy ( "position" . $op_ord_pos )->getOne ();
 			if ($coll) {
-				$coll = $coll->anonces->clearOrders ()->orderBy ( "position" . $op_ord_pos );
+				$coll = $coll->anonces->query()->clearOrders ()->orderBy ( "position" . $op_ord_pos );
 				//self::setQueryAccesses( $coll );
 				$anonce = $coll->getOne ();
 				if ($anonce)
@@ -239,7 +239,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			}
 			return null;
 		}
-		$q = $this->system->anonces->test ( "time", $this->time, $op_test )->orderBy ( "time" . $op_ord_pos );
+		$q = $this->system->anonces->query()->test ( "time", $this->time, $op_test )->orderBy ( "time" . $op_ord_pos );
 		//self::setQueryAccesses( $q );
 		return $q->getOne ();
 	}
