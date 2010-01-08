@@ -5,7 +5,7 @@ class R_Mr_Cmd_EditPage extends R_Command {
 	{
 		$form = new O_Form_Handler( "R_Mdl_Info_Page" );
 
-		$pageTitle = strtr( urldecode( substr( O_Registry::get( "app/env/process_url" ), 5 ) ),
+		$pageTitle = strtr( urldecode( substr( O_Registry::get( "env/process_url" ), 5 ) ),
 				"_", " " );
 
 		$page = R_Mdl_Info_Page::getByUrlName( $pageTitle );

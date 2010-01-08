@@ -4,7 +4,7 @@ class R_Ctr_Tpl_Default extends R_Ctr_Template {
 	public function displayContents()
 	{
 		$this->layout()->addHeadLink( "openid.server", 
-				"http://" . O_Registry::get( "app/env/http_host" ) . O_UrlBuilder::get( 
+				"http://" . O_Registry::get( "env/http_host" ) . O_UrlBuilder::get( 
 						"openid/provider" ) );
 		
 		?><h1>Взгляд из центра <a

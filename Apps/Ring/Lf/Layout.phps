@@ -25,11 +25,11 @@ class R_Lf_Layout extends R_Layout {
 		$this->addCssSrc("/tmp-css");
 
 		// Openid provider
-		if (!O_Registry::get( "app/env/process_url" ) && $this->site->owner) {
+		if (!O_Registry::get( "env/process_url" ) && $this->site->owner) {
 			$this->addHeadLink( "openid2.provider openid.server",
-					"http://" . O_Registry::get( "app/env/http_host" ) . "/openid/provider" );
+					"http://" . O_Registry::get( "env/http_host" ) . "/openid/provider" );
 			Header(
-					"X-XRDS-Location: http://" . O_Registry::get( "app/env/http_host" ) . "/openid/provider/user-xrds" );
+					"X-XRDS-Location: http://" . O_Registry::get( "env/http_host" ) . "/openid/provider/user-xrds" );
 		}
 
 		$this->addJavaScriptSrc( "ring.js" );

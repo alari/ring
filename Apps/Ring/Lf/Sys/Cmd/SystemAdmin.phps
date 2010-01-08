@@ -12,7 +12,7 @@ class R_Lf_Sys_Cmd_SystemAdmin extends R_Lf_Sys_Command {
 		$form_processor = $this->instance->form();
 		$form_processor->setAjax();
 		$form_processor->addHidden( "action", "process" );
-		if (O_Registry::get( "app/env/request_method" ) == "POST" && $this->getParam( "action" ) ==
+		if (O_Registry::get( "env/request_method" ) == "POST" && $this->getParam( "action" ) ==
 			 "process") {
 				$form_processor->responseAjax( null, "Изменения успешно сохранены." );
 			return null;

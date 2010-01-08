@@ -16,7 +16,7 @@ class R_Tpl_OpenId_Login extends R_Template {
 				?>
 <form method="POST" id="openid-login-form"
 	action="<?=
-				O_Registry::get( "app/env/request_url" )?>"><label><span>OpenId:</span>
+				O_Registry::get( "env/request_url" )?>"><label><span>OpenId:</span>
 <input type="text" name="openid_identifier"
 	value="<?=
 				$this->identity?>" /></label>

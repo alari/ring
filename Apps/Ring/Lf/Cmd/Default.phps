@@ -3,7 +3,7 @@ class R_Lf_Cmd_Default extends R_Lf_Command {
 
 	public function process()
 	{
-		$urlbase = O_Registry::get( "app/env/process_url" );
+		$urlbase = O_Registry::get( "env/process_url" );
 		$page = "";
 		if (strpos( $urlbase, "/" ))
 			list ($urlbase, $page) = explode( "/", $urlbase, 2 );

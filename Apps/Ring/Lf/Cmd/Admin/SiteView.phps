@@ -3,7 +3,7 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 
 	public function process()
 	{
-		if (O_Registry::get( "app/env/request_method" ) == "POST") {
+		if (O_Registry::get( "env/request_method" ) == "POST") {
 			// Editing css text
 			if ($this->getParam( "action" ) == "css") {
 				$css = $this->getParam( "css" );

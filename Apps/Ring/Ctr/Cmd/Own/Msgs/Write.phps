@@ -13,7 +13,7 @@ class R_Ctr_Cmd_Own_Msgs_Write extends R_Command {
 				if (!$adresate)
 					$adresate = new R_Mdl_User( $adresate,
 							O_Acl_Role::getByName( "OpenId User" ) );
-				O_Registry::set( "app/env/params/target", $adresate->id );
+				O_Registry::set( "env/params/target", $adresate->id );
 			}
 
 			if ($formProcessor->handle()) {

@@ -37,7 +37,7 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 	
 	static public function checkCreate(O_Form_Check_AutoProducer $producer) {
 		$new_value = $producer->getValue ();
-		$new_title = O_Registry::get ( "app/env/params/collection_new" );
+		$new_title = O_Registry::get ( "env/params/collection_new" );
 		
 		if (! $new_title && $new_value instanceof self)
 			return true;
