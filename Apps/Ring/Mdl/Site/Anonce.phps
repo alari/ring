@@ -155,7 +155,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 */
 	public function delete() {
 		if ($this->collection) {
-			$this->collection->anonces->test ( "position", $this->position, ">" )->field ( "position", "position-1", 1 )->update ();
+			$this->collection->anonces->query()->test ( "position", $this->position, ">" )->field ( "position", "position-1", 1 )->update ();
 		}
 		parent::delete ();
 	}
