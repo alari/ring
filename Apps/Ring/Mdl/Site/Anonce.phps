@@ -207,6 +207,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	}
 	
 	public function getNext() {
+		$this->system->anonces->reload();
 		return $this->getNextOrPrev ( 0 );
 	}
 	
