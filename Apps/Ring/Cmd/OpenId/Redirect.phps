@@ -10,7 +10,7 @@ class R_Cmd_OpenId_Redirect extends R_Command {
 			session_commit();
 			return $this->redirect();
 		}
-		$redirect = isset( $_SESSION[ "redirect" ] ) ? $_SESSION[ "redirect" ] : "/?no-redir";
+		$redirect = isset( $_SESSION[ "redirect" ] ) ? $_SESSION[ "redirect" ] : "/?no-redir:".$_GET[session_name()];
 		return $this->redirect( $redirect );
 	}
 
