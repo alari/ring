@@ -2,7 +2,7 @@
 class R_Cmd_OpenId_Redirect extends R_Command {
 
 	public function process()
-	{
+	{die($_SERVER["QUERY_STRING"]);
 		if (isset( $_GET[ session_name() ] )) {
 			session_write_close();
 			session_id( $_GET[ session_name() ] );
