@@ -5,8 +5,8 @@
  * @field users -has many _User -inverse groups
  * @field site -has one _Site -inverse groups
  *
- * @field type UNSIGNED TINYINT DEFAULT NULL
- * @field flag UNSIGNED TINYINT
+ * @field type TINYINT DEFAULT NULL
+ * @field flag TINYINT
  * @field title TINYTEXT
  *
  * @index site,type -unique
