@@ -2,7 +2,7 @@
 class R_Ctr_Tpl_Own_Friends_List extends R_Ctr_Template {
 	public $friends;
 
-	public $follows;
+	public $follow;
 
 	public function displayContents()
 	{
