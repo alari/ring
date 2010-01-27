@@ -29,7 +29,7 @@ class R_Ctr_Cmd_Admin_User extends R_Command {
 				// Our user has site
 				if ($user && $pwd) {
 					$user->setPwd( $pwd );
-					$user->site = new R_Mdl_Site( $identity );
+					$user->site = new R_Mdl_Site( $identity, $user );
 				}
 			}
 			catch (Exception $e) {

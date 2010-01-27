@@ -5,6 +5,8 @@
  * @field owner -has one _User -inverse site
  * @field owner_friends -alias usr_related.user -where flags & 2
  *
+ * @field groups -owns many _User_Group -inverse site
+ *
  * @field usr_related -owns many _User_Relation -inverse site
  *
  * @field members -alias usr_related.user -where flags & 8
@@ -52,7 +54,7 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 	 *
 	 * @param string $host
 	 */
-	public function __construct( $host, $type=self::TYPE_AUTH )
+	public function __construct( $host, $owner, $type=self::TYPE_AUTH )
 	{
 		if (substr( $host, 0, 7 ) == "http://")
 			$host = substr( $host, 7 );
@@ -74,6 +76,9 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 		$style = str_replace( "{%STATIC_PROJ%}", O_Registry::get( "app/html/static_root" ), $style );
 		file_put_contents( $this->static_folder . "style.css", $style );
 		$this->about_page = new R_Mdl_Site_About( );
+
+		// Generate default groups
+		R_Mdl_User_Group::createSiteGroups($this, $owner);
 	}
 
 	/**

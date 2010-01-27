@@ -6,6 +6,8 @@
  * @field email VARCHAR(255) -edit -title Адрес электронной почты
  * @field nickname VARCHAR(255) -edit -title Ник или псевдоним
  *
+ * @field groups -has many _User_Group -inverse users
+ *
  * @field usr_related -owns many R_Mdl_User_Relation -inverse author
  * @field relations -owns many R_Mdl_User_Relation -inverse user
  *
@@ -25,7 +27,7 @@
  * @field ava_tiny -image filepath: avaPath tiny; src: avaSrc tiny; width:80; height:200
  */
 class R_Mdl_User extends O_Acl_User {
-	
+
 	public function __construct($identity, O_Acl_Role $role = null) {
 		if (! $role)
 			$role = O_Acl_Role::getByName ( "OpenId User" );
@@ -36,7 +38,7 @@ class R_Mdl_User extends O_Acl_User {
 		$this->nickname = rtrim ( substr ( $identity, 7 ), "/" );
 		$this->createUserdir ();
 	}
-	
+
 	public function avaSrc($type) {
 		if ($this ["ava_full"] == "-") {
 			if (! $this->isOurUser ()) {
@@ -49,11 +51,11 @@ class R_Mdl_User extends O_Acl_User {
 		}
 		return $this->staticUrl ( "ava-" . $type . "." . $this ["ava_full"] );
 	}
-	
+
 	public function avaPath($type, $ext = null) {
 		return $this->staticFilename ( "ava-" . $type . ($ext ? $ext : "." . $this ["ava_full"]) );
 	}
-	
+
 	/**
 	 * Sets password for user
 	 *
@@ -64,7 +66,7 @@ class R_Mdl_User extends O_Acl_User {
 		$this->pwd_hash = md5 ( $this->identity . $pwd );
 		return $this->save ();
 	}
-	
+
 	/**
 	 * Updates identity and password for user
 	 *
@@ -82,7 +84,7 @@ class R_Mdl_User extends O_Acl_User {
 		}
 		return $this->setPwd ( $pwd );
 	}
-	
+
 	/**
 	 * Returns true if user was registered on our site, false -- if it's other openid user
 	 *
@@ -91,7 +93,7 @@ class R_Mdl_User extends O_Acl_User {
 	public function isOurUser() {
 		return ( bool ) $this->pwd_hash;
 	}
-	
+
 	/**
 	 * Logs in (sets user to session)
 	 *
@@ -105,7 +107,7 @@ class R_Mdl_User extends O_Acl_User {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Returns identity url
 	 *
@@ -118,25 +120,25 @@ class R_Mdl_User extends O_Acl_User {
 			return $this->identity;
 		}
 	}
-	
+
 	public function avatar($full = false) {
 		return "<img class=\"avatar\" src=\"" . ($full ? $this->ava_full : $this->ava_tiny) . "\" alt=\"" . htmlspecialchars ( $this->nickname ) . "\"/>";
 	}
-	
+
 	public function staticUrl($filename) {
 		return O_Registry::get ( "app/users/static_urlbase" ) . $this->id . "/" . $filename;
 	}
-	
+
 	public function staticFilename($filename) {
 		return O_Registry::get ( "app/users/static_folder" ) . $this->id . "/" . $filename;
 	}
-	
+
 	public function createUserdir() {
 		if (! is_dir ( O_Registry::get ( "app/users/static_folder" ) . $this->id )) {
 			mkdir ( O_Registry::get ( "app/users/static_folder" ) . $this->id );
 		}
 	}
-	
+
 	public function link() {
 		if (! $this->isOurUser ()) {
 			$img = O_UrlBuilder::getStatic ( "im/openid.gif" );
@@ -147,27 +149,46 @@ class R_Mdl_User extends O_Acl_User {
 		}
 		return "<img src=\"$img\" width=\"11\" height=\"11\" alt=\"\"/>&nbsp;<a href=\"" . $this->url () . "\">" . trim($this->nickname ? $this->nickname : $this->identity) . "</a>";
 	}
-	
+
 	/**
-	 * Adds friendship relation
+	 * Adds friendship/follow relation
 	 *
-	 * @param O_Dao_ActiveRecord $object
+	 * @param R_Mdl_User|R_Mdl_Site $object
 	 */
 	public function addFriend(O_Dao_ActiveRecord $object) {
+		// Old variant
 		R_Mdl_User_Relation::addFriend ( $this, $object );
+		// New variant
+		if($object instanceof R_Mdl_Site) {
+			R_Mdl_User_Group::addFollower($object, $this);
+		} elseif($object instanceof R_Mdl_User) {
+			R_Mdl_User_Group::addFriend($this, $object);
+		}
 	}
-	
+
+	/**
+	 * Removes friendship/follow relation
+	 *
+	 * @param R_Mdl_User|R_Mdl_Site $object
+	 */
 	public function removeFriend(O_Dao_ActiveRecord $object) {
+		// Old variant
 		R_Mdl_User_Relation::removeFriend ( $this, $object );
+		// New variant
+		if($object instanceof R_Mdl_Site) {
+			R_Mdl_User_Group::removeFollower($object, $this);
+		} elseif($object instanceof R_Mdl_User) {
+			R_Mdl_User_Group::removeFriend($this, $object);
+		}
 	}
-	
+
 	public function setCommFlags(R_Mdl_Site $site, $flags, $status = "") {
 		$rel = R_Mdl_User_Relation::getRelation ( $this, $site, 0 );
 		$rel->flags = ($rel->flags & (~ R_Mdl_User_Relation::FLAGS_COMM)) | $flags;
 		$rel->status = $status;
 		$rel->save ();
 	}
-	
+
 	/**
 	 * Returns user by identity
 	 *

@@ -8,9 +8,10 @@ class R_Ctr_Cmd_Admin_Comm extends R_Command {
 
 				$host = $this->getParam( "host" );
 				if(!$host) throw new Exception("Host must be specified");
-				$site = new R_Mdl_Site( $host, R_Mdl_Site::TYPE_COMM );
 				$user = R_Mdl_User::getByIdentity($this->getParam("leader"));
 				if(!$user) $user = R_Mdl_Session::getUser();
+
+				$site = new R_Mdl_Site( $host, $user, R_Mdl_Site::TYPE_COMM );
 				$user->setCommFlags($site, R_Mdl_User_Relation::FLAG_IS_LEADER | R_Mdl_User_Relation::FLAG_WATCH, "Руководитель");
 
 			}

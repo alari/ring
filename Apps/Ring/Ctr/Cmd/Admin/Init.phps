@@ -3,31 +3,20 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 
 	public function process()
 	{
-		$identity = O_Registry::get( "app/hosts/center" );
-		
-		$rootRole = O_Acl_Role::getByName( "root" );
-		
-		O_Acl_Role::getByName( "OpenId User" );
-		O_Acl_Role::getByName( "Visitor" )->setAsVisitorRole();
-		
-		$root = R_Mdl_User::getByIdentity( $identity );
-		
-		if (!$root) {
-			$root = new R_Mdl_User( $identity, $rootRole );
-		} else
-			$root->role = $rootRole;
-		
-		$root->setPwd( O_Registry::get( "app/mode" ) == "production" ? "XKSLzapa" : "12345" );
-		$root->save();
-		
-		if (!O_Dao_TableInfo::get( "R_Mdl_Site_Anonce" )->tableExists())
-			O_Dao_TableInfo::get( "R_Mdl_Site_Anonce" )->createTable();
-		if (!O_Dao_TableInfo::get( "R_Mdl_User_Relation" )->tableExists())
-			O_Dao_TableInfo::get( "R_Mdl_User_Relation" )->createTable();
-		
-		$rootRole->allow( "manage roles" );
-		$rootRole->allow( "log in" );
-		
-		return $this->redirect( "/" );
+		foreach(R_Mdl_Site::getQuery() as $site) {
+			$leader = $site->owner;
+			if(!$leader) {
+				$leader = $site->leader->getOne();
+			}
+			R_Mdl_User_Group::createSiteGroups($site, $leader);
+			foreach($site->{"usr_related.user"}->test("flags", R_Mdl_User_Relation::FLAG_WATCH, "&")->where("flags & ? = 0", R_Mdl_User_Relation::FLAGS_COMM) as $reader) {
+				$reader->addFriend($site);
+			}
+		}
+		foreach(R_Mdl_User::getQuery() as $user) {
+			foreach($user->friends as $f) {
+				$user->addFriend($f);
+			}
+		}
 	}
 }
