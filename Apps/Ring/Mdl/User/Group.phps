@@ -37,9 +37,9 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 			case self::TYPE_CUSTOM:
 				$max = $site->groups->getFunc("flag", "MAX");
 				if($max < (1<<7)) return $max << 1;
-				return 0;
+				return null;
 			default:
-				return 0;
+				return null;
 		}
 	}
 
