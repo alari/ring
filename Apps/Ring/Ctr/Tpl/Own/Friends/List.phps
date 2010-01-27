@@ -17,7 +17,6 @@ class R_Ctr_Tpl_Own_Friends_List extends R_Ctr_Template {
 		</ul>
 
 <h1>Вы следите за сайтами</h1>
-<p><?=$this->follow->prepareSelect()?></p>
 <ul>
 <?foreach($this->follow as $site) {?>
 <li><?=$site->link()?></li>
