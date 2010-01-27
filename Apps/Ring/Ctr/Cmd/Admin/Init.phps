@@ -3,6 +3,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 
 	public function process()
 	{
+		R_Mdl_User_Group::getTableInfo()->createTable();
 		foreach(R_Mdl_Site::getQuery() as $site) {
 			$leader = $site->owner;
 			if(!$leader) {
