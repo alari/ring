@@ -63,7 +63,7 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 		$this->site = $site;
 		parent::__construct();
 		} catch(PDOException $e) {
-			echo "Group for ".$site->id." ($type) not created<br/>";
+			return null;
 		}
 	}
 
@@ -73,7 +73,7 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 		if($site["type"]==R_Mdl_Site::TYPE_COMM) {
 			new self($site, self::TYPE_COMM_MEMBERS);
 			$leaders = new self($site, self::TYPE_COMM_LEADERS);
-			$leaders->users[] = $owner;
+			if($leaders) $leaders->users[] = $owner;
 			new self($site, self::TYPE_COMM_REQUESTS);
 			new self($site, self::TYPE_COMM_INVITATIONS);
 		} else {
