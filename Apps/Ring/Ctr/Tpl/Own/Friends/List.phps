@@ -2,6 +2,8 @@
 class R_Ctr_Tpl_Own_Friends_List extends R_Ctr_Template {
 	public $friends;
 
+	public $follows;
+
 	public function displayContents()
 	{
 		$this->layout()->setTitle( "Ваши друзья - список" );
@@ -13,6 +15,13 @@ class R_Ctr_Tpl_Own_Friends_List extends R_Ctr_Template {
 			echo "<li>", $friend->link(), " <small><a href=\"?remove=" . $friend->id . "\">Убрать из друзей</a></small></li>";
 		?>
 		</ul>
+
+<h1>Вы следите за сайтами</h1>
+<ul>
+<?foreach($this->follows as $site) {?>
+<li><?=$site->link()?></li>
+<?}?>
+</ul>
 
 <form method="POST">
 <fieldset><legend>Добавить в друзья</legend> OpenId пользователя: <input
