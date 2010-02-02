@@ -29,7 +29,7 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 	static private function getNewGroupTitle($type, $isComm) {
 		switch($type){
 			case self::TYPE_MEMBER: return $isComm?"Участники":"Друзья";
-			case self::TYPE_ADMIN: return "Администрация";
+			case self::TYPE_ADMIN: return "Руководство";
 			default: return "Новая группа";
 		}
 	}
