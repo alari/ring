@@ -97,9 +97,10 @@ class R_Mdl_User_Relationship extends O_Dao_ActiveRecord {
 	 */
 	static public function getRelation(R_Mdl_User $user, R_Mdl_Site $site, $createWithFlags=null) {
 		$rel = static::getQuery()->test("user", $user)->test("site", $site)->getOne();
-		if(!$rel && $createWithFlags !== null) {
+		echo "rel:".$rel->id;
+		if(!$rel && $createWithFlags !== null) {echo "crt";
 			return new self($user, $site, $createWithFlags);
-		}
+		}echo "rt";
 		return $rel;
 	}
 }
