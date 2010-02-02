@@ -13,6 +13,8 @@
  * @index site,user,groups,flags
  * @index site,flags
  * @index site,flags,groups
+ *
+ * @tail ENGINE=MyISAM
  */
 class R_Mdl_User_Relationship extends O_Dao_ActiveRecord {
 	const FLAG_FOLLOW = 1;

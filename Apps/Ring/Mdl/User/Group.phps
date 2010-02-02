@@ -11,6 +11,8 @@
  * @index site,type
  * @index type
  * @index site,flags -unique
+ *
+ * @tail ENGINE=MyISAM
  */
 class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 	const TYPE_DEFAULT = 0;
