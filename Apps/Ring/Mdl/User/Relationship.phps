@@ -100,5 +100,6 @@ class R_Mdl_User_Relationship extends O_Dao_ActiveRecord {
 		if(!$rel && $createWithFlags !== null) {
 			return new self($user, $site, $createWithFlags);
 		}
+		return $rel;
 	}
 }
