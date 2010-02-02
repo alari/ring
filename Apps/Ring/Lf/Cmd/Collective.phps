@@ -5,10 +5,9 @@ class R_Lf_Cmd_Collective extends R_Lf_Command {
 	{
 		$tpl = $this->getTemplate();
 
-		$tpl->leaders = $this->getSite()->usr_related->test("flags", R_Mdl_User_Relation::FLAG_IS_LEADER, "&");
-		$tpl->admins = $this->getSite()->usr_related->test("flags", R_Mdl_User_Relation::FLAG_IS_ADMIN, "&");
-		$tpl->members = $this->getSite()->members;
-		$tpl->readers = $this->getSite()->{"usr_related.user"}->test("flags", R_Mdl_User_Relation::FLAG_WATCH, "&")->where("flags & ? = 0", R_Mdl_User_Relation::FLAGS_COMM);
+		$tpl->leaders = $this->getSite()->getTypicalGroup(R_Mdl_User_Group::TYPE_ADMIN)->getUsers();
+		$tpl->members = $this->getSite()->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER)->getUsers();
+		$tpl->readers = $this->getSite()->{"relations.user"}->test("flags", R_Mdl_User_Relationship::FLAG_FOLLOW, "&");
 
 		return $tpl;
 	}

@@ -256,12 +256,22 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 
 
 
-
+	/**
+	 * Returns one of always created typical groups
+	 *
+	 * @param const $type
+	 * @return R_Mdl_User_Group
+	 */
 	public function getTypicalGroup($type) {
-		$r = $this->groups->test("type", $type)->getOne();
-		return $r;
+		return $this->groups->test("type", $type)->getOne();
 	}
 
+	/**
+	 * Returns user relation
+	 *
+	 * @param R_Mdl_User $user
+	 * @return R_Mdl_User_Relationship
+	 */
 	public function getUserRelation(R_Mdl_User $user) {
 		return R_Mdl_User_Relationship::getRelation($user, $this, 0);
 	}

@@ -114,4 +114,8 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 		}
 		return $rel;
 	}
+
+	public function getUsers() {
+		$this->{"site.relations.user"}->test("groups", $this->flags, "&");
+	}
 }

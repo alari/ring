@@ -1,7 +1,6 @@
 <?php
 class R_Lf_Tpl_Collective extends R_Lf_Template {
 	public $leaders;
-	public $admins;
 	public $members;
 	public $readers;
 
@@ -12,17 +11,11 @@ class R_Lf_Tpl_Collective extends R_Lf_Template {
 		if (count( $this->leaders )) {
 			echo "<h3>Руководство</h3><ul>";
 			foreach ($this->leaders as $u) {
-				echo "<li>", $u->user->link(), "<br/><small>", $u->status, "</small></li>";
+				echo "<li>", $u->link(), "</li>";
 			}
 			echo "</ul><hr/>";
 		}
-		if (count( $this->admins )) {
-			echo "<h3>Орггруппа</h3><ul>";
-			foreach ($this->admins as $u) {
-				echo "<li>", $u->user->link(), "<br/><small>", $u->status, "</small></li>";
-			}
-			echo "</ul><hr/>";
-		}
+
 		if (count( $this->members )) {
 			echo "<h3>Участники</h3>";
 			foreach ($this->members as $u)
@@ -35,7 +28,7 @@ class R_Lf_Tpl_Collective extends R_Lf_Template {
 				echo $u->link(), " ";
 		}
 
-		$this->layout()->setTitle( "Коллектив сообщества" );
+		$this->layout()->setTitle( "Коллектив сайта" );
 
 	}
 
