@@ -203,7 +203,7 @@ class R_Mdl_User extends O_Acl_User {
 	 * @param R_Mdl_Site $site
 	 * @return R_Mdl_Site_Relationship
 	 */
-	public function getSiteRelation(R_Mdl_Site $site) {echo "Q";
+	public function getSiteRelation(R_Mdl_Site $site) {
 		return R_Mdl_User_Relationship::getRelation($this, $site, 0);
 	}
 
