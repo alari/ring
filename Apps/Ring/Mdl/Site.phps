@@ -258,7 +258,11 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 
 
 	public function getTypicalGroup($type) {
-		return $this->groups->test("type", $type)->getOne();
+		echo "a";
+		$r = $this->groups->test("type", $type)->getOne();
+		echo "b";
+		print_r($r);
+		return $r;
 	}
 
 	public function getUserRelation(R_Mdl_User $user) {

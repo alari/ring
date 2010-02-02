@@ -157,18 +157,17 @@ class R_Mdl_User extends O_Acl_User {
 	public function addFriend(O_Dao_ActiveRecord $object) {
 		// Old variant
 		R_Mdl_User_Relation::addFriend ( $this, $object );
-		echo 1;
 		// New variant
-		if($object instanceof R_Mdl_Site) {echo 2;
-			$this->getSiteRelation($object)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);echo 3;
-			if($object->owner && $this->site) {echo 4;
-				$object->owner->getSiteRelation($this->site)->addGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );echo "G";
+		if($object instanceof R_Mdl_Site) {
+			$this->getSiteRelation($object)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
+			if($object->owner && $this->site) {
+				$object->owner->getSiteRelation($this->site)->addGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
 			}
-		} elseif($object instanceof R_Mdl_User) {echo 5;
-			if($object->site instanceof R_Mdl_Site) {echo 6;
+		} elseif($object instanceof R_Mdl_User) {
+			if($object->site instanceof R_Mdl_Site) {
 				$this->getSiteRelation($object->site)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
 			}
-			if($this->site instanceof R_Mdl_User) {echo 7;
+			if($this->site instanceof R_Mdl_User) {
 				$object->getSiteRelation($this->site)->addGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
 			}
 		}
