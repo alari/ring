@@ -20,17 +20,10 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 	const TYPE_ADMIN = 3;
 
 	static private function getNewGroupFlag(R_Mdl_Site $site, $type) {
-		switch($type) {
-			case self::TYPE_MEMBER:
-				return 1;
-			case self::TYPE_ADMIN:
-				return (1<<16)-1;
-			default:
-				$max = $site->groups->test("type", self::TYPE_ADMIN, "!=")->getFunc("flags", "MAX");
-				if($max == 0) $max = 1;
-				if($max < (1<<15)) return $max << 1;
-				return 0;
-		}
+		$max = $site->groups->test("type", self::TYPE_ADMIN, "!=")->getFunc("flags", "MAX");
+		if($max == 0) $max = 1;
+		if($max < (1<<15)) return $max << 1;
+		return 0;
 	}
 
 	static private function getNewGroupTitle($type, $isComm) {
@@ -93,6 +86,9 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 	public function addUser(R_Mdl_User $user) {
 		$rel = $this->getRelation($user);
 		$rel->addGroup($this);
+		if($this->type == self::TYPE_ADMIN) {
+			$rel->addFlag(R_Mdl_User_Relationship::FLAG_ADMIN);
+		}
 		return $rel;
 	}
 
@@ -113,6 +109,10 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 			}
 		}
 		return $rel;
+	}
+
+	public function hasUser(R_Mdl_User $user) {
+		return $this->getRelation($user)->groups & $this->flags;
 	}
 
 	public function getUsers() {

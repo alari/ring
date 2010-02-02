@@ -21,6 +21,7 @@ class R_Mdl_User_Relationship extends O_Dao_ActiveRecord {
 	const FLAG_BAN = 2;
 	const FLAG_INVITE = 4;
 	const FLAG_REQUEST = 8;
+	const FLAG_ADMIN = 16;
 
 	/**
 	 * Creates new relation
