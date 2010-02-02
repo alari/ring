@@ -41,7 +41,7 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 
 	public function __construct(R_Mdl_Site $site, $type, $title=null) {
 		try {
-			$this->flag = self::getNewGroupFlag($site, $type);
+			$this->flags = self::getNewGroupFlag($site, $type);
 			$this->type = $type;
 			$this->title = $title ? $title : self::getNewGroupTitle($type, $site["type"]==R_Mdl_Site::TYPE_COMM);
 			$this->site = $site;
