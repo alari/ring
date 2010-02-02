@@ -8,7 +8,7 @@
  * @field flags INT(64) NOT NULL DEFAULT 0
  * @field status TINYTEXT
  *
- * @field user -has one R_Mdl_User -inverse relations
+ * @field user -has one R_Mdl_User -inverse relations_old
  *
  * @index site,author,user -unique
  * @index flags

@@ -8,6 +8,7 @@
  * @field groups -owns many _User_Group -inverse site
  *
  * @field usr_related -owns many _User_Relation -inverse site
+ * @field relations -owns many _User_Relationship -inverse site
  *
  * @field members -alias usr_related.user -where flags & 8
  * @field admins -alias usr_related.user -where flags & 16
@@ -253,4 +254,14 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 		return true;
 	}
 
+
+
+
+	public function getTypicalGroup($type) {
+		return $this->groups->test("type", $type)->getOne();
+	}
+
+	public function getUserRelation(R_Mdl_User $user) {
+		return R_Mdl_User_Relationship::getRelation($user, $this, 0);
+	}
 }

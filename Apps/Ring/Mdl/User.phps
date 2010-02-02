@@ -6,10 +6,9 @@
  * @field email VARCHAR(255) -edit -title Адрес электронной почты
  * @field nickname VARCHAR(255) -edit -title Ник или псевдоним
  *
- * @field groups -has many _User_Group -inverse users
- *
  * @field usr_related -owns many R_Mdl_User_Relation -inverse author
- * @field relations -owns many R_Mdl_User_Relation -inverse user
+ * @field relations_old -owns many R_Mdl_User_Relation -inverse user
+ * @field relations -owns many _User_Relationship -inverse user
  *
  * @field friends -alias usr_related.user -where flags & 2
  * @field friend_of -alias relations.author -where flags & 2
@@ -160,9 +159,17 @@ class R_Mdl_User extends O_Acl_User {
 		R_Mdl_User_Relation::addFriend ( $this, $object );
 		// New variant
 		if($object instanceof R_Mdl_Site) {
-			R_Mdl_User_Group::addFollower($object, $this);
+			$this->getSiteRelation($object)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
+			if($object->owner && $this->site) {
+				$object->owner->getSiteRelation($this->site)->addGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
+			}
 		} elseif($object instanceof R_Mdl_User) {
-			R_Mdl_User_Group::addFriend($this, $object);
+			if($object->site instanceof R_Mdl_Site) {
+				$this->getSiteRelation($object->site)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
+			}
+			if($this->site instanceof R_Mdl_User) {
+				$object->getSiteRelation($this->site)->addGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
+			}
 		}
 	}
 
@@ -176,17 +183,28 @@ class R_Mdl_User extends O_Acl_User {
 		R_Mdl_User_Relation::removeFriend ( $this, $object );
 		// New variant
 		if($object instanceof R_Mdl_Site) {
-			R_Mdl_User_Group::removeFollower($object, $this);
+			$this->getSiteRelation($object)->removeFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
+			if($object->owner && $this->site) {
+				$object->owner->getSiteRelation($this->site)->removeGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
+			}
 		} elseif($object instanceof R_Mdl_User) {
-			R_Mdl_User_Group::removeFriend($this, $object);
+			if($object->site instanceof R_Mdl_Site) {
+				$this->getSiteRelation($object->site)->removeFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
+			}
+			if($this->site instanceof R_Mdl_User) {
+				$object->getSiteRelation($this->site)->removeGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
+			}
 		}
 	}
 
-	public function setCommFlags(R_Mdl_Site $site, $flags, $status = "") {
-		$rel = R_Mdl_User_Relation::getRelation ( $this, $site, 0 );
-		$rel->flags = ($rel->flags & (~ R_Mdl_User_Relation::FLAGS_COMM)) | $flags;
-		$rel->status = $status;
-		$rel->save ();
+	/**
+	 * Returns site relation
+	 *
+	 * @param R_Mdl_Site $site
+	 * @return R_Mdl_Site_Relationship
+	 */
+	public function getSiteRelation(R_Mdl_Site $site) {
+		return $this->relations->test("site", $site)->getOne();
 	}
 
 	/**

@@ -20,6 +20,11 @@
  * @field system -has one R_Mdl_Sys_Instance -inverse anonces -preload
  * @field tags -has many R_Mdl_Site_Tag -inverse anonces
  *
+ * @field groups TINYINT DEFAULT 0
+ * @field groups_access TINYINT DEFAULT 0
+ * @field logged_access TINYINT DEFAULT 0
+ * @field anonymous_access TINYINT DEFAULT 0
+ *
  * @field access_comment ENUM('protected','private','disable') NOT NULL DEFAULT 'protected' -enum protected: Авторизованным; private: Друзьям; disable: Только себе
  *
  * @field linked -has many R_Mdl_Site_Anonce -inverse linked
@@ -37,9 +42,9 @@
  */
 class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	const NODES_CLASS = "R_Mdl_Site_Comment";
-	
+
 	private $_updateCollectionPosition = 0;
-	
+
 	public function __construct(R_Mdl_Sys_Creative $creative, R_Mdl_Sys_Implementation $instance) {
 		parent::__construct ();
 		$this->system = $instance->system;
@@ -52,7 +57,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$this->save ();
 		$this->creative->save ();
 	}
-	
+
 	/**
 	 * Returns url of main content page
 	 *
@@ -62,7 +67,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$field = O_Dao_TableInfo::get ( __CLASS__ )->getFieldInfo ( "creative" )->getRealField ( $this );
 		return $this->system->creativeUrl ( $this [$field] );
 	}
-	
+
 	/**
 	 * Simple link for creative -- without author
 	 *
@@ -71,7 +76,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	public function link() {
 		return "<a href=\"" . $this->url () . "\">" . $this->title . "</a>";
 	}
-	
+
 	/**
 	 * Checks if current user can see this
 	 *
@@ -80,7 +85,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	public function isVisible() {
 		return R_Mdl_Session::can ( "read " . $this->system ["access"], $this->site ) && R_Mdl_Session::can ( "read " . $this ["access"], $this->site );
 	}
-	
+
 	/**
 	 * Returns directory to store files attached with this anonce in
 	 *
@@ -101,7 +106,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$dir .= "/";
 		return $dir;
 	}
-	
+
 	/**
 	 * Returns url base to get urls to files attached with anonce
 	 *
@@ -116,7 +121,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$dir .= "/";
 		return $dir;
 	}
-	
+
 	/**
 	 * Sets access conditions to anonces query
 	 *
@@ -131,7 +136,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$r_tbl = O_Dao_TableInfo::get ( "R_Mdl_User_Relation" )->getTableName ();
 		if (! $user)
 			$user = R_Mdl_Session::getUser ();
-		
+
 		$q->joinOnce ( $r_tbl, "$tbl.site=$r_tbl.site AND $r_tbl.user=" . $user->id );
 		$q->where ( "access='public' OR access='protected'
 			OR owner=?
@@ -139,7 +144,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			OR (access='disable' AND $r_tbl.flags & ?)
 				", $user, R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE );
 	}
-	
+
 	static public function getByUserRelations($user) {
 		$q = $user->{"relations.site.anonces"}->where ( "__rel1.flags & " . R_Mdl_User_Relation::FLAG_WATCH );
 		$q->where ( "access='public' OR access='protected'
@@ -148,7 +153,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			OR (access='disable' AND __rel1.flags & ?)", $user, R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE );
 		return $q;
 	}
-	
+
 	/**
 	 * Deletes anonce
 	 *
@@ -159,7 +164,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		}
 		parent::delete ();
 	}
-	
+
 	public function save() {
 		parent::save ();
 		// Check validity of position in the cycle
@@ -182,7 +187,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			}
 		}
 	}
-	
+
 	/**
 	 * Sets anonce position in collection
 	 *
@@ -195,26 +200,26 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			return;
 			/* @var $anonces O_Dao_Query */
 		$anonces = $this->collection->anonces;
-		
+
 		if ($newPosition > $this->position) {
 			$anonces->test ( "position", $this->position, ">" )->test ( "position", $newPosition, "<=" )->field ( "position", "position-1", 1 )->update ();
 		} else {
 			$anonces->test ( "position", $this->position, "<" )->test ( "position", $newPosition, ">=" )->field ( "position", "position+1", 1 )->update ();
 		}
-		
+
 		$this->position = $newPosition;
 		parent::save ();
 	}
-	
+
 	public function getNext() {
 		$this->system->anonces->reload();
 		return $this->getNextOrPrev ( 0 );
 	}
-	
+
 	public function getPrevious() {
 		return $this->getNextOrPrev ( 1 );
 	}
-	
+
 	private function getNextOrPrev($prev) {
 		if ($prev) {
 			$op_test = "<";
