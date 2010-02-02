@@ -11,10 +11,4 @@ class R_Lf_Cmd_Collective extends R_Lf_Command {
 
 		return $tpl;
 	}
-
-	public function isAuthenticated()
-	{
-		$site =$this->getSite();
-		return $site["type"] == R_Mdl_Site::TYPE_COMM;
-	}
 }
