@@ -162,7 +162,7 @@ class R_Mdl_User extends O_Acl_User {
 		if($object instanceof R_Mdl_Site) {echo 2;
 			$this->getSiteRelation($object)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);echo 3;
 			if($object->owner && $this->site) {echo 4;
-				$object->owner->getSiteRelation($this->site)->addGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
+				$object->owner->getSiteRelation($this->site)->addGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );echo "G";
 			}
 		} elseif($object instanceof R_Mdl_User) {echo 5;
 			if($object->site instanceof R_Mdl_Site) {echo 6;
