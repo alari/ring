@@ -13,8 +13,9 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 			R_Mdl_User_Group::createSiteGroups($site, $leader);
 
 			foreach($site->{"usr_related.user"}->test("flags", R_Mdl_User_Relation::FLAG_WATCH, "&")->where("flags & ? = 0", R_Mdl_User_Relation::FLAGS_COMM) as $reader) {
-				echo "Adding: ".$reader->link()."<br/>";
+				echo "Adding: ".$reader->link();
 				$reader->addFriend($site);
+				echo "+<br/>";
 			}
 			echo "</div><hr/>";
 		}
