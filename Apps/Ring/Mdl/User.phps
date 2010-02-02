@@ -157,17 +157,18 @@ class R_Mdl_User extends O_Acl_User {
 	public function addFriend(O_Dao_ActiveRecord $object) {
 		// Old variant
 		R_Mdl_User_Relation::addFriend ( $this, $object );
+		echo 1;
 		// New variant
-		if($object instanceof R_Mdl_Site) {
-			$this->getSiteRelation($object)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
-			if($object->owner && $this->site) {
+		if($object instanceof R_Mdl_Site) {echo 2;
+			$this->getSiteRelation($object)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);echo 3;
+			if($object->owner && $this->site) {echo 4;
 				$object->owner->getSiteRelation($this->site)->addGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
 			}
-		} elseif($object instanceof R_Mdl_User) {
-			if($object->site instanceof R_Mdl_Site) {
+		} elseif($object instanceof R_Mdl_User) {echo 5;
+			if($object->site instanceof R_Mdl_Site) {echo 6;
 				$this->getSiteRelation($object->site)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
 			}
-			if($this->site instanceof R_Mdl_User) {
+			if($this->site instanceof R_Mdl_User) {echo 7;
 				$object->getSiteRelation($this->site)->addGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
 			}
 		}
@@ -203,7 +204,7 @@ class R_Mdl_User extends O_Acl_User {
 	 * @param R_Mdl_Site $site
 	 * @return R_Mdl_Site_Relationship
 	 */
-	public function getSiteRelation(R_Mdl_Site $site) {
+	public function getSiteRelation(R_Mdl_Site $site) {echo "Q";
 		return R_Mdl_User_Relationship::getRelation($this, $site, 0);
 	}
 
