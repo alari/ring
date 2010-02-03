@@ -16,25 +16,14 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 	const FLAG_MEMBER = 2;
 	const FLAG_ADMIN = 1;
 
-	static private function getNewGroupFlag(R_Mdl_Site $site, $flag) {
-		if($flag == self::FLAG_MEMBER || $flag == self::FLAG_ADMIN) {
-			return $flag;
-		}
-		$max = $site->groups->getFunc("flag", "MAX");
-		if($max < 2) $max = 2;
-		if($max < (1<<15)) return $max << 1;
-		return null;
-	}
-
-	static private function getNewGroupTitle($flag, $isComm) {
-		switch($flag){
-			case self::FLAG_MEMBER: return $isComm?"Участники":"Друзья";
-			case self::FLAG_ADMIN: return $isComm?"Руководство":"Автор";
-			default: return "Новая группа";
-		}
-	}
-
-	public function __construct(R_Mdl_Site $site, $flag, $title=null) {
+	/**
+	 * Creates new group
+	 *
+	 * @param R_Mdl_Site $site
+	 * @param int $flag
+	 * @param string $title
+	 */
+	public function __construct(R_Mdl_Site $site, $flag=0, $title=null) {
 		try {
 			$this->flag = self::getNewGroupFlag($site, $flag);
 			$this->title = $title ? $title : self::getNewGroupTitle($flag, $site["type"]==R_Mdl_Site::TYPE_COMM);
@@ -100,15 +89,61 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 		return $rel;
 	}
 
+	/**
+	 * Checks if user is in this group
+	 *
+	 * @param R_Mdl_User $user
+	 * @return bool
+	 */
 	public function hasUser(R_Mdl_User $user) {
 		return $this->getRelation($user)->groups & $this->flag;
 	}
 
+	/**
+	 * Returns users in group
+	 *
+	 * @return O_Dao_Query
+	 */
 	public function getUsers() {
 		return $this->{"site.relations.user"}->test("groups", $this->flag, "&");
 	}
 
+	/**
+	 * Returns relations in group
+	 *
+	 * @return O_Dao_Query
+	 */
 	public function getRelations() {
 		return $this->{"site.relations"}->test("groups", $this->flag, "&");
+	}
+
+	/**
+	 * Returns new free group flag
+	 *
+	 * @param R_Mdl_Site $site
+	 * @param const $flag
+	 * @return int
+	 */
+	static private function getNewGroupFlag(R_Mdl_Site $site, $flag) {
+		if($flag == self::FLAG_MEMBER || $flag == self::FLAG_ADMIN) {
+			return $flag;
+		}
+		$max = $site->groups->getFunc("flag", "MAX");
+		if($max < 2) $max = 2;
+		if($max < (1<<15)) return $max << 1;
+		return null;
+	}
+
+	/**
+	 * Returns new group title
+	 * @param const $flag
+	 * @param bool $isComm
+	 */
+	static private function getNewGroupTitle($flag, $isComm) {
+		switch($flag){
+			case self::FLAG_MEMBER: return $isComm?"Участники":"Друзья";
+			case self::FLAG_ADMIN: return $isComm?"Руководство":"Автор";
+			default: return "Новая группа";
+		}
 	}
 }
