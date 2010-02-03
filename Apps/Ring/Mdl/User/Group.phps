@@ -7,7 +7,6 @@
  * @field flag INT(16)
  * @field title TINYTEXT
  *
- * @index type
  * @index site,flag -unique
  *
  * @tail ENGINE=MyISAM
