@@ -8,6 +8,7 @@
  * @field groups -owns many _User_Group -inverse site
  *
  * @field usr_related -owns many _User_Relation -inverse site
+ *
  * @field relations -owns many _User_Relationship -inverse site
  *
  * @field members -alias usr_related.user -where flags & 8
@@ -40,13 +41,15 @@
  * @index status
  * @index type
  */
-class R_Mdl_Site extends O_Dao_ActiveRecord {
+class R_Mdl_Site extends O_Dao_ActiveRecord /*O_Dao_NestedSet_Root*/ {
 
 	const TYPE_AUTH = 1;
 	const TYPE_COMM = 2;
 	const ST_MODERATED = 1;
 	const ST_AWAITING = 0;
 	const ST_TECH = 2;
+
+	const NODES_CLASS = "R_Mdl_Resourse";
 
 	private $available_systems;
 
@@ -262,8 +265,8 @@ class R_Mdl_Site extends O_Dao_ActiveRecord {
 	 * @param const $type
 	 * @return R_Mdl_User_Group
 	 */
-	public function getTypicalGroup($type) {
-		return $this->groups->test("type", $type)->getOne();
+	public function getGroupByFlag($flag) {
+		return $this->groups->test("flag", $flag)->getOne();
 	}
 
 	/**

@@ -45,7 +45,7 @@ class R_Mdl_User_Relationship extends O_Dao_ActiveRecord {
 	 * @param R_Mdl_User_Group $group
 	 */
 	public function addGroup(R_Mdl_User_Group $group) {
-		$this->groups = $this->groups | $group->flags;
+		$this->groups = $this->groups | $group->flag;
 		$this->save();
 	}
 
@@ -55,7 +55,7 @@ class R_Mdl_User_Relationship extends O_Dao_ActiveRecord {
 	 * @param R_Mdl_User_Group $group
 	 */
 	public function removeGroup(R_Mdl_User_Group $group) {
-		$this->groups = $this->groups &~ $group->flags;
+		$this->groups = $this->groups &~ $group->flag;
 		$this->save();
 	}
 
@@ -65,7 +65,7 @@ class R_Mdl_User_Relationship extends O_Dao_ActiveRecord {
 	 * @return O_Dao_Query
 	 */
 	public function getGroups() {
-		return $this->site->groups->test("flags", $this->groups, "&");
+		return $this->site->groups->test("flag", $this->groups, "&");
 	}
 
 	/**

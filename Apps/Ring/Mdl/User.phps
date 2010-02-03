@@ -161,14 +161,14 @@ class R_Mdl_User extends O_Acl_User {
 		if($object instanceof R_Mdl_Site) {
 			$this->getSiteRelation($object)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
 			if($object->owner && $this->site) {
-				$object->owner->getSiteRelation($this->site)->addGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
+				$object->owner->getSiteRelation($this->site)->addGroup( $this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_MEMBER) );
 			}
 		} elseif($object instanceof R_Mdl_User) {
 			if($object->site instanceof R_Mdl_Site) {
 				$this->getSiteRelation($object->site)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
 			}
 			if($this->site instanceof R_Mdl_User) {
-				$object->getSiteRelation($this->site)->addGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
+				$object->getSiteRelation($this->site)->addGroup( $this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_MEMBER) );
 			}
 		}
 	}
@@ -185,14 +185,14 @@ class R_Mdl_User extends O_Acl_User {
 		if($object instanceof R_Mdl_Site) {
 			$this->getSiteRelation($object)->removeFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
 			if($object->owner && $this->site) {
-				$object->owner->getSiteRelation($this->site)->removeGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
+				$object->owner->getSiteRelation($this->site)->removeGroup( $this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_MEMBER) );
 			}
 		} elseif($object instanceof R_Mdl_User) {
 			if($object->site instanceof R_Mdl_Site) {
 				$this->getSiteRelation($object->site)->removeFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
 			}
 			if($this->site instanceof R_Mdl_User) {
-				$object->getSiteRelation($this->site)->removeGroup( $this->site->getTypicalGroup(R_Mdl_User_Group::TYPE_MEMBER) );
+				$object->getSiteRelation($this->site)->removeGroup( $this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_MEMBER) );
 			}
 		}
 	}

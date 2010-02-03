@@ -4,41 +4,40 @@
  *
  * @field site -has one _Site -inverse groups
  *
- * @field type INT(2) DEFAULT 0
- * @field flags INT(16)
+ * @field flag INT(16)
  * @field title TINYTEXT
  *
- * @index site,type
  * @index type
- * @index site,flags -unique
+ * @index site,flag -unique
  *
  * @tail ENGINE=MyISAM
  */
 class R_Mdl_User_Group extends O_Dao_ActiveRecord {
-	const TYPE_DEFAULT = 0;
-	const TYPE_MEMBER = 1;
-	const TYPE_ADMIN = 3;
+	const FLAG_MEMBER = 2;
+	const FLAG_ADMIN = 1;
 
-	static private function getNewGroupFlag(R_Mdl_Site $site, $type) {
-		$max = $site->groups->test("type", self::TYPE_ADMIN, "!=")->getFunc("flags", "MAX");
-		if($max == 0) $max = 1;
+	static private function getNewGroupFlag(R_Mdl_Site $site, $flag) {
+		if($flag == self::FLAG_MEMBER || $flag == self::FLAG_ADMIN) {
+			return $flag;
+		}
+		$max = $site->groups->getFunc("flag", "MAX");
+		if($max < 2) $max = 2;
 		if($max < (1<<15)) return $max << 1;
-		return 0;
+		return null;
 	}
 
-	static private function getNewGroupTitle($type, $isComm) {
-		switch($type){
-			case self::TYPE_MEMBER: return $isComm?"Участники":"Друзья";
-			case self::TYPE_ADMIN: return "Руководство";
+	static private function getNewGroupTitle($flag, $isComm) {
+		switch($flag){
+			case self::FLAG_MEMBER: return $isComm?"Участники":"Друзья";
+			case self::FLAG_ADMIN: return $isComm?"Руководство":"Автор";
 			default: return "Новая группа";
 		}
 	}
 
-	public function __construct(R_Mdl_Site $site, $type, $title=null) {
+	public function __construct(R_Mdl_Site $site, $flag, $title=null) {
 		try {
-			$this->flags = self::getNewGroupFlag($site, $type);
-			$this->type = $type;
-			$this->title = $title ? $title : self::getNewGroupTitle($type, $site["type"]==R_Mdl_Site::TYPE_COMM);
+			$this->flag = self::getNewGroupFlag($site, $flag);
+			$this->title = $title ? $title : self::getNewGroupTitle($flag, $site["type"]==R_Mdl_Site::TYPE_COMM);
 			$this->site = $site;
 			parent::__construct();
 		} catch(PDOException $e) {
@@ -53,8 +52,8 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 	 * @param R_Mdl_User $owner
 	 */
 	static public function createSiteGroups(R_Mdl_Site $site, R_Mdl_User $owner) {
-		$mem = new self($site, self::TYPE_MEMBER);
-		$adm = new self($site, self::TYPE_ADMIN);
+		$mem = new self($site, self::FLAG_MEMBER);
+		$adm = new self($site, self::FLAG_ADMIN);
 		$adm->addUser($owner);
 		if($site["type"]==R_Mdl_Site::TYPE_AUTH) {
 			$site->owner = $owner;
@@ -86,9 +85,6 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 	public function addUser(R_Mdl_User $user) {
 		$rel = $this->getRelation($user);
 		$rel->addGroup($this);
-		if($this->type == self::TYPE_ADMIN) {
-			$rel->addFlag(R_Mdl_User_Relationship::FLAG_ADMIN);
-		}
 		return $rel;
 	}
 
@@ -101,25 +97,18 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 	public function removeUser(R_Mdl_User $user) {
 		$rel = $this->getRelation($user);
 		$rel->removeGroup($this);
-		if($this->type == self::TYPE_ADMIN) {
-			$rel->flags = 0;
-			$rel->save();
-			foreach($rel->getGroups() as $g) {
-				$rel->addGroup($g);
-			}
-		}
 		return $rel;
 	}
 
 	public function hasUser(R_Mdl_User $user) {
-		return $this->getRelation($user)->groups & $this->flags;
+		return $this->getRelation($user)->groups & $this->flag;
 	}
 
 	public function getUsers() {
-		return $this->{"site.relations.user"}->test("groups", $this->flags, "&");
+		return $this->{"site.relations.user"}->test("groups", $this->flag, "&");
 	}
 
 	public function getRelations() {
-		return $this->{"site.relations"}->test("groups", $this->flags, "&");
+		return $this->{"site.relations"}->test("groups", $this->flag, "&");
 	}
 }
