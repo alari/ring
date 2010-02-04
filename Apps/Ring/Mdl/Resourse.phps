@@ -14,7 +14,7 @@
  * @field groups_access INT(8) DEFAULT 0
  * @field logged_access INT(8) DEFAULT 0
  * @field anonymous_access INT(1) DEFAULT 0
- * @field show_in_friendlist INT(1) DEFAULT 0
+ * @field show_to_followers INT(1) DEFAULT 0
  *
  * @index root,url_cache(24)
  */
@@ -45,7 +45,7 @@ class R_Mdl_Resourse extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
 		$q->join($rel, "$rel.user=".$user->id." AND $rel.site=$res.root");
 		$q->where("
 			$rel.flags & 3 = 1 AND
-			$res.show_in_friendlist = 1 AND (
+			$res.show_to_followers = 1 AND (
 				$res.owner=$usr
 				OR ($res.groups & $rel.groups = 1 AND $res.groups_access & 1 = 1)
 				OR ($res.logged_access & 1 = 1 AND NOT ($res.groups & $rel.groups = 1 AND $res.groups_access & 1 = 0))
@@ -65,7 +65,7 @@ class R_Mdl_Resourse extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
 	 */
 	static public function getAnonymousAccessed() {
 		$q = static::getQuery();
-		$q->test("show_in_friendlist", 1)->test("anonymous_access", 1);
+		$q->test("show_to_followers", 1)->test("anonymous_access", 1);
 		return $q;
 	}
 
@@ -208,7 +208,11 @@ class R_Mdl_Resourse extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
 		if($this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_ADMIN)->hasUser($user)) {
 			return true;
 		}
-		if($this->site->getUserRelation($user)->flags & $this->groups) {
+		$rel = $this->site->getUserRelation($user);
+		if($rel->flags & R_Mdl_User_Relationship::FLAG_BAN) {
+			return false;
+		}
+		if($rel->groups & $this->groups) {
 			return $this->groupsCan($action);
 		}
 		return $this->loggedCan($action);
