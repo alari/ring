@@ -22,7 +22,7 @@ class R_Lf_Layout extends R_Layout {
 		$this->addCssSrc( 'bases.css' );
 		$this->addCssSrc( $this->site->staticUrl( "style.css" ) );
 		// TODO: make normal sources for style scheme css
-		$this->addCssSrc("/tmp-css");
+		// $this->addCssSrc("/tmp-css");
 
 		// Openid provider
 		if (!O_Registry::get( "env/process_url" ) && $this->site->owner) {
