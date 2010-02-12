@@ -5,21 +5,21 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 	{
 		if (isset( $_POST[ "redirect" ] )) {
 			$_SESSION[ "redirect" ] = $_POST[ "redirect" ];
-		} else {
+		} elseif(!isset($_SESSION["redirect"])) {
 			$_SESSION[ "redirect" ] = "/";
 		}
-		
-		if (isset( $_POST[ 'openid_action' ] ) && $_POST[ 'openid_action' ] == "login" && !empty( 
+
+		if (isset( $_POST[ 'openid_action' ] ) && $_POST[ 'openid_action' ] == "login" && !empty(
 				$_POST[ 'openid_identifier' ] )) {
-			
+
 			// Process auth for our users
 			$user = R_Mdl_User::getByIdentity( $_POST[ "openid_identifier" ] );
 			if ($user && $user->isOurUser()) {
-				if ((isset( $_POST[ "pwd" ] ) && $user->can( "log in" ) && $user->login( 
+				if ((isset( $_POST[ "pwd" ] ) && $user->can( "log in" ) && $user->login(
 						$_POST[ "pwd" ] )) || $user->identity == R_Mdl_Session::getIdentity()) {
 					return $this->successRedirect();
 				}
-				
+
 				$tpl = $this->getTemplate();
 				$tpl->mode = "our";
 				$tpl->identity = $_POST[ "openid_identifier" ];
@@ -27,12 +27,12 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 					$tpl->error = "Неверный пароль.";
 				return $tpl;
 			}
-			
+
 			return parent::tryAuth();
 		} elseif (isset( $_GET[ 'openid_mode' ] )) {
 			return parent::finishAuth();
 		}
-		
+
 		return parent::startAuth();
 	}
 
