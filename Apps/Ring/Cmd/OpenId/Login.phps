@@ -67,7 +67,7 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 		if (isset( $url[ "host" ] ) && ($url[ "host" ] == O_Registry::get( "app/hosts/project" ) ||
 			 O_Dao_Query::get( "R_Mdl_Site" )->test( "host", $url[ "host" ] )->getFunc())) {
 				$redirect = "http://" . $url[ "host" ] . "/openid/redirect?" . session_name() . "=" .
-				 session_id();
+				 session_id()."&ref=".urlencode($redirect);
 		}
 		return $this->redirect( $redirect );
 	}

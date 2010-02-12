@@ -20,7 +20,7 @@ class R_Ctr_Cmd_JsLogin extends R_Command {
 		}
 		$_SESSION[ "redirect" ] = $this->getParam( "ref" );
 		return "window.location.href='http://" . $ref . "/openid/redirect?" . session_name() . "=" .
-				 session_id() . "';";
+				 session_id() . "&ref=".urlencode($this->getParam("ref"))."';";
 	}
 
 }
