@@ -10,6 +10,10 @@
  * @field type TINYINT NOT NULL DEFAULT 0
  * @field content INT
  *
+ * show in parent block bool
+ * show in parent block type
+ * show block type
+ *
  * @field groups INT(16) DEFAULT 1
  * @field groups_access INT(8) DEFAULT 0
  * @field logged_access INT(8) DEFAULT 0
@@ -30,6 +34,18 @@ class R_Mdl_Resourse extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
 
 	static private $types = Array(0=>"Folder", 1=>"Text");
 
+	public function getPageTitle() {
+		;
+	}
+
+	public function getContent() {
+		;
+	}
+
+	public function setContent() {
+		;
+	}
+
 	/**
 	 * Returns posts for followed sites
 	 * No sortings applied!
@@ -47,7 +63,7 @@ class R_Mdl_Resourse extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
 			$rel.flags & 3 = 1 AND
 			$res.show_to_followers = 1 AND (
 				$res.owner=$usr
-				OR ($res.groups & $rel.groups = 1 AND $res.groups_access & 1 = 1)
+				OR ($res.groups & $rel.groups > 0 AND $res.groups_access & 1 = 1)
 				OR ($res.logged_access & 1 = 1 AND NOT ($res.groups & $rel.groups = 1 AND $res.groups_access & 1 = 0))
 			)
 		");
@@ -66,6 +82,22 @@ class R_Mdl_Resourse extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
 	static public function getAnonymousAccessed() {
 		$q = static::getQuery();
 		$q->test("show_to_followers", 1)->test("anonymous_access", 1);
+		return $q;
+	}
+
+	/**
+	 * Adds access checks to query in current resourse context
+	 *
+	 * @param O_Dao_Query $q
+	 * @return O_Dao_Query
+	 */
+	public function addQueryAccessChecks(O_Dao_Query $q) {
+		if(R_Mdl_Session::isLogged()) {
+			$rel = R_Mdl_Session::getUser()->getSiteRelation($this->root);
+			$q->where("owner=? OR (groups & ? > 0 AND groups_access & 1 = 1)", R_Mdl_Session::getUser(), $rel->groups);
+		} else {
+			$q->test("anonymous_access", 1);
+		}
 		return $q;
 	}
 
