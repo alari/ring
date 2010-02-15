@@ -26,11 +26,11 @@ class R_Mdl_Resourse extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
 	const ROOT_CLASS = "R_Mdl_Site";
 	const NODES_CLASS = "R_Mdl_Comment";
 
-	const ALLOW_READ = 1;
-	const ALLOW_WRITE = 2;
-	const ALLOW_DELETE = 4;
-	const ALLOW_COMMENT = 8;
-	const ALLOW_ADMIN = 16;
+	const ACTION_READ = 1;
+	const ACTION_WRITE = 2;
+	const ACTION_DELETE = 4;
+	const ACTION_COMMENT = 8;
+	const ACTION_ADMIN = 16;
 
 	static private $types = Array(0=>"Folder", 1=>"Text");
 
@@ -221,15 +221,15 @@ class R_Mdl_Resourse extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
 	 */
 	public function aclUserCan($action, R_Mdl_User $user=null) {
 		if(strpos($action, "read")===0) {
-			$action = self::ALLOW_READ;
+			$action = self::ACTION_READ;
 		} elseif(strpos($action, "write")===0){
-			$action = self::ALLOW_WRITE;
+			$action = self::ACTION_WRITE;
 		} elseif(strpos($action, "comment")===0){
-			$action = self::ALLOW_COMMENT;
+			$action = self::ACTION_COMMENT;
 		} elseif(strpos($action, "delete")===0){
-			$action = self::ALLOW_DELETE;
+			$action = self::ACTION_DELETE;
 		} else {
-			$action = self::ALLOW_ADMIN;
+			$action = self::ACTION_ADMIN;
 		}
 		if(!$user) {
 			return $this->anonymousCan($action);
