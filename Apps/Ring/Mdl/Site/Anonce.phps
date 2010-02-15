@@ -321,7 +321,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$res = static::getTableInfo()->getTableName();
 		$rel = R_Mdl_User_Relationship::getTableInfo()->getTableName();
 		$usr = $user->id;
-		$q->join($rel, "$rel.user=".$user->id." AND $rel.site=$res.root");
+		$q->join($rel, "$rel.user=".$user->id." AND $rel.site=$res.site");
 		$q->where("
 			$rel.flags & 3 = 1 AND
 			$res.show_to_followers = 1 AND (
