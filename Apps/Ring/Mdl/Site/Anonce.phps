@@ -307,8 +307,6 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 				$this->denyToAnonymous(self::ACTION_READ);
 				break;
 		}
-		//access_comment ENUM('protected','private','disable') NOT NULL DEFAULT 'protected' -enum protected: Авторизованным; private: Друзьям; disable: Только себе
-		//access ENUM('public','protected','private','disable')
 	}
 
 	/**
