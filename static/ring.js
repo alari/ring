@@ -132,7 +132,7 @@ var R = {
 	},
 	System: {
 		url: null,
-		setSortable: function(list, handle, host) {\
+		setSortable: function(list, handle, host) {
 			R.SortableUtils.init();
 			this.url = 'http://'+host+'/admin/system-position';
 			$(list).Sortable({
