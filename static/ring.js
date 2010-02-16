@@ -7,18 +7,18 @@ var R = {
 		},
 		show: function(){
 			R.Shadow.show();
-			this.getEl().fade('show');
+			this.getEl().fadeIn();
 			this.isShowed = 1;
 		},
 		hide: function(){
 			R.Shadow.hide();
-			this.getEl().fade('hide');
+			this.getEl().fadeOut();
 			this.isShowed = 0;
 		},
 		getEl: function(){
 			if(!this.el) {
-				this.el = $('user-menu');
-				this.el.style.width = $('user-box').getSize().x;
+				this.el = $('#user-menu');
+				this.el.css('width', $('#user-box').width());
 			}
 			return this.el;
 		}
@@ -27,67 +27,75 @@ var R = {
 		el: null,
 		isShowed:0,
 		show: function(){
-			this.getEl().style.width = $('wrap').getParent().getScrollSize().x;
-			this.getEl().style.height = $('wrap').getParent().getScrollSize().y;
-			this.getEl().fade(0.6);
+			this.el.css('width', $('#wrap').width());
+			this.el.css('height', $('#wrap').height());
+			this.getEl().fadeTo(400, 0.6);
 			this.isShowed = 1;
 		},
 		hide: function(){
-			this.getEl().fade("out");
+			this.getEl().fadeTo("fast", 0, function(){
+				$(this).fadeOut();
+			});
 			this.isShowed = 0;
 		},
 		getEl: function(){
 			if(!this.el) {
 				this.el = new Element("div", {id:"shadow"});
-				this.el.fade('hide');
-				$('wrap').getParent().adopt(this.el);
+				this.el.fadeOut();
+				$('#wrap').after(this.el);
 				this.el.style.left = 0;
 				this.el.style.top = 0;
 			}
 			return this.el;
 		},
-		toggle: function(widthOffset){
-			this.isShowed ? this.hide() : this.show(widthOffset);
+		toggle: function(){
+			this.isShowed ? this.hide() : this.show();
 		}
 	},
 	AjaxFragment: {
-		show: function(el, options) {
-			el = $(el);
+		show: function(elName, options) {
+			el = $('#'+elName);
 			this.init(el);
-			el.set("r_ajax_isShowed", 1);
-			el.style.overflow = "hidden";
-			new Request($merge(options,{onSuccess:function(response){
-				el.set('html', response);
-				el.get('tween', {property:'height'}).start(0,el.getScrollSize().y).chain(function(){el.style.height='auto';el.style.overflow='visible';});
-			}})).send();
+			el.attr("r_ajax_isShowed", 1);
+			el.css("overflow", "hidden");
+			
+			el.load(options.url, options.data, function() {
+				$(this).animate({				 
+				    height: $(this).innerHeight()
+				  }, 850, function() {
+					  $(this).css('height', 'auto');
+					  $(this).css('overflow', 'visible');
+				  });
+			});
 		},
 		hide: function(el) {
-			el = $(el);
-			el.style.overflow='hidden';
-			el.get('tween',{property:'height'}).start(el.getScrollSize().y, 0);
-			el.set("r_ajax_isShowed", 0);
+			el = $('#'+el);
+			el.css('overflow', 'hidden');
+			el.animate({height: $(this).innerHeight()}, 850);
+			el.attr("r_ajax_isShowed", 0);
 		},
 		init: function(el, param) {
-			if(el.get('r_ajax_isInitiated') == 1) return;
-			el.style.height = 0;
-			el.set('r_ajax_isInitiated', 1);
+			if(el.attr('r_ajax_isInitiated') == 1) return;
+			el.css('height', 0);
+			el.attr('r_ajax_isInitiated', 1);
 		},
-		toggle: function(el, options) {
-			el = $(el);
-			if(el.get("r_ajax_isShowed") == 1) this.hide(el);
-			else this.show(el, options);
+		toggle: function(elName, options) {
+			el = $("#" + elName);
+			if(el.attr("r_ajax_isShowed") == 1) this.hide(elName);
+			else this.show(elName, options);
 		}
 	},
 	Comment: {
+		/*
+		 * .showForm(this,'<?=O_UrlBuilder::get( "comment" )?>',<?=$rootId?>,<?=$parent?>,<?=$systemId?>)
+		 */
 		showForm: function(el, url, root, parent, sys) {
-			el = $(el).getParent();
-			e=el.retrieve("form-el");
-			if(!e) {
-				var e=new Element('div');
-				e.injectAfter(el);
-				el.store("form-el", e);
+			el = $(el).parent();
+			e = el.children('.form-el');
+			if(e.lenght == 0) {
+				el.children('.form-el').after('<div class="form-el"></div>');
 			}
-			if(e.get("r_ajax_isShowed") == 1) {
+			if(e.attr("r_ajax_isShowed") == 1) {
 				return R.AjaxFragment.hide(e);
 			}
 			var action = parent?'comment-for':'comment-new';
@@ -101,75 +109,89 @@ var R = {
 		},
 		remove: function(url, root, comm, sys) {
 			if(!confirm("Удалить комментарий со всеми ответами на него?")) return;
-			$('comm-'+comm).fade(0.5);
-			$('comm-add-'+comm).fade(0.4);
-			new Request.JSON({url:url, data:{
+			$('#comm-'+comm).fadeTo(400, 0.5);
+			$('#comm-add-'+comm).fadeTo(400, 0.4);
+			$.post(url, {
 				root: root,
 				action: 'delete',
 				comm: comm,
-				sys: sys}, onSuccess:function(response){
+				sys: sys}, function(response){
 					if(response.status == "FAILED") {
 						alert("Ошибка! Удалить комментарий не удалось.");
 						return;
 					}
 					for(j in response.comments) {
 						i = response.comments[j];
-						$('comm-'+i).dispose();
-						$('comm-add-'+i).dispose();
+						$('#comm-'+i).dispose();
+						$('#comm-add-'+i).dispose();
 					}
-				}}).send();
-		}
+				},
+				"json"
+			);
+		}	
 	},
 	System: {
 		url: null,
 		setSortable: function(list, handle, host) {
 			this.url = 'http://'+host+'/admin/system-position';
-			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete.bind(this)});
+			$(list).Sortable({
+				start:R.SortableUtils.onStart,
+				update: this.onComplete,
+				handle: handle
+			});
 		},
-		onComplete:function(el){
-			el = $(el);
-			 var newPosition = el.getAllPrevious().length+1;
-			 if(newPosition == R.SortableUtils.oldPosition-1) return;
+		onComplete:function(elName){
+			el = $("#"+elName);
+			var newPosition = el.prevUntil().length+1;
+			if(newPosition == R.SortableUtils.oldPosition-1) return;
 		 	
 		 	var elId = el.get("id").replace(/^sysid-(.+)$/, "$1");
-		 	new Request({url:this.url,data:{base:elId,pos:newPosition}}).post();
+		 	$.post(this.url, {base:elId, pos:newPosition});
 		 }
 	},
 	Collection: {
 		url: null,
 		setSortable: function(list, handle, host) {
 			this.url = 'http://'+host+'/admin/collection-position';
-			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete.bind(this)});
+			$(list).Sortable({
+				start:R.SortableUtils.onStart,
+				update: this.onComplete,
+				handle: handle
+			});
 		},
 		onComplete:function(el){
-			el = $(el);
-			 var newPosition = el.getAllPrevious().length+1;
-			 if(newPosition == R.SortableUtils.oldPosition-1) return;
+			el = $("#"+elName);
+			var newPosition = el.prevUntil().length+1;
+			if(newPosition == R.SortableUtils.oldPosition-1) return;
 		 	
-		 	var elId = el.get("id").replace(/^collid-([0-9]+)$/, "$1");
-		 	new Request({url:this.url,data:{coll:elId,pos:newPosition}}).post();
+			var elId = el.get("id").replace(/^collid-([0-9]+)$/, "$1");
+			$.post(this.url, {base:elId, pos:newPosition});
 		 }
 	},
 	Anonce: {
 		url: null,
 		setSortable: function(list, handle, host) {
 			this.url = 'http://'+host+'/admin/anonce-position';
-			new Sortables(list, {'handle':handle, onStart:R.SortableUtils.onStart, onComplete:this.onComplete.bind(this)});
+			$(list).Sortable({
+				start:R.SortableUtils.onStart,
+				update: this.onComplete,
+				handle: handle
+			});
 		},
-		onComplete: function(el) {
-			 el = $(el);
-			 var newPosition = el.getAllPrevious().length+1;
+		onComplete: function(elName) {
+			 el = $("#"+elName);
+			 var newPosition = el.prevUntil().length+1;
 			 if(newPosition == R.SortableUtils.oldPosition-1) return;
 			 	
 			 var elId = el.get("id").replace(/^anonceid-(.+)$/, "$1");
-			 new Request({url:this.url,data:{anonce:elId,pos:newPosition}}).post();
+			 $.post(this.url, {base:elId, pos:newPosition});
 		}
 	},
 	SortableUtils: {
 		oldPosition: null,
-		onStart: function(el) {
-			el = $(el);
-			R.SortableUtils.oldPosition = el.getAllPrevious().length+1; 
+		onStart: function(elName) {
+			el = $("#"+elName);
+			R.SortableUtils.oldPosition = el.prevUntil().length+1; 
 		}
 	}
 };
