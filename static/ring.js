@@ -132,7 +132,8 @@ var R = {
 	},
 	System: {
 		url: null,
-		setSortable: function(list, handle, host) {
+		setSortable: function(list, handle, host) {\
+			R.SortableUtils.init();
 			this.url = 'http://'+host+'/admin/system-position';
 			$(list).Sortable({
 				start:R.SortableUtils.onStart,
@@ -152,6 +153,7 @@ var R = {
 	Collection: {
 		url: null,
 		setSortable: function(list, handle, host) {
+			R.SortableUtils.init();
 			this.url = 'http://'+host+'/admin/collection-position';
 			$(list).Sortable({
 				start:R.SortableUtils.onStart,
@@ -171,6 +173,7 @@ var R = {
 	Anonce: {
 		url: null,
 		setSortable: function(list, handle, host) {
+			R.SortableUtils.init();
 			this.url = 'http://'+host+'/admin/anonce-position';
 			$(list).Sortable({
 				start:R.SortableUtils.onStart,
@@ -192,6 +195,10 @@ var R = {
 		onStart: function(elName) {
 			el = $("#"+elName);
 			R.SortableUtils.oldPosition = el.prevUntil().length+1; 
+		},
+		init: function(){
+			$.getScript('http://centralis.name/static/js/jquery-ui-min.js');
 		}
+	
 	}
 };
