@@ -160,7 +160,7 @@ class R_Mdl_User extends O_Acl_User {
 			if($object->site instanceof R_Mdl_Site) {
 				$this->getSiteRelation($object->site)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
 			}
-			if($this->site instanceof R_Mdl_User) {
+			if($this->site instanceof R_Mdl_Site) {
 				$object->getSiteRelation($this->site)->addGroup( $this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_MEMBER) );
 			}
 		}
@@ -182,7 +182,7 @@ class R_Mdl_User extends O_Acl_User {
 			if($object->site instanceof R_Mdl_Site) {
 				$this->getSiteRelation($object->site)->removeFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
 			}
-			if($this->site instanceof R_Mdl_User) {
+			if($this->site instanceof R_Mdl_Site) {
 				$object->getSiteRelation($this->site)->removeGroup( $this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_MEMBER) );
 			}
 		}
