@@ -136,7 +136,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		}
 		$user = R_Mdl_Session::getUser ();
 		$res = static::getTableInfo()->getTableName ();
-		$rel = R_Mdl_User_Relationship::getTableInfo()->getTableName ();
+		$rel = R_Mdl_User_Relation::getTableInfo()->getTableName ();
 		$usr = $user->id;
 
 		$q->joinOnce ( $rel, "$res.site=$rel.site AND $rel.user=" . $user->id );
@@ -312,7 +312,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	static public function getUserFollowed(R_Mdl_User $user) {
 		$q = static::getQuery();
 		$res = static::getTableInfo()->getTableName();
-		$rel = R_Mdl_User_Relationship::getTableInfo()->getTableName();
+		$rel = R_Mdl_User_Relation::getTableInfo()->getTableName();
 		$usr = $user->id;
 		$q->join($rel, "$rel.user=".$user->id." AND $rel.site=$res.site");
 		$q->where("
@@ -497,7 +497,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			return true;
 		}
 		$rel = $this->site->getUserRelation($user);
-		if($rel->flags & R_Mdl_User_Relationship::FLAG_BAN) {
+		if($rel->flags & R_Mdl_User_Relation::FLAG_BAN) {
 			return false;
 		}
 		if($rel->groups & $this->groups) {

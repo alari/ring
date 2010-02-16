@@ -56,7 +56,7 @@ class R_Mdl_Resourse extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
 	static public function getUserFollowed(R_Mdl_User $user) {
 		$q = static::getQuery();
 		$res = static::getTableInfo()->getTableName();
-		$rel = R_Mdl_User_Relationship::getTableInfo()->getTableName();
+		$rel = R_Mdl_User_Relation::getTableInfo()->getTableName();
 		$usr = $user->id;
 		$q->join($rel, "$rel.user=".$user->id." AND $rel.site=$res.root");
 		$q->where("
@@ -241,7 +241,7 @@ class R_Mdl_Resourse extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
 			return true;
 		}
 		$rel = $this->site->getUserRelation($user);
-		if($rel->flags & R_Mdl_User_Relationship::FLAG_BAN) {
+		if($rel->flags & R_Mdl_User_Relation::FLAG_BAN) {
 			return false;
 		}
 		if($rel->groups & $this->groups) {

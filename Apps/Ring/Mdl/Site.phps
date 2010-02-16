@@ -284,6 +284,6 @@ class R_Mdl_Site extends O_Dao_ActiveRecord /*O_Dao_NestedSet_Root*/ {
 	 * @return R_Mdl_User_Relationship
 	 */
 	public function getUserRelation(R_Mdl_User $user) {
-		return R_Mdl_User_Relationship::getRelation($user, $this, 0);
+		return R_Mdl_User_Relation::getRelation($user, $this, 0);
 	}
 }

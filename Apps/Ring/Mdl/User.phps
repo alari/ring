@@ -152,13 +152,13 @@ class R_Mdl_User extends O_Acl_User {
 	public function addFriend(O_Dao_ActiveRecord $object) {
 		// New variant
 		if($object instanceof R_Mdl_Site) {
-			$this->getSiteRelation($object)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
+			$this->getSiteRelation($object)->addFlag(R_Mdl_User_Relation::FLAG_FOLLOW);
 			if($object->owner && $this->site) {
 				$object->owner->getSiteRelation($this->site)->addGroup( $this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_MEMBER) );
 			}
 		} elseif($object instanceof R_Mdl_User) {
 			if($object->site instanceof R_Mdl_Site) {
-				$this->getSiteRelation($object->site)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
+				$this->getSiteRelation($object->site)->addFlag(R_Mdl_User_Relation::FLAG_FOLLOW);
 			}
 			if($this->site instanceof R_Mdl_Site) {
 				$object->getSiteRelation($this->site)->addGroup( $this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_MEMBER) );
@@ -174,13 +174,13 @@ class R_Mdl_User extends O_Acl_User {
 	public function removeFriend(O_Dao_ActiveRecord $object) {
 		// New variant
 		if($object instanceof R_Mdl_Site) {
-			$this->getSiteRelation($object)->removeFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
+			$this->getSiteRelation($object)->removeFlag(R_Mdl_User_Relation::FLAG_FOLLOW);
 			if($object->owner && $this->site) {
 				$object->owner->getSiteRelation($this->site)->removeGroup( $this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_MEMBER) );
 			}
 		} elseif($object instanceof R_Mdl_User) {
 			if($object->site instanceof R_Mdl_Site) {
-				$this->getSiteRelation($object->site)->removeFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
+				$this->getSiteRelation($object->site)->removeFlag(R_Mdl_User_Relation::FLAG_FOLLOW);
 			}
 			if($this->site instanceof R_Mdl_Site) {
 				$object->getSiteRelation($this->site)->removeGroup( $this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_MEMBER) );
@@ -195,7 +195,7 @@ class R_Mdl_User extends O_Acl_User {
 	 * @return R_Mdl_User_Relationship
 	 */
 	public function getSiteRelation(R_Mdl_Site $site) {
-		return R_Mdl_User_Relationship::getRelation($this, $site, 0);
+		return R_Mdl_User_Relation::getRelation($this, $site, 0);
 	}
 
 	/**

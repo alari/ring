@@ -46,7 +46,7 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 		if($site["type"]==R_Mdl_Site::TYPE_AUTH) {
 			$site->owner = $owner;
 			$site->save();
-			foreach($owner->relations->test("flags", R_Mdl_User_Relationship::FLAG_FOLLOW, "&") as $r){
+			foreach($owner->relations->test("flags", R_Mdl_User_Relation::FLAG_FOLLOW, "&") as $r){
 				if($r->site->owner) {
 					$mem->addUser($r->site->owner);
 				}
@@ -61,7 +61,7 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 	 * @return R_Mdl_User_Relationship
 	 */
 	public function getRelation(R_Mdl_User $user) {
-		return R_Mdl_User_Relationship::getRelation($user, $this->site, 0);
+		return R_Mdl_User_Relation::getRelation($user, $this->site, 0);
 	}
 
 	/**

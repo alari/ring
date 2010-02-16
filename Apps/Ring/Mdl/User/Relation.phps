@@ -16,7 +16,7 @@
  *
  * @tail ENGINE=MyISAM
  */
-class R_Mdl_User_Relationship extends O_Dao_ActiveRecord {
+class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	const FLAG_FOLLOW = 1;
 	const FLAG_BAN = 2;
 	const FLAG_INVITE = 4;
