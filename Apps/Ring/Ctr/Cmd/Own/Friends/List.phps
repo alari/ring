@@ -23,6 +23,12 @@ class R_Ctr_Cmd_Own_Friends_List extends R_Command {
 
 		$tpl = $this->getTemplate();
 		$tpl->follow = $user->{"relations.site"}->test("flags", R_Mdl_User_Relationship::FLAG_FOLLOW);
+
+		if($user->site) {
+			$tpl->site = $user->site;
+			$tpl->friends = $user->site->owner_friends;
+		}
+
 		return $tpl;
 
 	}
