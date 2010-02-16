@@ -1,6 +1,10 @@
 <?php
 class R_Cmd_Comment extends R_Command {
 	private $system;
+	/**
+	 *
+	 * @var R_Mdl_Site_Anonce
+	 */
 	private $root;
 
 	public function process()
@@ -8,11 +12,11 @@ class R_Cmd_Comment extends R_Command {
 		Header( "Content-type: text/html; charset=utf-8" );
 
 		if ($this->getParam( "action" ) == "comment-new" || $this->getParam( "action" ) == "comment-for") {
-			if (!$this->can( "comment " . $this->system[ "access" ], $this->system->site )) {
+			if (!R_Mdl_Session::isLogged()) {
 				return "Вы не можете оставлять отзывы. Вероятно, Вам просто нужно авторизоваться. (<a href='http://" .
 					 O_Registry::get( "app/hosts/project" ) . "/OpenId' target='_blank'>Как?</a>)";
 			}
-			if(!$this->can("comment ".$this->root["access_comment"], $this->system->site)){
+			if(!$this->can("comment", $this->root)){
 				return "Отзывы на страничке отключены.";
 			}
 			$this->handleForm();
