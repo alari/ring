@@ -20,7 +20,7 @@ class R_Ctr_Tpl_Own_Friends_List extends R_Ctr_Template {
 <h1>Ваши друзья (сайт: <?=$this->site->link()?>)</h1>
 <ul>
 <?foreach($this->friends as $friend) {?>
-<li><?=$friend->link()?></li>
+<li><?=$friend->link()?> - <small><a href="?remove=<?=$friend->id?>">Убрать</a></small></li>
 <?}?>
 </ul>
 
