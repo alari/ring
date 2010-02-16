@@ -1,6 +1,6 @@
 <?php
 /**
- * @table user_relation_ship
+ * @table user_relations
  *
  * @field site -has one _Site -inverse relations
  * @field user -has one _User -inverse relations
