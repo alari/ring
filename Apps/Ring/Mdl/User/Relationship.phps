@@ -23,6 +23,8 @@ class R_Mdl_User_Relationship extends O_Dao_ActiveRecord {
 	const FLAG_REQUEST = 8;
 	const FLAG_ADMIN = 16;
 
+	static private $objs = Array();
+
 	/**
 	 * Creates new relation
 	 *
@@ -97,10 +99,14 @@ class R_Mdl_User_Relationship extends O_Dao_ActiveRecord {
 	 * @return R_Mdl_User_Relationship
 	 */
 	static public function getRelation(R_Mdl_User $user, R_Mdl_Site $site, $createWithFlags=null) {
-		$rel = static::getQuery()->test("user", $user)->test("site", $site)->getOne();
-		if(!$rel && $createWithFlags !== null) {
-			return new self($user, $site, $createWithFlags);
+		$k = $user["id"].".".$site["id"];
+		if(array_key_exists($k, self::$objs)) {
+			return self::$objs[$k];
 		}
-		return $rel;
+		self::$objs[$k] = static::getQuery()->test("user", $user)->test("site", $site)->getOne();
+		if(!self::$objs[$k] && $createWithFlags !== null) {
+			return self::$objs[$k] = new self($user, $site, $createWithFlags);
+		}
+		return self::$objs[$k];
 	}
 }
