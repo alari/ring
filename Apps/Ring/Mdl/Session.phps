@@ -35,6 +35,9 @@ class R_Mdl_Session extends O_Acl_Session {
 	static public function setQueryAccesses( O_Dao_Query $q, R_Mdl_Site $site )
 	{
 		if(self::isLogged()) {
+			if(self::getUser() == $site->owner) {
+				return $q;
+			}
 			$rel = self::getUser()->getSiteRelation($site);
 			$q->where("owner=?
 			 OR	(groups & ? > 0 AND groups_access & 1 = 1)
