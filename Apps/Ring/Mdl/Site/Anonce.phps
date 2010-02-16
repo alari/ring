@@ -129,31 +129,24 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 *
 	 * @param O_Dao_Query $q
 	 */
-	static public function setQueryAccesses(O_Dao_Query $q, R_Mdl_User $user = null) {
-		if (! $user && ! R_Mdl_Session::isLogged ()) {
-			$q->test ( "access", "public" );
+	static public function setQueryAccesses(O_Dao_Query $q) {
+		if (! R_Mdl_Session::isLogged ()) {
+			$q->where ( "anonymous_access & ?", self::ACTION_READ );
 			return;
 		}
-		$tbl = O_Dao_TableInfo::get ( __CLASS__ )->getTableName ();
-		$r_tbl = O_Dao_TableInfo::get ( "R_Mdl_User_Relation" )->getTableName ();
-		if (! $user)
-			$user = R_Mdl_Session::getUser ();
+		$user = R_Mdl_Session::getUser ();
+		$res = static::getTableInfo()->getTableName ();
+		$rel = R_Mdl_User_Relationship::getTableInfo()->getTableName ();
+		$usr = $user->id;
 
-		$q->joinOnce ( $r_tbl, "$tbl.site=$r_tbl.site AND $r_tbl.user=" . $user->id );
-		$q->where ( "access='public' OR access='protected'
-			OR owner=?
-			OR (access='private' AND $r_tbl.flags & ?)
-			OR (access='disable' AND $r_tbl.flags & ?)
-				", $user, R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE );
-	}
-
-	static public function getByUserRelations($user) {
-		$q = $user->{"relations.site.anonces"}->where ( "__rel1.flags & " . R_Mdl_User_Relation::FLAG_WATCH );
-		$q->where ( "access='public' OR access='protected'
-			OR anonces.owner=?
-			OR (access='private' AND __rel1.flags & ?)
-			OR (access='disable' AND __rel1.flags & ?)", $user, R_Mdl_User_Relation::FLAGS_PRIVATE, R_Mdl_User_Relation::FLAGS_DISABLE );
-		return $q;
+		$q->joinOnce ( $rel, "$res.site=$rel.site AND $rel.user=" . $user->id );
+		$q->where("
+			$rel.flags & 2 = 0 AND (
+				$res.owner=$usr
+				OR ($res.groups & $rel.groups > 0 AND $res.groups_access & 1 = 1)
+				OR ($res.logged_access & 1 = 1 AND NOT ($res.groups & $rel.groups = 1 AND $res.groups_access & 1 = 0))
+			)
+		");
 	}
 
 	/**
@@ -235,14 +228,14 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 		$anonce = null;
 		if ($this->collection) {
 			$coll = $this->collection->anonces->test ( "position", $this->position, $op_test )->clearOrders ()->orderBy ( "position" . $op_ord_pos );
-			//self::setQueryAccesses( $coll );
+			$this->addQueryAccessChecks( $coll );
 			$anonce = $coll->getOne ();
 			if ($anonce)
 				return $anonce;
 			$coll = $this->system->collections->test ( "position", $this->collection->position, $op_test )->clearOrders ()->orderBy ( "position" . $op_ord_pos )->getOne ();
 			if ($coll) {
 				$coll = $coll->anonces->clearOrders ()->orderBy ( "position" . $op_ord_pos );
-				//self::setQueryAccesses( $coll );
+				$this->addQueryAccessChecks( $coll );
 				$anonce = $coll->getOne ();
 				if ($anonce)
 					return $anonce;
@@ -250,7 +243,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 			return null;
 		}
 		$q = $this->system->anonces->test ( "time", $this->time, $op_test )->clearOrders()->orderBy ( "time" . $op_ord_pos );
-		//self::setQueryAccesses( $q );
+		$this->addQueryAccessChecks( $q );
 		return $q->getOne ();
 	}
 
@@ -356,7 +349,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 */
 	public function addQueryAccessChecks(O_Dao_Query $q) {
 		if(R_Mdl_Session::isLogged()) {
-			$rel = R_Mdl_Session::getUser()->getSiteRelation($this->root);
+			$rel = R_Mdl_Session::getUser()->getSiteRelation($this->site);
 			$q->where("owner=? OR (groups & ? > 0 AND groups_access & 1 = 1) OR (logged_access & 1 = 1 AND NOT (groups & ? = 1 AND groups_access & 1 = 0))", R_Mdl_Session::getUser(), $rel->groups, $rel->groups);
 		} else {
 			$q->test("anonymous_access", 1);
@@ -370,7 +363,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
 	 * @return O_Dao_Query
 	 */
 	public function getGroups() {
-		return $this->root->groups->test("flag", $this->groups, "&");
+		return $this->site->groups->test("flag", $this->groups, "&");
 	}
 
 	/**

@@ -26,19 +26,23 @@ class R_Mdl_Session extends O_Acl_Session {
 
 	/**
 	 * Sets available accesses for query in current site context
+	 * Suiteble for resourses
 	 *
 	 * @param O_Dao_Query $query
 	 * @param R_Mdl_Site $site
 	 * @return O_Dao_Query
 	 */
-	static public function setQueryAccesses( O_Dao_Query $query, R_Mdl_Site $site )
+	static public function setQueryAccesses( O_Dao_Query $q, R_Mdl_Site $site )
 	{
-		$accesses = Array ();
-		foreach (array_keys( R_Mdl_Sys_Instance::getAccesses() ) as $acc) {
-			if (self::can( "read " . $acc, $site ))
-				$accesses[] = $acc;
+		if(self::isLogged()) {
+			$rel = self::getUser()->getSiteRelation($site);
+			$q->where("owner=?
+			 OR	(groups & ? > 0 AND groups_access & 1 = 1)
+			 OR (logged_access & 1 = 1 AND NOT (groups & ? = 1 AND groups_access & 1 = 0))", self::getUser(), $rel->groups, $rel->groups);
+		} else {
+			$q->test("anonymous_access", 1);
 		}
-		return $query->test( "access", count( $accesses ) ? $accesses : 0 );
+		return $q;
 	}
 
 }
