@@ -135,7 +135,7 @@ var R = {
 		setSortable: function(list, handle, host) {
 			//R.SortableUtils.init(function(list, handle, host){});
 			this.url = 'http://'+host+'/admin/system-position';
-			$(list).Sortable({
+			$(list).sortable({
 				start:R.SortableUtils.onStart,
 				update: this.onComplete,
 				handle: handle
@@ -155,7 +155,7 @@ var R = {
 		setSortable: function(list, handle, host) {
 		//	R.SortableUtils.init();
 			this.url = 'http://'+host+'/admin/collection-position';
-			$(list).Sortable({
+			$(list).sortable({
 				start:R.SortableUtils.onStart,
 				update: this.onComplete,
 				handle: handle
@@ -175,7 +175,7 @@ var R = {
 		setSortable: function(list, handle, host) {
 			//R.SortableUtils.init();
 			this.url = 'http://'+host+'/admin/anonce-position';
-			$(list).Sortable({
+			$(list).sortable({
 				start:R.SortableUtils.onStart,
 				update: this.onComplete,
 				handle: handle
