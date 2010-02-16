@@ -22,7 +22,6 @@ class R_Ctr_Cmd_Own_Friends_List extends R_Command {
 		}
 
 		$tpl = $this->getTemplate();
-		$tpl->friends = $user->friends;
 		$tpl->follow = $user->{"relations.site"}->test("flags", R_Mdl_User_Relationship::FLAG_FOLLOW);
 		return $tpl;
 

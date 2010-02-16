@@ -6,12 +6,7 @@
  * @field email VARCHAR(255) -edit -title Адрес электронной почты
  * @field nickname VARCHAR(255) -edit -title Ник или псевдоним
  *
- * @field usr_related -owns many R_Mdl_User_Relation -inverse author
- * @field relations_old -owns many R_Mdl_User_Relation -inverse user
  * @field relations -owns many _User_Relationship -inverse user
- *
- * @field friends -alias usr_related.user -where flags & 2
- * @field friend_of -alias relations.author -where flags & 2
  *
  * @field msgs_own -owns many R_Mdl_User_Msg -inverse owner -order-by time DESC
  * @field msgs_target -owns many R_Mdl_User_Msg -inverse target
@@ -155,8 +150,6 @@ class R_Mdl_User extends O_Acl_User {
 	 * @param R_Mdl_User|R_Mdl_Site $object
 	 */
 	public function addFriend(O_Dao_ActiveRecord $object) {
-		// Old variant
-		R_Mdl_User_Relation::addFriend ( $this, $object );
 		// New variant
 		if($object instanceof R_Mdl_Site) {
 			$this->getSiteRelation($object)->addFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
@@ -179,8 +172,6 @@ class R_Mdl_User extends O_Acl_User {
 	 * @param R_Mdl_User|R_Mdl_Site $object
 	 */
 	public function removeFriend(O_Dao_ActiveRecord $object) {
-		// Old variant
-		R_Mdl_User_Relation::removeFriend ( $this, $object );
 		// New variant
 		if($object instanceof R_Mdl_Site) {
 			$this->getSiteRelation($object)->removeFlag(R_Mdl_User_Relationship::FLAG_FOLLOW);
@@ -201,7 +192,7 @@ class R_Mdl_User extends O_Acl_User {
 	 * Returns site relation
 	 *
 	 * @param R_Mdl_Site $site
-	 * @return R_Mdl_Site_Relationship
+	 * @return R_Mdl_User_Relationship
 	 */
 	public function getSiteRelation(R_Mdl_Site $site) {
 		return R_Mdl_User_Relationship::getRelation($this, $site, 0);

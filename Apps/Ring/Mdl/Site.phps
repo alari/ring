@@ -3,17 +3,15 @@
  * @table site -show-loop:callback R_Fr_Site::showInLoop -edit:submit Сохранить изменения
  * @field host varchar(255) NOT NULL
  * @field owner -has one _User -inverse site
- * @field owner_friends -alias usr_related.user -where flags & 2
+ * @field owner_friends -alias relations.user -where groups & 2
  *
  * @field groups -owns many _User_Group -inverse site
  *
- * @field usr_related -owns many _User_Relation -inverse site
- *
  * @field relations -owns many _User_Relationship -inverse site
  *
- * @field members -alias usr_related.user -where flags & 8
- * @field admins -alias usr_related.user -where flags & 16
- * @field leader -alias usr_related.user -where flags & 32
+ * @field members -alias relations.user -where groups & 2
+ * @field admins -alias relations.user -where groups & 1
+ * @field leader -alias relations.user -where groups & 1 and flags & 16
  *
  * @field systems -owns many R_Mdl_Sys_Instance -inverse site -order-by position
  * @field tags -owns many R_Mdl_Site_Tag -inverse site
