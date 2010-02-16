@@ -1,7 +1,7 @@
 <?php
 /**
  * @table site_resourses
- *site 23
+ *
  * @field url_part VARCHAR(12) DEFAULT NULL
  * @field url_cache VARCHAR(255) DEFAULT NULL
  *
@@ -9,10 +9,7 @@
  *
  * @field type TINYINT NOT NULL DEFAULT 0
  * @field content INT
- *
- * show in parent block bool
- * show in parent block type
- * show block type
+ * @field content_class VARCHAR(255)
  *
  * @field groups INT(16) DEFAULT 1
  * @field groups_access INT(8) DEFAULT 0
@@ -21,6 +18,11 @@
  * @field show_to_followers INT(1) DEFAULT 0
  *
  * @index root,url_cache(24)
+ * @index root,show_to_followers
+ * @index root,flags,show_to_followers,owner,groups,groups_access,logged_access
+ * @index anonymous_access
+ * @index root,groups,groups_access
+ * @index content,content_class
  */
 class R_Mdl_Resourse extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
 	const ROOT_CLASS = "R_Mdl_Site";
@@ -32,7 +34,8 @@ class R_Mdl_Resourse extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
 	const ACTION_COMMENT = 8;
 	const ACTION_ADMIN = 16;
 
-	static private $types = Array(0=>"Folder", 1=>"Text");
+	const TYPE_SYSTEM = 1;
+	const TYPE_COLLECTION = 2;
 
 	public function getPageTitle() {
 		;
