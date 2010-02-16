@@ -6,7 +6,7 @@
  * @field email VARCHAR(255) -edit -title Адрес электронной почты
  * @field nickname VARCHAR(255) -edit -title Ник или псевдоним
  *
- * @field relations -owns many _User_Relationship -inverse user
+ * @field relations -owns many _User_Relation -inverse user
  *
  * @field msgs_own -owns many R_Mdl_User_Msg -inverse owner -order-by time DESC
  * @field msgs_target -owns many R_Mdl_User_Msg -inverse target
@@ -192,7 +192,7 @@ class R_Mdl_User extends O_Acl_User {
 	 * Returns site relation
 	 *
 	 * @param R_Mdl_Site $site
-	 * @return R_Mdl_User_Relationship
+	 * @return R_Mdl_User_Relation
 	 */
 	public function getSiteRelation(R_Mdl_Site $site) {
 		return R_Mdl_User_Relation::getRelation($this, $site, 0);

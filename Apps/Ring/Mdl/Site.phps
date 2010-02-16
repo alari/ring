@@ -7,7 +7,7 @@
  *
  * @field groups -owns many _User_Group -inverse site
  *
- * @field relations -owns many _User_Relationship -inverse site
+ * @field relations -owns many _User_Relation -inverse site
  *
  * @field members -alias relations.user -where groups & 2
  * @field admins -alias relations.user -where groups & 1
@@ -281,7 +281,7 @@ class R_Mdl_Site extends O_Dao_ActiveRecord /*O_Dao_NestedSet_Root*/ {
 	 * Returns user relation
 	 *
 	 * @param R_Mdl_User $user
-	 * @return R_Mdl_User_Relationship
+	 * @return R_Mdl_User_Relation
 	 */
 	public function getUserRelation(R_Mdl_User $user) {
 		return R_Mdl_User_Relation::getRelation($user, $this, 0);

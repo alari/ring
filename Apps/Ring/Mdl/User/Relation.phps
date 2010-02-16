@@ -96,7 +96,7 @@ class R_Mdl_User_Relation extends O_Dao_ActiveRecord {
 	 * @param R_Mdl_User $user
 	 * @param R_Mdl_Site $site
 	 * @param const $createWithFlags
-	 * @return R_Mdl_User_Relationship
+	 * @return R_Mdl_User_Relation
 	 */
 	static public function getRelation(R_Mdl_User $user, R_Mdl_Site $site, $createWithFlags=null) {
 		$k = $user["id"].".".$site["id"];

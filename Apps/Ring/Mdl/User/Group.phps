@@ -58,7 +58,7 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 	 * Returns relation object for user and site
 	 *
 	 * @param R_Mdl_User $user
-	 * @return R_Mdl_User_Relationship
+	 * @return R_Mdl_User_Relation
 	 */
 	public function getRelation(R_Mdl_User $user) {
 		return R_Mdl_User_Relation::getRelation($user, $this->site, 0);
@@ -68,7 +68,7 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 	 * Adds user to group
 	 *
 	 * @param R_Mdl_User $user
-	 * @return R_Mdl_User_Relationship
+	 * @return R_Mdl_User_Relation
 	 */
 	public function addUser(R_Mdl_User $user) {
 		$rel = $this->getRelation($user);
@@ -80,7 +80,7 @@ class R_Mdl_User_Group extends O_Dao_ActiveRecord {
 	 * Removes user from the group
 	 *
 	 * @param R_Mdl_User $user
-	 * @return R_Mdl_User_Relationship
+	 * @return R_Mdl_User_Relation
 	 */
 	public function removeUser(R_Mdl_User $user) {
 		$rel = $this->getRelation($user);
