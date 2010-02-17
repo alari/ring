@@ -3,7 +3,6 @@ Options -Indexes
 php_value upload_max_filesize 16M
 php_value session.gc_maxlifetime 864000
 php_value magic_quotes_gpc Off
-php_value date.timezone Europe/Moscow
 
 RewriteEngine On
 

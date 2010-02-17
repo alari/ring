@@ -32,7 +32,6 @@ class R_Lf_Layout extends R_Layout {
 					"X-XRDS-Location: http://" . O_Registry::get( "env/http_host" ) . "/openid/provider/user-xrds" );
 		}
 
-		$this->addJavaScriptSrc("http://centralis.name/static/js/jquery-ui-min.js");
 		$this->addJavaScriptSrc( "ring.js" );
 
 		// Authentication

@@ -3,52 +3,50 @@ var R = {
 		isShowed: 0,
 		el: null,
 		toggle: function(){
-			R.UserMenu.isShowed ? this.hide() : this.show();
+			this.isShowed ? this.hide() : this.show();
 		},
 		show: function(){
-			this.getEl().fadeIn();
 			R.Shadow.show();
-			R.UserMenu.isShowed = 1;
+			this.getEl().fadeIn();
+			this.isShowed = 1;
 		},
 		hide: function(){
 			R.Shadow.hide();
 			this.getEl().fadeOut();
-			R.UserMenu.isShowed = 0;
+			this.isShowed = 0;
 		},
 		getEl: function(){
-			if(!R.UserMenu.el) {
-				R.UserMenu.el = $('#user-menu');
-				R.UserMenu.el.css('width', $('#user-box').width());
-				//R.userMenu.el
+			if(!this.el) {
+				this.el = $('#user-menu');
+				this.el.css('width', $('#user-box').width());
 			}
-			return R.UserMenu.el;
+			return this.el;
 		}
 	},
 	Shadow: {
 		el: null,
 		isShowed:0,
 		show: function(){
-
-			this.getEl().css('width', $('#wrap').width());
-			R.Shadow.el.css('height', $('#wrap').height());
-			R.Shadow.el.fadeTo(400, 0.6);
-			R.Shadow.isShowed = 1;
+			this.el.css('width', $('#wrap').width());
+			this.el.css('height', $('#wrap').height());
+			this.getEl().fadeTo(400, 0.6);
+			this.isShowed = 1;
 		},
 		hide: function(){
 			this.getEl().fadeTo("fast", 0, function(){
 				$(this).fadeOut();
 			});
-			R.Shadow.isShowed = 0;
+			this.isShowed = 0;
 		},
 		getEl: function(){
-			if(!R.Shadow.el) {
-				R.Shadow.el = $("<div id='shadow'></div>");
-				R.Shadow.el.fadeOut();
-				$('#wrap').after(R.Shadow.el);
-				R.Shadow.el.css("left", 0);
-				R.Shadow.el.css("top", 0);
+			if(!this.el) {
+				this.el = new Element("div", {id:"shadow"});
+				this.el.fadeOut();
+				$('#wrap').after(this.el);
+				this.el.style.left = 0;
+				this.el.style.top = 0;
 			}
-			return R.Shadow.el;
+			return this.el;
 		},
 		toggle: function(){
 			this.isShowed ? this.hide() : this.show();
@@ -56,24 +54,24 @@ var R = {
 	},
 	AjaxFragment: {
 		show: function(elName, options) {
-			
-			el = typeof(elName)=='object' ? elName : $('#'+elName);
+			el = $('#'+elName);
 			this.init(el);
 			el.attr("r_ajax_isShowed", 1);
 			el.css("overflow", "hidden");
 			
-			el.load(options.url, options.data).animate({				 
+			el.load(options.url, options.data, function() {
+				$(this).animate({				 
 				    height: $(this).innerHeight()
 				  }, 850, function() {
 					  $(this).css('height', 'auto');
 					  $(this).css('overflow', 'visible');
 				  });
-
+			});
 		},
 		hide: function(el) {
-			el = typeof(el)=='object' ? el : $('#'+el);
+			el = $('#'+el);
 			el.css('overflow', 'hidden');
-			el.animate({height: 0}, 850);
+			el.animate({height: $(this).innerHeight()}, 850);
 			el.attr("r_ajax_isShowed", 0);
 		},
 		init: function(el, param) {
@@ -94,9 +92,8 @@ var R = {
 		showForm: function(el, url, root, parent, sys) {
 			el = $(el).parent();
 			e = el.children('.form-el');
-			if(e.length == 0) {
-				el.append('<div class="form-el"></div>');
-				e = $('.form-el', el);
+			if(e.lenght == 0) {
+				el.children('.form-el').after('<div class="form-el"></div>');
 			}
 			if(e.attr("r_ajax_isShowed") == 1) {
 				return R.AjaxFragment.hide(e);
@@ -136,72 +133,65 @@ var R = {
 	System: {
 		url: null,
 		setSortable: function(list, handle, host) {
-			//R.SortableUtils.init(function(list, handle, host){});
 			this.url = 'http://'+host+'/admin/system-position';
-			$(list).sortable({
+			$(list).Sortable({
 				start:R.SortableUtils.onStart,
 				update: this.onComplete,
-				//handle: handle
+				handle: handle
 			});
 		},
-		onComplete:function(e, elObj){
-			el = elObj.item;
+		onComplete:function(elName){
+			el = $("#"+elName);
 			var newPosition = el.prevUntil().length+1;
-			if(newPosition == R.SortableUtils.oldPosition) return;
+			if(newPosition == R.SortableUtils.oldPosition-1) return;
 		 	
-		 	var elId = el.attr("id").replace(/^sysid-(.+)$/, "$1");
-		 	$.post(R.System.url, {base:elId, pos:newPosition});
+		 	var elId = el.get("id").replace(/^sysid-(.+)$/, "$1");
+		 	$.post(this.url, {base:elId, pos:newPosition});
 		 }
 	},
 	Collection: {
 		url: null,
 		setSortable: function(list, handle, host) {
-		//	R.SortableUtils.init();
 			this.url = 'http://'+host+'/admin/collection-position';
-			$(list).sortable({
+			$(list).Sortable({
 				start:R.SortableUtils.onStart,
 				update: this.onComplete,
-				//handle: handle
+				handle: handle
 			});
 		},
-		onComplete:function(e, elObj){
-			el = elObj.item;
+		onComplete:function(el){
+			el = $("#"+elName);
 			var newPosition = el.prevUntil().length+1;
-			if(newPosition == R.SortableUtils.oldPosition) return;
+			if(newPosition == R.SortableUtils.oldPosition-1) return;
 		 	
-			var elId = el.attr("id").replace(/^collid-([0-9]+)$/, "$1");
-			$.post(R.Collection.url, {base:elId, pos:newPosition});
+			var elId = el.get("id").replace(/^collid-([0-9]+)$/, "$1");
+			$.post(this.url, {base:elId, pos:newPosition});
 		 }
 	},
 	Anonce: {
 		url: null,
 		setSortable: function(list, handle, host) {
-			//R.SortableUtils.init();
 			this.url = 'http://'+host+'/admin/anonce-position';
-			$(list).sortable({
+			$(list).Sortable({
 				start:R.SortableUtils.onStart,
 				update: this.onComplete,
-				//handle: handle
+				handle: handle
 			});
 		},
-		onComplete: function(ev, elObj) {
-			 el = elObj.item;
+		onComplete: function(elName) {
+			 el = $("#"+elName);
 			 var newPosition = el.prevUntil().length+1;
-			 if(newPosition == R.SortableUtils.oldPosition) return;
+			 if(newPosition == R.SortableUtils.oldPosition-1) return;
 			 	
-			 var elId = el.attr("id").replace(/^anonceid-(.+)$/, "$1");
-			 $.post(R.Anonce.url, {base:elId, pos:newPosition});
+			 var elId = el.get("id").replace(/^anonceid-(.+)$/, "$1");
+			 $.post(this.url, {base:elId, pos:newPosition});
 		}
 	},
 	SortableUtils: {
 		oldPosition: null,
-		onStart: function(ev, elObj) {
-			el = elObj.item;
+		onStart: function(elName) {
+			el = $("#"+elName);
 			R.SortableUtils.oldPosition = el.prevUntil().length+1; 
 		}
-		/*init: function(cb){
-			$.getScript('http://centralis.name/static/js/jquery-ui-min.js', cb);
-		}*/
-	
 	}
 };
