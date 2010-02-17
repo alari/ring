@@ -42,7 +42,7 @@
  * @index collection,position
  * @index position
  */
-class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root {
+class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResourse {
 	const NODES_CLASS = "R_Mdl_Site_Comment";
 
 	private $_updateCollectionPosition = 0;
