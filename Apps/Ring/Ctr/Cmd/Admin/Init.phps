@@ -21,8 +21,9 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 				/* @var $sys R_Mdl_Sys_Instance */
 				$sys->createResource();
 				echo "Resource OK";
+				if(count($sys->collections))
 				foreach ($sys->collections as $coll) {
-					echo "<br/>Coll #{$coll['id']} ".$coll->title;
+					echo "<dl><dt>Coll #{$coll['id']} ".$coll->title."</dt><dd>";
 					/* @var $coll R_Mdl_Site_Collection */
 					$coll->createResource();
 					foreach($coll->anonces as $a) {
@@ -30,7 +31,8 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 						/* @var $a R_Mdl_Site_Anonce */
 						$a->createResource();
 					}
-				}
+					echo "</dd>";
+				} else
 				foreach($sys->anonces as $a) {
 					echo "<br/>A #{$a['id']} ".$a->title;
 					/* @var $a R_Mdl_Site_Anonce */
