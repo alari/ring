@@ -40,6 +40,7 @@ class R_Mdl_Resource extends R_Mdl_Resource_Acl {
 			$this->content = $record["id"];
 			$this->content_class = get_class($record);
 		}
+		$this->save();
 	}
 
 	public function getContent() {
