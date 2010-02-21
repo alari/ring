@@ -85,6 +85,8 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 		$double = Array("groups","groups_access","logged_access","anonymous_access","show_to_followers","title","time");
 		foreach($double as $f) $res->$f = $this->$f;
 
+		$res->save();
+
 		if($this->collection) {
 			$coll_res = $this->collection->getResource();
 			$prev = $this->collection->anonces->test("position", $this->position, "<")->clearOrders()->orderBy("position DESC")->getOne();
@@ -96,8 +98,6 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 			}
 			else $coll_res->injectTop($res);
 		}
-
-		$res->save();
 	}
 
 	/**
