@@ -13,7 +13,7 @@
  * @index anonymous_access
  * @index root,groups,groups_access
  */
-abstract class R_Mdl_Resource_Acl extends O_Dao_NestedSet_Both implements O_Acl_iResource {
+abstract class R_Mdl_Resource_Acl extends O_Dao_NestedSet_Node implements O_Acl_iResource {
 
 	const ACTION_READ = 1;
 	const ACTION_WRITE = 2;
