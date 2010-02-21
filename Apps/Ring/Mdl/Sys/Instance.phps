@@ -105,6 +105,7 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 		$res->groups = 3;
 		$res->show_to_followers = 0;
 		$res->setContent($this);
+		$res->units_type = $this->getType();
 		$time = $this->anonces->getFunc("time", "MIN");
 		if(!$time) $time = time();
 		$res->time = $time;
