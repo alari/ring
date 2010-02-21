@@ -84,7 +84,10 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 		foreach($double as $f) $res->$f = $this->$f;
 
 		if($this->collection) {
-
+			$coll_res = $this->collection->getResource();
+			$prev = $this->getPrevious();
+			if($prev) $prev->getResource()->injectAfter($res);
+			else $coll_res->injectTop($res);
 		}
 
 		$res->save();

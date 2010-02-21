@@ -215,6 +215,12 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 
 		$this->position = $newPosition;
 		parent::save();
+
+		$res = $this->getResource();
+		/* @var $prev R_Mdl_Resource */
+		$prev = $this->site->systems->test("position", $newPosition, "<")->clearOrders()->orderBy("position DESC")->getOne();
+		if($prev) $prev->injectAfter($res);
+		else $this->site->getResource()->injectTop($res);
 	}
 
 }

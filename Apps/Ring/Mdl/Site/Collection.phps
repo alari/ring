@@ -123,6 +123,10 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 
 		$this->position = $newPosition;
 		parent::save ();
-	}
 
+		$res = $this->getResource();
+		$prev = $this->system->collections->test("position", $newPosition, "<")->clearOrders()->orderBy("position DESC")->getOne();
+		if($prev) $prev->injectAfter($res);
+		else $this->system->getResource()->injectTop($res);
+	}
 }
