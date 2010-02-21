@@ -63,6 +63,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 	}
 
 	public function createResource() {
+		if($this->getResource()) return;
 		$res = new R_Mdl_Resource($this->site);
 		$this->system->getResource()->injectBottom($res);
 		$res->type = R_Mdl_Resource::TYPE_ANONCE;

@@ -97,6 +97,7 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 	}
 
 	public function createResource() {
+		if($this->getResource()) return;
 		$res = new R_Mdl_Resource($this->site);
 		$this->site->getResource()->injectBottom($res);
 		$res->type = R_Mdl_Resource::TYPE_SYSTEM;
