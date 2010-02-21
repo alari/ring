@@ -82,7 +82,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 		$res->url_part = $this->creative->id;
 		$res->url_cache = $sys->url_cache."/".$this->creative->id;
 
-		$double = Array("groups","groups_access","logged_access","anonymous_access","show_to_followers","title","time");
+		$double = Array("groups","groups_access","logged_access","anonymous_access","show_to_followers","title","time","description");
 		foreach($double as $f) $res->$f = $this->$f;
 
 		$res->save();

@@ -52,6 +52,7 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 		$res->logged_access = $sys->logged_access;
 		$res->groups_access = $sys->groups_access;
 		$res->time = $this->time;
+		$res->description = $this->description;
 
 		$res->save();
 	}
