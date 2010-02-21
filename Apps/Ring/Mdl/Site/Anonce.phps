@@ -109,7 +109,8 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 		if ($this->collection) {
 			$this->collection->anonces->test ( "position", $this->position, ">" )->field ( "position", "position-1", 1 )->update ();
 		}
-		$this->getResource()->delete();
+		$r = $this->getResource();
+		if($r) $r->delete();
 		parent::delete ();
 	}
 
