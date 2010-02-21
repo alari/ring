@@ -3,6 +3,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 
 	public function process()
 	{
+		exit;
 		error_reporting(E_ALL);
 		ini_set("display_errors", true);
 		try {
