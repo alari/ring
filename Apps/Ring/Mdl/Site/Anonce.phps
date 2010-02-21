@@ -87,7 +87,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 
 		if($this->collection) {
 			$coll_res = $this->collection->getResource();
-			$prev = $this->getPrevious();
+			$prev = $this->collection->anonces->test("position", $this->position, "<")->clearOrders()->orderBy("position DESC")->getOne();
 			if($prev) {
 				$prev_res = $prev->getResource();
 				if(!$prev_res) $prev->createResource();
@@ -262,6 +262,9 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 		return $this->getNextOrPrev ( 0 );
 	}
 
+	/**
+	 * @return R_Mdl_Site_Anonce
+	 */
 	public function getPrevious() {
 		return $this->getNextOrPrev ( 1 );
 	}
