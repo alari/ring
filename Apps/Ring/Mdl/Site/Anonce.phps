@@ -70,6 +70,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 		$res->type = R_Mdl_Resource::TYPE_ANONCE;
 		$res->groups = 3;
 		$res->show_to_followers = 1;
+		$res->units_type = $this->system->getResource()->units_sype;
 		$res->setContent($this);
 		$this->syncRes($res);
 	}
