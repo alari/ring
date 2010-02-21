@@ -25,6 +25,11 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 					echo "<br/>Coll #{$coll['id']} ".$coll->title;
 					/* @var $coll R_Mdl_Site_Collection */
 					$coll->createResource();
+					foreach($coll->anonces as $a) {
+						echo "<br/>A #{$a['id']} ".$a->title;
+						/* @var $a R_Mdl_Site_Anonce */
+						$a->createResource();
+					}
 				}
 				foreach($sys->anonces as $a) {
 					echo "<br/>A #{$a['id']} ".$a->title;
