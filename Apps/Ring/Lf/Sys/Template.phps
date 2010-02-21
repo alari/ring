@@ -145,10 +145,5 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 	</ul>
 			<?
 		}
-
-		$o = $this->site;
-		if($this->instance) $o = $this->instance->system;
-		if($this->creative) $o = $this->creative->anonce;
-		if($o->getResource()) echo "<span>".$o->getResource()->dump()."</span>";
 	}
 }
