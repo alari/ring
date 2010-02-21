@@ -31,6 +31,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 					/* @var $a R_Mdl_Site_Anonce */
 					$a->createResource();
 				}
+				echo "</dd>";
 			}
 			echo "</dd>";
 		}
