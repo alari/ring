@@ -47,4 +47,8 @@ class R_Mdl_Resource extends R_Mdl_Resource_Acl {
 		return O_Dao_ActiveRecord::getById($this->content, $this->content_class);
 	}
 
+	public function dump() {
+		return "[$this->id\{$this->left_key,$this->right_key,$this->level\}]";
+	}
+
 }

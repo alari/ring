@@ -10,11 +10,11 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 	{
 		$description = Array ();
 		$keywords = Array ();
-		
+
 		if ($this->tags)
 			foreach ($this->tags as $tag)
 				$keywords[] = $tag->title;
-		
+
 		if ($this->creative) {
 			$description[] = $this->creative->anonce->title;
 			$description[] = $this->instance->title;
@@ -27,23 +27,23 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 				$keywords[] = $this->creative->anonce->owner->nickname;
 			}
 		}
-		
+
 		if ($this->instance) {
 			$description[] = $this->instance->title;
 			$keywords[] = $this->instance->title;
 			$this->layout()->setBodyClass( "sys-" . $this->instance->system->urlbase . "-body" );
 		}
-		
+
 		if (!$this->creative && $this->getSite()->owner) {
 			$description[] = "Автор: " . $this->site->owner->nickname;
 			$keywords[] = "автор";
 			$keywords[] = $this->site->owner->nickname;
 		}
-		
+
 		$description[] = "Сайт &laquo;" . $this->getSite()->title . "&raquo;";
-		
+
 		$description[] = "Входит в кольцо творческих сайтов Mirari.Name";
-		
+
 		$this->layout()->setMetaDescription( $description );
 		$this->layout()->setMetaKeywords( $keywords );
 	}
@@ -70,12 +70,9 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 <ul>
 	<li><a href="<?=$this->instance->system->url( "form" )?>">Добавить</a></li>
 <?
-			
+
 			if ($this->creative) {
-				if (R_MDl_Session::can( "write " . $this->creative->anonce[ "access" ], 
-						$this->creative->anonce ) && R_MDl_Session::can( 
-						"write " . $this->instance->system[ "access" ], 
-						$this->creative->anonce )) {
+				if (R_MDl_Session::can( "write " . $this->creative->anonce[ "access" ], $this->creative->anonce ) && R_MDl_Session::can( "write " . $this->instance->system[ "access" ], $this->creative->anonce )) {
 					?>
 	<li><a
 		href="<?=$this->instance->system->url( "form/" . $this->creative->id )?>">Править</a></li>
@@ -86,8 +83,7 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 		<li><a href="<?=$this->creative->url()?>?action=delete"
 		onclick="return confirm('Вы уверены? Восстановление будет невозможно!')">Удалить</a></li>
 <?
-					if (R_Mdl_Session::can( "crosspost", $this->getSite() ) && count( 
-							$this->getSite()->crosspost_services )) {
+					if (R_Mdl_Session::can( "crosspost", $this->getSite() ) && count( $this->getSite()->crosspost_services )) {
 						?>
 		<li><a
 		href="<?=$this->instance->system->url( "cross/" . $this->creative->id )?>">Кросспостинг</a></li><?
@@ -102,18 +98,17 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 
 				<?
 			}
-			
+
 			?></ul><?
 		}
-		
+
 		if (R_Mdl_Session::isLogged() && $this->creative) {
 			?>
 
 <p><i>Внутренний ID для связей: <b><?=$this->creative[ "anonce" ]?></b></i></p>
 <?
 			if (R_Mdl_Session::getUser() != $this->creative->anonce->owner) {
-				$has_fovarites = R_Mdl_Session::getUser()->favorites->has( 
-						$this->creative->anonce );
+				$has_fovarites = R_Mdl_Session::getUser()->favorites->has( $this->creative->anonce );
 				?>
 <p><i><a href="javascript:void(0)"
 	onclick="new Request.HTML({url:'<?=$this->creative->url()?>?action=fav',update:$(this).getParent()}).send();"><?=($has_fovarites ? "Убрать из избранного" : "Добавить в избранное")?></a></i>
@@ -124,18 +119,17 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 
 <?
 		}
-		
+
 		if ($this->tags instanceof O_Dao_Query && count( $this->tags->getAll() )) {
 			?><p><b>Метки</b></p>
 <ul>
 <?
 			foreach ($this->tags as $tag) {
-				echo "<li>", $this->tag == $tag ? "<b>" : "", $tag->link( 
-						$this->instance->system ), $this->tag == $tag ? "</b>" : "", "</li>";
+				echo "<li>", $this->tag == $tag ? "<b>" : "", $tag->link( $this->instance->system ), $this->tag == $tag ? "</b>" : "", "</li>";
 			}
 			echo "</ul>";
 		}
-		
+
 		if (count( $this->instance->system->collections )) {
 			?>
 	<br />
@@ -144,14 +138,17 @@ abstract class R_Lf_Sys_Template extends R_Lf_Template {
 	<ul>
 	<?
 			foreach ($this->instance->system->collections as $coll) {
-				$is_current = ($this->creative && $this->creative->anonce->collection == $coll) ||
-								 $this->collection == $coll ? 1 : 0;
-				echo "<li><i>" . ($is_current ? "<b>" : "") . $coll->link() . ($is_current ? "</b>" : "") .
-						 "</i></li>";
-				}
-				?>
+				$is_current = ($this->creative && $this->creative->anonce->collection == $coll) || $this->collection == $coll ? 1 : 0;
+				echo "<li><i>" . ($is_current ? "<b>" : "") . $coll->link() . ($is_current ? "</b>" : "") . "</i></li>";
+			}
+			?>
 	</ul>
 			<?
-			}
 		}
+
+		$o = $this->site;
+		if($this->instance) $o = $this->instance->system;
+		if($this->creative) $o = $this->creative->anonce;
+		echo "<span>".$o->getResource()->dump()."</span>";
 	}
+}
