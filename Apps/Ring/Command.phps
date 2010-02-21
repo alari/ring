@@ -1,9 +1,9 @@
 <?php
 abstract class R_Command extends O_Command {
 
-	public function can( $action, O_Dao_ActiveRecord $resourse = null )
+	public function can( $action, O_Dao_ActiveRecord $resource = null )
 	{
-		return R_Mdl_Session::getUser()->can( $action, $resourse );
+		return R_Mdl_Session::getUser()->can( $action, $resource );
 	}
 
 	public function isMethodPost()

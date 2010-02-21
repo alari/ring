@@ -7,7 +7,7 @@
  * @field nickname VARCHAR(255) -edit -title Ник или псевдоним
  *
  * @field relations -owns many _User_Relation -inverse user
- * @field resourses -owns many _Resourse -inverse owner
+ * @field resources -owns many _Resource -inverse owner
  *
  * @field msgs_own -owns many R_Mdl_User_Msg -inverse owner -order-by time DESC
  * @field msgs_target -owns many R_Mdl_User_Msg -inverse target

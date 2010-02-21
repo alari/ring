@@ -1,6 +1,6 @@
 <?php
 /**
- * @table site_resourses
+ * @table site_resources
  *
  * @field url_part VARCHAR(12) DEFAULT NULL
  * @field url_cache VARCHAR(255) DEFAULT NULL
@@ -15,13 +15,14 @@
  * @index root,url_cache(24) -unique
  * @index content,content_class
  */
-class R_Mdl_Resourse extends R_Mdl_Resourse_Acl {
+class R_Mdl_Resource extends R_Mdl_Resource_Acl {
 	const ROOT_CLASS = "R_Mdl_Site";
 	const NODES_CLASS = "R_Mdl_Comment";
 
 	const TYPE_SYSTEM = 1;
 	const TYPE_COLLECTION = 2;
 	const TYPE_ANONCE = 3;
+	const TYPE_SITE = 4;
 
 	public function getPageTitle() {
 		;

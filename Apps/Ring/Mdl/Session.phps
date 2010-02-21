@@ -26,7 +26,7 @@ class R_Mdl_Session extends O_Acl_Session {
 
 	/**
 	 * Sets available accesses for query in current site context
-	 * Suiteble for resourses
+	 * Suiteble for resources
 	 *
 	 * @param O_Dao_Query $query
 	 * @param R_Mdl_Site $site

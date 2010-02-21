@@ -42,7 +42,7 @@
  * @index collection,position
  * @index position
  */
-class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResourse {
+class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource {
 	const NODES_CLASS = "R_Mdl_Site_Comment";
 
 	private $_updateCollectionPosition = 0;
@@ -58,6 +58,81 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResourse 
 		$this->owner = R_Mdl_Session::getUser ();
 		$this->save ();
 		$this->creative->save ();
+
+		$this->createResource();
+	}
+
+	public function createResource() {
+		$res = new R_Mdl_Resource($this->site);
+		$this->system->getResource()->injectBottom($res);
+		$res->type = R_Mdl_Resource::TYPE_ANONCE;
+		$res->groups = 3;
+		$res->show_to_followers = 1;
+		$res->setContent($this);
+		$this->syncRes($res);
+	}
+
+	private function syncRes(R_Mdl_Resource $res=null) {
+		if(!$res) $res = $this->getResource();
+		if(!$res) return;
+		$sys = $this->system->getResource();
+
+		$res->url_part = $this->creative->id;
+		$res->url_cache = $sys->url_cache."/".$this->creative->id;
+
+		$double = Array("groups","groups_access","logged_access","anonymous_access","show_to_followers","title","time");
+		foreach($double as $f) $res->$f = $this->$f;
+
+		if($this->collection) {
+
+		}
+
+		$res->save();
+	}
+
+	/**
+	 * Deletes anonce
+	 *
+	 */
+	public function delete() {
+		if ($this->collection) {
+			$this->collection->anonces->test ( "position", $this->position, ">" )->field ( "position", "position-1", 1 )->update ();
+		}
+		$this->getResource()->delete();
+		parent::delete ();
+	}
+
+	public function save() {
+		// 								ACCESS MIGRATION
+		$this->setMigrateAccesses();
+		parent::save ();
+		$this->syncRes();
+		// Check validity of position in the cycle
+		if (! $this->_updateCollectionPosition && $this->collection) {
+			// If there's more then one anonce with current position
+			if ($this->collection->anonces->test ( "position", $this->position )->test ( "id", $this->id, "!=" )->getOne ()) {
+				// Set for number of anonces -- making this last anonce
+				$this->position = count ( $this->collection->anonces ) + 1;
+				parent::save ();
+				// There is still error in position -- update all positions in collection
+				if ($this->collection->anonces->test ( "position", $this->position )->test ( "id", $this->id, "!=" )->getOne ()) {
+					$i = 0;
+					foreach ( $this->collection->anonces as $a ) {
+						$a->_updateCollectionPosition = 1;
+						$a->position = ++ $i;
+						$a->save ();
+						$a->_updateCollectionPosition = 0;
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @return R_Mdl_Resource
+	 */
+	public function getResource() {
+		return $this->system->getResource()->getChilds()->test("content", $this->id)->test("content_class", __CLASS__)->getOne();
 	}
 
 	/**
@@ -147,42 +222,6 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResourse 
 				OR ($res.logged_access & 1 = 1 AND NOT ($res.groups & $rel.groups = 1 AND $res.groups_access & 1 = 0))
 			)
 		");
-	}
-
-	/**
-	 * Deletes anonce
-	 *
-	 */
-	public function delete() {
-		if ($this->collection) {
-			$this->collection->anonces->test ( "position", $this->position, ">" )->field ( "position", "position-1", 1 )->update ();
-		}
-		parent::delete ();
-	}
-
-	public function save() {
-		// 								ACCESS MIGRATION
-		$this->setMigrateAccesses();
-		parent::save ();
-		// Check validity of position in the cycle
-		if (! $this->_updateCollectionPosition && $this->collection) {
-			// If there's more then one anonce with current position
-			if ($this->collection->anonces->test ( "position", $this->position )->test ( "id", $this->id, "!=" )->getOne ()) {
-				// Set for number of anonces -- making this last anonce
-				$this->position = count ( $this->collection->anonces ) + 1;
-				parent::save ();
-				// There is still error in position -- update all positions in collection
-				if ($this->collection->anonces->test ( "position", $this->position )->test ( "id", $this->id, "!=" )->getOne ()) {
-					$i = 0;
-					foreach ( $this->collection->anonces as $a ) {
-						$a->_updateCollectionPosition = 1;
-						$a->position = ++ $i;
-						$a->save ();
-						$a->_updateCollectionPosition = 0;
-					}
-				}
-			}
-		}
 	}
 
 	/**

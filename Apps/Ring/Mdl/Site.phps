@@ -39,7 +39,7 @@
  * @index status
  * @index type
  */
-class R_Mdl_Site extends O_Dao_ActiveRecord /*O_Dao_NestedSet_Root*/ {
+class R_Mdl_Site extends O_Dao_NestedSet_Root {
 
 	const TYPE_AUTH = 1;
 	const TYPE_COMM = 2;
@@ -47,7 +47,7 @@ class R_Mdl_Site extends O_Dao_ActiveRecord /*O_Dao_NestedSet_Root*/ {
 	const ST_AWAITING = 0;
 	const ST_TECH = 2;
 
-	const NODES_CLASS = "R_Mdl_Resourse";
+	const NODES_CLASS = "R_Mdl_Resource";
 
 	private $available_systems;
 
@@ -81,6 +81,43 @@ class R_Mdl_Site extends O_Dao_ActiveRecord /*O_Dao_NestedSet_Root*/ {
 
 		// Generate default groups
 		R_Mdl_User_Group::createSiteGroups($this, $owner);
+
+		$this->createResource();
+	}
+
+	public function createResource() {
+		if($this->getResource()) return;
+		// CREATE ROOT RESOURCE
+		$res = new R_Mdl_Resource($this);
+		$res->type = R_Mdl_Resource::TYPE_SITE;
+		$res->show_to_followers = 0;
+		$res->loggedAllow(R_Mdl_Resource::ACTION_READ);
+		$res->anonymousAllow(R_Mdl_Resource::ACTION_READ);
+		$res->url_cache = "";
+		$res->url_part = "";
+		$res->title = $this->title;
+		$time = $this->anonces->getFunc("time", "MIN");
+		if(!$time) $time = time();
+		$res->time = $time;
+		$res->save();
+	}
+
+	public function save() {
+		parent::save();
+		$res = $this->getResource();
+		if($res) {
+			$res->title = $this->title;
+			$res->save();
+		}
+	}
+
+	/**
+	 * Returns root resource
+	 *
+	 * @return R_Mdl_Resource
+	 */
+	public function getResource() {
+		return $this->nodes->test("left_key", 1)->getOne();
 	}
 
 	/**

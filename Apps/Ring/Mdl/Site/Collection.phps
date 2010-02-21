@@ -24,10 +24,51 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 		$this->system = $system;
 		$this->position = count ( $system->collections ) + 1;
 		$this->save ();
+
+		$this->createResource();
+	}
+
+	public function createResource() {
+		$res = new R_Mdl_Resource($this->system->site);
+		$this->system->getResource()->injectBottom($res);
+		$res->type = R_Mdl_Resource::TYPE_COLLECTION;
+		$res->groups = 3;
+		$res->show_to_followers = 0;
+		$res->setContent($this);
+		$this->syncRes($res);
+	}
+
+	private function syncRes(R_Mdl_Resource $res=null) {
+		if(!$res) $res = $this->getResource();
+		if(!$res) return;
+		$sys = $this->system->getResource();
+		$res->title = $this->title;
+		$res->url_part = "coll-".$this->id;
+		$res->url_cache = $sys->url_cache."/coll-".$this->id;
+
+		$res->anonymous_access = $sys->anonymous_access;
+		$res->logged_access = $sys->logged_access;
+		$res->groups_access = $sys->groups_access;
+		$res->time = $this->time;
+
+		$res->save();
+	}
+
+	/**
+	 * @return R_Mdl_Resource
+	 */
+	public function getResource() {
+		return $this->system->getResource()->getChilds()->test("content", $this->id)->test("content_class", __CLASS__)->getOne();
 	}
 
 	public function save() {
 		parent::save ();
+		$this->syncRes();
+	}
+
+	public function delete() {
+		$this->getResource()->delete();
+		parent::delete();
 	}
 
 	static public function checkCreate(O_Form_Check_AutoProducer $producer) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * @field owner -has one _User -inverse resourses
+ * @field owner -has one _User -inverse resources
  *
  * @field groups INT(16) DEFAULT 1
  * @field groups_access INT(8) DEFAULT 0
@@ -13,7 +13,7 @@
  * @index anonymous_access
  * @index root,groups,groups_access
  */
-abstract class R_Mdl_Resourse_Acl extends O_Dao_NestedSet_Both implements O_Acl_iResourse {
+abstract class R_Mdl_Resource_Acl extends O_Dao_NestedSet_Both implements O_Acl_iResource {
 
 	const ACTION_READ = 1;
 	const ACTION_WRITE = 2;
@@ -61,7 +61,7 @@ abstract class R_Mdl_Resourse_Acl extends O_Dao_NestedSet_Both implements O_Acl_
 	}
 
 	/**
-	 * Adds access checks to query in current resourse context
+	 * Adds access checks to query in current resource context
 	 *
 	 * @param O_Dao_Query $q
 	 * @return O_Dao_Query
@@ -108,7 +108,7 @@ abstract class R_Mdl_Resourse_Acl extends O_Dao_NestedSet_Both implements O_Acl_
 	 *
 	 * @param const $action
 	 */
-	public function groupsAllow($action) {
+	public function allowToGroups($action) {
 		$this->groups_access = $this->groups_access | $action;
 	}
 
@@ -117,7 +117,7 @@ abstract class R_Mdl_Resourse_Acl extends O_Dao_NestedSet_Both implements O_Acl_
 	 *
 	 * @param const $action
 	 */
-	public function groupsDeny($action) {
+	public function denyToGroups($action) {
 		$this->groups_access = $this->groups_access &~ $action;
 	}
 
@@ -136,7 +136,7 @@ abstract class R_Mdl_Resourse_Acl extends O_Dao_NestedSet_Both implements O_Acl_
 	 *
 	 * @param const $action
 	 */
-	public function loggedAllow($action) {
+	public function allowToLogged($action) {
 		$this->logged_access = $this->logged_access | $action;
 	}
 
@@ -145,7 +145,7 @@ abstract class R_Mdl_Resourse_Acl extends O_Dao_NestedSet_Both implements O_Acl_
 	 *
 	 * @param const $action
 	 */
-	public function loggedDeny($action) {
+	public function denyToLogged($action) {
 		$this->logged_access = $this->logged_access &~ $action;
 	}
 
@@ -164,7 +164,7 @@ abstract class R_Mdl_Resourse_Acl extends O_Dao_NestedSet_Both implements O_Acl_
 	 *
 	 * @param const $action
 	 */
-	public function allowAnonymous($action) {
+	public function allowToAnonymous($action) {
 		$this->anonymous_access = $this->anonymous_access | $action;
 	}
 
@@ -173,7 +173,7 @@ abstract class R_Mdl_Resourse_Acl extends O_Dao_NestedSet_Both implements O_Acl_
 	 *
 	 * @param const $action
 	 */
-	public function denyAnonymous($action) {
+	public function denyToAnonymous($action) {
 		$this->anonymous_access = $this->anonymous_access &~ $action;
 	}
 

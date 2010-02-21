@@ -23,18 +23,18 @@
  * @index site,urlbase -unique
  */
 class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
-	private static $classes = Array ("blog" => "R_Mdl_Sys_Blog_System", "im" => "R_Mdl_Sys_Im_System", 
-									"sound" => "R_Mdl_Sys_Sound_System", 
-									"libro" => "R_Mdl_Sys_Libro_System", 
+	private static $classes = Array ("blog" => "R_Mdl_Sys_Blog_System", "im" => "R_Mdl_Sys_Im_System",
+									"sound" => "R_Mdl_Sys_Sound_System",
+									"libro" => "R_Mdl_Sys_Libro_System",
 									"afisha" => "R_Mdl_Sys_Afisha_System");
-	private static $titles = Array ("blog" => "Блог", "im" => "Изображения", "sound" => "Музыка", 
+	private static $titles = Array ("blog" => "Блог", "im" => "Изображения", "sound" => "Музыка",
 									"libro" => "Литература", "afisha" => "Афиша");
-	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям и друзьям друзей", 
+	private static $accesses = Array ("public" => "Всем", "protected" => "Друзьям и друзьям друзей",
 									"private" => "Друзьям", "disable" => "Только себе");
 
 	public function getType()
 	{
-		return self::$titles[ O_Dao_TableInfo::get( $this )->getFieldInfo( "instance" )->getRealField( 
+		return self::$titles[ O_Dao_TableInfo::get( $this )->getFieldInfo( "instance" )->getRealField(
 				$this ) ];
 	}
 
@@ -90,8 +90,71 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 		$this->title = $title;
 		$this->urlbase = $urlbase;
 		$this->position = count( $site->systems ) + 1;
-		parent::__construct();
 		$this->site = $site;
+		parent::__construct();
+
+		$this->createResource();
+	}
+
+	public function createResource() {
+		$res = new R_Mdl_Resource($this->site);
+		$this->site->getResource()->injectBottom($res);
+		$res->type = R_Mdl_Resource::TYPE_SYSTEM;
+		$res->groups = 3;
+		$res->show_to_followers = 0;
+		$res->setContent($this);
+		$time = $this->anonces->getFunc("time", "MIN");
+		if(!$time) $time = time();
+		$res->time = $time;
+		$this->syncRes($res);
+	}
+
+	private function syncRes(R_Mdl_Resource $res=null) {
+		if(!$res) $res = $this->getResource();
+		if(!$res) return;
+		$res->title = $this->title;
+		$res->url_part = $this->urlbase;
+		$res->url_cache = $this->urlbase;
+
+		$act = R_Mdl_Resource::ACTION_READ;
+
+		switch($this["access"]){
+			case "public":
+				$res->allowToGroups($act);
+				$res->allowToLogged($act);
+				$res->allowToAnonymous($act);
+				break;
+			case "protected":
+				$res->allowToGroups($act);
+				$res->allowToLogged($act);
+				$res->denyToAnonymous($act);
+				break;
+			case "private":
+				$res->allowToGroups($act);
+				$res->denyToLogged($act);
+				$res->denyToAnonymous($act);
+				break;
+			case "disable":
+				$res->denyToGroups($act);
+				$res->denyToLogged($act);
+				$res->denyToAnonymous($act);
+				break;
+		}
+
+		$res->getChilds()->test("type", R_Mdl_Resource::TYPE_COLLECTION)
+			->field("groups_access", $res->groups_access)
+			->field("logged_access", $res->logged_access)
+			->field("anonymous_access", $res->anonymous_access)
+			->update();
+
+		$res->save();
+	}
+
+	/**
+	 * @return R_Mdl_Resource
+	 */
+	public function getResource() {
+		return $this->site->nodes->test("content", $this->id)->test("content_class", __CLASS__)->getOne();
 	}
 
 	/**
@@ -117,9 +180,15 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 
 	public function delete()
 	{
-		$this->site->systems->test( "position", $this->position, ">" )->field( "position", 
+		$this->site->systems->test( "position", $this->position, ">" )->field( "position",
 				"position-1", true )->update();
+		$this->getSysResourse()->delete();
 		parent::delete();
+	}
+
+	public function save() {
+		parent::save();
+		$this->syncRes();
 	}
 
 	/**
@@ -133,17 +202,17 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 			return;
 		if ($newPosition <= 0 || $newPosition > count( $this->site->systems ) + 1)
 			return;
-		
+
 		$systems = $this->site->systems;
-		
+
 		if ($newPosition > $this->position) {
-			$systems->test( "position", $this->position, ">" )->test( "position", $newPosition, 
+			$systems->test( "position", $this->position, ">" )->test( "position", $newPosition,
 					"<=" )->field( "position", "position-1", 1 )->update();
 		} else {
-			$systems->test( "position", $this->position, "<" )->test( "position", $newPosition, 
+			$systems->test( "position", $this->position, "<" )->test( "position", $newPosition,
 					">=" )->field( "position", "position+1", 1 )->update();
 		}
-		
+
 		$this->position = $newPosition;
 		parent::save();
 	}
