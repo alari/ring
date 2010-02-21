@@ -32,6 +32,7 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 		if($this->getResource()) return;
 		$res = new R_Mdl_Resource($this->system->site);
 		$this->system->getResource()->injectBottom($res);
+		$res->reload();
 		$res->type = R_Mdl_Resource::TYPE_COLLECTION;
 		$res->groups = 3;
 		$res->show_to_followers = 0;

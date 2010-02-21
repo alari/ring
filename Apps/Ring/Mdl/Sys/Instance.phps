@@ -100,6 +100,7 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 		if($this->getResource()) return;
 		$res = new R_Mdl_Resource($this->site);
 		$this->site->getResource()->injectBottom($res);
+		$res->reload();
 		$res->type = R_Mdl_Resource::TYPE_SYSTEM;
 		$res->groups = 3;
 		$res->show_to_followers = 0;
