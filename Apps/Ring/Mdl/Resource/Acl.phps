@@ -194,7 +194,7 @@ abstract class R_Mdl_Resource_Acl extends O_Dao_NestedSet_Both implements O_Acl_
 	 * @param R_Mdl_User $user
 	 * @return bool
 	 */
-	public function aclUserCan($action, R_Mdl_User $user=null) {
+	public function aclUserCan($action, O_Acl_iUser $user=null) {
 		if(strpos($action, "read")===0) {
 			$action = self::ACTION_READ;
 		} elseif(strpos($action, "write")===0){
