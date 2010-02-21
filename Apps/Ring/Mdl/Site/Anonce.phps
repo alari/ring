@@ -142,7 +142,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 	 * @return R_Mdl_Resource
 	 */
 	public function getResource() {
-		return $this->system->getResource()->getChilds()->test("content", $this->id)->test("content_class", __CLASS__)->getOne();
+		return $this->site->nodes->test("content", $this->id)->test("content_class", __CLASS__)->getOne();
 	}
 
 	/**
