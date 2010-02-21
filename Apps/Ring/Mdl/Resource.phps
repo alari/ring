@@ -6,12 +6,16 @@
  * @field url_cache VARCHAR(255) DEFAULT NULL
  *
  * @field title VARCHAR(255)
+ * @field description VARCHAR(511)
+ * @field time INT
  *
  * @field type TINYINT NOT NULL DEFAULT 0
  * @field content INT
  * @field content_class VARCHAR(255)
  * @field units_type CHAR(6) -enum blog:Блог; im:Изображения; sound:Музыка; libro:Литература; afisha:Афиша
  *
+ * @index time
+ * @index root,time
  * @index root,url_cache(24) -unique
  * @index content,content_class
  */
