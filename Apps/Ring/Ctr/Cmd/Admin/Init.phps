@@ -3,7 +3,13 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 
 	public function process()
 	{
+		error_reporting(E_ALL);
+		ini_set("display_errors", true);
+		try {
 		O_Db_Manager::getConnection()->query("DROP TABLE site_resources");
+		}catch(PDOException $e) {
+			echo "No table";
+		}
 		foreach(R_Mdl_Site::getQuery() as $site) {
 			/* @var $site R_Mdl_Site */
 			echo "<dl>";
