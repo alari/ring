@@ -381,7 +381,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 	}
 
 	/**
-	 * Adds access checks to query in current resourse context
+	 * Adds access checks to query in current resource context
 	 *
 	 * @param O_Dao_Query $q
 	 * @return O_Dao_Query
