@@ -238,13 +238,15 @@ echo "<!--", print_r(O_Profiler::getStat(),1), "-->";
 	protected function loginBox()
 	{
 		if (R_Mdl_Session::isLogged()) {
+			$usr = R_Mdl_Session::getUser();
+			$friendsPage = $usr->site ? $usr->site->url("friends.feed") : "http://".O_Registry::get( "app/hosts/center" )."/own/friends";
 			?>
 <p>Привет,
-<?=R_Mdl_Session::getUser()->link()?>! <a
+<?=$usr->link()?>! <a
 	href="<?=O_UrlBuilder::get( "openid/logout" )?>">Выход</a></p>
 <p><a href="javascript:void(0)" onclick="R.UserMenu.toggle()">Возможности</a></p>
 <p><a
-	href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends">Друзья</a>
+	href="<?=$friendsPage?>">Друзья</a>
 &nbsp; <small><a
 	href="http://<?=O_Registry::get( "app/hosts/center" )?>/own/friends/list">Кто</a></small></p>
 <div id="user-menu"><?

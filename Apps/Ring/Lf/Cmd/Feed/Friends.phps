@@ -16,7 +16,7 @@ class R_Lf_Cmd_Feed_Friends extends R_Lf_Command {
 
 	public function url( $page )
 	{
-		return O_UrlBuilder::get( "feed.friends" . ($page > 1 ? ".page-" . $page : "") );
+		return O_UrlBuilder::get( "friends.feed" . ($page > 1 ? ".page-" . $page : "") );
 	}
 
 	public function isAuthenticated()
