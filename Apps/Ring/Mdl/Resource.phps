@@ -1,6 +1,6 @@
 <?php
 /**
- * @table site_resources
+ * @table site_resources -loop-full:callback R_Fr_Resource::loopFullCallback
  *
  * @field url_part VARCHAR(12) DEFAULT NULL
  * @field url_cache VARCHAR(255) DEFAULT NULL
@@ -49,6 +49,10 @@ class R_Mdl_Resource extends R_Mdl_Resource_Acl {
 
 	public function dump() {
 		return "[$this->id\{$this->left_key,$this->right_key,$this->level\}]";
+	}
+
+	public function url() {
+		return $this->root->url($this->url_cache);
 	}
 
 }
