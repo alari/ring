@@ -12,16 +12,10 @@ class R_Fr_Resource {
 		foreach ($q as $res){
 			$anonce = $res->getContent();
 			if(!$anonce instanceof R_Mdl_Site_Anonce) {
-				echo "<pre>";
-				print_r($res);
-				print_r($anonce);
-				echo "</pre><hr/>";
 				continue;
 			}
 			if ($anonce->isVisible()) {
 				$anonce->creative->show( $params->layout(), "full" );
-			} else {
-				echo $anonce->link()." is not visible<br/>";
 			}
 		}
 	}
