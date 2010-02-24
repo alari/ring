@@ -6,7 +6,7 @@ class R_Lf_Cmd_Feed_Friends extends R_Lf_Command {
 	{
 		$tpl = $this->getTemplate();
 
-		$resources = R_Mdl_Resource::getUserFollowed($this->getSite()->owner)->clearOrders()->orderBy("id DESC");
+		$resources = R_Mdl_Resource::getUserFollowed($this->getSite()->owner)->clearOrders()->orderBy("site_resources.id DESC");
 
 		$tpl->paginator = $resources->getPaginator( array ($this, "url"), 15 );
 		$tpl->title = "Лента друзей";
