@@ -30,18 +30,28 @@ abstract class R_Mdl_Resource_Acl extends O_Dao_NestedSet_Node implements O_Acl_
 	 */
 	static public function getUserFollowed(R_Mdl_User $user) {
 		$q = static::getQuery();
-		$res = static::getTableInfo()->getTableName();
-		$rel = R_Mdl_User_Relation::getTableInfo()->getTableName();
-		$usr = $user->id;
-		$q->join($rel, "$rel.user=".$user->id." AND $rel.site=$res.root");
+		$res_tbl = static::getTableInfo()->getTableName();
+		$rel_tbl = R_Mdl_User_Relation::getTableInfo()->getTableName();
+		$usr_id = $user->id;
+		$q->join($rel_tbl." usr_rel", "usr_rel.user=".$user->id." AND usr_rel.site=$res_tbl.root");
+		$q->where("usr_rel.flags & 3 = 1 AND $res_tbl.show_to_followers = 1");
+		// The user we're looking for can see resources
 		$q->where("
-			$rel.flags & 3 = 1 AND
-			$res.show_to_followers = 1 AND (
-				$res.owner=$usr
-				OR ($res.groups & $rel.groups > 0 AND $res.groups_access & 1 = 1)
-				OR ($res.logged_access & 1 = 1 AND NOT ($res.groups & $rel.groups = 1 AND $res.groups_access & 1 = 0))
-			)
-		");
+				$res_tbl.owner=$usr_id
+				OR ($res_tbl.groups & usr_rel.groups > 0 AND $res_tbl.groups_access & 1 = 1)
+				OR ($res_tbl.logged_access & 1 = 1 AND NOT ($res_tbl.groups & usr_rel.groups = 1 AND $res_tbl.groups_access & 1 = 0))
+			");
+		if(R_Mdl_Session::isLogged() && R_Mdl_Session::getUser()->id == $usr_id) {
+			// That's all
+			return $q;
+		}
+		// Another user is logged
+		if(R_Mdl_Session::isLogged()) {
+			$q->where("$res_tbl.logged_access & 1 = 1");
+			return $q;
+		}
+		// Nobody is logged
+		$q->where("$res_tbl.anonymous_access & 1 = 1");
 		return $q;
 	}
 

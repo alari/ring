@@ -2,6 +2,22 @@
 
 class R_Fr_Resource {
 
+	static public function loopFullCallback(O_Dao_Renderer_Show_Params $params) {
+		/* @var $q O_Dao_Query */
+		$q = $params->value();
+		if (!$q instanceof O_Dao_Query) {
+			echo "Error<br>";
+			return;
+		}
+		foreach ($q as $res){
+			$anonce = $res->getContent();
+			if(!$anonce instanceof R_Mdl_Site_Anonce) continue;
+			if ($anonce->isVisible()) {
+				$anonce->creative->show( $params->layout(), "full" );
+			}
+		}
+	}
+
 	/**
 	 * Shows resource own page
 	 * TODO: add access checks to queries
