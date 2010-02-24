@@ -6,17 +6,17 @@ class R_Mdl_Site_Crosspost_TwitterLogic extends R_Mdl_Site_Crosspost_Logic {
 			$this->getTwitter ()->destroyStatus ( $this->crosspost->postid );
 		}
 	}
-	
+
 	public function update() {
 		if ($this->crosspost) {
 			$this->crosspost->crossposted = time ();
-		
+
 		}
 		return $this->error ( "Can't update twitter satus." );
 	}
-	
+
 	public function post() {
-		$status = $this->crosspost->anonce->title . " // " . $this->crosspost->anonce->description;
+		$status = $this->crosspost->anonce->title;
 		$len = 139 - strlen ( $this->crosspost->anonce->url () );
 		if (iconv_strlen ( $status ) > $len) {
 			$status = iconv_substr ( $status, 0, $len - 3 ) . "...";
@@ -28,10 +28,10 @@ class R_Mdl_Site_Crosspost_TwitterLogic extends R_Mdl_Site_Crosspost_Logic {
 		$this->crosspost->postid = $id = $r->id;
 		$this->crosspost->url = $this->crosspost->service->blog_url . "/status/" . $id;
 		$this->crosspost->crossposted = time ();
-		
+
 		return $this->crosspost->save ();
 	}
-	
+
 	/**
 	 * Returns twitterlib object
 	 *
