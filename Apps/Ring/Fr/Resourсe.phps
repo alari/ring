@@ -20,6 +20,8 @@ class R_Fr_Resource {
 			}
 			if ($anonce->isVisible()) {
 				$anonce->creative->show( $params->layout(), "full" );
+			} else {
+				echo $anonce->link()." is not visible<br/>";
 			}
 		}
 	}
