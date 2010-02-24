@@ -35,9 +35,8 @@ R.System.setSortable("#sys-sort", '.system', '<?=$this->getSite()->host?>');
 <?
 		$tags = $this->getSite()->tags->limit( 100 );
 		R_Fr_Site_Tag::showCloud( $tags );
-		?>
-<p><a href="<?=$this->getSite()->url( "comments" )?>">Комментарии на сайте</a></p>
-		<?
+
+		parent::displayNav();
 	}
 
 }
