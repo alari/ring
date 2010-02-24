@@ -1,6 +1,6 @@
 <?php
 /**
- * @table site_resources -loop-full:callback R_Fr_Resource::loopFullCallback
+ * @table site_resources
  *
  * @field url_part VARCHAR(12) DEFAULT NULL
  * @field url_cache VARCHAR(255) DEFAULT NULL
