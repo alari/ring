@@ -1,5 +1,5 @@
 <?php
-class R_Lf_Tpl_Feed_Friends extends R_Lf_Template {
+class R_Lf_Tpl_Friends_Feed extends R_Lf_Template {
 	/**
 	 * Anonces paginator
 	 *

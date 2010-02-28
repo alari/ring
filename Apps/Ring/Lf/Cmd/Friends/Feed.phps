@@ -1,6 +1,6 @@
 <?php
 
-class R_Lf_Cmd_Feed_Friends extends R_Lf_Command {
+class R_Lf_Cmd_Friends_Feed extends R_Lf_Command {
 
 	public function process()
 	{
