@@ -331,6 +331,8 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 				$this->denyToGroups(self::ACTION_COMMENT);
 				$this->denyToLogged(self::ACTION_COMMENT);
 				break;
+			default:
+				fwrite(STDERR, "Wrong access_comment: ".$this["access_comment"]);
 		}
 		switch($this["access"]){
 			case "public":
