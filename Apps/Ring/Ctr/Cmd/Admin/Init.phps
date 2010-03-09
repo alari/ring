@@ -30,7 +30,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 				list(, $photo) = explode("src='", $photo, 2);
 				list($photo, ) = explode("'", $photo, 2);
 				$photo = file_get_contents($photo);
-				$file = tempnam(sys_get_temp_dir(), 'agle');
+				$file = tempnam(realpath(sys_get_temp_dir()), 'agle');
 				$f = fopen($file, "w+");
 				fwrite($f, file_get_contents($photo));
 				fclose($f);
