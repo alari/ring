@@ -9,6 +9,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		$system = $site->systems->test("urlbase", "photos")->getOne();
 		$system->collections->delete();
 
+		$root = "http://aglemusic.ru";
 		$root_url = "http://aglemusic.ru/photos/";
 		$root_content = file_get_contents($root_url);
 		$albums = explode("<div class='phalbum_outer2'>", $root_content);
@@ -25,7 +26,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 			$collection->content = $album;
 			$collection->description = strip_tags($album);
 			$collection->save();
-			$photos_content = file_get_contents($url);
+			$photos_content = file_get_contents($root.$url);
 			$photos = explode("<div class='photoouter'>", $photos_content);
 			print_r($photos);
 			foreach($photos as $photo) {
@@ -38,7 +39,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 				echo "- $title - $photo<br/>";
 				$file = $site->staticPath("tmp.jpeg");
 				$f = fopen($file, "w+");
-				fwrite($f, file_get_contents($photo));
+				fwrite($f, file_get_contents($root.$photo));
 				fclose($f);
 				echo "[", filesize($file), "]";
 				$pic = new R_Mdl_Sys_Im_Picture($system->instance);
