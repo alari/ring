@@ -19,6 +19,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 			list($title, $album) = explode("</a></h2>", $album, 2);
 			list(, $album) = explode("<!--", $album, 2);
 			list($album,) = explode("-->", $album, 2);
+			echo "<hr/>($url $title $album)<br/>";
 			$collection = new R_Mdl_Site_Collection($system);
 			$collection->title = $title;
 			$collection->content = $album;
@@ -31,6 +32,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 				list($title, $photo) = explode("</p>", $photo, 2);
 				list(, $photo) = explode("src='", $photo, 2);
 				list($photo, ) = explode("'", $photo, 2);
+				echo "- $title - $photo<br/>";
 				$file = $site->staticPath("tmp.jpeg");
 				$f = fopen($file, "w+");
 				fwrite($f, file_get_contents($photo));
