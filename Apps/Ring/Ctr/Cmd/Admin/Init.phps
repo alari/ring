@@ -4,6 +4,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 	public function process()
 	{
 		$user = R_Mdl_User::getByIdentity("agle.mirari.name");
+		R_Mdl_Session::setUser($user);
 		$site = $user->site;
 		$system = $site->systems->test("urlbase", "photos")->getOne();
 		$system->collections->delete();
