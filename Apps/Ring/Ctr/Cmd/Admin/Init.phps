@@ -28,6 +28,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 			$collection->save();
 			$photos_content = file_get_contents($root.$url);
 			$photos = explode("<div class='photoouter'>", $photos_content);
+			array_unshift($photos);
 			print_r($photos);
 			foreach($photos as $photo) {
 				list(, $photo) = explode("<p>", $photo, 2);
