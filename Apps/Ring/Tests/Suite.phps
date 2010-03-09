@@ -21,4 +21,3 @@ class R_Tests_Suite extends PHPUnit_Framework_TestSuite {
 		return new self( );
 	}
 }
-
