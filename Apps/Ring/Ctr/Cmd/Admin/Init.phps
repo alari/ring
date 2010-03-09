@@ -7,7 +7,6 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		$site = $user->site;
 		$system = $site->systems->test("urlbase", "photos")->getOne();
 		$system->collections->delete();
-		$system = $system->instance;
 
 		$root_url = "http://aglemusic.ru/photos/";
 		$root_content = file_get_contents($root_url);
@@ -35,7 +34,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 				$f = fopen($file, "w+");
 				fwrite($f, file_get_contents($photo));
 				fclose($f);
-				$pic = new R_Mdl_Sys_Im_Picture($system);
+				$pic = new R_Mdl_Sys_Im_Picture($system->instance);
 				$anonce = $pic->anonce;
 				$anonce->collection = $collection;
 				$anonce->owner = $user;
