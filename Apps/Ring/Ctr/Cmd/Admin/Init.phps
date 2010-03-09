@@ -31,7 +31,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 				list($title, $photo) = explode("</p>", $photo, 2);
 				list(, $photo) = explode("src='", $photo, 2);
 				list($photo, ) = explode("'", $photo, 2);
-				$file = tempnam(realpath(sys_get_temp_dir()), 'agle');
+				$file = $site->staticPath("tmp.img");
 				$f = fopen($file, "w+");
 				fwrite($f, file_get_contents($photo));
 				fclose($f);
@@ -43,6 +43,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 				$anonce->save();
 				$pic->img_full = new O_Image_Resizer($file);
 				$pic->save();
+				unlink($site->staticPath("tmp.img"));
 			}
 		}
 
