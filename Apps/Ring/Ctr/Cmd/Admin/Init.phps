@@ -7,6 +7,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		$site = $user->site;
 		$system = $site->systems->test("urlbase", "photos")->getOne();
 		$system->collections->delete();
+		$system = $system->instance;
 
 		$root_url = "http://aglemusic.ru/photos/";
 		$root_content = file_get_contents($root_url);
