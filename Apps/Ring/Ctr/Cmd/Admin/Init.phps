@@ -5,7 +5,8 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 	{
 		$user = R_Mdl_User::getByIdentity("agle.mirari.name");
 		$site = $user->site;
-		$system = $site->systems->test("urlbase", "photos")->getOne();;
+		$system = $site->systems->test("urlbase", "photos")->getOne();
+		$system->collections->delete();
 
 		$root_url = "http://aglemusic.ru/photos/";
 		$root_content = file_get_contents($root_url);
@@ -29,7 +30,6 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 				list($title, $photo) = explode("</p>", $photo, 2);
 				list(, $photo) = explode("src='", $photo, 2);
 				list($photo, ) = explode("'", $photo, 2);
-				$photo = file_get_contents($photo);
 				$file = tempnam(realpath(sys_get_temp_dir()), 'agle');
 				$f = fopen($file, "w+");
 				fwrite($f, file_get_contents($photo));
