@@ -12,25 +12,39 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		$root = "http://aglemusic.ru";
 		$root_url = "http://aglemusic.ru/photos/";
 		$root_content = file_get_contents($root_url);
+
+		$skip_collections = 8;
+		$skip_in_collection = 3;
+
+		$i = 0;
+		$j = 0;
+
 		$albums = explode("<div class='phalbum_outer2'>", $root_content);
 		array_shift($albums);
 		foreach($albums as $album) {
+			$i++;
+			if($i <= $skip_collections) continue;
 			list(, $album) = explode('<h2><a href="', $album, 2);
 			list($url, $album) = explode('">', $album, 2);
 			list($title, $album) = explode("</a></h2>", $album, 2);
 			list(, $album) = explode("<!--", $album, 2);
 			list($album,) = explode("-->", $album, 2);
 			echo "<hr/>($url $title $album)<br/>";
-			$collection = new R_Mdl_Site_Collection($system);
-			$collection->title = $title;
-			$collection->content = $album;
-			$collection->description = strip_tags($album);
-			$collection->save();
+			$collection = $system->collections->test("title", $title)->getOne();
+			if(!$collection) {
+				$collection = new R_Mdl_Site_Collection($system);
+				$collection->title = $title;
+				$collection->content = $album;
+				$collection->description = strip_tags($album);
+				$collection->save();
+			}
 			$photos_content = file_get_contents($root.$url);
 			$photos = explode("<div class='photoouter'>", $photos_content);
-			array_unshift($photos);
-			print_r($photos);
+			array_shift($photos);
+			array_pop($photos);
 			foreach($photos as $photo) {
+				$j++;
+				if($j <= $skip_in_collection) continue;
 				list(, $photo) = explode("<p>", $photo, 2);
 				echo "<hr/>1$photo";
 				list($title, $photo) = explode("</p>", $photo, 2);
