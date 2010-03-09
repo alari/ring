@@ -27,10 +27,13 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 			$collection->save();
 			$photos_content = file_get_contents($url);
 			$photos = explode("<div class='photoouter'>", $photos_content);
+			print_r($photos);
 			foreach($photos as $photo) {
 				list(, $photo) = explode("<p>", $photo, 2);
+				echo "<hr/>1$photo";
 				list($title, $photo) = explode("</p>", $photo, 2);
 				list(, $photo) = explode("src='", $photo, 2);
+				echo "<hr/>2$photo";
 				list($photo, ) = explode("'", $photo, 2);
 				echo "- $title - $photo<br/>";
 				$file = $site->staticPath("tmp.jpeg");
