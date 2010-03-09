@@ -31,10 +31,11 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 				list($title, $photo) = explode("</p>", $photo, 2);
 				list(, $photo) = explode("src='", $photo, 2);
 				list($photo, ) = explode("'", $photo, 2);
-				$file = $site->staticPath("tmp.img");
+				$file = $site->staticPath("tmp.jpeg");
 				$f = fopen($file, "w+");
 				fwrite($f, file_get_contents($photo));
 				fclose($f);
+				echo "[", filesize($file), "]";
 				$pic = new R_Mdl_Sys_Im_Picture($system->instance);
 				$anonce = $pic->anonce;
 				$anonce->collection = $collection;
