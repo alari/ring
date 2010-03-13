@@ -21,7 +21,9 @@ class R_Ctr_Cmd_Own_EditProfile extends R_Command {
 			} else
 				$this->setNotice( "Ошибка при смене пароля." );
 		} else {
-			$form->handle();
+			if($form->handle()) {
+				return $this->redirect();
+			}
 		}
 
 		$tpl = $this->getTemplate();
