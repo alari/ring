@@ -15,21 +15,21 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 			return $r;
 		};
 
-		$adjust = function($res, $obj, $left_key = 1, $level = 0) {
-			$res->left_key = $left_key;
-			$res->level = $level;
+		$adjust = function($resource, $obj, $left_key = 1, $level = 0) {
+			$resource->left_key = $left_key;
+			$resource->level = $level;
 			if($obj instanceof R_Mdl_Site_Anonce) {
-				$res->right_key = $left_key + 1;
+				$resource->right_key = $left_key + 1;
 			} elseif($obj instanceof R_Mdl_Site_Collection) {
-				$res->right_key = $left_key + 2*count($obj->anonces)+1;
+				$resource->right_key = $left_key + 2*count($obj->anonces)+1;
 			} elseif($obj instanceof R_Mdl_Sys_Instance) {
-				$res->right_key = $left_key + 2*(count($obj->anonces)+count($obj->collections));
+				$resource->right_key = $left_key + 2*(count($obj->anonces)+count($obj->collections));
 			} elseif($obj instanceof R_Mdl_Site) {
 				$collections = 0;
 				foreach($obj->systems as $s) $collections += count($s->collections);
-				$res->right_key = $left_key + 2*(count($obj->anonces)+count($obj->systems)+$collections);
+				$resource->right_key = $left_key + 2*(count($obj->anonces)+count($obj->systems)+$collections);
 			}
-			$res->save();
+			$resource->save();
 		};
 
 		foreach (R_Mdl_Site::getQuery() as $site) {
