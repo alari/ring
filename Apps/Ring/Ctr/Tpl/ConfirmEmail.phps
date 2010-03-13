@@ -1,5 +1,5 @@
 <?php
-class R_Ctr_Tpl_EmailConfirm extends R_Ctr_Template {
+class R_Ctr_Tpl_ConfirmEmail extends R_Ctr_Template {
 
 	public $isSucceed;
 
