@@ -5,6 +5,7 @@
  *
  * @field email VARCHAR(255) -edit -title Адрес электронной почты
  * @field nickname VARCHAR(255) -edit -title Ник или псевдоним
+ * @field email_confirmed INT(1) DEFAULT 0
  *
  * @field relations -owns many _User_Relation -inverse user
  * @field resources -owns many _Resource -inverse owner
@@ -20,6 +21,8 @@
  *
  * @field ava_full ENUM('-','gif','jpeg','png') DEFAULT '-' -image filepath: avaPath full; src: avaSrc full; width:190; height:500; cascade: ava_tiny; clear:1
  * @field ava_tiny -image filepath: avaPath tiny; src: avaSrc tiny; width:80; height:200
+ *
+ * @index email -unique
  */
 class R_Mdl_User extends O_Acl_User {
 
