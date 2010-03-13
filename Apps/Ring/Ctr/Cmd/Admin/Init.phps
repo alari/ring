@@ -50,7 +50,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 						foreach ($coll->anonces as $a) {
 							/* @var $a R_Mdl_Site_Anonce */
 							$aResource = $res($a);
-							$adjust($aResource, $aResource, $left_key++, 3);
+							$adjust($aResource, $a, $left_key++, 3);
 							$left_key++;
 						}
 						$left_key++;
