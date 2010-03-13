@@ -54,7 +54,7 @@ class R_Mdl_User extends O_Acl_User {
 		return $this->staticFilename ( "ava-" . $type . ($ext ? $ext : "." . $this ["ava_full"]) );
 	}
 
-	private static function getPasswordHash($pwd){
+	private function getPasswordHash($pwd){
 		return md5 ( $this->id . $pwd );
 	}
 	/**
@@ -64,7 +64,7 @@ class R_Mdl_User extends O_Acl_User {
 	 * @return bool
 	 */
 	public function setPwd($pwd) {
-		$this->pwd_hash = self::getPasswordHash($pwd);
+		$this->pwd_hash = $this->getPasswordHash($pwd);
 		return $this->save ();
 	}
 
@@ -102,7 +102,7 @@ class R_Mdl_User extends O_Acl_User {
 	 * @return bool
 	 */
 	public function login($pwd) {
-		if ( self::getPasswordHash($pwd) == $this->pwd_hash) {
+		if ( $this->getPasswordHash($pwd) == $this->pwd_hash) {
 			R_Mdl_Session::setUser ( $this );
 			return true;
 		}
