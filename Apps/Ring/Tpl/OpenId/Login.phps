@@ -45,10 +45,9 @@ class R_Tpl_OpenId_Login extends R_Template {
 	</div>
 
 	<!-- Simple OpenID Selector -->
-    <form method="get" id="openid_form">
+    <form method="post" id="openid_form">
         <fieldset>
             <legend>Sign-in or Create New Account</legend>
-            <input type="hidden" name="action" value="verify" />
 
             <div id="openid_choice">
                 <p>Please click your account provider:</p>
