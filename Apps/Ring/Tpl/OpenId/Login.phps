@@ -40,7 +40,7 @@ class R_Tpl_OpenId_Login extends R_Template {
 	value="<?=
 				@$_SESSION[ "redirect" ]?>" /></form></div>
 				<hr/>
-	<div class="notice">
+	<div id="notice">
 		<b>Для наших авторов:</b> Из-за изменения алгоритма хранения пароля, все старые пароли были утеряны. Вам нужно получить новый. Для этого обратитесь к Алари (icq 5630024, name.alari@gmail.com, звонить тоже можно).
 	</div>
 <?
