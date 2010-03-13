@@ -44,6 +44,7 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 	protected function authSuccess( Auth_OpenID_SuccessResponse $response )
 	{
 		$identity = $response->getDisplayIdentifier();
+
 		$email = null;
 
 		// Get email from AX
@@ -54,11 +55,15 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
         	$email = $obj->data["http://axschema.org/contact/email"];
         	if(count($email)) $email = $email[0];
         }
+        if($email) {
+        	$identity = "$".$email;
+        }
 
 		$user = O_OpenId_Provider_UserPlugin::getByIdentity( $identity );
 		if (!$user) {
 			$user = new R_Mdl_User( $identity, O_Acl_Role::getByName( "Openid User" ) );
 		}
+
 		if($email) {
 			$user->email = $email;
 			$user->email_confirmed = 1;
@@ -71,7 +76,12 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 		if (!$user->nickname && isset( $sreg[ 'nickname' ] ) && $sreg[ 'nickname' ]) {
 			$user->nickname = $sreg[ 'nickname' ];
 		}
-		$user->save();
+
+		try {
+			$user->save();
+		} catch(PDOException $e) {
+			$_SESSION["notice"] = "Этот email был использован другим пользователем.";
+		}
 		R_Mdl_Session::setUser( $user );
 		return $this->successRedirect();
 	}
