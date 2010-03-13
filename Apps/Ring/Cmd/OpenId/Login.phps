@@ -45,6 +45,16 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 	{
 		$identity = $response->getDisplayIdentifier();
 		if($_SERVER["REMOTE_ADDR"] == "84.237.120.114") {
+			include_once 'Auth/OpenID/AX.php';
+			       $ax = new Auth_OpenID_AX_FetchResponse();
+        $obj = $ax->fromSuccessResponse($response);
+
+        // Print me raw
+        echo '<pre>';
+        print_r($obj->data);
+        echo '</pre>';
+        exit;
+
 			die($identity."<hr/>".print_r($this->getSRegResponse( $response ),1));
 		}
 		$user = O_OpenId_Provider_UserPlugin::getByIdentity( $identity );
