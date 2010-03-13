@@ -22,7 +22,7 @@ class R_Mdl_User_EmailConfirm extends O_Dao_ActiveRecord {
 		$this->save();
 	}
 
-	public function sendEmail() {
+	public function sendEmail($to=null) {
 		$link = "http://".O_Registry::get("app/hosts/center")."/confirm-email?hash=".$this->hash_key;
 
 		$msg_body = <<<MSG
@@ -35,7 +35,7 @@ class R_Mdl_User_EmailConfirm extends O_Dao_ActiveRecord {
 Если Вы считаете это сообщение ошибкой, просто проигнорируйте его.
 MSG;
 
-		$msg = new O_Mail_Message($this->owner->email, "noreply@mirari.name", "Подтверждение адреса электронной почты", $msg_body);
+		$msg = new O_Mail_Message($to ? $to : $this->owner->email, "noreply@mirari.name", "Подтверждение адреса электронной почты", $msg_body);
 
 		$msg->send();
 	}
@@ -60,7 +60,7 @@ MSG;
 		if(in_array($user->id, self::$ignore)) return true;
 		$user->email_confirmed = 0;
 		$o = new self($user);
-		$o->sendEmail();
+		$o->sendEmail($fieldValue);
 	}
 
 	static public function ignore(R_Mdl_User $user) {
