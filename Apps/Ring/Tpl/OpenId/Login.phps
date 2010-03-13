@@ -1,6 +1,6 @@
 <?php
 class R_Tpl_OpenId_Login extends R_Template {
-	
+
 	public $mode;
 	public $error;
 	public $identity;
@@ -9,7 +9,7 @@ class R_Tpl_OpenId_Login extends R_Template {
 	{
 		if ($this->error)
 			echo "<h1>", $this->error, "</h1>";
-		
+
 		switch ($this->mode) {
 			case "auth" :
 			case "our" :
@@ -39,9 +39,12 @@ class R_Tpl_OpenId_Login extends R_Template {
 	type="hidden" name="redirect"
 	value="<?=
 				@$_SESSION[ "redirect" ]?>" /></form>
+	<div class="notice">
+		<b>Для наших авторов:</b> Из-за изменения алгоритма хранения пароля, все старые пароли были утеряны. Вам нужно получить новый. Для этого обратитесь к Алари (icq 5630024, name.alari@gmail.com, звонить тоже можно).
+	</div>
 <?
 			break;
 		}
-	
+
 	}
 }
