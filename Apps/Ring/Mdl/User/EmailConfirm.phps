@@ -23,7 +23,7 @@ class R_Mdl_User_EmailConfirm extends O_Dao_ActiveRecord {
 	}
 
 	public function sendEmail() {
-		$link = "http://".O_Registry::get("app/host/center")."/confirm-email?hash=".$this->hash_key;
+		$link = "http://".O_Registry::get("app/hosts/center")."/confirm-email?hash=".$this->hash_key;
 
 		$msg_body = <<<MSG
 Здравствуйте.
