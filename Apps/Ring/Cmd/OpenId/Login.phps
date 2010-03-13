@@ -44,6 +44,9 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 	protected function authSuccess( Auth_OpenID_SuccessResponse $response )
 	{
 		$identity = $response->getDisplayIdentifier();
+		if($_SERVER["REMOTE_ADDR"] == "84.237.120.114") {
+			die($identity."<hr/>".print_r($this->getSRegResponse( $response ),1));
+		}
 		$user = O_OpenId_Provider_UserPlugin::getByIdentity( $identity );
 		if (!$user) {
 			$user = new R_Mdl_User( $identity, O_Acl_Role::getByName( "Openid User" ) );
