@@ -76,11 +76,20 @@ class R_Layout extends O_Html_Layout {
 
 	protected function showNotice()
 	{
-		if (isset( $_SESSION[ "notice" ] )) {
-			?>
-<div id="notice" onclick="$(this).fade('out')"><?=$_SESSION[ "notice" ]?></div>
-<?
+		$notice = null;
+		if(isset($_SESSION["notice"])) {
+			$notice = $_SESSION["notice"];
 			unset( $_SESSION[ "notice" ] );
+		}
+		elseif(R_Mdl_Session::isLogged() && !R_Mdl_Session::getUser()->email_confirmed) {
+			$link = "http://".O_Registry::get("app/hosts/center")."/own/edit-profile";
+			$notice = "Ваш адрес электронной почты <a href=\"$link\">не указан или не подтверждён</a>.";
+		}
+		if ($notice) {
+			?>
+<div id="notice" onclick="$(this).fade('out')"><?=$notice?></div>
+<?
+
 		}
 	}
 
