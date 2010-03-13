@@ -14,7 +14,7 @@ class R_Tpl_OpenId_Login extends R_Template {
 			case "auth" :
 			case "our" :
 				?>
-<form method="POST" id="openid-login-form"
+<div><form method="POST" id="openid-login-form"
 	action="<?=
 				O_Registry::get( "env/request_url" )?>"><label><span>OpenId:</span>
 <input type="text" name="openid_identifier"
@@ -38,7 +38,7 @@ class R_Tpl_OpenId_Login extends R_Template {
 	 <input type="hidden" name="openid_action" value="login" /> <input
 	type="hidden" name="redirect"
 	value="<?=
-				@$_SESSION[ "redirect" ]?>" /></form>
+				@$_SESSION[ "redirect" ]?>" /></form></div>
 				<hr/>
 	<div class="notice">
 		<b>Для наших авторов:</b> Из-за изменения алгоритма хранения пароля, все старые пароли были утеряны. Вам нужно получить новый. Для этого обратитесь к Алари (icq 5630024, name.alari@gmail.com, звонить тоже можно).
