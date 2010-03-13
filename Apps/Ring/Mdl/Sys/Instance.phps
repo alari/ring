@@ -186,7 +186,7 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 		$this->site->systems->test( "position", $this->position, ">" )->field( "position",
 				"position-1", true )->update();
 		$r = $this->getResource();
-		if($r) $r->delete();
+		if($r) $r->delete(true);
 		parent::delete();
 	}
 

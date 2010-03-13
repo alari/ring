@@ -72,7 +72,7 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 
 	public function delete() {
 		$r = $this->getResource();
-		if($r) $r->delete();
+		if($r) $r->delete(true);
 		parent::delete();
 	}
 
