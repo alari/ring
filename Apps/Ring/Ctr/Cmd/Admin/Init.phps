@@ -7,6 +7,10 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		ini_set("display_errors", true);
 
 		$res = function($obj) {
+			$resc = R_Mdl_Resource::getQuery()->test("content", $obj->id)->test("content_class", get_class($obj))->getFunc();
+			if($resc > 1) {
+				O_Db_Query::get("site_resources")->test("content", $obj->id)->test("content_class", get_class($obj))->limit($resc-1)->delete();
+			}
 			$r = $obj->getResource();
 			if(!$r) {
 				$obj->createResource();
