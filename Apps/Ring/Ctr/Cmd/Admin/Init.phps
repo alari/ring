@@ -6,17 +6,16 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		error_reporting(E_ALL);
 		ini_set("display_errors", true);
 
-		$res = function($obj) {
+		function res($obj) {
 			$r = $obj->getResource();
 			if(!$r) {
 				$obj->createResource();
 				$r = $obj->getResource();
 			}
 			return $r;
-		};
+		}
 
-		$adjust = function($resource, $obj, $left_key, $level) {
-
+		function adjust($resource, $obj, $left_key, $level) {
 			$resource->left_key = $left_key;
 			$resource->level = $level;
 			if($obj instanceof R_Mdl_Site_Anonce) {
@@ -31,26 +30,26 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 				$resource->right_key = $left_key + 2*(count($obj->anonces)+count($obj->systems)+$collections)+1;
 			}
 			$resource->save();
-		};
+		}
 
 		foreach (R_Mdl_Site::getQuery() as $site) {
 			/* @var $site R_Mdl_Site */
-			$siteResource = $res($site);
-			$adjust($siteResource, $site, 1, 0);
+			$siteResource = res($site);
+			adjust($siteResource, $site, 1, 0);
 			$left_key = 2;
 			foreach ($site->systems as $sys) {
 				/* @var $sys R_Mdl_Sys_Instance */
-				$sysResource = $res($sys);
-				$adjust($sysResource, $sys, $left_key++, 1);
+				$sysResource = res($sys);
+				adjust($sysResource, $sys, $left_key++, 1);
 				if (count( $sys->collections )) {
 					foreach ($sys->collections as $coll) {
 						/* @var $coll R_Mdl_Site_Collection */
-						$collResource = $res($coll);
-						$adjust($collResource, $coll, $left_key++, 2);
+						$collResource = res($coll);
+						adjust($collResource, $coll, $left_key++, 2);
 						foreach ($coll->anonces as $a) {
 							/* @var $a R_Mdl_Site_Anonce */
-							$aResource = $res($a);
-							$adjust($res, $aResource, $left_key++, 3);
+							$aResource = res($a);
+							adjust($res, $aResource, $left_key++, 3);
 							$left_key++;
 						}
 						$left_key++;
@@ -58,8 +57,8 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 				} else {
 					foreach($sys->anonces as $a) {
 						/* @var $a R_Mdl_Site_Anonce */
-						$aResource = $res($a);
-						$adjust($aResource, $a, $left_key++, 2);
+						$aResource = res($a);
+						adjust($aResource, $a, $left_key++, 2);
 						$left_key++;
 					}
 				}
