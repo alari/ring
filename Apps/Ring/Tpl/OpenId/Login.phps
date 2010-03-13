@@ -47,10 +47,10 @@ class R_Tpl_OpenId_Login extends R_Template {
 	<!-- Simple OpenID Selector -->
     <form method="post" id="openid_form">
         <fieldset>
-            <legend>Sign-in or Create New Account</legend>
+            <legend>Авторизуйтесь с помощью аккаунта на другом сайте</legend>
 
             <div id="openid_choice">
-                <p>Please click your account provider:</p>
+                <p>Кликните:</p>
                 <div id="openid_btns"></div>
             </div>
             <div id="openid_input_area">
