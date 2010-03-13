@@ -15,7 +15,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 			return $r;
 		};
 
-		$adjust = function($resource, $obj, $left_key = 1, $level = 0) {
+		$adjust = function($resource, $obj, $left_key, $level) {
 			$resource->left_key = $left_key;
 			$resource->level = $level;
 			if($obj instanceof R_Mdl_Site_Anonce) {
@@ -35,7 +35,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		foreach (R_Mdl_Site::getQuery() as $site) {
 			/* @var $site R_Mdl_Site */
 			$siteResource = $res($site);
-			$adjust($siteResource, $site);
+			$adjust($siteResource, $site, 1, 0);
 			$left_key = 2;
 			foreach ($site->systems as $sys) {
 				/* @var $sys R_Mdl_Sys_Instance */
