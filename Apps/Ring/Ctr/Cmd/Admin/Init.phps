@@ -16,6 +16,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		};
 
 		$adjust = function($resource, $obj, $left_key, $level) {
+
 			$resource->left_key = $left_key;
 			$resource->level = $level;
 			if($obj instanceof R_Mdl_Site_Anonce) {
@@ -23,11 +24,11 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 			} elseif($obj instanceof R_Mdl_Site_Collection) {
 				$resource->right_key = $left_key + 2*count($obj->anonces)+1;
 			} elseif($obj instanceof R_Mdl_Sys_Instance) {
-				$resource->right_key = $left_key + 2*(count($obj->anonces)+count($obj->collections));
+				$resource->right_key = $left_key + 2*(count($obj->anonces)+count($obj->collections))+1;
 			} elseif($obj instanceof R_Mdl_Site) {
 				$collections = 0;
 				foreach($obj->systems as $s) $collections += count($s->collections);
-				$resource->right_key = $left_key + 2*(count($obj->anonces)+count($obj->systems)+$collections);
+				$resource->right_key = $left_key + 2*(count($obj->anonces)+count($obj->systems)+$collections)+1;
 			}
 			$resource->save();
 		};
