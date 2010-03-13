@@ -59,9 +59,6 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
         	$email = $obj->data["http://axschema.org/contact/email"];
         	if(count($email)) $email = $email[0];
         }
-        if($email) {
-        	$identity = "$".$email;
-        }
 
 		$user = O_OpenId_Provider_UserPlugin::getByIdentity( $identity );
 		if (!$user) {

@@ -118,8 +118,8 @@ class R_Mdl_User extends O_Acl_User {
 		if ($this ["site"]) {
 			return $this->site->url ();
 		} else {
-			if($this->identity[0] == '$') return "#mailed-identity";
-			return $this->identity;
+			// TODO: place there profile url
+			return "#mailed-identity";
 		}
 	}
 
