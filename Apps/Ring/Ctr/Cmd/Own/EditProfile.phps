@@ -6,11 +6,11 @@ class R_Ctr_Cmd_Own_EditProfile extends R_Command {
 		/* @var $user R_Mdl_User */
 		$user = R_Mdl_Session::getUser();
 		$form = $user->form();
-		
+
 		if ($this->getParam( "action" ) == "upload-ava") {
 			$user->ava_full = null;
 			$user->save();
-			
+
 			return $this->redirect();
 		} elseif ($this->getParam( "action" ) == "ch-pwd") {
 			if ($user->isOurUser() && $this->getParam( "pwd" ) == $this->getParam( "pwd_reply" ) &&
@@ -22,12 +22,15 @@ class R_Ctr_Cmd_Own_EditProfile extends R_Command {
 				$this->setNotice( "Ошибка при смене пароля." );
 		} else {
 			$form->handle();
+			if($form->getError("_")) {
+				$this->setNotice($form->getError("_"));
+			}
 		}
-		
+
 		$tpl = $this->getTemplate();
 		$tpl->form = $form;
 		return $tpl;
-	
+
 	}
 
 	public function isAuthenticated()
