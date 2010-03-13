@@ -43,6 +43,29 @@ class R_Tpl_OpenId_Login extends R_Template {
 	<div id="notice">
 		<b>Для наших авторов:</b> Из-за изменения алгоритма хранения пароля, все старые пароли были утеряны. Вам нужно получить новый. Для этого обратитесь к Алари (icq 5630024, name.alari@gmail.com, звонить тоже можно).
 	</div>
+
+	<!-- Simple OpenID Selector -->
+    <form method="get" id="openid_form">
+        <fieldset>
+            <legend>Sign-in or Create New Account</legend>
+            <input type="hidden" name="action" value="verify" />
+
+            <div id="openid_choice">
+                <p>Please click your account provider:</p>
+                <div id="openid_btns"></div>
+            </div>
+            <div id="openid_input_area">
+                <input id="openid_identifier" name="openid_identifier" type="text" value="http://" />
+                <input id="openid_submit" type="submit" value="Sign-In"/>
+            </div>
+        </fieldset>
+    </form>
+    <!-- /Simple OpenID Selector -->
+    <script type="text/javascript">
+    	Om.use('OpenIdSelector', function(){
+    		new OpenIdSelector('openid_identifier');
+        });
+    </script>
 <?
 			break;
 		}
