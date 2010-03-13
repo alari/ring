@@ -117,7 +117,7 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 	 * @return R_Mdl_Resource
 	 */
 	public function getResource() {
-		return $this->nodes->test("left_key", 1)->getOne();
+		return $this->nodes->test("level", 0)->getOne();
 	}
 
 	/**
