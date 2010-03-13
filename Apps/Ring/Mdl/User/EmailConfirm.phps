@@ -15,10 +15,11 @@ class R_Mdl_User_EmailConfirm extends O_Dao_ActiveRecord {
 
 	public function __construct(R_Mdl_User $user)
 	{
+		parent::__construct();
 		$this->time = time();
 		$this->owner = $user;
 		$this->hash_key = md5(microtime(true).$user->email);
-		parent::__construct();
+		$this->save();
 	}
 
 	public function sendEmail() {
