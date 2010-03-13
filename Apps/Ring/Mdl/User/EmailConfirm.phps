@@ -42,7 +42,7 @@ MSG;
 
 	static public function checkConfirm($hash_key) {
 		$o = static::getQuery()->test("hash_key", $hash_key)->getOne();
-		if($o) {print_r($o);
+		if($o && $o->owner) {
 			$ow = $o->owner;
 			$ow->email_confirmed = 1;
 			$ow->save();
