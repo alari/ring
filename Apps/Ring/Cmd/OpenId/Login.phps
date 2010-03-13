@@ -63,13 +63,14 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 		$user = O_OpenId_Provider_UserPlugin::getByIdentity( $identity );
 		if (!$user) {
 			$user = new R_Mdl_User( $identity, O_Acl_Role::getByName( "Openid User" ) );
+			if($email) {
+				R_Mdl_User_EmailConfirm::ignore($user);
+				$user->email_confirmed = 1;
+				$user->email = $email;
+				list($user->nickname,) = explode("@", $email, 2);
+			}
 		}
 
-		if($email) {
-			$user->email = $email;
-			$user->email_confirmed = 1;
-			list($user->nickname,) = explode("@", $email, 2);
-		}
 		$sreg = $this->getSRegResponse( $response );
 		if (!$user->email && isset( $sreg[ 'email' ] ) && $sreg[ 'email' ]) {
 			$user->email = $sreg[ 'email' ];

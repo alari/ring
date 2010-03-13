@@ -3,9 +3,10 @@
  * @table user -edit:submit Сохранить изменения
  * @field site -owns one R_Mdl_Site -inverse owner
  *
- * @field email VARCHAR(255) -edit -title Адрес электронной почты
- * @field nickname VARCHAR(255) -edit -title Ник или псевдоним
+ * @field email_confirm -owns one _User_EmailConfirm -inverse owner
  * @field email_confirmed INT(1) DEFAULT 0
+ * @field email VARCHAR(255) -edit -title Адрес электронной почты -signal email
+ * @field nickname VARCHAR(255) -edit -title Ник или псевдоним
  *
  * @field relations -owns many _User_Relation -inverse user
  * @field resources -owns many _Resource -inverse owner
@@ -23,6 +24,8 @@
  * @field ava_tiny -image filepath: avaPath tiny; src: avaSrc tiny; width:80; height:200
  *
  * @index email -unique
+ *
+ * @registry app/dao-listeners/set/email/R_Mdl_User R_Mdl_User_EmailConfirm::eventListener -add
  */
 class R_Mdl_User extends O_Acl_User {
 
