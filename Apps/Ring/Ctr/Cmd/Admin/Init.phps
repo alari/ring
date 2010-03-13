@@ -30,11 +30,13 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 						}
 					}
 				else {
-					/* @var $a R_Mdl_Site_Anonce */
-					$aResource = $a->getResource();
-					$sysResource->injectBottom( $aResource );
-					$siteResource->reload();
-					$sysResource->reload();
+					foreach($sys->anonces as $a) {
+						/* @var $a R_Mdl_Site_Anonce */
+						$aResource = $a->getResource();
+						$sysResource->injectBottom( $aResource );
+						$siteResource->reload();
+						$sysResource->reload();
+					}
 				}
 			}
 		}
