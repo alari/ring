@@ -50,14 +50,9 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 		include_once 'Auth/OpenID/AX.php';
 		$ax = new Auth_OpenID_AX_FetchResponse();
         $obj = $ax->fromSuccessResponse($response);
-        if(array_key_exists("http://axschema.org/contact/email", $obj->data)) {
+        if(isset($obj->data["http://axschema.org/contact/email"])) {
         	$email = $obj->data["http://axschema.org/contact/email"];
         	if(count($email)) $email = $email[0];
-        }
-
-        if(strpos($identity, "://www.google.com")) {
-        	if(!$email) return parent::startAuth();
-        	$identity = $email;
         }
 
 		$user = O_OpenId_Provider_UserPlugin::getByIdentity( $identity );

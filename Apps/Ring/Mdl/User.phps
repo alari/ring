@@ -118,7 +118,6 @@ class R_Mdl_User extends O_Acl_User {
 		if ($this ["site"]) {
 			return $this->site->url ();
 		} else {
-			if(strpos($this->identity, "@")) return "#identity";
 			return $this->identity;
 		}
 	}
