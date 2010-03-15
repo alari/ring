@@ -69,7 +69,19 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 		if(count($form->getErrors())) {
 			return $form->ajaxFailedResponse();
 		}
-
+		try {
+			$user = new R_Mdl_User(null, O_Acl_Role::getByName( "Openid User" ));
+			$user->login = $this->getParam("login");
+			$user->email = $this->getParam("email");
+			$user->setPwd($this->getParam("pwd"));
+			$user->save();
+			R_Mdl_Session::setUser($user);
+		} catch(Exception $e) {
+			$user->delete();
+			$form->setFieldError("_", $e->getMessage());
+			return $form->ajaxFailedResponse();
+		}
+		return $form->ajaxSucceedResponse(O_UrlBuilder::get());
 	}
 
 	/**
