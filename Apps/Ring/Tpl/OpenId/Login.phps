@@ -10,17 +10,18 @@ class R_Tpl_OpenId_Login extends R_Template {
 		if ($this->error)
 			echo "<h1>", $this->error, "</h1>";
 
-		?>
-<form method="POST" action="<?=O_Registry::get( "env/request_url" )?>">
-<fieldset>
-<legend>Войти в существующий аккаунт</legend>
-	<div><label><span>Email / Логин / Наш OpenID:</span><input type="text" name="openid_identifier"	value="<?=$this->identity?>" /></label></div>
-	<div><label><span>Пароль:</span> <input type="password" name="pwd" /></label></div>
-	<label><input type="submit" value="Войти" /></label>
+		$ourForm = new O_Form_Builder(O_Registry::get( "env/request_url" ), "Войти в существующий аккаунт");
+		$ourForm->setMethod("POST");
+		$ourForm->addHidden("openid_action", "login");
+		$ourForm->addHidden("redirect", @$_SESSION[ "redirect" ]);
 
-	<input type="hidden" name="openid_action" value="login" /><input type="hidden" name="redirect"	value="<?=@$_SESSION[ "redirect" ]?>" />
-</fieldset>
-</form>
+		$ourForm->addRow(new O_Form_Row_String("openid_identifier", "Email / Логин / Наш OpenID", "", $this->identity));
+		$ourForm->addRow(new O_Form_Row_Password("pwd", "Пароль"));
+		$ourForm->addSubmitButton("Войти");
+		$ourForm->render($this->layout());
+
+		?>
+
 <br/>
 	<div id="notice">
 		<b>Для наших авторов:</b> Из-за изменения алгоритма хранения пароля, все старые пароли были утеряны. Вам нужно получить новый. Для этого обратитесь к Алари (icq 5630024, name.alari@gmail.com, звонить тоже можно).
