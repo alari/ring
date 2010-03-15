@@ -183,7 +183,7 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 
 	public function delete()
 	{
-		$this->site->systems->test( "position", $this->position, ">" )->field( "position",
+		if($this->site) $this->site->systems->test( "position", $this->position, ">" )->field( "position",
 				"position-1", true )->update();
 		$r = $this->getResource();
 		if($r) $r->delete(true);
