@@ -66,7 +66,9 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 			$form->setFieldError("email", "Пользователь с таким адресом электронной почты уже существует");
 		}
 
-		if(count($form->getErrors())) return $form->ajaxFailedResponse();
+		if(count($form->getErrors())) {
+			return $this->getTemplate();
+		}
 
 	}
 
@@ -79,7 +81,7 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 			$newForm->setInstanceId("openid-reg");
 			$newForm->addHidden("openid_action", "register");
 			$newForm->addRow(new O_Form_Row_String("email", "Email"));
-			$newForm->addRow(new O_Form_Row_String("login", "Логин (>5 символов)"));
+			$newForm->addRow(new O_Form_Row_String("login", "Логин (>4 символов)"));
 			$newForm->addRow(new O_Form_Row_Password("pwd", "Пароль"));
 			$newForm->addRow(new O_Form_Row_Password("pwd2", "Повторите пароль"));
 			$newForm->addSubmitButton("Создать аккаунт");
