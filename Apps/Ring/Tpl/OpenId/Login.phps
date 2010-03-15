@@ -7,8 +7,12 @@ class R_Tpl_OpenId_Login extends R_Template {
 
 	public function displayContents()
 	{
-		if ($this->error)
+		if ($this->error) {
 			echo "<h1>", $this->error, "</h1>";
+			$_SESSION["notice"] = <<<A
+<b>Для наших авторов:</b> Из-за изменения алгоритма хранения пароля, все старые пароли были утеряны. Вам нужно получить новый. Для этого обратитесь к Алари (icq 5630024, name.alari@gmail.com, звонить тоже можно).
+A;
+		}
 
 		$ourForm = new O_Form_Builder(O_Registry::get( "env/request_url" ), "Войти в существующий аккаунт");
 		$ourForm->setMethod("POST");
@@ -20,19 +24,15 @@ class R_Tpl_OpenId_Login extends R_Template {
 		$ourForm->addSubmitButton("Войти");
 		$ourForm->render($this->layout());
 
+		$newForm = new O_Form_Builder(O_Registry::get("env/process_url"), "Создать новый аккаунт");
+		$newForm->addHidden("openid_action", "register");
+		$newForm->addRow(new O_Form_Row_String("email", "Email"));
+		$newForm->addRow(new O_Form_Row_String("login", "Логин (>5 символов)"));
+		$newForm->addRow(new O_Form_Row_Password("pwd", "Пароль"));
+		$newForm->addRow(new O_Form_Row_Password("pwd2", "Повторите пароль"));
+		$newForm->addSubmitButton("Создать аккаунт");
+		$newForm->render($this->layout(), true);
 		?>
-
-<br/>
-	<div id="notice">
-		<b>Для наших авторов:</b> Из-за изменения алгоритма хранения пароля, все старые пароли были утеряны. Вам нужно получить новый. Для этого обратитесь к Алари (icq 5630024, name.alari@gmail.com, звонить тоже можно).
-	</div><br/>
-
-<form method="post">
-<fieldset>
-<legend>Создать новый аккаунт</legend>
-</fieldset>
-</form>
-<br/>
 
 	<!-- Simple OpenID Selector -->
     <form method="post" id="openid_form">
