@@ -62,7 +62,9 @@ class R_Mdl_Site_Collection extends O_Dao_ActiveRecord {
 	 * @return R_Mdl_Resource
 	 */
 	public function getResource() {
-		return $this->system->site->nodes->test("content", $this->id)->test("content_class", __CLASS__)->getOne();
+		if($this->system && $this->system->site) $q = $this->system->site->nodes;
+		else $q = R_Mdl_Resource::getQuery();
+		return $q->test("content", $this->id)->test("content_class", __CLASS__)->getOne();
 	}
 
 	public function save() {
