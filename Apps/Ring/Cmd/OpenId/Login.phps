@@ -67,7 +67,7 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 		}
 
 		if(count($form->getErrors())) {
-			return $this->getTemplate();
+			return $form->ajaxFailedResponse();
 		}
 
 	}
@@ -77,7 +77,7 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 	 */
 	private function getRegForm() {
 		if(!$this->regForm) {
-			$newForm = new O_Form_Builder(O_UrlBuilder::get(), "Создать новый аккаунт");
+			$newForm = new O_Form_Builder(O_UrlBuilder::get(O_Registry::get("env/process_url")), "Создать новый аккаунт");
 			$newForm->setInstanceId("openid-reg");
 			$newForm->addHidden("openid_action", "register");
 			$newForm->addRow(new O_Form_Row_String("email", "Email"));

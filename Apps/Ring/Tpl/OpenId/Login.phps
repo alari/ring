@@ -25,7 +25,7 @@ A;
 		$ourForm->addSubmitButton("Войти");
 		$ourForm->render($this->layout());
 
-		$this->newForm->render($this->layout());
+		$this->newForm->render($this->layout(), true);
 		?>
 
 	<!-- Simple OpenID Selector -->
