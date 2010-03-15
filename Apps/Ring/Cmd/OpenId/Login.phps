@@ -74,6 +74,7 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 			$user->login = $this->getParam("login");
 			$user->email = $this->getParam("email");
 			$user->setPwd($this->getParam("pwd"));
+			$user->nickname = $this->getParam("login");
 			$user->save();
 			R_Mdl_Session::setUser($user);
 		} catch(Exception $e) {
