@@ -154,7 +154,7 @@ class R_Mdl_User extends O_Acl_User {
 		} else {
 			$img = O_UrlBuilder::getStatic ( "im/user.gif" );
 		}
-		return "<img src=\"$img\" width=\"11\" height=\"11\" alt=\"\"/>&nbsp;<a href=\"" . $this->url () . "\">" . trim($this->nickname ? $this->nickname : $this->identity) . "</a>";
+		return "<img src=\"$img\" width=\"11\" height=\"11\" alt=\"\"/>&nbsp;<a href=\"" . $this->url () . "\">" . trim($this->nickname ? $this->nickname : ($this->identity? $this->identity : $this->login)) . "</a>";
 	}
 
 	/**
