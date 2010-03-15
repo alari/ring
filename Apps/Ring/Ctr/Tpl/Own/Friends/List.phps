@@ -17,12 +17,14 @@ class R_Ctr_Tpl_Own_Friends_List extends R_Ctr_Template {
 <?}?>
 </ul>
 
+<?if($this->site){?>
 <h1>Ваши друзья (сайт: <?=$this->site->link()?>)</h1>
 <ul>
 <?foreach($this->friends as $friend) {?>
 <li><?=$friend->link()?> - <small><a href="?remove=<?=$friend->id?>">Убрать</a></small></li>
 <?}?>
 </ul>
+<?}?>
 
 <form method="POST">
 <fieldset><legend>Следить за автором или сайтом:</legend> OpenId пользователя: <input
