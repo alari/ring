@@ -7,20 +7,22 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		ini_set("display_errors", true);
 
 		foreach(R_Mdl_User::getQuery() as $u) if(!$u->login) {
+			$u->login = null;
 			if($u->identity) {
 				$login = $u->identity;
-				if(strpos($login, "://")) list($login,) = explode("://", $identity, 2);
+				if(strpos($login, "://")) list($login,) = explode("://", $login, 2);
 				list($login,) = explode(".", $login, 2);
-				$u->login = $login;
-				$u->save();
+				if($login) {
+					$u->login = $login;
+				}
 			} elseif($u->email) {
 				list($login,) = explode("@", $u->email, 2);
 				list($login,) = explode(".", $login, 2);
 				if($login) {
 					$u->login = $login;
-					$u->save();
 				}
 			}
+			$u->save();
 		}
 
 		$res = function($obj) {
