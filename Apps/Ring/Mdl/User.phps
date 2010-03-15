@@ -219,4 +219,18 @@ class R_Mdl_User extends O_Acl_User {
 		return O_OpenId_Provider_UserPlugin::getByIdentity ( $identity );
 	}
 
+	/**
+	 * Returns user by email, host or login
+	 * @param unknown_type $ident
+	 */
+	static public function getByStringId($ident) {
+		if(strpos($ident, "@")) {
+			$field = "email";
+		} elseif(strpos($ident, ".")) {
+			return self::getByIdentity($ident);
+		} else {
+			$field = "login";
+		}
+		return static::getQuery()->test($field, $ident)->getOne();
+	}
 }
