@@ -39,7 +39,8 @@ class R_Mdl_Session extends O_Acl_Session {
 				return $q;
 			}
 			$rel = self::getUser()->getSiteRelation($site);
-			$q->where("owner=?
+			$tbl = O_Dao_TableInfo::get($q->getClass())->getTableName();
+			$q->where("$tbl.owner=?
 			 OR	(groups & ? > 0 AND groups_access & 1 = 1)
 			 OR (logged_access & 1 = 1 AND NOT (groups & ? = 1 AND groups_access & 1 = 0))", self::getUser(), $rel->groups, $rel->groups);
 		} else {
