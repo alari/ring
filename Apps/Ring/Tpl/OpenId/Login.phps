@@ -11,23 +11,27 @@ class R_Tpl_OpenId_Login extends R_Template {
 			echo "<h1>", $this->error, "</h1>";
 
 		?>
-<fieldset>
-<legend>Войти или зарегистрироваться</legend>
-
 <form method="POST" action="<?=O_Registry::get( "env/request_url" )?>">
-
-	<label><span>Email / Логин / Наш OpenID:</span><input type="text" name="openid_identifier"	value="<?=$this->identity?>" /></label>
-	<label><span>Пароль:</span> <input type="password" name="pwd" /></label>
+<fieldset>
+<legend>Войти в существующий аккаунт</legend>
+	<div><label><span>Email / Логин / Наш OpenID:</span><input type="text" name="openid_identifier"	value="<?=$this->identity?>" /></label></div>
+	<div><label><span>Пароль:</span> <input type="password" name="pwd" /></label></div>
 	<label><input type="submit" value="Войти" /></label>
 
 	<input type="hidden" name="openid_action" value="login" /><input type="hidden" name="redirect"	value="<?=@$_SESSION[ "redirect" ]?>" />
-</form>
 </fieldset>
-
-<br/><br/>
+</form>
+<br/>
 	<div id="notice">
 		<b>Для наших авторов:</b> Из-за изменения алгоритма хранения пароля, все старые пароли были утеряны. Вам нужно получить новый. Для этого обратитесь к Алари (icq 5630024, name.alari@gmail.com, звонить тоже можно).
-	</div>
+	</div><br/>
+
+<form method="post">
+<fieldset>
+<legend>Создать новый аккаунт</legend>
+</fieldset>
+</form>
+<br/>
 
 	<!-- Simple OpenID Selector -->
     <form method="post" id="openid_form">
