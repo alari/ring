@@ -157,7 +157,8 @@ class R_Mdl_Sys_Instance extends O_Dao_ActiveRecord {
 	 * @return R_Mdl_Resource
 	 */
 	public function getResource() {
-		return $this->site->nodes->test("content", $this->id)->test("content_class", __CLASS__)->getOne();
+		$q = $this->site ? $this->site->nodes : R_Mdl_Resource::getQuery();
+		return $q->test("content", $this->id)->test("content_class", __CLASS__)->getOne();
 	}
 
 	/**
