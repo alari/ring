@@ -1,8 +1,14 @@
 <?php
 class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 
+	protected $regForm;
+
 	public function process()
 	{
+		if($this->getParam("openid_action") == "register") {
+			return $this->tryRegister();
+		}
+
 		if($_POST["openid_identifier"] == "OpenID") {
 			return $this->redirect();
 		}
@@ -40,9 +46,52 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 		return parent::startAuth();
 	}
 
+	private function tryRegister() {
+		$form = $this->getRegForm();
+		if(strlen($this->getParam("pwd")) < 5) {
+			$form->setFieldError("pwd", "Слишком короткий пароль");
+		}
+		if($this->getParam("pwd") != $this->getParam("pwd2")) {
+			$form->setFieldError("pwd2", "Введённые пароли не совпадают");
+		}
+		if(!preg_match("#^[a-z0-9][-0-9a-z]{3,}[a-z0-9]$#i", $this->getParam("login"))) {
+			$form->setFieldError("login", "Неправильный логин: должен быть не менее 5 символов, латинские буквы, цифры, знак дефиса (не первым и не последним символом)");
+		} elseif(R_Mdl_User::getQuery()->test("login", $this->getParam("login"))->getFunc()) {
+			$form->setFieldError("login", "Этот логин занят");
+		}
+		// TODO: set strong validity checker
+		if(!$this->getParam("email") || !strpos($this->getParam("email"), "@")) {
+			$form->setFieldError("email", "Введите правильный адрес электронной почты");
+		} elseif(R_Mdl_User::getQuery()->test("email", $this->getParam("email"))->getFunc()) {
+			$form->setFieldError("email", "Пользователь с таким адресом электронной почты уже существует");
+		}
+
+		if(count($form->getErrors())) return $form->ajaxFailedResponse();
+
+	}
+
+	/**
+	 * @return O_Form_Builder
+	 */
+	private function getRegForm() {
+		if(!$this->regForm) {
+			$newForm = new O_Form_Builder(O_Registry::get("env/process_url"), "Создать новый аккаунт");
+			$newForm->addHidden("openid_action", "register");
+			$newForm->addRow(new O_Form_Row_String("email", "Email"));
+			$newForm->addRow(new O_Form_Row_String("login", "Логин (>5 символов)"));
+			$newForm->addRow(new O_Form_Row_Password("pwd", "Пароль"));
+			$newForm->addRow(new O_Form_Row_Password("pwd2", "Повторите пароль"));
+			$newForm->addSubmitButton("Создать аккаунт");
+			$this->regForm = $newForm;
+		}
+		return $this->regForm;
+	}
+
 	public function getTemplate( $tpl_name = null )
 	{
-		return new R_Tpl_OpenId_Login( );
+		$tpl = new R_Tpl_OpenId_Login( );
+		$tpl->newForm = $this->getRegForm();
+		return $tpl;
 	}
 
 	protected function authSuccess( Auth_OpenID_SuccessResponse $response )

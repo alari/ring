@@ -4,6 +4,7 @@ class R_Tpl_OpenId_Login extends R_Template {
 	public $mode;
 	public $error;
 	public $identity;
+	public $newForm;
 
 	public function displayContents()
 	{
@@ -24,14 +25,7 @@ A;
 		$ourForm->addSubmitButton("Войти");
 		$ourForm->render($this->layout());
 
-		$newForm = new O_Form_Builder(O_Registry::get("env/process_url"), "Создать новый аккаунт");
-		$newForm->addHidden("openid_action", "register");
-		$newForm->addRow(new O_Form_Row_String("email", "Email"));
-		$newForm->addRow(new O_Form_Row_String("login", "Логин (>5 символов)"));
-		$newForm->addRow(new O_Form_Row_Password("pwd", "Пароль"));
-		$newForm->addRow(new O_Form_Row_Password("pwd2", "Повторите пароль"));
-		$newForm->addSubmitButton("Создать аккаунт");
-		$newForm->render($this->layout(), true);
+		$this->newForm->render($this->layout(), true);
 		?>
 
 	<!-- Simple OpenID Selector -->
