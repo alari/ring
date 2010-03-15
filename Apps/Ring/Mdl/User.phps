@@ -24,6 +24,9 @@
  * @field ava_full ENUM('-','gif','jpeg','png') DEFAULT '-' -image filepath: avaPath full; src: avaSrc full; width:190; height:500; cascade: ava_tiny; clear:1
  * @field ava_tiny -image filepath: avaPath tiny; src: avaSrc tiny; width:80; height:200
  *
+ * @field created_time INT
+ * @field lastlogged_time INT
+ *
  * @index email -unique
  * @index login -unique
  *
@@ -37,6 +40,7 @@ class R_Mdl_User extends O_Acl_User {
 		O_OpenId_Provider_UserPlugin::normalize ( $identity );
 		$this->identity = $identity;
 		$this->role = $role;
+		$this->created_time = time();
 		parent::__construct ();
 		$this->nickname = rtrim ( substr ( $identity, 7 ), "/" );
 		$this->createUserdir ();
@@ -109,6 +113,8 @@ class R_Mdl_User extends O_Acl_User {
 	public function login($pwd) {
 		if ( $this->getPasswordHash($pwd) == $this->pwd_hash) {
 			R_Mdl_Session::setUser ( $this );
+			$this->lastlogged_time = time();
+			$this->save();
 			return true;
 		}
 		return false;
