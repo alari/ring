@@ -10,7 +10,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 			$u->login = null;
 			if($u->identity) {
 				$login = $u->identity;
-				if(strpos($login, "://")) list($login,) = explode("://", $login, 2);
+				if(strpos($login, "://")) list(,$login) = explode("://", $login, 2);
 				list($login,) = explode(".", $login, 2);
 				if($login) {
 					$u->login = $login;
