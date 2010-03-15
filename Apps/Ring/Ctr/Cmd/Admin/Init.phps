@@ -6,8 +6,22 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		error_reporting(E_ALL);
 		ini_set("display_errors", true);
 
-		R_Mdl_Site::getByHost("ap.mirari.name")->delete();
-		exit;
+		foreach(R_Mdl_User::getQuery() as $u) if(!$u->login) {
+			if($u->identity) {
+				$login = $u->identity;
+				if(strpos($login, "://")) list($login,) = explode("://", $identity, 2);
+				list($login,) = explode(".", $login, 2);
+				$u->login = $login;
+				$u->save();
+			} elseif($u->email) {
+				list($login,) = explode("@", $u->email, 2);
+				list($login,) = explode(".", $login, 2);
+				if($login) {
+					$u->login = $login;
+					$u->save();
+				}
+			}
+		}
 
 		$res = function($obj) {
 			$resc = R_Mdl_Resource::getQuery()->test("content", $obj->id)->test("content_class", get_class($obj))->getFunc();
