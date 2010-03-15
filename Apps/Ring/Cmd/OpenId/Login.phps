@@ -76,6 +76,7 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 	private function getRegForm() {
 		if(!$this->regForm) {
 			$newForm = new O_Form_Builder(O_UrlBuilder::get(), "Создать новый аккаунт");
+			$newForm->setInstanceId("openid-reg");
 			$newForm->addHidden("openid_action", "register");
 			$newForm->addRow(new O_Form_Row_String("email", "Email"));
 			$newForm->addRow(new O_Form_Row_String("login", "Логин (>5 символов)"));
