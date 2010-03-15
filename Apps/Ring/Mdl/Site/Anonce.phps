@@ -547,7 +547,8 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 		if($user == $this->owner) {
 			return true;
 		}
-		if($this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_ADMIN)->hasUser($user)) {
+		$admGroup = $this->site->getGroupByFlag(R_Mdl_User_Group::FLAG_ADMIN);
+		if($admGroup && $admGroup->hasUser($user)) {
 			return true;
 		}
 		$rel = $this->site->getUserRelation($user);
