@@ -10,36 +10,21 @@ class R_Tpl_OpenId_Login extends R_Template {
 		if ($this->error)
 			echo "<h1>", $this->error, "</h1>";
 
-		switch ($this->mode) {
-			case "auth" :
-			case "our" :
-				?>
-<div><form method="POST"
-	action="<?=
-				O_Registry::get( "env/request_url" )?>"><label><span>OpenId:</span>
-<input type="text" name="openid_identifier"
-	value="<?=
-				$this->identity?>" /></label>
+		?>
+<fieldset>
+<legend>Войти или зарегистрироваться</legend>
 
-	<?
-				if ($this->mode == "our") {
-					?>
-	<br />
-<label><span>Пароль:</span> <input type="password" name="pwd" /></label>
-<label><input type="submit" value="Войти" /></label>
-<?
-				} else {
-					?>
-<input type="submit" value="Войти" />
-<?
-				}
-				?>
+<form method="POST" action="<?=O_Registry::get( "env/request_url" )?>">
 
-	 <input type="hidden" name="openid_action" value="login" /> <input
-	type="hidden" name="redirect"
-	value="<?=
-				@$_SESSION[ "redirect" ]?>" /></form></div>
-				<hr/>
+	<label><span>Email / Логин / Наш OpenID:</span><input type="text" name="openid_identifier"	value="<?=$this->identity?>" /></label>
+	<label><span>Пароль:</span> <input type="password" name="pwd" /></label>
+	<label><input type="submit" value="Войти" /></label>
+
+	<input type="hidden" name="openid_action" value="login" /><input type="hidden" name="redirect"	value="<?=@$_SESSION[ "redirect" ]?>" />
+</form>
+</fieldset>
+
+<br/><br/>
 	<div id="notice">
 		<b>Для наших авторов:</b> Из-за изменения алгоритма хранения пароля, все старые пароли были утеряны. Вам нужно получить новый. Для этого обратитесь к Алари (icq 5630024, name.alari@gmail.com, звонить тоже можно).
 	</div>
@@ -58,10 +43,7 @@ class R_Tpl_OpenId_Login extends R_Template {
                 <input id="openid_submit" type="submit" value="Sign-In"/>
             </div>
         </fieldset>
-         <input type="hidden" name="openid_action" value="login" /> <input
-	type="hidden" name="redirect"
-	value="<?=
-				@$_SESSION[ "redirect" ]?>" />
+         <input type="hidden" name="openid_action" value="login" /> <input type="hidden" name="redirect" value="<?=@$_SESSION[ "redirect" ]?>" />
     </form>
     <!-- /Simple OpenID Selector -->
     <script type="text/javascript">
@@ -70,8 +52,5 @@ class R_Tpl_OpenId_Login extends R_Template {
         });
     </script>
 <?
-			break;
-		}
-
 	}
 }

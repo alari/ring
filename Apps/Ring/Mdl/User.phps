@@ -7,6 +7,7 @@
  * @field email_confirmed INT(1) DEFAULT 0
  * @field email VARCHAR(255) -edit -title Адрес электронной почты -signal email
  * @field nickname VARCHAR(255) -edit -title Ник или псевдоним
+ * @field login VARCHAR(32) -edit -title Логин -check Preg [a-z0-9][-a-z0-9]{3,}[a-z0-9]
  *
  * @field relations -owns many _User_Relation -inverse user
  * @field resources -owns many _Resource -inverse owner
@@ -24,6 +25,7 @@
  * @field ava_tiny -image filepath: avaPath tiny; src: avaSrc tiny; width:80; height:200
  *
  * @index email -unique
+ * @index login -unique
  *
  * @registry app/dao-listeners/set/email/R_Mdl_User R_Mdl_User_EmailConfirm::eventListener -add
  */
