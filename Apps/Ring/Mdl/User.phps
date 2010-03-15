@@ -236,6 +236,10 @@ class R_Mdl_User extends O_Acl_User {
 			$field = "email";
 		} elseif(strpos($ident, ".")) {
 			return self::getByIdentity($ident);
+		}elseif(strpos($ident, "_")){ {
+			list(,$ident) = explode("_", $ident, 2);
+			$field = "id";
+		}
 		} else {
 			$field = "login";
 		}
