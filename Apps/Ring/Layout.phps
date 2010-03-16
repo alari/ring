@@ -236,7 +236,7 @@ class R_Layout extends O_Html_Layout {
 <!--/LiveInternet--></div>
 <div id="site_sp"><?=(R_Mdl_Session::isLogged() ? "" : $this->sape()->return_links())?></div>
 <?
-echo "<!--", print_r(O_Profiler::getStat(),1), "-->";
+echo "<!--", print_r(O_Profiler::getStat(),1), apc_sma_info(), "-->";
 //echo "<!--", print_r(array_keys(O_Registry::get("fw/classmanager/loaded")),1), "-->";
 	}
 
