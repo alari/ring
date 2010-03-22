@@ -82,7 +82,7 @@ O( "*url_dispatcher", function(){
 			O("*topic", R_Mdl_Info_Topic::getByUrlName($p[1]));
 		} elseif($URL('edit:(.+)')) {
 			O("*command", "EditPage");
-		} else {
+		} elseif(O("~process_url")) {
 			O("*command", "Page");
 			O("*page", R_Mdl_Info_Page::getByUrlName(O("~process_url")));
 		}
