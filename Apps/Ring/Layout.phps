@@ -225,7 +225,7 @@ class R_Layout extends O_Html_Layout {
 
 	protected function showCounter()
 	{
-		if (O_Registry::get( "app/mode" ) != "production")
+		if (O( "*mode" ) != "production")
 			return;
 		?>
 <?=
