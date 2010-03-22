@@ -29,7 +29,7 @@ O( "*url_dispatcher", function(){
 		O("*plugin", "");
 		O("*command", "OpenId_".ucfirst($p[1]));
 	} elseif($URL("openid/provider(/(.+))?", $p)) {
-		O("*current/action", $p[2]);
+		O("*action", $p[2]);
 		O("*plugin", "");
 		O("*command", "OpenId_Provider");
 	} elseif($URL("comment")) {
@@ -47,42 +47,43 @@ O( "*url_dispatcher", function(){
 		} elseif($PG('commants\.feed')) {
 			O("*command", "Comments_Feed");
 		} elseif($URL('tag/(([0-9]+)/)?(.+)', $p)) {
-			O("*current/tag", $p[3]);
-			O("*paginator/page", $p[2]);
+			O("*tag", $p[3]);
+			O("_paginator/page", $p[2]);
 			O("*command", "Tag");
 		}
 		if($M('(www\.|openid\.)?(.+)', "~http_host", $p)) {
-			O("*current/site", R_Mdl_Site::getByHost($p[2]));
+			O("*site", R_Mdl_Site::getByHost($p[2]));
 		}
-		O("*layout_class", "R_Lf_Layout");
+		//
+		O("_layout_class", "R_Lf_Layout");
 	} elseif(O("*plugin") == "Ctr") {
 		if($URL("own/msgs/read-([0-9]+)", $p)) {
-			O("*current/msg", $p[1]);
+			O("*msg", $p[1]);
 			O("*command", "Own_Msgs_Read");
 		} elseif($URL('own/msgs/write(-([0-9]+))', $p)) {
-			O("*current/adresate", $p[2]);
+			O("*adresate", $p[2]);
 			O("*command", "Own_Msgs_Write");
 		} elseif($URL('Own/Msgs/(([a-zA-Z]+)(-([0-9]+))?)?', $p)) {
-			O("*current/box", $p[2]);
-			O("*paginator/page", $p[4]);
+			O("*box", $p[2]);
+			O("_paginator/page", $p[4]);
 			O("*command", "Own_Msgs_Box");
 		} elseif($URL('Own/Friends-([0-9]+)', $p)) {
-			O("*paginator/page", $p[1]);
+			O("_paginator/page", $p[1]);
 			O("*command", "Own_Friends");
 		}
-		O("*layout_Class", "R_Ctr_Layout");
+		O("_layout_class", "R_Ctr_Layout");
 		// TODO: understand this
-		O("*dict/default/base/filebase", "Apps/Ring/Ctr/dict.");
+		O("_dict/default/base/filebase", "Apps/Ring/Ctr/dict.");
 	} elseif(O("*plugin") == "Mr") {
 		if($URL('topic:(.+)', $p)) {
 			O("*command", "Topic");
-			O("*current/topic", R_Mdl_Info_Topic::getByUrlName($p[1]));
+			O("*topic", R_Mdl_Info_Topic::getByUrlName($p[1]));
 		} elseif($URL('edit:(.+)')) {
 			O("*command", "EditPage");
 		} else {
 			O("*command", "Page");
-			O("*current/page", R_Mdl_Info_Page::getByUrlName(O("~process_url")));
+			O("*page", R_Mdl_Info_Page::getByUrlName(O("~process_url")));
 		}
-		O("*layout_class", "R_Mr_Layout");
+		O("_layout_class", "R_Mr_Layout");
 	}
 } );
