@@ -27,6 +27,7 @@ O( "*url_dispatcher", function(){
 	// OpenId and other plugin-independent utilites
 	if($URL("openid/(redirect|login|logout)", $p)) {
 		O("_layout_class", "R_Ctr_Layout");
+		O("_dict/default/base/filebase", "Apps/Ring/Ctr/dict.");
 		O("*plugin", "");
 		O("*command", "OpenId_".ucfirst($p[1]));
 	} elseif($URL("openid/provider(/(.+))?", $p)) {
