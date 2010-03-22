@@ -9,7 +9,7 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 			return $this->tryRegister();
 		}
 
-		if($_POST["openid_identifier"] == "OpenID") {
+		if(isset($_POST["openid_identifier"]) && $_POST["openid_identifier"] == "OpenID") {
 			return $this->redirect();
 		}
 

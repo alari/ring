@@ -278,7 +278,7 @@ echo "<!--", print_r(O_Profiler::getStat(),1), "-->";
 	onfocus="this.className='openid-focus';this.value=this.value=='OpenID'?'':this.value"
 	onblur="this.value = this.value ? this.value : 'OpenID';if(this.value=='OpenID') this.className = 'openid-blur'"
 	class="openid-blur" /> <input type="submit" value="Вход"
-	id="openid-signup" /> <span>(например, логин.livejournal.com)</span> <input
+	id="openid-signup" /> <input
 	type="hidden" name="openid_action" value="login" /> <input
 	type="hidden" name="redirect"
 	value="http://<?=$_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ]?>" />
