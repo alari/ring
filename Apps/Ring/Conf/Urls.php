@@ -1,5 +1,4 @@
 <?php
-use O;
 O( "*url_dispatcher", function(){
 	// To prevent IDE from warnings
 	$p = Array();
