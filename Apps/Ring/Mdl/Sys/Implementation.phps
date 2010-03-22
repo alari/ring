@@ -41,13 +41,13 @@ abstract class R_Mdl_Sys_Implementation extends O_Dao_ActiveRecord {
 			$class = $prefix . "Home";
 			$cmd = new $class( );
 			if (isset( $matches[ 1 ] ))
-				O_Registry::set( "app/paginator/page", $matches[ 1 ] );
+				O( "*paginator/page", $matches[ 1 ] );
 			// Creatives by tag
 		} elseif (preg_match( "#tag(/([0-9]+))?/(.+)$#", $page, $matches )) {
 			$class = $prefix . "Tag";
 			$cmd = new $class( );
 			if (isset( $matches[ 2 ] ))
-				O_Registry::set( "app/paginator/page", $matches[ 2 ] );
+				O( "*paginator/page", $matches[ 2 ] );
 			$cmd->tag = $this->system->site->tags->test( "title", urldecode( $matches[ 3 ] ) )->getOne();
 			// Linked anonces
 		} elseif (preg_match( "#^linked/([0-9]+)$#", $page, $matches )) {
@@ -59,7 +59,7 @@ abstract class R_Mdl_Sys_Implementation extends O_Dao_ActiveRecord {
 			$class = $prefix . "Comments";
 			$cmd = new $class( );
 			if (isset( $matches[ 2 ] ))
-				O_Registry::set( "app/paginator/page", $matches[ 2 ] );
+				O( "*paginator/page", $matches[ 2 ] );
 			// One collection page
 		} elseif (preg_match( "#^coll-([0-9]+)$#", $page, $matches )) {
 			$class = $prefix . "Collection";
