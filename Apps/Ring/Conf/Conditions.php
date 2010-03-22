@@ -39,6 +39,3 @@ O("*conditions", function(){
 	O("_prefix", "R");
 	O("_ext", "phps");
 });
-?>
-prefix: R
-ext: phps
