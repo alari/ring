@@ -50,7 +50,7 @@ O( "*url_dispatcher", function(){
 			O("*command", "Comments_Feed");
 		} elseif($URL('tag/(([0-9]+)/)?(.+)', $p)) {
 			O("*tag", $p[3]);
-			O("_paginator/page", $p[2]);
+			O("*paginator/page", $p[2]);
 			O("*command", "Tag");
 		}
 		if($M('(www\.|openid\.)?(.+)', "~http_host", $p)) {
@@ -67,10 +67,10 @@ O( "*url_dispatcher", function(){
 			O("*command", "Own_Msgs_Write");
 		} elseif($URL('Own/Msgs/(([a-zA-Z]+)(-([0-9]+))?)?', $p)) {
 			O("*box", $p[2]);
-			O("_paginator/page", $p[4]);
+			O("*paginator/page", $p[4]);
 			O("*command", "Own_Msgs_Box");
 		} elseif($URL('Own/Friends-([0-9]+)', $p)) {
-			O("_paginator/page", $p[1]);
+			O("*paginator/page", $p[1]);
 			O("*command", "Own_Friends");
 		}
 		O("_layout_class", "R_Ctr_Layout");
