@@ -5,18 +5,18 @@ class R_Cmd_OpenId_Login extends O_OpenId_Consumer_Command {
 
 	public function process()
 	{
+		if (isset( $_POST[ "redirect" ] )) {
+			$_SESSION[ "redirect" ] = $_POST[ "redirect" ];
+		} elseif(!isset($_SESSION["redirect"])) {
+			$_SESSION[ "redirect" ] = "/";
+		}
+
 		if($this->getParam("openid_action") == "register") {
 			return $this->tryRegister();
 		}
 
 		if(isset($_POST["openid_identifier"]) && $_POST["openid_identifier"] == "OpenID") {
 			return $this->redirect();
-		}
-
-		if (isset( $_POST[ "redirect" ] )) {
-			$_SESSION[ "redirect" ] = $_POST[ "redirect" ];
-		} elseif(!isset($_SESSION["redirect"])) {
-			$_SESSION[ "redirect" ] = "/";
 		}
 
 		if (isset( $_POST[ 'openid_action' ] ) && $_POST[ 'openid_action' ] == "login" && !empty(
