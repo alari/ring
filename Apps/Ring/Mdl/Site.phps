@@ -99,7 +99,9 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 	private function _doSave($op, $np, $s){
 		$o = $op.$s;
 		$n = $np.$s;
+		try {
 		O_Db_Query::get("tmp_files")->field("old_url", $o)->field("new_url", $n)->insert();
+		} catch(PDOException $e){}
 	}
 
 	private function _rename($of, $nf, $op, $np){
