@@ -56,43 +56,6 @@ class R_Lf_Tpl_Admin_SiteView extends R_Lf_Template {
 </fieldset>
 <input type="hidden" name="action" value="favicon" /></form>
 
-<br />
-<hr />
-<ul>
-<?
-		foreach (O_Dao_Query::get( "R_Mdl_Site_StyleScheme" ) as $s) {
-			?>
-<li style="background-color:<?=$s->color_back?>;color:<?=$s->color_text?>"><a href="?set-scheme=<?=$s->id?>" style="<?=$s->color_text?>"><?=$s->title?></a></li>
-<?
-		}
-		?>
-		<li><a href="?set-scheme=null">Очистить схему</a></li>
-</ul>
-<br />
-<hr />
-<form method="post">
-<fieldset><legend>(beta) попробовать базовые цвета</legend>
-<?
-		$c = array ();
-		if (isset( $_SESSION[ "c" ] ) && is_array( $_SESSION[ "c" ] ))
-			$c = $_SESSION[ "c" ];
-		?><ul>
-<?
-		for ($i = 1; $i <= 10; $i++) {
-			?>
-<li>Цвет №<?=$i?>: <input type="text" name="c[<?=$i?>]"
-		value="<?=(isset( $c[ $i ] ) ? $c[ $i ] : "")?>" onkeyup="$('span-color-<?=$i?>').setStyle('background', this.value)" /> <span id="span-color-<?=$i?>" style="width:10px;height:20px;background:<?=(isset( $c[ $i ] ) ? $c[ $i ] : "")?>">&nbsp;</span></li>
-<?
-		}
-		?>
-</ul>
-<br />
-<input type="submit" value="Попробовать" /> <br />
-<br />
-Название: <input type="text" name="scheme-title" /> <input type="submit"
-	name="save-scheme" value="Сохранить схему" /> <input type="hidden"
-	name="action" value="style-scheme" /></fieldset>
-</form>
 <?
 	}
 

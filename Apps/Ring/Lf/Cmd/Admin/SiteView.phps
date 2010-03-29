@@ -8,7 +8,7 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 			if ($this->getParam( "action" ) == "css") {
 				$css = $this->getParam( "css" );
 				if ($css)
-					file_put_contents( $this->getSite()->static_folder . "style.css", $css );
+					file_put_contents( $this->getSite()->staticPath( "style.css" ), $css );
 				return $this->redirect();
 				// Uploading style-used file
 			} elseif ($this->getParam( "action" ) == "file") {
@@ -24,10 +24,10 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 							"Картинка должна быть в jpg, gif или png и иметь название, написанное латиницей." );
 					return $this->redirect();
 				}
-				if (file_exists( $this->getSite()->static_folder . $file[ "name" ] ))
+				if (file_exists( $this->getSite()->staticPath( $file[ "name" ] ) ))
 					unlink( $this->getSite()->static_folder . $file[ "name" ] );
 				move_uploaded_file( $file[ "tmp_name" ],
-						$this->getSite()->static_folder . $file[ "name" ] );
+						$this->getSite()->staticPath( $file[ "name" ] ) );
 				return $this->redirect();
 				// Uploading css
 			} elseif ($this->getParam( "action" ) == "favicon") {
@@ -63,28 +63,20 @@ class R_Lf_Cmd_Admin_SiteView extends R_Lf_Command {
 			}
 		} else {
 			if ($this->getParam( "action" ) == "revert") {
-				file_put_contents( $this->getSite()->static_folder . "style.css",
-						file_get_contents( $this->getSite()->static_folder . "../style.css" ) );
-				return $this->redirect();
-			} elseif ($this->getParam( "set-scheme" )) {
-				if (isset( $_SESSION[ "c" ] ))
-					unset( $_SESSION[ "c" ] );
-				$this->getSite()->style_scheme = O_Dao_ActiveRecord::getById(
-						$this->getParam( "set-scheme" ), "R_Mdl_Site_StyleScheme" );
-				$this->getSite()->save();
-				$this->setNotice( "Обновите страницу, чтобы применить стилевую схему." );
+				file_put_contents( $this->getSite()->staticPath( "style.css" ),
+						file_get_contents( O_Registry::get( "app/sites/static_folder" ) . "style.css" ) );
 				return $this->redirect();
 			}
 
 			$tpl = $this->getTemplate();
-			$tpl->css_source = file_get_contents( $this->getSite()->static_folder . "style.css" );
-			$d = opendir( $this->getSite()->static_folder );
+			$tpl->css_source = file_get_contents( $this->getSite()->staticPath( "style.css" ) );
+			$d = opendir( substr($this->getSite()->staticPath(""), 0, -1) );
 			while ($f = readdir( $d ))
-				if (is_file( $this->getSite()->static_folder . $f )) {
+				if (is_file( $this->getSite()->staticPath( $f ) )) {
 					if ($f == "style.css")
 						continue;
 					if ($this->getParam( "delete" ) == $f) {
-						unlink( $this->getSite()->static_folder . $f );
+						unlink( $this->getSite()->staticPath( $f ) );
 						continue;
 					}
 					$tpl->files[] = $f;

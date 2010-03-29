@@ -67,11 +67,11 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 
 		parent::__construct();
 
-		if (!is_dir( substr( $this->static_folder, 0, -1 ) ))
-			mkdir( substr( $this->static_folder, 0, -1 ), 0777 );
+		if (!is_dir( substr( $this->staticPath(""), 0, -1 ) ))
+			mkdir( substr( $this->staticPath(""), 0, -1 ), 0777 );
 		$style = file_get_contents( O_Registry::get( "app/sites/static_folder" ) . "style.css" );
 		$style = str_replace( "{%STATIC_PROJ%}", O_Registry::get( "app/html/static_root" ), $style );
-		file_put_contents( $this->static_folder . "style.css", $style );
+		file_put_contents( $this->staticPath("style.css"), $style );
 		$this->about_page = new R_Mdl_Site_About( );
 
 		// Generate default groups
