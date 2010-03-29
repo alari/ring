@@ -220,7 +220,7 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 	 */
 	public function staticUrl( $file )
 	{
-		return $this->url( $this->static_urlbase . $file );
+		return "http://fl.utils.mir.io/s/". $this["id"] . "/" . $file;
 	}
 
 	/**
@@ -231,6 +231,7 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 	 */
 	public function staticPath( $file )
 	{
+		return "../fl.utils.mir.io/s/". $this["id"] . "/" . $file;
 		return $this->static_folder . $file;
 	}
 
