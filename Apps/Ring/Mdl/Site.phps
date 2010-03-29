@@ -93,24 +93,26 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 		$old_folder = $this->static_folder;
 		$old_prefix = $this->static_urlbase;
 
-		function _do_save($op, $np, $s){
-			$o = $op.$s;
-			$n = $np.$s;
-			O_Db_Query::get("tmp_files")->field("old_url", $o)->field("new_url", $n)->insert();
-		};
+		$this->_rename($old_folder, $new_folder, $old_prefix, $new_prefix);
+	}
 
-		function _rename($of, $nf, $op, $np){
+	private function _doSave($op, $np, $s){
+		$o = $op.$s;
+		$n = $np.$s;
+		O_Db_Query::get("tmp_files")->field("old_url", $o)->field("new_url", $n)->insert();
+	}
+
+	private function _rename($of, $nf, $op, $np){
 			$f = opendir($of);
 			while($s = readdir($f)) if($s != "." && $s != "..") {
 				if(is_file($of.$s)) {
 					copy($of.$s, $nf.$s);
-					_do_save($op, $np, $s);
+					$this->_doSave($op, $np, $s);
 				} elseif(is_dir($s)) {
 					mkdir($nf.$s, 777);
-					_rename($of.$s."/", $nf.$s."/", $op.$s."/", $np.$s."/");
+					$this->_rename($of.$s."/", $nf.$s."/", $op.$s."/", $np.$s."/");
 				}
 			}
-		};
 	}
 
 	public function createResource() {
