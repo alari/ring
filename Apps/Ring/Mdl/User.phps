@@ -129,7 +129,7 @@ class R_Mdl_User extends O_Acl_User {
 		if ($this ["site"]) {
 			return $this->site->url ();
 		} else {
-			return "http://".O_Registry::get("app/hosts/center")."/user/".($this->login?$this->login:"id_".$this->id);
+			return "http://".O_Registry::get("app/hosts/center")."/~".($this->login?$this->login:"id_".$this->id);
 		}
 	}
 
