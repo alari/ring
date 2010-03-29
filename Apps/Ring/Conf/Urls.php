@@ -77,8 +77,6 @@ O( "*url_dispatcher", function(){
 			O("*command", "Own_Friends");
 		}
 		O("_layout_class", "R_Ctr_Layout");
-		// TODO: understand this
-		O("_dict/default/base/filebase", "Apps/Ring/Ctr/dict.");
 	} elseif(O("*plugin") == "Mr") {
 		if($URL('topic:(.+)', $p)) {
 			O("*command", "Topic");

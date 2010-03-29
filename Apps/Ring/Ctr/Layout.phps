@@ -50,7 +50,7 @@ class R_Ctr_Layout extends R_Layout {
 		</div>
 </div>
 <div id="foot">
-<div class="cont"><span><?=$this->_("lo.bottom", "http://".O_Registry::get( "app/hosts/project" )."/")?></span>
+<div class="cont"><span><?=sprintf("Взгляд из центра <a href=\"%s\">кольца творческих сайтов Mirari.Name</a>", "http://".O_Registry::get( "app/hosts/project" )."/")?></span>
 </div>
 <div style="float: right">
 <?$this->showCounter();?>
