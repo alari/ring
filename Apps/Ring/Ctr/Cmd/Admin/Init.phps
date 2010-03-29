@@ -6,6 +6,10 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		error_reporting(E_ALL);
 		ini_set("display_errors", true);
 
+		foreach(R_Mdl_Site::getQuery() as $s) $s->renameFiles();
+
+		exit;
+
 		foreach(R_Mdl_User::getQuery() as $u) if(!$u->login) {
 			$u->login = null;
 			if($u->identity) {
