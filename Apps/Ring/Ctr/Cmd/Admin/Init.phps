@@ -18,6 +18,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 				$string = "/static/s".$string;
 				if(array_key_exists($string, $rename)) return $rename[$string];
 			}
+			return $string;
 		};
 
 		$do_replace = function($text) use ($replace) {
