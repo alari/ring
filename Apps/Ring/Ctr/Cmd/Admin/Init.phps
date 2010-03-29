@@ -14,7 +14,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 			copy("./static/s/".$s->host."/style.css", "../fl.utils.mir.io/s/".$s["id"]."/style.css");
 			echo filesize("./static/s/".$s->host."/style.css")."|".filesize("../fl.utils.mir.io/s/".$s["id"]."/style.css")."<br/>";
 		}
-
+exit;
 		echo "B...";
 
 		$rename = Array();
