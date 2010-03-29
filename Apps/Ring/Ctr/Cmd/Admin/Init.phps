@@ -6,60 +6,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		error_reporting(E_ALL);
 		ini_set("display_errors", true);
 
-		$rename = Array();
-		foreach(O_Db_Query::get("tmp_files")->select()->fetchAll(PDO::FETCH_ASSOC) as $f){
-			$rename [ $f["old_url"] ] = $f["new_url"];
-		}
-
-		$replace = function($string) use ($rename) {
-			$string = $string[0];
-			if(strpos($string, "static/s")) {
-				list(, $string) = explode("static/s", $string, 2);
-				$string = "/static/s".$string;
-				if(array_key_exists($string, $rename)) {
-					echo "[ ".$string." => ".$rename[$string]." ]";
-					return $rename[$string];
-				}
-			}
-			return $string;
-		};
-
-		$do_replace = function($text) use ($replace) {
-			return preg_replace_callback("#(http://[^/]+)?/static/s/[^\\\"'\\s\\#\\)]+#im", $replace, $text);
-		};
-
-		$q = R_Mdl_Sys_Libro_Text::getQuery();
-		$q->where("content LIKE '%static%'");
-		foreach($q as $p) {
-			$p->content = $do_replace($p->content);
-			$p->save();
-		}
-
 		exit;
-
-
-		$d = opendir("../fl.utils.mir.io/s");
-
-		exit;
-
-		foreach(R_Mdl_User::getQuery() as $u) if(!$u->login) {
-			$u->login = null;
-			if($u->identity) {
-				$login = $u->identity;
-				if(strpos($login, "://")) list(,$login) = explode("://", $login, 2);
-				list($login,) = explode(".", $login, 2);
-				if($login) {
-					$u->login = $login;
-				}
-			} elseif($u->email) {
-				list($login,) = explode("@", $u->email, 2);
-				list($login,) = explode(".", $login, 2);
-				if($login) {
-					$u->login = $login;
-				}
-			}
-			$u->save();
-		}
 
 		$res = function($obj) {
 			$resc = R_Mdl_Resource::getQuery()->test("content", $obj->id)->test("content_class", get_class($obj))->getFunc();
