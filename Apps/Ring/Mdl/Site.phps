@@ -110,7 +110,7 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 				if(is_file($of.$s)) {
 					!copy($of.$s, $nf.$s) ?:
 					$this->_doSave($op, $np, $s);
-				} elseif(is_dir($s)) {
+				} elseif(is_dir($of.$s)) {
 					!mkdir($nf.$s, 0777) ?:
 					$this->_rename($of.$s."/", $nf.$s."/", $op.$s."/", $np.$s."/");
 				}
