@@ -7,24 +7,25 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		ini_set("display_errors", true);
 
 		echo "A...";
-
+/**
 		foreach(R_Mdl_Site::getQuery() as $s) {
 			unlink("../fl.utils.mir.io/s/".$s["id"]."/style.css");
 			echo filesize("./static/s/".$s->host."/style.css")."|".filesize("../fl.utils.mir.io/s/".$s["id"]."/style.css")."|";
 			copy("./static/s/".$s->host."/style.css", "../fl.utils.mir.io/s/".$s["id"]."/style.css");
 			echo filesize("./static/s/".$s->host."/style.css")."|".filesize("../fl.utils.mir.io/s/".$s["id"]."/style.css")."<br/>";
 		}
-exit;
+*/
 		echo "B...";
 
 		$rename = Array();
 		foreach(O_Db_Query::get("tmp_files")->select()->fetchAll(PDO::FETCH_ASSOC) as $f){
 			$rename [ $f["old_url"] ] = $f["new_url"];
 		}
-
+echo count($rename);
 		echo "C...";
 
 		$replace = function($string) use ($rename) {
+			echo "[", print_r($string, 1), "]";
 			$string = $string[0];
 			if(strpos($string, "static/s")) {
 				list(, $string) = explode("static/s", $string, 2);
@@ -43,8 +44,8 @@ exit;
 			if(is_file("../fl.utils.mir.io/s/$f/style.css")) {
 				$style = file_get_contents("../fl.utils.mir.io/s/$f/style.css");
 				$style = $do_replace($style);
-				echo $style;
-				file_put_contents("../fl.utils.mir.io/s/$f/style.css", $style);
+				echo $style, "<hr/>";
+				//file_put_contents("../fl.utils.mir.io/s/$f/style.css", $style);
 			}
 		}
 
