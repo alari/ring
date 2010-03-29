@@ -59,7 +59,7 @@ O( "*url_dispatcher", function(){
 		//
 		O("_layout_class", "R_Lf_Layout");
 	} elseif(O("*plugin") == "Ctr") {
-		if($URL("~([^/])/?.*", $p)) {
+		if($URL("~([^/]+)(/.+)?", $p)) {
 			O("*user", R_Mdl_User::getByStringId($p[1]));
 			O("*command", "User_Profile");
 		} elseif($URL("own/msgs/read-([0-9]+)", $p)) {
