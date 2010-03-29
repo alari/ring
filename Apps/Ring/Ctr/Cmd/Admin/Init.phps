@@ -6,15 +6,21 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		error_reporting(E_ALL);
 		ini_set("display_errors", true);
 
+		echo "A...";
+
 		foreach(R_Mdl_Site::getQuery() as $s) {
 			unlink("../fl.utils.mir.io/s/".$s["id"]."/style.css");
 			copy("./static/s/".$s->host."/style.css", "../fl.utils.mir.io/s/".$s["id"]."/style.css");
 		}
 
+		echo "B...";
+
 		$rename = Array();
 		foreach(O_Db_Query::get("tmp_files")->select()->fetchAll(PDO::FETCH_ASSOC) as $f){
 			$rename [ $f["old_url"] ] = $f["new_url"];
 		}
+
+		echo "C...";
 
 		$replace = function($string) use ($rename) {
 			$string = $string[0];
@@ -35,6 +41,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 			if(is_file("../fl.utils.mir.io/s/$f/style.css")) {
 				$style = file_get_contents("../fl.utils.mir.io/s/$f/style.css");
 				$style = $do_replace($style);
+				echo $style;
 				file_put_contents("../fl.utils.mir.io/s/$f/style.css", $style);
 			}
 		}
