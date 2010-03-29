@@ -25,12 +25,14 @@ echo count($rename);
 		echo "C...";
 
 		$replace = function($string) use ($rename) {
-			echo "[", print_r($string, 1), "]";
 			$string = $string[0];
 			if(strpos($string, "static/s")) {
 				list(, $string) = explode("static/s", $string, 2);
 				$string = "/static/s".$string;
-				if(array_key_exists($string, $rename)) return $rename[$string];
+				if(array_key_exists($string, $rename)) {
+					echo "[ ".$string." => ".$rename[$string]." ]";
+					return $rename[$string];
+				}
 			}
 			return $string;
 		};
