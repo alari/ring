@@ -10,7 +10,29 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		foreach(O_Db_Query::get("tmp_files")->select()->fetchAll(PDO::FETCH_ASSOC) as $f){
 			$rename [ $f["old_url"] ] = $f["new_url"];
 		}
-		print_r($rename); exit;
+
+		$replace = function($string) use ($rename) {
+			if(strpos($string, "static/s")) {
+				list(, $string) = explode("static/s", $string, 2);
+				$string = "/static/s".$string;
+				if(array_key_exists($string, $rename)) return $rename[$string];
+			}
+		};
+
+		$do_replace = function($text) use ($replace) {
+			preg_replace_callback("#(http://[^/]+)?/static/s[^\\\"'\\s\\#\\)]#im", $replace, $text);
+		};
+
+		$d = opendir("../fl.utils.mir.io/s");
+		while($f = readdir($d)) if(is_numeric($f)) {
+			if(is_file("../fl.utils.mir.io/s/$f/style.css")) {
+				$style = file_get_contents("../fl.utils.mir.io/s/$f/style.css");
+				$style = $do_replace($style);
+				file_put_contents("../fl.utils.mir.io/s/$f/style.css", $style);
+			}
+		}
+
+		exit;
 
 
 		$d = opendir("../fl.utils.mir.io/s");
