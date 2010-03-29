@@ -10,7 +10,9 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 
 		foreach(R_Mdl_Site::getQuery() as $s) {
 			unlink("../fl.utils.mir.io/s/".$s["id"]."/style.css");
+			echo filesize("./static/s/".$s->host."/style.css")."|";
 			copy("./static/s/".$s->host."/style.css", "../fl.utils.mir.io/s/".$s["id"]."/style.css");
+			echo filesize("./static/s/".$s->host."/style.css")."|".filesize("../fl.utils.mir.io/s/".$s["id"]."/style.css")."<br/>";
 		}
 
 		echo "B...";
