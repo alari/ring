@@ -87,13 +87,13 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 
 	public function renameFiles() {
 		$new_folder = "../fl.utils.mir.io/s/".$this->id;
-		mkdir($new_folder, 777, true);
+		if(!is_dir($new_folder)) mkdir($new_folder, 777, true);
 		$new_folder .= "/";
 		$new_prefix = "http://fl.utils.mir.io/s/".$this->id."/";
 		$old_folder = $this->static_folder;
 		$old_prefix = $this->static_urlbase;
 
-		function _save($op, $np, $s){
+		function _do_save($op, $np, $s){
 			$o = $op.$s;
 			$n = $np.$s;
 			O_Db_Query::get("tmp_files")->field("old_url", $o)->field("new_url", $n)->insert();
@@ -104,7 +104,7 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 			while($s = readdir($f)) if($s != "." && $s != "..") {
 				if(is_file($of.$s)) {
 					copy($of.$s, $nf.$s);
-					_save($op, $np, $s);
+					_do_save($op, $np, $s);
 				} elseif(is_dir($s)) {
 					mkdir($nf.$s, 777);
 					_rename($of.$s."/", $nf.$s."/", $op.$s."/", $np.$s."/");
