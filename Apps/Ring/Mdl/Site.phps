@@ -25,8 +25,6 @@
  * @field type TINYINT DEFAULT 1 -enum 1: Авторский; 2: Сообщество -edit-adm enum -title Тип сайта
  * @field status TINYINT DEFAULT 0 -enum 0: Неотмодерирован; 1: Прошёл модерацию; 2: Технический сайт -edit-adm enum -title Статус сайта
  *
- * @field static_urlbase varchar(255) NOT NULL
- * @field static_folder varchar(255) NOT NULL
  * @field copyright varchar(255) NOT NULL DEFAULT 'Copyright holders' -edit -required Введите копирайт автора или авторов сайта -title Копирайты
  * @field title varchar(255) NOT NULL DEFAULT 'Сайт' -edit -required Введите название сайта -title Название сайта
  *
@@ -67,9 +65,6 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 
 		$this->type = $type;
 
-		$this->static_urlbase = O_Registry::get( "app/sites/static_urlbase" ) . "$host/";
-		$this->static_folder = O_Registry::get( "app/sites/static_folder" ) . "$host/";
-
 		parent::__construct();
 
 		if (!is_dir( substr( $this->static_folder, 0, -1 ) ))
@@ -83,38 +78,6 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 		R_Mdl_User_Group::createSiteGroups($this, $owner);
 
 		$this->createResource();
-	}
-
-	public function renameFiles() {
-		$new_folder = "../fl.utils.mir.io/s/".$this->id;
-		if(!is_dir($new_folder)) mkdir($new_folder, 0777, true);
-		$new_folder .= "/";
-		$new_prefix = "http://fl.utils.mir.io/s/".$this->id."/";
-		$old_folder = $this->static_folder;
-		$old_prefix = $this->static_urlbase;
-
-		$this->_rename($old_folder, $new_folder, $old_prefix, $new_prefix);
-	}
-
-	private function _doSave($op, $np, $s){
-		$o = $op.$s;
-		$n = $np.$s;
-		try {
-		O_Db_Query::get("tmp_files")->field("old_url", $o)->field("new_url", $n)->insert();
-		} catch(PDOException $e){}
-	}
-
-	private function _rename($of, $nf, $op, $np){
-			$f = opendir($of);
-			while($s = readdir($f)) if($s != "." && $s != "..") {
-				if(is_file($of.$s)) {
-					!copy($of.$s, $nf.$s) ?:
-					$this->_doSave($op, $np, $s);
-				} elseif(is_dir($of.$s)) {
-					!mkdir($nf.$s, 0777) ?:
-					$this->_rename($of.$s."/", $nf.$s."/", $op.$s."/", $np.$s."/");
-				}
-			}
 	}
 
 	public function createResource() {
@@ -232,7 +195,6 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 	public function staticPath( $file )
 	{
 		return "../fl.utils.mir.io/s/". $this["id"] . "/" . $file;
-		return $this->static_folder . $file;
 	}
 
 	/**
@@ -241,7 +203,7 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 	 */
 	public function delete()
 	{
-		$dir = substr( $this->static_folder, 0, -1 );
+		$dir = "../fl.utils.mir.io/s/".$this["id"];
 		parent::delete();
 		$this->rmdir( $dir );
 	}
@@ -318,19 +280,10 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 			return false;
 		}
 
-		if (!rename( substr( $this->static_folder, 0, -1 ),
-				O_Registry::get( "app/sites/static_folder" ) . $host )) {
-			$this->host = $old_host;
-			$this->save();
-			return false;
-		}
-
 		if ($this->owner && R_Mdl_User::getByIdentity( $old_host ) == $this->owner) {
 			$this->owner->setIdentity( $this->host, $pwd );
 		}
 
-		$this->static_urlbase = O_Registry::get( "app/sites/static_urlbase" ) . "$host/";
-		$this->static_folder = O_Registry::get( "app/sites/static_folder" ) . "$host/";
 		$this->save();
 		return true;
 	}

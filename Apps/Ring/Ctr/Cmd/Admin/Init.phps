@@ -6,7 +6,17 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		error_reporting(E_ALL);
 		ini_set("display_errors", true);
 
-		foreach(R_Mdl_Site::getQuery() as $s) $s->renameFiles();
+		$d = opendir("./static/u");
+		while($f = readdir($d)) {
+			if(!is_numeric($f)) continue;
+			mkdir("../fl.utils.mir.io/u/$f", 0777);
+			$dd = opendir("./static/u/$f");
+			while($ff = readdir($dd)) {
+				if($ff != "." && $ff != "..") {
+					copy("./static/u/$f/$ff", "../fl.utils.mir.io/u/$f/$ff");
+				}
+			}
+		}
 
 		exit;
 

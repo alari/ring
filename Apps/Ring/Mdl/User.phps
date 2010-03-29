@@ -138,16 +138,19 @@ class R_Mdl_User extends O_Acl_User {
 	}
 
 	public function staticUrl($filename) {
+		return "http://fl.utils.mir.io/u/".$this["id"]."/".$filename;
 		return O_Registry::get ( "app/users/static_urlbase" ) . $this->id . "/" . $filename;
 	}
 
 	public function staticFilename($filename) {
+		return "../fl.utils.mir.io/u/".$this["id"]."/".$filename;
 		return O_Registry::get ( "app/users/static_folder" ) . $this->id . "/" . $filename;
 	}
 
 	public function createUserdir() {
-		if (! is_dir ( O_Registry::get ( "app/users/static_folder" ) . $this->id )) {
-			mkdir ( O_Registry::get ( "app/users/static_folder" ) . $this->id );
+		$dir = substr($this->staticFilename(""), 0, -1);
+		if (! is_dir ( $dir )) {
+			mkdir ( $dir, 0777 );
 		}
 	}
 
