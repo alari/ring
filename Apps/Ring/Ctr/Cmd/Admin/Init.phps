@@ -28,7 +28,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 			return preg_replace_callback("#(http://[^/]+)?/static/s/[^\\\"'\\s\\#\\)]+#im", $replace, $text);
 		};
 
-		$q = R_Mdl_Sys_Blog_Post::getQuery();
+		$q = R_Mdl_Sys_Libro_Text::getQuery();
 		$q->where("content LIKE '%static%'");
 		foreach($q as $p) {
 			$p->content = $do_replace($p->content);
