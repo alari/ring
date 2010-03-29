@@ -93,21 +93,21 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 		$old_folder = $this->static_folder;
 		$old_prefix = $this->static_urlbase;
 
-		$save = function($op, $np, $s){
+		function _save($op, $np, $s){
 			$o = $op.$s;
 			$n = $np.$s;
 			O_Db_Query::get("tmp_files")->field("old_url", $o)->field("new_url", $n)->insert();
 		};
 
-		$rename = function($of, $nf, $op, $np) use ($rename, $save){
+		function _rename($of, $nf, $op, $np){
 			$f = opendir($of);
 			while($s = readdir($f)) if($s != "." && $s != "..") {
 				if(is_file($of.$s)) {
 					copy($of.$s, $nf.$s);
-					$save($op, $np, $s);
+					_save($op, $np, $s);
 				} elseif(is_dir($s)) {
 					mkdir($nf.$s, 777);
-					$rename($of.$s."/", $nf.$s."/", $op.$s."/", $np.$s."/");
+					_rename($of.$s."/", $nf.$s."/", $op.$s."/", $np.$s."/");
 				}
 			}
 		};
