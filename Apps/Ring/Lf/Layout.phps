@@ -15,14 +15,12 @@ class R_Lf_Layout extends R_Layout {
 	public function displayBody()
 	{
 		if (!$this->site)
-			$this->site = O_Registry::get( "app/current/site" );
+			$this->site = O( "*site" );
 
 		O_Js_Middleware::getFramework()->addSrc( $this );
 
 		$this->addCssSrc( 'bases.css' );
 		$this->addCssSrc( $this->site->staticUrl( "style.css" ) );
-		// TODO: make normal sources for style scheme css
-		// $this->addCssSrc("/tmp-css");
 
 		// Openid provider
 		if (!O_Registry::get( "env/process_url" ) && $this->site->owner) {
