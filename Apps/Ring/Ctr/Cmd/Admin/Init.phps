@@ -12,6 +12,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		}
 
 		$replace = function($string) use ($rename) {
+			$string = $string[0];
 			if(strpos($string, "static/s")) {
 				list(, $string) = explode("static/s", $string, 2);
 				$string = "/static/s".$string;
