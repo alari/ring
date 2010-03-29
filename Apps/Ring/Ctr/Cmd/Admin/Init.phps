@@ -38,7 +38,7 @@ echo count($rename);
 		};
 
 		$do_replace = function($text) use ($replace) {
-			preg_replace_callback("#(http://[^/]+)?/static/s/[^\\\"'\\s\\#\\)]+#im", $replace, $text);
+			return preg_replace_callback("#(http://[^/]+)?/static/s/[^\\\"'\\s\\#\\)]+#im", $replace, $text);
 		};
 
 		$d = opendir("../fl.utils.mir.io/s");
