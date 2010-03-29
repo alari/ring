@@ -6,17 +6,14 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		error_reporting(E_ALL);
 		ini_set("display_errors", true);
 
-		$d = opendir("./static/u");
-		while($f = readdir($d)) {
-			if(!is_numeric($f)) continue;
-			mkdir("../fl.utils.mir.io/u/$f", 0777);
-			$dd = opendir("./static/u/$f");
-			while($ff = readdir($dd)) {
-				if($ff != "." && $ff != "..") {
-					copy("./static/u/$f/$ff", "../fl.utils.mir.io/u/$f/$ff");
-				}
-			}
+		$rename = Array();
+		foreach(O_Db_Query::get("tmp_files")->select()->fetchAll(PDO::FETCH_ASSOC) as $f){
+			$rename [ $f["old_url"] ] = $f["new_url"];
 		}
+		print_r($rename); exit;
+
+
+		$d = opendir("../fl.utils.mir.io/s");
 
 		exit;
 
