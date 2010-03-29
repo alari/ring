@@ -47,7 +47,7 @@ echo count($rename);
 				$style = file_get_contents("../fl.utils.mir.io/s/$f/style.css");
 				$style = $do_replace($style);
 				echo $style, "<hr/>";
-				//file_put_contents("../fl.utils.mir.io/s/$f/style.css", $style);
+				file_put_contents("../fl.utils.mir.io/s/$f/style.css", $style);
 			}
 		}
 
