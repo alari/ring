@@ -138,7 +138,7 @@ class R_Mdl_User extends O_Acl_User {
 	}
 
 	public function staticUrl($filename) {
-		return "http://fl.utils.mir.io/u/".$this["id"]."/".$filename;
+		return "http://fl.centralis.name/u/".$this["id"]."/".$filename;
 		return O_Registry::get ( "app/users/static_urlbase" ) . $this->id . "/" . $filename;
 	}
 

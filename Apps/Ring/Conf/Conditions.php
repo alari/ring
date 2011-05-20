@@ -25,7 +25,7 @@ O("*conditions", function(){
 		O("*mode", "production");
 		O("_db/default", Array(
 			"engine"=>"mysql",
-			"host"=>"localhost:3306",
+			"host"=>"127.0.0.1:3306",
 			"dbname"=>"ring",
 			"user"=>"ring",
 			"password"=>"XKSLzapa"

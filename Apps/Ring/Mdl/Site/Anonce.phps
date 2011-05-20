@@ -322,6 +322,7 @@ class R_Mdl_Site_Anonce extends O_Dao_NestedSet_Root implements O_Acl_iResource 
 			case "protected":
 				$this->allowToGroups(self::ACTION_COMMENT);
 				$this->allowToLogged(self::ACTION_COMMENT);
+fwrite(STDERR, "set protected");
 				break;
 			case "private":
 				$this->allowToGroups(self::ACTION_COMMENT);

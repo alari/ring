@@ -6,7 +6,7 @@ class R_Ctr_Cmd_Admin_Init extends R_Command {
 		error_reporting(E_ALL);
 		ini_set("display_errors", true);
 
-		exit;
+		#exit;
 
 		$res = function($obj) {
 			$resc = R_Mdl_Resource::getQuery()->test("content", $obj->id)->test("content_class", get_class($obj))->getFunc();

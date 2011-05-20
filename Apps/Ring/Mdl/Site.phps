@@ -181,7 +181,7 @@ class R_Mdl_Site extends O_Dao_NestedSet_Root {
 	 */
 	public function staticUrl( $file )
 	{
-		return "http://fl.utils.mir.io/s/". $this["id"] . "/" . $file;
+		return "http://fl.centralis.name/s/". $this["id"] . "/" . $file;
 	}
 
 	/**
